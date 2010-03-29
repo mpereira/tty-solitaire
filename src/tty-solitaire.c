@@ -1,9 +1,9 @@
 /*
  * =============================================================================
  *
- *       Filename:  hatneck.c
+ *       Filename:  tty-solitaire.c
  *
- *    Description:  hatneck is a ncurses-based solitaire game
+ *    Description:  ncurses-based solitaire game
  *
  *        Created:  03/28/2010 04:58:26 PM
  *       Compiler:  gcc
