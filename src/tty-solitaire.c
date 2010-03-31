@@ -51,28 +51,11 @@ struct card {
 WINDOW *initialize_shape();
 struct card_frame *initialize_card_frame();
 struct card *initialize_card();
-void draw_card(struct card *card);
-void set_card_frame(struct card_frame *card_frame,
-                    int start_y,
-                    int start_x);
-void set_card_attributes(struct card *card,
-                        enum value value,
-                        enum suit suit,
-                        char exposed);
-void set_card(struct card *card,
-              enum value value,
-              enum suit suit,
-              char exposed,
-              int start_y,
-              int start_x);
-
-void delete_card(struct card *card) {
-  free(card->frame->shape);
-  free(card->frame);
-  free(card);
-
-  return;
-}
+void draw_card(struct card *);
+void set_card_frame(struct card_frame *, int, int);
+void set_card_attributes(struct card *, enum value, enum suit, char);
+void set_card(struct card *, enum value, enum suit, char, int, int);
+void delete_card(struct card *);
 
 int main(int argc, const char *argv[]) {
   char message[] = "Welcome to tty-solitaire.";
@@ -196,6 +179,14 @@ void set_card(struct card *card,
               int start_x) {
   set_card_attributes(card, value, suit, exposed);
   set_card_frame(card->frame, start_y, start_x);
+
+  return;
+}
+
+void delete_card(struct card *card) {
+  free(card->frame->shape);
+  free(card->frame);
+  free(card);
 
   return;
 }
