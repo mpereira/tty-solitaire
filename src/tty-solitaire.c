@@ -1,9 +1,7 @@
 #include <ncurses.h>
 #include <malloc.h>
 #include <string.h>
-
-#define FALSE 0
-#define TRUE  1
+#include "common.h"
 
 #define CARD_FRAME_WIDTH  7
 #define CARD_FRAME_HEIGHT 5
