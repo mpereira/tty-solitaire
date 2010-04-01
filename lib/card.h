@@ -36,7 +36,7 @@ struct card {
   struct frame *frame;
   enum value   value;
   enum suit    suit;
-  char         face;
+  enum face    face;
 };
 
 struct card *initialize_card();
