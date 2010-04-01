@@ -6,9 +6,7 @@
 
 int main(int argc, const char *argv[]) {
   char message[] = "Welcome to tty-solitaire.";
-  int ch;
   int row_number, column_number;
-  struct card *card = NULL;
 
   initscr();                /* initialize the terminal in curses mode */
   raw();                    /* disable line buffers                   */
@@ -20,33 +18,7 @@ int main(int argc, const char *argv[]) {
            (column_number - strlen(message)) / 2,
            "%s\n",
            message);
-
-  card = initialize_card();
-
-  set_card(card, KING, CLUBS, TRUE, 1, 1);
-
-  refresh_card(card);
-
-  while ((ch = getch()) != KEY_F(1)) {
-    switch(ch) {
-      case KEY_LEFT:
-      case 'h':
-        refresh_card(card);
-        break;
-      case KEY_RIGHT:
-      case 'l':
-        refresh_card(card);
-        break;
-      case KEY_UP:
-      case 'k':
-        refresh_card(card);
-        break;
-      case KEY_DOWN:
-      case 'j':
-        refresh_card(card);
-        break;
-    }
-  }
+  getch();
 
   endwin();
   puts("Game finished.");
