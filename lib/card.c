@@ -12,7 +12,7 @@ struct card *initialize_card() {
   card->frame   = initialize_frame();
   card->value   = NONE;
   card->suit    = NONE;
-  card->exposed = FALSE;
+  card->face    = COVERED;
 
   return(card);
 }
@@ -27,13 +27,13 @@ void delete_card(struct card *card) {
 void set_card(struct card *card,
               enum value value,
               enum suit suit,
-              char exposed,
+              enum face face,
               int start_y,
               int start_x) {
   set_frame(card->frame, start_y, start_x);
   card->value = value;
   card->suit = suit;
-  card->exposed = exposed;
+  card->face = face;
 
   return;
 }

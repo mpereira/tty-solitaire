@@ -26,16 +26,18 @@ enum value {
   ACE   = 14
 };
 
+enum face { COVERED, EXPOSED };
+
 struct card {
   struct frame *frame;
   enum value   value;
   enum suit    suit;
-  char         exposed;
+  char         face;
 };
 
 struct card *initialize_card();
 void delete_card(struct card *);
-void set_card(struct card *, enum value, enum suit, char, int, int);
+void set_card(struct card *, enum value, enum suit, enum face, int, int);
 void refresh_card(struct card *);
 
 #endif
