@@ -10,9 +10,9 @@ struct card *initialize_card() {
   card = malloc(sizeof(card));
 
   card->frame   = initialize_frame();
-  card->value   = NONE;
-  card->suit    = NONE;
-  card->face    = COVERED;
+  card->value   = NO_VALUE;
+  card->suit    = NO_SUIT;
+  card->face    = NO_FACE;
 
   return(card);
 }

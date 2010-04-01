@@ -1,32 +1,36 @@
 #ifndef CARD_H
 #define CARD_H
 
+enum value {
+  NO_VALUE = -1,
+  TWO      = 2,
+  THREE    = 3,
+  FOUR     = 4,
+  FIVE     = 5,
+  SIX      = 6,
+  SEVEN    = 7,
+  EIGHT    = 8,
+  NINE     = 9,
+  TEN      = 10,
+  JACK     = 11,
+  QUEEN    = 12,
+  KING     = 13,
+  ACE      = 14
+};
+
 enum suit {
-  BLANK    = -1,
+  NO_SUIT  = -1,
   DIAMONDS = 0,
   SPADES   = 1,
   HEARTS   = 2,
   CLUBS    = 3
 };
 
-enum value {
-  NONE  = -1,
-  TWO   = 2,
-  THREE = 3,
-  FOUR  = 4,
-  FIVE  = 5,
-  SIX   = 6,
-  SEVEN = 7,
-  EIGHT = 8,
-  NINE  = 9,
-  TEN   = 10,
-  JACK  = 11,
-  QUEEN = 12,
-  KING  = 13,
-  ACE   = 14
+enum face {
+  NO_FACE = -1,
+  COVERED = 0,
+  EXPOSED = 1
 };
-
-enum face { COVERED, EXPOSED };
 
 struct card {
   struct frame *frame;
