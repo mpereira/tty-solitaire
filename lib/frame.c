@@ -25,7 +25,7 @@ struct frame *initialize_frame() {
 }
 
 void delete_frame(struct frame *frame) {
-  free(frame->shape);
+  delwin(frame->shape);
   free(frame);
 
   return;
