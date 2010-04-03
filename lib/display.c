@@ -12,6 +12,11 @@ void init_curses() {
   raw();                    /* disable line buffers                   */
   noecho();                 /* character echo is unnecessary          */
   keypad(stdscr, TRUE);     /* enable F and arrow keys                */
+  start_color();
+
+  init_pair(1, COLOR_BLACK, COLOR_WHITE);
+  init_pair(2, COLOR_RED, COLOR_WHITE);
+  init_pair(3, COLOR_WHITE, COLOR_BLUE);
 }
 
 char *card_suit(enum suit suit) {
@@ -53,4 +58,51 @@ char *card_value(enum value value) {
   }
 
   return(card_value);
+}
+
+void draw_value(struct card *card) {
+  mvwprintw(card->frame->shape, 0, 0, card_value(card->value));
+  mvwprintw(card->frame->shape, 4, 6, card_value(card->value));
+
+  return;
+}
+
+void draw_suit(struct card *card) {
+  if (card->suit % 2 == 0) {
+    wattron(card->frame->shape, COLOR_PAIR(RED_ON_WHITE));
+    mvwprintw(card->frame->shape, 0, 1, card_suit(card->suit));
+    mvwprintw(card->frame->shape, 4, 5, card_suit(card->suit));
+    wattroff(card->frame->shape, COLOR_PAIR(RED_ON_WHITE));
+  } else {
+    wattron(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
+    mvwprintw(card->frame->shape, 0, 1, card_suit(card->suit));
+    mvwprintw(card->frame->shape, 4, 5, card_suit(card->suit));
+    wattroff(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
+  }
+
+  return;
+}
+
+void draw_front(struct card *card) {
+  wbkgd(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
+  draw_value(card);
+  draw_suit(card);
+
+  return;
+}
+
+void draw_back(struct card *card) {
+  wbkgd(card->frame->shape, COLOR_PAIR(WHITE_ON_BLUE));
+
+  return;
+}
+
+void draw_card(struct card *card) {
+  if (card->face == EXPOSED) {
+    draw_front(card);
+  } else {
+    draw_back(card);
+  }
+
+  return;
 }
