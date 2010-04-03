@@ -8,5 +8,6 @@
 
 void init_curses();
 char *card_suit(enum suit);
+char *card_value(enum value);
 
 #endif
