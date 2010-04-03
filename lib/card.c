@@ -1,7 +1,7 @@
 #include <ncurses.h>
 #include <malloc.h>
-#include "card.h"
 #include "frame.h"
+#include "card.h"
 #include "../src/common.h"
 
 struct card *initialize_card() {
@@ -36,9 +36,4 @@ void set_card(struct card *card,
   card->face = face;
 
   return;
-}
-
-void refresh_card(struct card *card) {
-  box(card->frame->shape, 0, 0);
-  wrefresh(card->frame->shape);
 }

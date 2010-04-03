@@ -42,6 +42,5 @@ struct card {
 struct card *initialize_card();
 void delete_card(struct card *);
 void set_card(struct card *, enum value, enum suit, enum face, int, int);
-void refresh_card(struct card *);
 
 #endif
