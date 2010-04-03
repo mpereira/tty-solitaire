@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <malloc.h>
 #include <string.h>
+#include <locale.h>
 #include "common.h"
 #include "../lib/card.h"
 
@@ -8,6 +9,7 @@ int main(int argc, const char *argv[]) {
   char message[] = "Welcome to tty-solitaire.";
   int row_number, column_number;
 
+  setlocale(LC_ALL, "");    /* supporting unicode characters */
   initscr();                /* initialize the terminal in curses mode */
   raw();                    /* disable line buffers                   */
   noecho();                 /* character echo is unnecessary          */
@@ -21,6 +23,7 @@ int main(int argc, const char *argv[]) {
   getch();
 
   endwin();
+
   puts("Game finished.");
 
   return 0;
