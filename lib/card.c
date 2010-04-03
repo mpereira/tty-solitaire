@@ -2,7 +2,6 @@
 #include <malloc.h>
 #include "frame.h"
 #include "card.h"
-#include "../src/common.h"
 
 struct card *initialize_card() {
   struct card *card = NULL;
