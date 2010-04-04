@@ -43,3 +43,15 @@ void push(struct stack *stack, struct card *card) {
     stack = new_stack;
   }
 }
+
+struct stack *pop(struct stack *stack) {
+  struct stack *popped_entry = NULL;
+
+  if(!empty(stack)) {
+    popped_entry = stack;
+    popped_entry = NULL;
+    stack = stack->next;
+  }
+
+  return(popped_entry);
+}
