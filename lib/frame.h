@@ -12,7 +12,6 @@ struct frame {
   int    start_x;
 };
 
-WINDOW *initialize_shape();
 struct frame *initialize_frame();
 void delete_frame(struct frame *);
 void set_frame(struct frame *, int, int);

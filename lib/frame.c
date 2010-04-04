@@ -2,20 +2,12 @@
 #include <malloc.h>
 #include "frame.h"
 
-WINDOW *initialize_shape() {
-  WINDOW *shape;
-
-  shape = malloc(sizeof(shape));
-
-  return(shape);
-}
-
 struct frame *initialize_frame() {
   struct frame *frame = NULL;
 
   frame = malloc(sizeof(*frame));
 
-  frame->shape  = initialize_shape();
+  frame->shape  = NULL;
   frame->height  = FRAME_HEIGHT;
   frame->width   = FRAME_WIDTH;
   frame->start_y = 0;
