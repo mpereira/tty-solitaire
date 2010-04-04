@@ -33,16 +33,16 @@ int length(struct stack *stack) {
   return(length);
 }
 
-void push(struct stack *stack, struct card *card) {
+void push(struct stack **stack, struct card *card) {
   struct stack *new_stack = NULL;
 
-  if (empty(stack)) {
-    stack->card = card;
+  if (empty(*stack)) {
+    (*stack)->card = card;
   } else {
-    new_stack = malloc(sizeof(new_stack));
+    new_stack = initialize_stack();
     new_stack->card = card;
-    new_stack->next = stack;
-    stack = new_stack;
+    new_stack->next = (*stack);
+    *stack = new_stack;
   }
 }
 
