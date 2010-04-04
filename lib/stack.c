@@ -3,15 +3,13 @@
 #include "card.h"
 #include "stack.h"
 
-struct stack *initialize_stack() {
-  struct stack *stack = NULL;
+void initialize_stack(struct stack **stack) {
+  *stack = malloc(sizeof(**stack));
 
-  stack = malloc(sizeof(*stack));
+  (*stack)->card = NULL;
+  (*stack)->next = NULL;
 
-  stack->card  = NULL;
-  stack->next = NULL;
-
-  return(stack);
+  return;
 }
 
 bool empty(struct stack *stack) {
@@ -39,19 +37,24 @@ void push(struct stack **stack, struct card *card) {
   if (empty(*stack)) {
     (*stack)->card = card;
   } else {
-    new_stack = initialize_stack();
+    initialize_stack(&new_stack);
     new_stack->card = card;
     new_stack->next = (*stack);
     *stack = new_stack;
   }
 }
 
+/* FIXME: uglyness inside if statement */
 struct stack *pop(struct stack **stack) {
   struct stack *popped_entry = NULL;
 
   if(!empty(*stack)) {
     popped_entry = *stack;
-    *stack = (*stack)->next;
+    if (length(*stack) == 1) {
+      initialize_stack(stack);
+    } else {
+      *stack = (*stack)->next;
+    }
     popped_entry->next = NULL;
   }
 
