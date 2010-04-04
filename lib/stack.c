@@ -6,7 +6,7 @@
 struct stack *initialize_stack() {
   struct stack *stack = NULL;
 
-  stack = malloc(sizeof(stack));
+  stack = malloc(sizeof(*stack));
 
   stack->card  = NULL;
   stack->next = NULL;
@@ -46,13 +46,13 @@ void push(struct stack **stack, struct card *card) {
   }
 }
 
-struct stack *pop(struct stack *stack) {
+struct stack *pop(struct stack **stack) {
   struct stack *popped_entry = NULL;
 
-  if(!empty(stack)) {
-    popped_entry = stack;
-    popped_entry = NULL;
-    stack = stack->next;
+  if(!empty(*stack)) {
+    popped_entry = *stack;
+    *stack = (*stack)->next;
+    popped_entry->next = NULL;
   }
 
   return(popped_entry);
