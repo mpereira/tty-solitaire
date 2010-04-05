@@ -1,6 +1,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include "card.h"
+
 #define DIAMONDS_SYMBOL "\u2666"
 #define SPADES_SYMBOL   "\u2660"
 #define HEARTS_SYMBOL   "\u2665"

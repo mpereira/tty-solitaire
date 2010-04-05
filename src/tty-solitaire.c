@@ -1,7 +1,7 @@
 #include <ncurses.h>
 #include <malloc.h>
 #include <string.h>
-#include "../lib/card.h"
+#include "../lib/display.h"
 
 int main(int argc, const char *argv[]) {
   char message[] = "Welcome to tty-solitaire.";
