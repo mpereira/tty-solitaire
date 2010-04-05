@@ -1,7 +1,6 @@
 #include <ncurses.h>
 #include <malloc.h>
 #include <string.h>
-#include "common.h"
 #include "../lib/card.h"
 
 int main(int argc, const char *argv[]) {
