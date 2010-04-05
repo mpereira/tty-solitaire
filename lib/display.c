@@ -22,7 +22,7 @@ void init_curses() {
 char *card_suit(enum suit suit) {
   char *card_suit;
 
-  card_suit = malloc(5 * sizeof(card_suit));
+  card_suit = malloc(5 * sizeof(*card_suit));
 
   switch(suit) {
     case DIAMONDS: strcpy(card_suit, DIAMONDS_SYMBOL); break;
@@ -38,7 +38,7 @@ char *card_suit(enum suit suit) {
 char *card_value(enum value value) {
   char *card_value;
 
-  card_value = malloc(2 * sizeof(card_value));
+  card_value = malloc(2 * sizeof(*card_value));
 
   switch(value) {
     case TWO:   card_value = "2";  break;

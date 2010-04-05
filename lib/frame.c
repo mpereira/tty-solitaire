@@ -13,7 +13,7 @@ WINDOW *initialize_shape() {
 struct frame *initialize_frame() {
   struct frame *frame = NULL;
 
-  frame = malloc(sizeof(frame));
+  frame = malloc(sizeof(*frame));
 
   frame->shape  = initialize_shape();
   frame->height  = FRAME_HEIGHT;

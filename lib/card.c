@@ -6,7 +6,7 @@
 struct card *initialize_card() {
   struct card *card = NULL;
 
-  card = malloc(sizeof(card));
+  card = malloc(sizeof(*card));
 
   card->frame   = initialize_frame();
   card->value   = NO_VALUE;
