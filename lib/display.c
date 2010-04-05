@@ -39,6 +39,7 @@ void draw_empty_stacks() {
   for (int i = 0; i < EMPTY_STACKS_NUMBER; i++) {
     box(empty_stack[i], 0, 0);
     wrefresh(empty_stack[i]);
+    delwin(empty_stack[i]);
   }
 
   return;
