@@ -1,4 +1,3 @@
-#include <ncurses.h>
 #include <malloc.h>
 #include "frame.h"
 

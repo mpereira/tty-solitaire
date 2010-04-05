@@ -1,6 +1,5 @@
 #include <ncurses.h>
 #include <malloc.h>
-#include "frame.h"
 #include "card.h"
 
 struct card *initialize_card() {

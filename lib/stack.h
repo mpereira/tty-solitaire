@@ -1,6 +1,8 @@
 #ifndef STACK_H
 #define STACK_H
 
+#include "card.h"
+
 struct stack {
   struct card  *card;
   struct stack *next;

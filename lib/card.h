@@ -1,6 +1,8 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include "frame.h"
+
 enum value {
   NO_VALUE = -1,
   TWO      = 2,

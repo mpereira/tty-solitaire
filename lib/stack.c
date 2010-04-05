@@ -1,6 +1,5 @@
 #include <malloc.h>
 #include <stdbool.h>
-#include "card.h"
 #include "stack.h"
 
 void initialize_stack(struct stack **stack) {

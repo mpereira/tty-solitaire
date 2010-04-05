@@ -1,6 +1,8 @@
 #ifndef FRAME_H
 #define FRAME_H
 
+#include <ncurses.h>
+
 #define FRAME_WIDTH  7
 #define FRAME_HEIGHT 5
 

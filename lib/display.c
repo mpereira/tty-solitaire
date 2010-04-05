@@ -2,8 +2,6 @@
 #include <malloc.h>
 #include <string.h>
 #include <locale.h>
-#include "frame.h"
-#include "card.h"
 #include "display.h"
 
 void init_curses() {
