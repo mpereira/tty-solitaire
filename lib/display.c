@@ -17,6 +17,39 @@ void init_curses() {
   init_pair(3, COLOR_WHITE, COLOR_BLUE);
 }
 
+void draw_empty_stacks() {
+  WINDOW **empty_stack;
+
+  empty_stack = malloc(EMPTY_STACKS_NUMBER * sizeof(**empty_stack));
+
+  empty_stack[0] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 1);
+  empty_stack[1] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 9);
+  empty_stack[2] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 25);
+  empty_stack[3] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 33);
+  empty_stack[4] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 41);
+  empty_stack[5] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 49);
+  empty_stack[6] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 1);
+  empty_stack[7] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 9);
+  empty_stack[8] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 17);
+  empty_stack[9] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 25);
+  empty_stack[10] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 33);
+  empty_stack[11] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 41);
+  empty_stack[12] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 49);
+
+  for (int i = 0; i < EMPTY_STACKS_NUMBER; i++) {
+    box(empty_stack[i], 0, 0);
+    wrefresh(empty_stack[i]);
+  }
+
+  return;
+}
+
+void init_game() {
+  draw_empty_stacks();
+
+  return;
+}
+
 char *card_suit(enum suit suit) {
   char *card_suit;
 

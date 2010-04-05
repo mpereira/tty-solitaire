@@ -3,6 +3,8 @@
 
 #include "card.h"
 
+#define EMPTY_STACKS_NUMBER 13
+
 #define DIAMONDS_SYMBOL "\u2666"
 #define SPADES_SYMBOL   "\u2660"
 #define HEARTS_SYMBOL   "\u2665"
@@ -13,6 +15,8 @@
 #define WHITE_ON_BLUE  3
 
 void init_curses();
+void draw_empty_stacks();
+void init_game();
 char *card_suit(enum suit);
 char *card_value(enum value);
 void draw_value(struct card *);
