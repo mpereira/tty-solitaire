@@ -41,7 +41,8 @@ struct card {
   enum face    face;
 };
 
-struct card *initialize_card();
+void allocate_card(struct card **);
+void initialize_card(struct card *);
 void delete_card(struct card *);
 void set_card(struct card *, enum value, enum suit, enum face, int, int);
 

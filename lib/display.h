@@ -16,7 +16,7 @@
 
 void init_curses();
 void draw_empty_stacks();
-void init_game();
+void initialize_game();
 char *card_suit(enum suit);
 char *card_value(enum value);
 void draw_value(struct card *);

@@ -1,18 +1,20 @@
 #include <malloc.h>
 #include "frame.h"
 
-struct frame *initialize_frame() {
-  struct frame *frame = NULL;
+void allocate_frame(struct frame **frame) {
+  *frame = malloc(sizeof(**frame));
 
-  frame = malloc(sizeof(*frame));
+  return;
+}
 
-  frame->shape  = NULL;
+void initialize_frame(struct frame *frame) {
+  frame->shape   = NULL;
   frame->height  = FRAME_HEIGHT;
   frame->width   = FRAME_WIDTH;
   frame->start_y = 0;
   frame->start_x = 0;
 
-  return(frame);
+  return;
 }
 
 void delete_frame(struct frame *frame) {

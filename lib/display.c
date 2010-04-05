@@ -45,7 +45,9 @@ void draw_empty_stacks() {
   return;
 }
 
-void init_game() {
+void initialize_game() {
+  struct deck *deck = NULL;
+
   draw_empty_stacks();
 
   return;

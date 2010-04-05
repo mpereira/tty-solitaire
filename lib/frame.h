@@ -14,7 +14,8 @@ struct frame {
   int    start_x;
 };
 
-struct frame *initialize_frame();
+void allocate_frame(struct frame **);
+void initialize_frame(struct frame *);
 void delete_frame(struct frame *);
 void set_frame(struct frame *, int, int);
 

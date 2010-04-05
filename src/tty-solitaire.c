@@ -16,7 +16,7 @@ int main(int argc, const char *argv[]) {
            message);
   getch();
 
-  endwin();
+  initialize_game();
 
   puts("Game finished.");
 

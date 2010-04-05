@@ -2,11 +2,17 @@
 #include <stdbool.h>
 #include "stack.h"
 
-void initialize_stack(struct stack **stack) {
+void allocate_stack(struct stack **stack) {
   *stack = malloc(sizeof(**stack));
 
-  (*stack)->card = NULL;
-  (*stack)->next = NULL;
+  allocate_card(&((*stack)->card));
+
+  return;
+}
+
+void initialize_stack(struct stack *stack) {
+  stack->card = NULL;
+  stack->next = NULL;
 
   return;
 }
@@ -36,7 +42,7 @@ void push(struct stack **stack, struct card *card) {
   if (empty(*stack)) {
     (*stack)->card = card;
   } else {
-    initialize_stack(&new_stack);
+    allocate_stack(&new_stack);
     new_stack->card = card;
     new_stack->next = (*stack);
     *stack = new_stack;
@@ -50,7 +56,8 @@ struct stack *pop(struct stack **stack) {
   if(!empty(*stack)) {
     popped_entry = *stack;
     if (length(*stack) == 1) {
-      initialize_stack(stack);
+      allocate_stack(stack);
+      initialize_stack(*stack);
     } else {
       *stack = (*stack)->next;
     }

@@ -2,17 +2,21 @@
 #include <malloc.h>
 #include "card.h"
 
-struct card *initialize_card() {
-  struct card *card = NULL;
+void allocate_card(struct card **card) {
+  *card = malloc(sizeof(**card));
 
-  card = malloc(sizeof(*card));
+  allocate_frame(&((*card)->frame));
 
-  card->frame   = initialize_frame();
+  return;
+}
+
+void initialize_card(struct card *card) {
+  initialize_frame(card->frame);
   card->value   = NO_VALUE;
   card->suit    = NO_SUIT;
   card->face    = NO_FACE;
 
-  return(card);
+  return;
 }
 
 void delete_card(struct card *card) {
