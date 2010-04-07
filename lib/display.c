@@ -42,6 +42,8 @@ void draw_empty_stacks() {
     delwin(empty_stack[i]);
   }
 
+  free(empty_stack);
+
   return;
 }
 
@@ -49,6 +51,9 @@ void initialize_game() {
   struct deck *deck = NULL;
 
   draw_empty_stacks();
+  allocate_deck(&deck);
+  initialize_deck(deck);
+  delete_deck(deck);
 
   return;
 }

@@ -11,8 +11,14 @@ void allocate_stack(struct stack **stack) {
 }
 
 void initialize_stack(struct stack *stack) {
-  stack->card = NULL;
   stack->next = NULL;
+
+  return;
+}
+
+void delete_stack(struct stack *stack) {
+  delete_card(stack->card);
+  free(stack);
 
   return;
 }
