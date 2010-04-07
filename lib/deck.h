@@ -3,6 +3,8 @@
 
 #include "stack.h"
 
+#define NUMBER_OF_CARDS 52
+
 struct deck {
   struct stack *stock;
 
@@ -23,6 +25,6 @@ struct deck {
 void allocate_deck(struct deck **);
 void initialize_deck(struct deck *);
 void delete_deck(struct deck *);
-void shuffle_deck(struct deck *);
+void fill_deck(struct deck *);
 
 #endif

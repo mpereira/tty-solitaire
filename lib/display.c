@@ -2,6 +2,7 @@
 #include <malloc.h>
 #include <string.h>
 #include <locale.h>
+#include "deck.h"
 #include "display.h"
 
 void init_curses() {
@@ -53,7 +54,7 @@ void initialize_game() {
   draw_empty_stacks();
   allocate_deck(&deck);
   initialize_deck(deck);
-  delete_deck(deck);
+  fill_deck(deck);
 
   return;
 }
