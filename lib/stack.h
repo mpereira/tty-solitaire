@@ -15,5 +15,6 @@ bool empty(struct stack *);
 int length(struct stack *);
 void push(struct stack **, struct card *);
 struct stack *pop(struct stack **);
+void move_card(struct stack **, struct stack **);
 
 #endif

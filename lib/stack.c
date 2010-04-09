@@ -73,3 +73,12 @@ struct stack *pop(struct stack **stack) {
 
   return(popped_entry);
 }
+
+void move_card(struct stack **origin, struct stack **destination) {
+  struct stack *stack = NULL;
+
+  stack = pop(origin);
+  push(destination, stack->card);
+
+  return;
+}
