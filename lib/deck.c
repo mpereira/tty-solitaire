@@ -1,4 +1,6 @@
+#include <stdlib.h>
 #include <malloc.h>
+#include <time.h>
 #include "deck.h"
 
 void allocate_deck(struct deck **deck) {
@@ -123,6 +125,33 @@ void fill_deck(struct deck *deck) {
 
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     push(&(deck->stock), card[i]);
+  }
+
+  return;
+}
+
+void shuffle_deck(struct deck *deck) {
+  struct stack **stack = NULL;
+  struct stack tmp;
+  int random;
+
+  stack = malloc(NUMBER_OF_CARDS * sizeof(*stack));
+
+  for (int i = 0; i < NUMBER_OF_CARDS; i++) {
+    stack[i] = pop(&(deck->stock));
+  }
+
+  srand(time(NULL));
+
+  for (int i = 0; i < NUMBER_OF_CARDS - 1; i++) {
+    random = i + (rand() % (NUMBER_OF_CARDS) - i);
+    tmp = (*stack[i]);
+    (*stack[i]) = (*stack[random]);
+    (*stack[random]) = tmp;
+  }
+
+  for (int i = 0; i < NUMBER_OF_CARDS; i++) {
+    push(&(deck->stock), stack[i]->card);
   }
 
   return;

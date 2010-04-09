@@ -26,5 +26,6 @@ void allocate_deck(struct deck **);
 void initialize_deck(struct deck *);
 void delete_deck(struct deck *);
 void fill_deck(struct deck *);
+void shuffle_deck(struct deck *);
 
 #endif
