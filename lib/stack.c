@@ -11,6 +11,7 @@ void allocate_stack(struct stack **stack) {
 }
 
 void initialize_stack(struct stack *stack) {
+  initialize_card(stack->card);
   stack->next = NULL;
 
   return;
