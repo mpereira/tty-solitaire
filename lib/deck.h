@@ -7,6 +7,7 @@
 
 struct deck {
   struct stack *stock;
+  struct stack *waste_pile;
 
   struct stack *foundation_0;
   struct stack *foundation_1;

@@ -7,6 +7,7 @@ void allocate_deck(struct deck **deck) {
   *deck = malloc(sizeof(**deck));
 
   allocate_stack(&((*deck)->stock));
+  allocate_stack(&((*deck)->waste_pile));
 
   allocate_stack(&((*deck)->foundation_0));
   allocate_stack(&((*deck)->foundation_1));
@@ -26,6 +27,7 @@ void allocate_deck(struct deck **deck) {
 
 void initialize_deck(struct deck *deck) {
   initialize_stack(deck->stock);
+  initialize_stack(deck->waste_pile);
 
   initialize_stack(deck->foundation_0);
   initialize_stack(deck->foundation_1);
@@ -45,6 +47,7 @@ void initialize_deck(struct deck *deck) {
 
 void delete_deck(struct deck *deck) {
   delete_stack(deck->stock);
+  delete_stack(deck->waste_pile);
 
   delete_stack(deck->foundation_0);
   delete_stack(deck->foundation_1);
