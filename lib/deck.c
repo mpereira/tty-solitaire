@@ -67,6 +67,50 @@ void delete_deck(struct deck *deck) {
   return;
 }
 
+void set_deck_stacks_coordinates(struct deck *deck) {
+  set_frame(deck->stock->card->frame,
+            STOCK_STARTING_Y,
+            STOCK_STARTING_X);
+  set_frame(deck->waste_pile->card->frame,
+            WASTE_PILE_STARTING_Y,
+            WASTE_PILE_STARTING_X);
+  set_frame(deck->foundation_0->card->frame,
+            FOUNDATION_0_STARTING_Y,
+            FOUNDATION_0_STARTING_X);
+  set_frame(deck->foundation_1->card->frame,
+            FOUNDATION_1_STARTING_Y,
+            FOUNDATION_1_STARTING_X);
+  set_frame(deck->foundation_2->card->frame,
+            FOUNDATION_2_STARTING_Y,
+            FOUNDATION_2_STARTING_X);
+  set_frame(deck->foundation_3->card->frame,
+            FOUNDATION_3_STARTING_Y,
+            FOUNDATION_3_STARTING_X);
+  set_frame(deck->maneuvre_0->card->frame,
+            MANEUVRE_0_STARTING_Y,
+            MANEUVRE_0_STARTING_X);
+  set_frame(deck->maneuvre_1->card->frame,
+            MANEUVRE_1_STARTING_Y,
+            MANEUVRE_1_STARTING_X);
+  set_frame(deck->maneuvre_2->card->frame,
+            MANEUVRE_2_STARTING_Y,
+            MANEUVRE_2_STARTING_X);
+  set_frame(deck->maneuvre_3->card->frame,
+            MANEUVRE_3_STARTING_Y,
+            MANEUVRE_3_STARTING_X);
+  set_frame(deck->maneuvre_4->card->frame,
+            MANEUVRE_4_STARTING_Y,
+            MANEUVRE_4_STARTING_X);
+  set_frame(deck->maneuvre_5->card->frame,
+            MANEUVRE_5_STARTING_Y,
+            MANEUVRE_5_STARTING_X);
+  set_frame(deck->maneuvre_6->card->frame,
+            MANEUVRE_6_STARTING_Y,
+            MANEUVRE_6_STARTING_X);
+
+  return;
+}
+
 void fill_deck(struct deck *deck) {
   struct card *card[NUMBER_OF_CARDS];
 
