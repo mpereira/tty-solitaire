@@ -25,7 +25,7 @@ void delete_stack(struct stack *stack) {
 }
 
 bool empty(struct stack *stack) {
-  return(stack->card == NULL);
+  return(stack->card->value == NO_VALUE);
 }
 
 int length(struct stack *stack) {
