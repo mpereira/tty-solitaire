@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "card_debug.h"
 #include "stack_debug.h"
 
 void print_stack(struct stack *stack) {

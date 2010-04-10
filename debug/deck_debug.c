@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "stack_debug.h"
 #include "deck_debug.h"
 
 void print_deck(struct deck *deck) {
