@@ -56,15 +56,19 @@ void push(struct stack **stack, struct card *card) {
   }
 }
 
-/* FIXME: uglyness inside if statement */
+/* FIXME: hack hack hack to get the old coordinates after clearing the structure */
 struct stack *pop(struct stack **stack) {
   struct stack *popped_entry = NULL;
 
   if(!empty(*stack)) {
     popped_entry = *stack;
     if (length(*stack) == 1) {
+      int start_y, start_x;
+      start_y = (*stack)->card->frame->start_y;
+      start_x = (*stack)->card->frame->start_x;
       allocate_stack(stack);
       initialize_stack(*stack);
+      set_frame((*stack)->card->frame, start_y, start_x);
     } else {
       *stack = (*stack)->next;
     }
@@ -74,9 +78,24 @@ struct stack *pop(struct stack **stack) {
   return(popped_entry);
 }
 
+bool maneuvre_stack(struct stack *stack) {
+  return(stack->card->frame->start_y == MANEUVRE_STACKS_START_Y);
+}
+
+void refresh_card_coordinates(struct stack *origin, struct stack *destination) {
+  origin->card->frame->start_x = destination->card->frame->start_x;
+  origin->card->frame->start_y = destination->card->frame->start_y;
+  if (!empty(destination) && maneuvre_stack(destination)) {
+    origin->card->frame->start_y++;
+  }
+
+  return;
+}
+
 void move_card(struct stack **origin, struct stack **destination) {
   struct stack *stack = NULL;
 
+  refresh_card_coordinates(*origin, *destination);
   stack = pop(origin);
   push(destination, stack->card);
 
