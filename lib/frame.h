@@ -8,8 +8,6 @@
 
 struct frame {
   WINDOW *shape;
-  int    height;
-  int    width;
   int    start_y;
   int    start_x;
 };
