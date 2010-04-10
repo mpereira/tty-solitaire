@@ -36,7 +36,7 @@ void print_card(struct card *card) {
   }
 
   printf("at y:%d x:%d, ", card->frame->start_y, card->frame->start_x);
-  printf("with width:%d height:%d\n", card->frame->width, card->frame->height);
+  printf("with width:%d height:%d\n", FRAME_WIDTH, FRAME_HEIGHT);
 
   return;
 }
