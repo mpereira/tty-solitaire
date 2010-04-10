@@ -39,3 +39,15 @@ void set_card(struct card *card,
 
   return;
 }
+
+void expose_card(struct card *card) {
+  card->face = EXPOSED;
+
+  return;
+}
+
+void cover_card(struct card *card) {
+  card->face = COVERED;
+
+  return;
+}
