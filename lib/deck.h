@@ -56,5 +56,6 @@ void delete_deck(struct deck *);
 void set_deck_stacks_coordinates(struct deck *);
 void fill_deck(struct deck *);
 void shuffle_deck(struct deck *);
+void deal_cards(struct deck *);
 
 #endif

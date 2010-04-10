@@ -203,3 +203,49 @@ void shuffle_deck(struct deck *deck) {
 
   return;
 }
+
+void deal_cards(struct deck *deck) {
+  move_card(&(deck->stock), &(deck->maneuvre_0));
+  expose_card(deck->maneuvre_0->card);
+  move_card(&(deck->stock), &(deck->maneuvre_1));
+  move_card(&(deck->stock), &(deck->maneuvre_2));
+  move_card(&(deck->stock), &(deck->maneuvre_3));
+  move_card(&(deck->stock), &(deck->maneuvre_4));
+  move_card(&(deck->stock), &(deck->maneuvre_5));
+  move_card(&(deck->stock), &(deck->maneuvre_6));
+
+  move_card(&(deck->stock), &(deck->maneuvre_1));
+  expose_card(deck->maneuvre_1->card);
+  move_card(&(deck->stock), &(deck->maneuvre_2));
+  move_card(&(deck->stock), &(deck->maneuvre_3));
+  move_card(&(deck->stock), &(deck->maneuvre_4));
+  move_card(&(deck->stock), &(deck->maneuvre_5));
+  move_card(&(deck->stock), &(deck->maneuvre_6));
+
+  move_card(&(deck->stock), &(deck->maneuvre_2));
+  expose_card(deck->maneuvre_2->card);
+  move_card(&(deck->stock), &(deck->maneuvre_3));
+  move_card(&(deck->stock), &(deck->maneuvre_4));
+  move_card(&(deck->stock), &(deck->maneuvre_5));
+  move_card(&(deck->stock), &(deck->maneuvre_6));
+
+  move_card(&(deck->stock), &(deck->maneuvre_3));
+  expose_card(deck->maneuvre_3->card);
+  move_card(&(deck->stock), &(deck->maneuvre_4));
+  move_card(&(deck->stock), &(deck->maneuvre_5));
+  move_card(&(deck->stock), &(deck->maneuvre_6));
+
+  move_card(&(deck->stock), &(deck->maneuvre_4));
+  expose_card(deck->maneuvre_4->card);
+  move_card(&(deck->stock), &(deck->maneuvre_5));
+  move_card(&(deck->stock), &(deck->maneuvre_6));
+
+  move_card(&(deck->stock), &(deck->maneuvre_5));
+  expose_card(deck->maneuvre_5->card);
+  move_card(&(deck->stock), &(deck->maneuvre_6));
+
+  move_card(&(deck->stock), &(deck->maneuvre_6));
+  expose_card(deck->maneuvre_6->card);
+
+  return;
+}
