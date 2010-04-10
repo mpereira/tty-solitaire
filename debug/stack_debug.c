@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "stack_test.h"
+#include "stack_debug.h"
 
 void print_stack(struct stack *stack) {
   if (empty(stack)) {

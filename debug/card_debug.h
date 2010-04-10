@@ -1,5 +1,5 @@
-#ifndef CARD_TEST_H
-#define CARD_TEST_H
+#ifndef CARD_DEBUG_H
+#define CARD_DEBUG_H
 
 #include "../lib/card.h"
 

@@ -1,5 +1,5 @@
-#ifndef DECK_TEST_H
-#define DECK_TEST_H
+#ifndef DECK_DEBUG_H
+#define DECK_DEBUG_H
 
 #include "../lib/deck.h"
 

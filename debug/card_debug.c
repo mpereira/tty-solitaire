@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "card_test.h"
+#include "card_debug.h"
 
 void print_card(struct card *card) {
   switch (card->face) {
