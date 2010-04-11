@@ -5,7 +5,6 @@
 #include <locale.h>
 #include "deck.h"
 #include "display.h"
-#include "../debug/deck_debug.h"
 
 void init_curses() {
   setlocale(LC_ALL, "");    /* supporting unicode characters          */
@@ -61,8 +60,6 @@ void initialize_game() {
   shuffle_deck(deck);
   deal_cards(deck);
   draw_game(deck);
-  endwin();
-  /*print_deck(deck);*/
 
   return;
 }
