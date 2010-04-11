@@ -160,11 +160,12 @@ void draw_card(struct card *card) {
 
 void draw_stack(struct stack *stack) {
   if (!empty(stack)) {
-    struct stack *iterator = stack;
+    struct stack *iterator = stack->next;
     while (iterator != NULL) {
       draw_card(iterator->card);
       iterator = iterator->next;
     }
+    draw_card(stack->card);
   }
 
   return;
