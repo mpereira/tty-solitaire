@@ -111,7 +111,8 @@ char *card_value(enum value value) {
 
 void draw_value(struct card *card) {
   mvwprintw(card->frame->shape, 0, 0, card_value(card->value));
-  mvwprintw(card->frame->shape, 4, 6, card_value(card->value));
+  mvwprintw(card->frame->shape, 4,
+    6 - (strlen(card_value(card->value)) - 1), card_value(card->value));
 
   return;
 }
@@ -119,13 +120,16 @@ void draw_value(struct card *card) {
 void draw_suit(struct card *card) {
   if (card->suit % 2 == 0) {
     wattron(card->frame->shape, COLOR_PAIR(RED_ON_WHITE));
-    mvwprintw(card->frame->shape, 0, 1, card_suit(card->suit));
-    mvwprintw(card->frame->shape, 4, 5, card_suit(card->suit));
-    wattroff(card->frame->shape, COLOR_PAIR(RED_ON_WHITE));
   } else {
     wattron(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
-    mvwprintw(card->frame->shape, 0, 1, card_suit(card->suit));
-    mvwprintw(card->frame->shape, 4, 5, card_suit(card->suit));
+  }
+  mvwprintw(card->frame->shape, 0, 1 + (strlen(card_value(card->value) + 1)),
+    card_suit(card->suit));
+  mvwprintw(card->frame->shape, 4, 5 - (strlen(card_value(card->value) + 1)),
+    card_suit(card->suit));
+  if (card->suit % 2 == 0) {
+    wattroff(card->frame->shape, COLOR_PAIR(RED_ON_WHITE));
+  } else {
     wattroff(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
   }
 
