@@ -2,6 +2,7 @@
 #define DISPLAY_H
 
 #include "card.h"
+#include "deck.h"
 
 #define EMPTY_STACKS_NUMBER 13
 
@@ -24,5 +25,7 @@ void draw_suit(struct card *);
 void draw_front(struct card *);
 void draw_back(struct card *);
 void draw_card(struct card *);
+void draw_stack(struct stack *);
+void draw_game(struct deck *);
 
 #endif

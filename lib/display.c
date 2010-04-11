@@ -1,9 +1,11 @@
+#include <stdio.h>
 #include <ncurses.h>
 #include <malloc.h>
 #include <string.h>
 #include <locale.h>
 #include "deck.h"
 #include "display.h"
+#include "../debug/deck_debug.h"
 
 void init_curses() {
   setlocale(LC_ALL, "");    /* supporting unicode characters          */
@@ -54,7 +56,13 @@ void initialize_game() {
   draw_empty_stacks();
   allocate_deck(&deck);
   initialize_deck(deck);
+  set_deck_stacks_coordinates(deck);
   fill_deck(deck);
+  shuffle_deck(deck);
+  deal_cards(deck);
+  draw_game(deck);
+  endwin();
+  /*print_deck(deck);*/
 
   return;
 }
@@ -138,11 +146,45 @@ void draw_back(struct card *card) {
 }
 
 void draw_card(struct card *card) {
+  mvwin(card->frame->shape, card->frame->start_y, card->frame->start_x);
   if (card->face == EXPOSED) {
     draw_front(card);
   } else {
     draw_back(card);
   }
+  wrefresh(card->frame->shape);
+
+  return;
+}
+
+void draw_stack(struct stack *stack) {
+  if (!empty(stack)) {
+    struct stack *iterator = stack;
+    while (iterator != NULL) {
+      draw_card(iterator->card);
+      iterator = iterator->next;
+    }
+  }
+
+  return;
+}
+
+void draw_game(struct deck *deck) {
+  draw_stack(deck->stock);
+  draw_stack(deck->waste_pile);
+
+  draw_stack(deck->foundation_0);
+  draw_stack(deck->foundation_1);
+  draw_stack(deck->foundation_2);
+  draw_stack(deck->foundation_3);
+
+  draw_stack(deck->maneuvre_0);
+  draw_stack(deck->maneuvre_1);
+  draw_stack(deck->maneuvre_2);
+  draw_stack(deck->maneuvre_3);
+  draw_stack(deck->maneuvre_4);
+  draw_stack(deck->maneuvre_5);
+  draw_stack(deck->maneuvre_6);
 
   return;
 }
