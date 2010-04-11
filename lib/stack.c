@@ -79,7 +79,7 @@ struct stack *pop(struct stack **stack) {
 }
 
 bool maneuvre_stack(struct stack *stack) {
-  return(stack->card->frame->start_y == MANEUVRE_STACKS_START_Y);
+  return(stack->card->frame->start_y >= MANEUVRE_STACKS_START_Y);
 }
 
 void refresh_card_coordinates(struct stack *origin, struct stack *destination) {
