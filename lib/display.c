@@ -12,7 +12,8 @@ void init_curses() {
   raw();                    /* disable line buffers                   */
   noecho();                 /* character echo is unnecessary          */
   keypad(stdscr, TRUE);     /* enable F and arrow keys                */
-  start_color();
+  start_color();            /* I want colors                          */
+  curs_set(0);              /* invisible cursor */
 
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
@@ -52,6 +53,9 @@ void draw_empty_stacks() {
 void initialize_game() {
   struct deck *deck = NULL;
 
+  clear();
+  refresh();
+  assume_default_colors(COLOR_WHITE, COLOR_GREEN);
   draw_empty_stacks();
   allocate_deck(&deck);
   initialize_deck(deck);
