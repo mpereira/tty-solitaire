@@ -6,25 +6,25 @@ void print_card(struct card *card) {
     case NO_FACE: printf("No face "); break;
     case COVERED: printf("Covered "); break;
     case EXPOSED: printf("Exposed "); break;
-    default     : printf("?");
+    default     : printf("? ");
   }
 
   switch (card->value) {
     case NO_VALUE: printf(", no value "); break;
-    case TWO     : printf("two"); break;
+    case TWO     : printf("two "); break;
     case THREE   : printf("three "); break;
     case FOUR    : printf("four "); break;
-    case FIVE    : printf("five"); break;
-    case SIX     : printf("six"); break;
-    case SEVEN   : printf("seven"); break;
-    case EIGHT   : printf("eight"); break;
-    case NINE    : printf("nine"); break;
-    case TEN     : printf("ten"); break;
-    case JACK    : printf("jack"); break;
+    case FIVE    : printf("five "); break;
+    case SIX     : printf("six "); break;
+    case SEVEN   : printf("seven "); break;
+    case EIGHT   : printf("eight "); break;
+    case NINE    : printf("nine "); break;
+    case TEN     : printf("ten "); break;
+    case JACK    : printf("jack "); break;
     case QUEEN   : printf("queen "); break;
     case KING    : printf("king "); break;
     case ACE     : printf("ace "); break;
-    default      : printf("?");
+    default      : printf("? ");
   }
 
   switch (card->suit) {
