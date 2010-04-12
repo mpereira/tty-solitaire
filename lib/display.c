@@ -6,18 +6,67 @@
 #include "deck.h"
 #include "display.h"
 
-void init_curses() {
+void initialize_curses() {
   setlocale(LC_ALL, "");    /* supporting unicode characters          */
   initscr();                /* initialize the terminal in curses mode */
   raw();                    /* disable line buffers                   */
   noecho();                 /* character echo is unnecessary          */
   keypad(stdscr, TRUE);     /* enable F and arrow keys                */
   start_color();            /* I want colors                          */
-  curs_set(0);              /* invisible cursor */
+  curs_set(FALSE);          /* invisible cursor                       */
 
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
   init_pair(3, COLOR_WHITE, COLOR_BLUE);
+
+  return;
+}
+
+void end_curses() {
+  endwin();
+  puts("Game finished.");
+
+  return;
+}
+
+void initialize_game() {
+  struct deck *deck = NULL;
+  int pressed_key;
+
+  mvprintw(11, 27, "Welcome to tty-solitaire.");
+  mvprintw(12, 19, "Press the space bar to play or q to quit.");
+  while (1) {
+    switch (pressed_key = getch()) {
+      case KEY_SPACEBAR:
+        clear();
+        refresh();
+        assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+        draw_empty_stacks();
+        allocate_deck(&deck);
+        initialize_deck(deck);
+        set_deck_stacks_coordinates(deck);
+        fill_deck(deck);
+        shuffle_deck(deck);
+        deal_cards(deck);
+        draw_game(deck);
+        getchar();
+        end_curses();
+        end_game(deck);
+        return;
+      case 'q':
+      case 'Q':
+        end_curses();
+        return;
+    }
+  }
+
+  return;
+}
+
+void end_game(struct deck *deck) {
+  delete_deck(deck);
+
+  return;
 }
 
 void draw_empty_stacks() {
@@ -46,24 +95,6 @@ void draw_empty_stacks() {
   }
 
   free(empty_stack);
-
-  return;
-}
-
-void initialize_game() {
-  struct deck *deck = NULL;
-
-  clear();
-  refresh();
-  assume_default_colors(COLOR_WHITE, COLOR_GREEN);
-  draw_empty_stacks();
-  allocate_deck(&deck);
-  initialize_deck(deck);
-  set_deck_stacks_coordinates(deck);
-  fill_deck(deck);
-  shuffle_deck(deck);
-  deal_cards(deck);
-  draw_game(deck);
 
   return;
 }
