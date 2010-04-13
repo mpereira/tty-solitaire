@@ -3,8 +3,6 @@
 
 #include "deck.h"
 
-#define KEY_SPACEBAR ' '
-
 #define NUMBER_OF_CARDS 52
 
 #define STOCK_STARTING_X        1
@@ -38,7 +36,9 @@ void set_stacks_coordinates(struct deck *);
 void fill_deck(struct deck *);
 void shuffle_deck(struct deck *);
 void deal_cards(struct deck *);
+void greet_player();
 void initialize_game();
+void prepare_game(struct deck **);
 void end_game();
 
 #endif

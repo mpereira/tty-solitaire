@@ -9,6 +9,7 @@ void initialize_curses() {
   keypad(stdscr, TRUE);     /* enable F and arrow keys                */
   start_color();            /* I want colors                          */
   curs_set(FALSE);          /* invisible cursor                       */
+  assume_default_colors(COLOR_WHITE, COLOR_GREEN);
 
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
@@ -20,6 +21,13 @@ void initialize_curses() {
 void end_curses() {
   endwin();
   puts("Game finished.");
+
+  return;
+}
+
+void clear_screen() {
+  clear();
+  refresh();
 
   return;
 }

@@ -188,36 +188,31 @@ void deal_cards(struct deck *deck) {
   return;
 }
 
-void initialize_game() {
-  struct deck *deck = NULL;
-  int pressed_key;
-
+void greet_player() {
   mvprintw(11, 27, "Welcome to tty-solitaire.");
   mvprintw(12, 19, "Press the space bar to play or q to quit.");
-  while (1) {
-    switch (pressed_key = getch()) {
-      case KEY_SPACEBAR:
-        clear();
-        refresh();
-        assume_default_colors(COLOR_WHITE, COLOR_GREEN);
-        draw_empty_stacks();
-        allocate_deck(&deck);
-        initialize_deck(deck);
-        set_stacks_coordinates(deck);
-        fill_deck(deck);
-        shuffle_deck(deck);
-        deal_cards(deck);
-        draw_game(deck);
-        getchar();
-        end_curses();
-        end_game(deck);
-        return;
-      case 'q':
-      case 'Q':
-        end_curses();
-        return;
-    }
-  }
+
+  return;
+}
+
+void prepare_game(struct deck **deck) {
+  draw_empty_stacks();
+  allocate_deck(deck);
+  initialize_deck(*deck);
+  set_stacks_coordinates(*deck);
+  fill_deck(*deck);
+  shuffle_deck(*deck);
+  deal_cards(*deck);
+
+  return;
+}
+
+void initialize_game() {
+  struct deck *deck = NULL;
+
+  clear_screen();
+  prepare_game(&deck);
+  draw_game(deck);
 
   return;
 }
