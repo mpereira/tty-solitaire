@@ -7,8 +7,10 @@ LIB_DIR = lib
 OBJECTS = ${LIB_DIR}/frame.o   \
           ${LIB_DIR}/card.o    \
           ${LIB_DIR}/stack.o   \
-          ${LIB_DIR}/deck.o   \
-          ${LIB_DIR}/display.o
+          ${LIB_DIR}/deck.o    \
+          ${LIB_DIR}/util.o    \
+          ${LIB_DIR}/display.o \
+          ${LIB_DIR}/game.o
 LDFLAGS = -lncurses
 
 tty-solitaire: ${OBJECTS}
