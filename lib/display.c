@@ -1,103 +1,8 @@
-#include <stdio.h>
 #include <ncurses.h>
 #include <malloc.h>
 #include <string.h>
-#include <locale.h>
-#include "deck.h"
 #include "display.h"
-
-void initialize_curses() {
-  setlocale(LC_ALL, "");    /* supporting unicode characters          */
-  initscr();                /* initialize the terminal in curses mode */
-  raw();                    /* disable line buffers                   */
-  noecho();                 /* character echo is unnecessary          */
-  keypad(stdscr, TRUE);     /* enable F and arrow keys                */
-  start_color();            /* I want colors                          */
-  curs_set(FALSE);          /* invisible cursor                       */
-
-  init_pair(1, COLOR_BLACK, COLOR_WHITE);
-  init_pair(2, COLOR_RED, COLOR_WHITE);
-  init_pair(3, COLOR_WHITE, COLOR_BLUE);
-
-  return;
-}
-
-void end_curses() {
-  endwin();
-  puts("Game finished.");
-
-  return;
-}
-
-void initialize_game() {
-  struct deck *deck = NULL;
-  int pressed_key;
-
-  mvprintw(11, 27, "Welcome to tty-solitaire.");
-  mvprintw(12, 19, "Press the space bar to play or q to quit.");
-  while (1) {
-    switch (pressed_key = getch()) {
-      case KEY_SPACEBAR:
-        clear();
-        refresh();
-        assume_default_colors(COLOR_WHITE, COLOR_GREEN);
-        draw_empty_stacks();
-        allocate_deck(&deck);
-        initialize_deck(deck);
-        set_deck_stacks_coordinates(deck);
-        fill_deck(deck);
-        shuffle_deck(deck);
-        deal_cards(deck);
-        draw_game(deck);
-        getchar();
-        end_curses();
-        end_game(deck);
-        return;
-      case 'q':
-      case 'Q':
-        end_curses();
-        return;
-    }
-  }
-
-  return;
-}
-
-void end_game(struct deck *deck) {
-  delete_deck(deck);
-
-  return;
-}
-
-void draw_empty_stacks() {
-  WINDOW **empty_stack;
-
-  empty_stack = malloc(EMPTY_STACKS_NUMBER * sizeof(**empty_stack));
-
-  empty_stack[0] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 1);
-  empty_stack[1] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 9);
-  empty_stack[2] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 25);
-  empty_stack[3] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 33);
-  empty_stack[4] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 41);
-  empty_stack[5] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 49);
-  empty_stack[6] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 1);
-  empty_stack[7] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 9);
-  empty_stack[8] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 17);
-  empty_stack[9] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 25);
-  empty_stack[10] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 33);
-  empty_stack[11] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 41);
-  empty_stack[12] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 49);
-
-  for (int i = 0; i < EMPTY_STACKS_NUMBER; i++) {
-    box(empty_stack[i], 0, 0);
-    wrefresh(empty_stack[i]);
-    delwin(empty_stack[i]);
-  }
-
-  free(empty_stack);
-
-  return;
-}
+#include "game.h"
 
 char *card_suit(enum suit suit) {
   char *card_suit;
@@ -138,6 +43,36 @@ char *card_value(enum value value) {
   }
 
   return(card_value);
+}
+
+void draw_empty_stacks() {
+  WINDOW **empty_stack;
+
+  empty_stack = malloc(EMPTY_STACKS_NUMBER * sizeof(**empty_stack));
+
+  empty_stack[0] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 1);
+  empty_stack[1] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 9);
+  empty_stack[2] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 25);
+  empty_stack[3] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 33);
+  empty_stack[4] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 41);
+  empty_stack[5] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 49);
+  empty_stack[6] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 1);
+  empty_stack[7] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 9);
+  empty_stack[8] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 17);
+  empty_stack[9] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 25);
+  empty_stack[10] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 33);
+  empty_stack[11] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 41);
+  empty_stack[12] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 49);
+
+  for (int i = 0; i < EMPTY_STACKS_NUMBER; i++) {
+    box(empty_stack[i], 0, 0);
+    wrefresh(empty_stack[i]);
+    delwin(empty_stack[i]);
+  }
+
+  free(empty_stack);
+
+  return;
 }
 
 void draw_value(struct card *card) {

@@ -1,10 +1,7 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
-#include "card.h"
 #include "deck.h"
-
-#define KEY_SPACEBAR ' '
 
 #define EMPTY_STACKS_NUMBER 13
 
@@ -17,13 +14,9 @@
 #define RED_ON_WHITE   2
 #define WHITE_ON_BLUE  3
 
-void initialize_curses();
-void end_curses();
-void initialize_game();
-void end_game();
-void draw_empty_stacks();
 char *card_suit(enum suit);
 char *card_value(enum value);
+void draw_empty_stacks();
 void draw_value(struct card *);
 void draw_suit(struct card *);
 void draw_front(struct card *);

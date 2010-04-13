@@ -1,4 +1,3 @@
-#include <ncurses.h>
 #include <malloc.h>
 #include "card.h"
 

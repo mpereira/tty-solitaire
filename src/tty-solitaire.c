@@ -1,7 +1,5 @@
-#include <ncurses.h>
-#include <malloc.h>
-#include <string.h>
-#include "../lib/display.h"
+#include "../lib/util.h"
+#include "../lib/game.h"
 
 int main(int argc, const char *argv[]) {
   initialize_curses();
