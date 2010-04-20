@@ -26,6 +26,8 @@
 #define MANEUVRE_5_STARTING_X   41
 #define MANEUVRE_6_STARTING_X   49
 
+struct deck *deck;
+
 void set_stacks_coordinates(struct deck *);
 void fill_deck(struct deck *);
 void shuffle_deck(struct deck *);

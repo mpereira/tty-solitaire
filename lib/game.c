@@ -208,8 +208,6 @@ void prepare_game(struct deck **deck) {
 }
 
 void initialize_game() {
-  struct deck *deck = NULL;
-
   clear_screen();
   prepare_game(&deck);
   draw_game(deck);
