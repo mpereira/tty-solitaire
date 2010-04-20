@@ -220,3 +220,14 @@ void end_game(struct deck *deck) {
 
   return;
 }
+
+void handle_stock_event() {
+  if (!empty(deck->stock)) {
+    move_card(&(deck->stock), &(deck->waste_pile));
+    expose_card(deck->waste_pile->card);
+    draw_stack(deck->stock);
+    draw_stack(deck->waste_pile);
+  }
+
+  return;
+}

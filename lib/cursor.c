@@ -100,3 +100,7 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
 
   return;
 }
+
+bool cursor_on_stock(struct cursor *cursor) {
+  return((cursor->x == CURSOR_STARTING_X) && (cursor->y == CURSOR_STARTING_Y));
+}

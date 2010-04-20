@@ -46,6 +46,13 @@ int main(int argc, const char *argv[]) {
       case KEY_RIGHT:
         move_cursor(cursor, RIGHT);
         break;
+      case KEY_SPACEBAR:
+        if (cursor_on_stock(cursor)) {
+          handle_stock_event();
+        } else {
+          /*handle_card_event();*/
+        }
+        break;
       case 'q':
       case 'Q':
         end_curses();
