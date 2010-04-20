@@ -50,19 +50,58 @@ void draw_empty_stacks() {
 
   empty_stack = malloc(EMPTY_STACKS_NUMBER * sizeof(**empty_stack));
 
-  empty_stack[0] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 1);
-  empty_stack[1] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 9);
-  empty_stack[2] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 25);
-  empty_stack[3] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 33);
-  empty_stack[4] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 41);
-  empty_stack[5] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 1, 49);
-  empty_stack[6] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 1);
-  empty_stack[7] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 9);
-  empty_stack[8] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 17);
-  empty_stack[9] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 25);
-  empty_stack[10] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 33);
-  empty_stack[11] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 41);
-  empty_stack[12] = newwin(FRAME_HEIGHT, FRAME_WIDTH, 7, 49);
+  empty_stack[0] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          STOCK_STARTING_Y,
+                          STOCK_STARTING_X);
+  empty_stack[1] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          WASTE_PILE_STARTING_Y,
+                          WASTE_PILE_STARTING_X);
+  empty_stack[2] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          FOUNDATION_STARTING_Y,
+                          FOUNDATION_0_STARTING_X);
+  empty_stack[3] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          FOUNDATION_STARTING_Y,
+                          FOUNDATION_1_STARTING_X);
+  empty_stack[4] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          FOUNDATION_STARTING_Y,
+                          FOUNDATION_2_STARTING_X);
+  empty_stack[5] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          FOUNDATION_STARTING_Y,
+                          FOUNDATION_3_STARTING_X);
+  empty_stack[6] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          MANEUVRE_STARTING_Y,
+                          MANEUVRE_0_STARTING_X);
+  empty_stack[7] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          MANEUVRE_STARTING_Y,
+                          MANEUVRE_1_STARTING_X);
+  empty_stack[8] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          MANEUVRE_STARTING_Y,
+                          MANEUVRE_2_STARTING_X);
+  empty_stack[9] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          MANEUVRE_STARTING_Y,
+                          MANEUVRE_3_STARTING_X);
+  empty_stack[10] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          MANEUVRE_STARTING_Y,
+                          MANEUVRE_4_STARTING_X);
+  empty_stack[11] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          MANEUVRE_STARTING_Y,
+                          MANEUVRE_5_STARTING_X);
+  empty_stack[12] = newwin(FRAME_HEIGHT,
+                          FRAME_WIDTH,
+                          MANEUVRE_STARTING_Y,
+                          MANEUVRE_6_STARTING_X);
 
   for (int i = 0; i < EMPTY_STACKS_NUMBER; i++) {
     box(empty_stack[i], 0, 0);
