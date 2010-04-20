@@ -9,6 +9,7 @@ OBJECTS = ${LIB_DIR}/frame.o    \
           ${LIB_DIR}/stack.o    \
           ${LIB_DIR}/deck.o     \
           ${LIB_DIR}/util.o     \
+          ${LIB_DIR}/cursor.o   \
           ${LIB_DIR}/keyboard.o \
           ${LIB_DIR}/display.o  \
           ${LIB_DIR}/game.o
