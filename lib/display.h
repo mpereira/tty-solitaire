@@ -13,9 +13,11 @@
 #define BLACK_ON_WHITE 1
 #define RED_ON_WHITE   2
 #define WHITE_ON_BLUE  3
+#define WHITE_ON_GREEN 4
 
 char *card_suit(enum suit);
 char *card_value(enum value);
+void erase_stack(struct stack *);
 void draw_empty_stacks();
 void draw_value(struct card *);
 void draw_suit(struct card *);

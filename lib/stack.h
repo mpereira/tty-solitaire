@@ -3,7 +3,7 @@
 
 #include "card.h"
 
-#define MANEUVRE_STACKS_START_Y 7
+#define MANEUVRE_STACKS_STARTING_Y 7
 
 struct stack {
   struct card  *card;
@@ -18,6 +18,7 @@ int length(struct stack *);
 void push(struct stack **, struct card *);
 struct stack *pop(struct stack **);
 bool maneuvre_stack(struct stack *);
+bool waste_pile_stack(struct stack *);
 void refresh_card_coordinates(struct stack *, struct stack *);
 void move_card(struct stack **, struct stack **);
 

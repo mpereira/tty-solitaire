@@ -1,6 +1,7 @@
 #include <malloc.h>
 #include <stdbool.h>
 #include "stack.h"
+#include "game.h"
 
 void allocate_stack(struct stack **stack) {
   *stack = malloc(sizeof(**stack));
@@ -79,7 +80,12 @@ struct stack *pop(struct stack **stack) {
 }
 
 bool maneuvre_stack(struct stack *stack) {
-  return(stack->card->frame->start_y >= MANEUVRE_STACKS_START_Y);
+  return(stack->card->frame->start_y >= MANEUVRE_STACKS_STARTING_Y);
+}
+
+bool waste_pile_stack(struct stack *stack) {
+  return((stack->card->frame->start_x == WASTE_PILE_STARTING_X) &&
+         (stack->card->frame->start_y == WASTE_PILE_STARTING_Y));
 }
 
 void refresh_card_coordinates(struct stack *origin, struct stack *destination) {

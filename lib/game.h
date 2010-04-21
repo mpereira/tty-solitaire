@@ -36,6 +36,5 @@ void greet_player();
 void initialize_game();
 void prepare_game(struct deck **);
 void end_game();
-void handle_stock_event();
 
 #endif

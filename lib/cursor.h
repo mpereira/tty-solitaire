@@ -2,6 +2,7 @@
 #define CURSOR_H
 
 #include <stdbool.h>
+#include "deck.h"
 
 #define CURSOR_STARTING_X 4
 #define CURSOR_STARTING_Y 7

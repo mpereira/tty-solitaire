@@ -1,7 +1,5 @@
 #include <ncurses.h>
 #include <malloc.h>
-#include "stack.h"
-#include "deck.h"
 #include "display.h"
 #include "game.h"
 #include "cursor.h"
