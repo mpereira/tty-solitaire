@@ -50,7 +50,7 @@ int main(int argc, const char *argv[]) {
         if (cursor_on_stock(cursor)) {
           handle_stock_event();
         } else {
-          /*handle_card_event();*/
+          handle_card_movement(cursor);
         }
         break;
       case 'q':
