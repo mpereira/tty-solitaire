@@ -195,21 +195,22 @@ void greet_player() {
   return;
 }
 
-void prepare_game(struct deck **deck) {
-  draw_empty_stacks();
-  allocate_deck(deck);
-  initialize_deck(*deck);
-  set_stacks_coordinates(*deck);
-  fill_deck(*deck);
-  shuffle_deck(*deck);
-  deal_cards(*deck);
-
-  return;
-}
-
 void initialize_game() {
   clear_screen();
-  prepare_game(&deck);
+
+  allocate_cursor(&cursor);
+  initialize_cursor(cursor);
+
+  allocate_deck(&deck);
+  initialize_deck(deck);
+
+  set_stacks_coordinates(deck);
+  fill_deck(deck);
+  shuffle_deck(deck);
+  deal_cards(deck);
+
+  draw_empty_stacks();
+  draw_cursor(cursor);
   draw_game(deck);
 
   return;

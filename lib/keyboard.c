@@ -3,7 +3,6 @@
 #include "keyboard.h"
 
 void mark_origin(struct cursor *cursor) {
-
   return;
 }
 

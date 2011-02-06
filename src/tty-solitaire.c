@@ -5,10 +5,10 @@
 #include "../lib/keyboard.h"
 
 extern struct deck *deck;
+extern struct cursor *cursor;
 
 int main(int argc, const char *argv[]) {
   int option;
-  struct cursor *cursor;
 
   initialize_curses();
 
@@ -21,14 +21,11 @@ int main(int argc, const char *argv[]) {
         break;
       case 'q':
       case 'Q':
+        end_game();
         end_curses();
         exit(0);
     }
   }
-
-  allocate_cursor(&cursor);
-  initialize_cursor(cursor);
-  draw_cursor(cursor);
 
   while (1) {
     switch (option = getch()) {
