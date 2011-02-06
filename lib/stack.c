@@ -10,11 +10,6 @@ static bool maneuvre_stack(struct stack *stack) {
   return(stack->card->frame->start_y >= MANEUVRE_STACKS_STARTING_Y);
 }
 
-static bool waste_pile_stack(struct stack *stack) {
-  return((stack->card->frame->start_x == WASTE_PILE_STARTING_X) &&
-         (stack->card->frame->start_y == WASTE_PILE_STARTING_Y));
-}
-
 static void refresh_card_coordinates(struct stack *origin, struct stack *destination) {
   origin->card->frame->start_x = destination->card->frame->start_x;
   origin->card->frame->start_y = destination->card->frame->start_y;
