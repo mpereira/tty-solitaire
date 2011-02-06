@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <curses.h>
-#include "../lib/util.h"
-#include "../lib/game.h"
-#include "../lib/keyboard.h"
+#include "util.h"
+#include "game.h"
+#include "keyboard.h"
 
 const char *program_name;
 
