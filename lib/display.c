@@ -1,14 +1,19 @@
+#include <stdio.h>
 #include <stdlib.h>
-#include <ncurses.h>
 #include <malloc.h>
 #include <string.h>
+#include <errno.h>
+#include <ncurses.h>
 #include "display.h"
 #include "game.h"
 
 char *card_suit(enum suit suit) {
   char *card_suit;
 
-  card_suit = malloc(5 * sizeof(*card_suit));
+  if (!(card_suit = malloc(5 * sizeof(*card_suit)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   switch(suit) {
     case DIAMONDS: strcpy(card_suit, DIAMONDS_SYMBOL); break;
@@ -24,7 +29,10 @@ char *card_suit(enum suit suit) {
 char *card_value(enum value value) {
   char *card_value;
 
-  card_value = malloc(2 * sizeof(*card_value));
+  if (!(card_value = malloc(2 * sizeof(*card_value)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   switch(value) {
     case TWO:   card_value = "2";  break;
@@ -65,7 +73,10 @@ void erase_stack(struct stack *stack) {
 void draw_empty_stacks() {
   WINDOW **empty_stack;
 
-  empty_stack = malloc(EMPTY_STACKS_NUMBER * sizeof(**empty_stack));
+  if (!(empty_stack = malloc(EMPTY_STACKS_NUMBER * sizeof(**empty_stack)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   empty_stack[0] = newwin(FRAME_HEIGHT,
                           FRAME_WIDTH,

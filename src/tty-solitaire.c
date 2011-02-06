@@ -1,10 +1,13 @@
 #include <stdlib.h>
+#include <curses.h>
 #include "../lib/util.h"
 #include "../lib/game.h"
-#include "../lib/cursor.h"
 #include "../lib/keyboard.h"
 
-int main() {
+const char *program_name;
+
+int main(int argc, const char *argv[]) {
+  program_name = *argv;
   int key;
 
   initialize_curses();

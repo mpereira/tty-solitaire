@@ -1,11 +1,18 @@
-#include <ncurses.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
+#include <string.h>
+#include <errno.h>
+#include <ncurses.h>
 #include "display.h"
 #include "game.h"
 #include "cursor.h"
 
 void allocate_cursor(struct cursor **cursor) {
-  *cursor = malloc(sizeof(**cursor));
+  if (!(*cursor = malloc(sizeof(**cursor)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   return;
 }

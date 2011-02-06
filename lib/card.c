@@ -1,8 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
+#include <string.h>
+#include <errno.h>
 #include "card.h"
 
 void allocate_card(struct card **card) {
-  *card = malloc(sizeof(**card));
+  if (!(*card = malloc(sizeof(**card)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   allocate_frame(&((*card)->frame));
 

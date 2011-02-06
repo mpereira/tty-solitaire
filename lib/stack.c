@@ -1,10 +1,17 @@
-#include <malloc.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
+#include <malloc.h>
+#include <string.h>
+#include <errno.h>
 #include "stack.h"
 #include "game.h"
 
 void allocate_stack(struct stack **stack) {
-  *stack = malloc(sizeof(**stack));
+  if (!(*stack = malloc(sizeof(**stack)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   allocate_card(&((*stack)->card));
 

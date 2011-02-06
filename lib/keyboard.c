@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "display.h"
 #include "keyboard.h"
 
@@ -102,14 +101,6 @@ void handle_card_movement(struct cursor *cursor) {
   }
 
   return;
-}
-
-int key_event() {
-  int pressed_key;
-
-  pressed_key = getchar();
-
-  return(pressed_key);
 }
 
 void handle_keyboard_event(int key) {

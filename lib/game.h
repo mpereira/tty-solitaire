@@ -27,6 +27,7 @@
 #define MANEUVRE_5_STARTING_X   41
 #define MANEUVRE_6_STARTING_X   49
 
+extern const char *program_name;
 struct deck *deck;
 struct cursor *cursor;
 

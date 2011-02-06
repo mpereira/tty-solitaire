@@ -37,6 +37,8 @@ struct deck {
   struct stack *maneuvre_6;
 };
 
+extern const char *program_name;
+
 void allocate_deck(struct deck **);
 void initialize_deck(struct deck *);
 void delete_deck(struct deck *);

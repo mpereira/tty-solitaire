@@ -1,8 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
+#include <string.h>
+#include <errno.h>
 #include "frame.h"
 
 void allocate_frame(struct frame **frame) {
-  *frame = malloc(sizeof(**frame));
+  if (!(*frame = malloc(sizeof(**frame)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   return;
 }

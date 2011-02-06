@@ -15,7 +15,6 @@ bool cursor_on_stack(struct cursor *, struct stack *);
 bool cursor_on_invalid_spot(struct cursor *);
 void handle_stock_event();
 void handle_card_movement(struct cursor *);
-int key_event();
 void handle_keyboard_event();
 
 #endif

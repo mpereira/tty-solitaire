@@ -1,8 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <malloc.h>
+#include <string.h>
+#include <errno.h>
 #include "deck.h"
 
 void allocate_deck(struct deck **deck) {
-  *deck = malloc(sizeof(**deck));
+  if (!(*deck = malloc(sizeof(**deck)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   allocate_stack(&((*deck)->stock));
   allocate_stack(&((*deck)->waste_pile));

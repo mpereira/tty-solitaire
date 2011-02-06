@@ -15,6 +15,8 @@
 #define WHITE_ON_BLUE  3
 #define WHITE_ON_GREEN 4
 
+extern const char *program_name;
+
 char *card_suit(enum suit);
 char *card_value(enum value);
 void erase_stack(struct stack *);

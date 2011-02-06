@@ -1,5 +1,8 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#include <string.h>
+#include <errno.h>
 #include <time.h>
 #include "display.h"
 #include "util.h"
@@ -121,7 +124,10 @@ void shuffle_deck(struct deck *deck) {
   struct stack tmp;
   int random;
 
-  stack = malloc(NUMBER_OF_CARDS * sizeof(*stack));
+  if (!(stack = malloc(NUMBER_OF_CARDS * sizeof(*stack)))) {
+    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    exit(errno);
+  }
 
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     stack[i] = pop(&(deck->stock));

@@ -12,6 +12,8 @@ struct frame {
   int    start_x;
 };
 
+extern const char *program_name;
+
 void allocate_frame(struct frame **);
 void initialize_frame(struct frame *);
 void delete_frame(struct frame *);

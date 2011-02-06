@@ -10,6 +10,8 @@ struct stack {
   struct stack *next;
 };
 
+extern const char *program_name;
+
 void allocate_stack(struct stack **);
 void initialize_stack(struct stack *);
 void delete_stack(struct stack *);
