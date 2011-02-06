@@ -1,6 +1,8 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include "card.h"
+#include "stack.h"
 #include "deck.h"
 
 #define EMPTY_STACKS_NUMBER 13
