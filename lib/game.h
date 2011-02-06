@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "stack.h"
 #include "deck.h"
 #include "cursor.h"
 

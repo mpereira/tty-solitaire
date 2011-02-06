@@ -4,6 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <time.h>
+#include "stack.h"
 #include "display.h"
 #include "util.h"
 #include "game.h"
@@ -225,7 +226,7 @@ void initialize_game() {
 
 void end_game(struct deck *deck) {
   print_deck(deck); // debugging purposes
-  delete_deck(deck);
+  /*delete_deck(deck); this is segfaulting */
 
   return;
 }
