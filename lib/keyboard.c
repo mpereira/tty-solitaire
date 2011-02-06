@@ -3,7 +3,7 @@
 #include "display.h"
 #include "keyboard.h"
 
-struct stack *cursor_stack(struct cursor *cursor) {
+static struct stack *cursor_stack(struct cursor *cursor) {
   struct stack *cursor_stack = NULL;
 
   if (cursor->y == CURSOR_STARTING_Y) {
@@ -30,15 +30,16 @@ struct stack *cursor_stack(struct cursor *cursor) {
   return(cursor_stack);
 }
 
-bool cursor_on_stack(struct cursor *cursor, struct stack *stack) {
+static bool cursor_on_stack(struct cursor *cursor, struct stack *stack) {
   return(cursor_stack(cursor) == stack);
 }
 
-bool cursor_on_invalid_spot(struct cursor *cursor) {
+static bool cursor_on_invalid_spot(struct cursor *cursor) {
   return(cursor->x == CURSOR_INVALID_SPOT_X &&
          cursor->y == CURSOR_INVALID_SPOT_Y);
 }
-void handle_stock_event() {
+
+static void handle_stock_event() {
   if (!empty(deck->stock)) {
     /* erase the stack before emptying it */
     if (length(deck->stock) == 1) {
@@ -53,7 +54,7 @@ void handle_stock_event() {
   return;
 }
 
-void handle_card_movement(struct cursor *cursor) {
+static void handle_card_movement(struct cursor *cursor) {
   struct stack *origin = NULL;
   struct stack *destination = NULL;
   int option;

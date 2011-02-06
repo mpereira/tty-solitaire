@@ -7,7 +7,7 @@
 #include "display.h"
 #include "game.h"
 
-char *card_suit(enum suit suit) {
+static char *card_suit(enum suit suit) {
   char *card_suit;
 
   if (!(card_suit = malloc(5 * sizeof(*card_suit)))) {
@@ -26,7 +26,7 @@ char *card_suit(enum suit suit) {
   return(card_suit);
 }
 
-char *card_value(enum value value) {
+static char *card_value(enum value value) {
   char *card_value;
 
   if (!(card_value = malloc(2 * sizeof(*card_value)))) {

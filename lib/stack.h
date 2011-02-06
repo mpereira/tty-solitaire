@@ -40,9 +40,6 @@ bool empty(struct stack *);
 int length(struct stack *);
 void push(struct stack **, struct card *);
 struct stack *pop(struct stack **);
-bool maneuvre_stack(struct stack *);
-bool waste_pile_stack(struct stack *);
-void refresh_card_coordinates(struct stack *, struct stack *);
 void move_card(struct stack **, struct stack **);
 
 #endif

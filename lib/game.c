@@ -10,7 +10,7 @@
 #include "game.h"
 #include "../debug/deck_debug.h" // noob debugging
 
-void set_stacks_initial_coordinates(struct deck *deck) {
+static void set_stacks_initial_coordinates(struct deck *deck) {
   set_frame(deck->stock->card->frame,
             STOCK_STARTING_Y,
             STOCK_STARTING_X);
@@ -54,7 +54,7 @@ void set_stacks_initial_coordinates(struct deck *deck) {
   return;
 }
 
-void fill_deck(struct deck *deck) {
+static void fill_deck(struct deck *deck) {
   struct card *card[NUMBER_OF_CARDS];
 
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
@@ -120,7 +120,7 @@ void fill_deck(struct deck *deck) {
   return;
 }
 
-void shuffle_deck(struct deck *deck) {
+static void shuffle_deck(struct deck *deck) {
   struct stack **stack = NULL;
   struct stack tmp;
   int random;
@@ -150,7 +150,7 @@ void shuffle_deck(struct deck *deck) {
   return;
 }
 
-void deal_cards(struct deck *deck) {
+static void deal_cards(struct deck *deck) {
   move_card(&(deck->stock), &(deck->maneuvre_0));
   expose_card(deck->maneuvre_0->card);
   move_card(&(deck->stock), &(deck->maneuvre_1));

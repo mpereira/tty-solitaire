@@ -19,8 +19,6 @@
 
 extern const char *program_name;
 
-char *card_suit(enum suit);
-char *card_value(enum value);
 void erase_stack(struct stack *);
 void draw_empty_stacks();
 void draw_value(struct card *);
