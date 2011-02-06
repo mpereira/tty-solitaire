@@ -211,7 +211,7 @@ void initialize_game() {
 
   draw_empty_stacks();
   draw_cursor(cursor);
-  draw_game(deck);
+  draw_deck(deck);
 
   return;
 }

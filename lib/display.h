@@ -25,6 +25,6 @@ void draw_front(struct card *);
 void draw_back(struct card *);
 void draw_card(struct card *);
 void draw_stack(struct stack *);
-void draw_game(struct deck *);
+void draw_deck(struct deck *);
 
 #endif

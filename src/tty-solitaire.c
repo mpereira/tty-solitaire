@@ -11,7 +11,6 @@ int main(int argc, const char *argv[]) {
   int option;
 
   initialize_curses();
-
   greet_player();
 
   while (option != KEY_SPACEBAR) {

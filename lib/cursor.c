@@ -94,7 +94,7 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
   /* this is needed because of the screen glitch that moving the cursor
    * on the maneuvre's stacks causes */
   refresh();
-  draw_game(deck);
+  draw_deck(deck);
 
   return;
 }

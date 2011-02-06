@@ -197,7 +197,7 @@ void draw_stack(struct stack *stack) {
   return;
 }
 
-void draw_game(struct deck *deck) {
+void draw_deck(struct deck *deck) {
   draw_stack(deck->stock);
   draw_stack(deck->waste_pile);
 
