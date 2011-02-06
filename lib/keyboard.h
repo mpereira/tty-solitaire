@@ -7,6 +7,7 @@
 #define KEY_SPACEBAR ' '
 
 extern struct deck *deck;
+extern struct cursor *cursor;
 
 void mark_origin(struct cursor *);
 struct stack *cursor_stack(struct cursor *);
@@ -15,5 +16,6 @@ bool cursor_on_invalid_spot(struct cursor *);
 void handle_stock_event();
 void handle_card_movement(struct cursor *);
 int key_event();
+void handle_keyboard_event();
 
 #endif

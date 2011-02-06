@@ -111,3 +111,33 @@ int key_event() {
 
   return(pressed_key);
 }
+
+void handle_keyboard_event(int key) {
+  switch (key) {
+  case 'h':
+  case KEY_LEFT:
+    move_cursor(cursor, LEFT);
+    break;
+  case 'j':
+  case KEY_DOWN:
+    move_cursor(cursor, DOWN);
+    break;
+  case 'k':
+  case KEY_UP:
+    move_cursor(cursor, UP);
+    break;
+  case 'l':
+  case KEY_RIGHT:
+    move_cursor(cursor, RIGHT);
+    break;
+  case KEY_SPACEBAR:
+    if (cursor_on_stock(cursor)) {
+      handle_stock_event();
+    } else {
+      handle_card_movement(cursor);
+    }
+    break;
+  }
+
+  return;
+}

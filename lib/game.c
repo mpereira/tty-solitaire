@@ -217,6 +217,7 @@ void initialize_game() {
 }
 
 void end_game(struct deck *deck) {
+  print_deck(deck); // debugging purposes
   delete_deck(deck);
 
   return;

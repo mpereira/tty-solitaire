@@ -4,17 +4,14 @@
 #include "../lib/cursor.h"
 #include "../lib/keyboard.h"
 
-extern struct deck *deck;
-extern struct cursor *cursor;
-
 int main(int argc, const char *argv[]) {
-  int option;
+  int key;
 
   initialize_curses();
   greet_player();
 
-  while (option != KEY_SPACEBAR) {
-    switch (option = getch()) {
+  while (key != KEY_SPACEBAR) {
+    switch (key = getch()) {
       case KEY_SPACEBAR:
         initialize_game();
         break;
@@ -27,35 +24,12 @@ int main(int argc, const char *argv[]) {
   }
 
   while (1) {
-    switch (option = getch()) {
-      case 'h':
-      case KEY_LEFT:
-        move_cursor(cursor, LEFT);
-        break;
-      case 'j':
-      case KEY_DOWN:
-        move_cursor(cursor, DOWN);
-        break;
-      case 'k':
-      case KEY_UP:
-        move_cursor(cursor, UP);
-        break;
-      case 'l':
-      case KEY_RIGHT:
-        move_cursor(cursor, RIGHT);
-        break;
-      case KEY_SPACEBAR:
-        if (cursor_on_stock(cursor)) {
-          handle_stock_event();
-        } else {
-          handle_card_movement(cursor);
-        }
-        break;
-      case 'q':
-      case 'Q':
-        end_curses();
-        print_deck(deck);
-        exit(0);
+    if ((key = getch()) == 'q' || key == 'Q') {
+      end_game();
+      end_curses();
+      exit(0);
+    } else {
+      handle_keyboard_event(key);
     }
   }
 
