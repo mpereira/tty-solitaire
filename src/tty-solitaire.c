@@ -4,6 +4,8 @@
 #include "../lib/cursor.h"
 #include "../lib/keyboard.h"
 
+extern struct deck *deck;
+
 int main(int argc, const char *argv[]) {
   int option;
   struct cursor *cursor;
@@ -56,6 +58,7 @@ int main(int argc, const char *argv[]) {
       case 'q':
       case 'Q':
         end_curses();
+        print_deck(deck);
         exit(0);
     }
   }
