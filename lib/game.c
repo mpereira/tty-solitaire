@@ -4,6 +4,7 @@
 #include "display.h"
 #include "util.h"
 #include "game.h"
+#include "../debug/deck_debug.h" // noob debugging
 
 void set_stacks_coordinates(struct deck *deck) {
   set_frame(deck->stock->card->frame,

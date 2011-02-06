@@ -4,7 +4,7 @@
 #include "../lib/cursor.h"
 #include "../lib/keyboard.h"
 
-int main(int argc, const char *argv[]) {
+int main() {
   int key;
 
   initialize_curses();
