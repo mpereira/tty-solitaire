@@ -6,7 +6,7 @@
 #include "game.h"
 #include "../debug/deck_debug.h" // noob debugging
 
-void set_stacks_coordinates(struct deck *deck) {
+void set_stacks_initial_coordinates(struct deck *deck) {
   set_frame(deck->stock->card->frame,
             STOCK_STARTING_Y,
             STOCK_STARTING_X);
@@ -205,7 +205,7 @@ void initialize_game() {
   allocate_deck(&deck);
   initialize_deck(deck);
 
-  set_stacks_coordinates(deck);
+  set_stacks_initial_coordinates(deck);
   fill_deck(deck);
   shuffle_deck(deck);
   deal_cards(deck);

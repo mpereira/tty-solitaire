@@ -30,7 +30,7 @@
 struct deck *deck;
 struct cursor *cursor;
 
-void set_stacks_coordinates(struct deck *);
+void set_stacks_initial_coordinates(struct deck *);
 void fill_deck(struct deck *);
 void shuffle_deck(struct deck *);
 void deal_cards(struct deck *);
