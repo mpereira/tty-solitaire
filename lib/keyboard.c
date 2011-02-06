@@ -1,9 +1,7 @@
+#include "card.h"
+#include "stack.h"
 #include "display.h"
 #include "keyboard.h"
-
-void mark_origin(struct cursor *cursor) {
-  return;
-}
 
 struct stack *cursor_stack(struct cursor *cursor) {
   struct stack *cursor_stack = NULL;
@@ -60,7 +58,6 @@ void handle_card_movement(struct cursor *cursor) {
   struct stack *destination = NULL;
   int option;
 
-  mark_origin(cursor);
   origin = cursor_stack(cursor);
 
   /* trying to move cards from the space between the waste pile and the
