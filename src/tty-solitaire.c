@@ -15,14 +15,14 @@ int main(int argc, const char *argv[]) {
 
   while (key != KEY_SPACEBAR) {
     switch (key = getch()) {
-      case KEY_SPACEBAR:
-        initialize_game();
-        break;
-      case 'q':
-      case 'Q':
-        end_game();
-        end_curses();
-        exit(0);
+    case KEY_SPACEBAR:
+      initialize_game();
+      break;
+    case 'q':
+    case 'Q':
+      end_game();
+      end_curses();
+      exit(0);
     }
   }
 
