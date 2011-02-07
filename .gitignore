@@ -1,3 +1,2 @@
-lib/*.o
-debug/*.o
+**/*.o
 TODO
