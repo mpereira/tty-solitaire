@@ -18,9 +18,9 @@ void allocate_card(struct card **card) {
 
 void initialize_card(struct card *card) {
   initialize_frame(card->frame);
-  card->value   = NO_VALUE;
-  card->suit    = NO_SUIT;
-  card->face    = NO_FACE;
+  card->value = NO_VALUE;
+  card->suit = NO_SUIT;
+  card->face = NO_FACE;
 
   return;
 }
