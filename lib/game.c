@@ -224,9 +224,8 @@ void initialize_game() {
   return;
 }
 
-void end_game(struct deck *deck) {
-  print_deck(deck); // debugging purposes
-  /*delete_deck(deck); this is segfaulting */
+void end_game() {
+  delete_deck(deck);
 
   return;
 }

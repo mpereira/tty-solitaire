@@ -20,16 +20,16 @@ int main(int argc, const char *argv[]) {
       break;
     case 'q':
     case 'Q':
-      end_game();
       end_curses();
+      end_game();
       exit(0);
     }
   }
 
   while (1) {
     if ((key = getch()) == 'q' || key == 'Q') {
-      end_game();
       end_curses();
+      end_game();
       exit(0);
     } else {
       handle_keyboard_event(key);
