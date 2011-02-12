@@ -12,15 +12,15 @@ void test_initialize_frame() {
   assert(frame->start_y == 0);
   assert(frame->start_x == 0);
 
+  delete_frame(frame);
+
   return;
 }
 
 void test_set_frame() {
   struct frame *frame;
-  int start_y, start_x;
-
-  start_y = 2;
-  start_x = 2;
+  int start_y = 5;
+  int start_x = 10;
 
   allocate_frame(&frame);
   initialize_frame(frame);
@@ -28,6 +28,8 @@ void test_set_frame() {
 
   assert(frame->start_y == start_y);
   assert(frame->start_x == start_x);
+
+  delete_frame(frame);
 
   return;
 }
