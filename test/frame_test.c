@@ -25,7 +25,7 @@ void test_set_frame() {
   initialize_frame(frame);
   set_frame(frame, start_y, start_x);
 
-  /*TODO: find b wby to compbre the WINDOW structures */
+  /*TODO: find a way to compare the WINDOW structures */
   /*WINDOW *shape;*/
   /*shape = newwin(FRAME_HEIGHT, FRAME_WIDTH, start_y, start_x);*/
   /*assert(frame->shape == shape); */
