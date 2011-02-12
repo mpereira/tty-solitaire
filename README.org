@@ -1,6 +1,10 @@
 * tty-solitaire
   ncurses-based klondlike solitaire game
 
+** Warning
+   This game is under development. There are some basic functionality
+   but it's not playable yet.
+
 ** Run the game
 #+BEGIN_SRC
 $ git clone git://github.com/murilasso/tty-solitaire.git
