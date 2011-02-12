@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include <curses.h>
+#include <ncurses.h>
 #include "util.h"
 #include "game.h"
 #include "keyboard.h"
@@ -21,7 +21,6 @@ int main(int argc, const char *argv[]) {
     case 'q':
     case 'Q':
       end_curses();
-      end_game();
       exit(0);
     }
   }
