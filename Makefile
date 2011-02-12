@@ -1,5 +1,5 @@
 CC      = gcc
-CFLAGS  = -W -Wall -pedantic -ansi -std=c99
+CFLAGS  = -W -Wall -pedantic -ansi -std=c99 -g
 LDFLAGS = -lncursesw
 
 EXECUTABLE = bin/ttysolitaire
