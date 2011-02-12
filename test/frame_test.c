@@ -7,9 +7,10 @@ void test_initialize_frame() {
 
   allocate_frame(&frame);
   initialize_frame(frame);
-  assert(frame->shape == NULL &&
-         frame->start_y == 0 &&
-         frame->start_x == 0);
+
+  assert(frame->shape == NULL);
+  assert(frame->start_y == 0);
+  assert(frame->start_x == 0);
 
   return;
 }
