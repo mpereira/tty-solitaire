@@ -26,7 +26,9 @@ void initialize_card(struct card *card) {
 }
 
 void delete_card(struct card *card) {
-  delete_frame(card->frame);
+  if (card) {
+    delete_frame(card->frame);
+  }
   free(card);
 
   return;

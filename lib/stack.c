@@ -29,7 +29,9 @@ void initialize_stack(struct stack *stack) {
 }
 
 void delete_stack(struct stack *stack) {
-  delete_card(stack->card);
+  if (stack) {
+    delete_card(stack->card);
+  }
   free(stack);
 
   return;
