@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <stdbool.h>
 #include "../lib/frame.h"
 
 void test_initialize_frame() {
