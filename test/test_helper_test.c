@@ -63,18 +63,8 @@ void test_cards_equal_with_two_equivalent_cards() {
 
   allocate_card(&card_0);
   allocate_card(&card_1);
-  set_card(card_0,
-           ACE,
-           SPADES,
-           EXPOSED,
-           start_y,
-           start_x);
-  set_card(card_1,
-           ACE,
-           SPADES,
-           EXPOSED,
-           start_y,
-           start_x);
+  set_card(card_0, ACE, SPADES, EXPOSED, start_y, start_x);
+  set_card(card_1, ACE, SPADES, EXPOSED, start_y, start_x);
 
   assert(cards_equal(card_0, card_1));
 
