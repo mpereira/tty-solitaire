@@ -1,5 +1,3 @@
-#include <assert.h>
-#include <stdbool.h>
 #include "ttysolitaire_test.h"
 
 const char *program_name;
@@ -16,6 +14,7 @@ int main(int argc, const char *argv[]) {
   test_keyboard();
   test_stack();
   test_util();
+  test_test_helper();
 
   return(0);
 }

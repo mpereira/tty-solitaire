@@ -10,5 +10,6 @@ void test_game();
 void test_keyboard();
 void test_stack();
 void test_util();
+void test_test_helper();
 
 #endif
