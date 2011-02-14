@@ -31,13 +31,11 @@ void initialize_stack(struct stack *stack) {
 void delete_stack(struct stack *stack) {
   struct stack *tmp_stack;
 
-  if (stack) {
-    while (stack) {
-      tmp_stack = stack->next;
-      delete_card(stack->card);
-      free(stack);
-      stack = tmp_stack;
-    }
+  while (stack) {
+    tmp_stack = stack->next;
+    delete_card(stack->card);
+    free(stack);
+    stack = tmp_stack;
   }
 
   return;
