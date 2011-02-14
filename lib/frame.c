@@ -22,7 +22,7 @@ void initialize_frame(struct frame *frame) {
   return;
 }
 
-void delete_frame(struct frame *frame) {
+void free_frame(struct frame *frame) {
   if (frame) {
     delwin(frame->shape);
   }

@@ -72,7 +72,7 @@ struct stack *duplicate_stack(struct stack *stack) {
   while (!empty(tmp_stack)) {
     push(&new_stack, (pop(&tmp_stack))->card);
   }
-  delete_stack(tmp_stack);
+  free_stack(tmp_stack);
 
   return(new_stack);
 }

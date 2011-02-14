@@ -11,7 +11,7 @@ void test_initialize_stack() {
   assert(stack->card->value == NO_VALUE);
   assert(!stack->next);
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -24,7 +24,7 @@ void test_empty_on_empty_stack() {
 
   assert(empty(stack));
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -43,7 +43,7 @@ void test_empty_on_non_empty_stack() {
 
   assert(!empty(stack));
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -63,7 +63,7 @@ void test_push_on_empty_stack() {
   assert(stack->card == card);
   assert(!stack->next);
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -88,7 +88,7 @@ void test_push_on_non_empty_stack() {
   assert(stack->next->card == card_0);
   assert(!stack->next->next);
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -104,7 +104,7 @@ void test_push_null_on_empty_stack() {
   assert(stack->card == old_stack->card);
   assert(stack->next == NULL);
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -125,7 +125,7 @@ void test_push_null_on_non_empty_stack() {
   assert(stack->card == old_stack->card);
   assert(stack->next == old_stack->next);
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -142,7 +142,7 @@ void test_pop_on_empty_stack() {
   assert(empty(stack));
   assert(!popped_entry);
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -164,7 +164,7 @@ void test_pop_on_stack_with_one_element() {
   assert(popped_entry->card == card);
   assert(!popped_entry->next);
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -189,7 +189,7 @@ void test_pop_on_stack_with_more_than_one_element() {
   assert(popped_entry->card == card[2]);
   assert(!popped_entry->next);
 
-  delete_stack(stack);
+  free_stack(stack);
 
   return;
 }
@@ -214,8 +214,8 @@ void test_move_card_from_empty_stack_to_empty_stack() {
   assert(destination == new_destination);
   assert(stacks_equal(destination, destination_duplicate));
 
-  delete_stack(origin);
-  delete_stack(destination);
+  free_stack(origin);
+  free_stack(destination);
 
   return;
 }
@@ -246,8 +246,8 @@ void test_move_card_from_empty_stack_to_non_empty_stack() {
   assert(destination == new_destination);
   assert(stacks_equal(destination, destination_duplicate));
 
-  delete_stack(origin);
-  delete_stack(destination);
+  free_stack(origin);
+  free_stack(destination);
 
   return;
 }
@@ -271,8 +271,8 @@ void test_move_card_from_non_empty_stack_to_empty_stack() {
   assert(length(destination) == 1);
   assert(cards_equal(destination->card, card));
 
-  delete_stack(origin);
-  delete_stack(destination);
+  free_stack(origin);
+  free_stack(destination);
 
   return;
 }
@@ -301,8 +301,8 @@ void test_move_card_from_non_empty_stack_to_non_empty_stack() {
   assert(cards_equal(destination->card, card[0]));
   assert(cards_equal(destination->next->card, card[1]));
 
-  delete_stack(origin);
-  delete_stack(destination);
+  free_stack(origin);
+  free_stack(destination);
 
   return;
 }

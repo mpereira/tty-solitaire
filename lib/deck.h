@@ -41,6 +41,6 @@ extern const char *program_name;
 
 void allocate_deck(struct deck **);
 void initialize_deck(struct deck *);
-void delete_deck(struct deck *);
+void free_deck(struct deck *);
 
 #endif

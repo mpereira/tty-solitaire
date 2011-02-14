@@ -45,7 +45,7 @@ extern const char *program_name;
 
 void allocate_card(struct card **);
 void initialize_card(struct card *);
-void delete_card(struct card *);
+void free_card(struct card *);
 void set_card(struct card *, enum value, enum suit, enum face, int, int);
 void expose_card(struct card *);
 void cover_card(struct card *);

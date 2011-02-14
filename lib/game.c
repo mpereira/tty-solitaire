@@ -224,7 +224,7 @@ void initialize_game() {
 }
 
 void end_game() {
-  delete_deck(deck);
+  free_deck(deck);
 
   return;
 }

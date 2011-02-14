@@ -11,7 +11,7 @@ void test_initialize_frame() {
   assert(frame->start_y == 0);
   assert(frame->start_x == 0);
 
-  delete_frame(frame);
+  free_frame(frame);
 
   return;
 }
@@ -28,7 +28,7 @@ void test_set_frame() {
   assert(frame->start_y == start_y);
   assert(frame->start_x == start_x);
 
-  delete_frame(frame);
+  free_frame(frame);
 
   return;
 }

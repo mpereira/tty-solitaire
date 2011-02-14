@@ -11,7 +11,7 @@ void test_initialize_card() {
   assert(card->suit == NO_SUIT);
   assert(card->face == NO_FACE);
 
-  delete_card(card);
+  free_card(card);
 
   return;
 }
@@ -31,7 +31,7 @@ void test_set_card() {
   assert(card->frame->start_y == start_y);
   assert(card->frame->start_x == start_x);
 
-  delete_card(card);
+  free_card(card);
 
   return;
 }
@@ -45,7 +45,7 @@ void test_expose_card() {
 
   assert(card->face == EXPOSED);
 
-  delete_card(card);
+  free_card(card);
 
   return;
 }
@@ -59,7 +59,7 @@ void test_cover_card() {
 
   assert(card->face == COVERED);
 
-  delete_card(card);
+  free_card(card);
 
   return;
 }

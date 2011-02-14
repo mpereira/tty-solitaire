@@ -50,22 +50,22 @@ void initialize_deck(struct deck *deck) {
   return;
 }
 
-void delete_deck(struct deck *deck) {
+void free_deck(struct deck *deck) {
   if (deck) {
-    delete_stack(deck->waste_pile);
+    free_stack(deck->waste_pile);
 
-    delete_stack(deck->foundation_0);
-    delete_stack(deck->foundation_1);
-    delete_stack(deck->foundation_2);
-    delete_stack(deck->foundation_3);
+    free_stack(deck->foundation_0);
+    free_stack(deck->foundation_1);
+    free_stack(deck->foundation_2);
+    free_stack(deck->foundation_3);
 
-    delete_stack(deck->maneuvre_0);
-    delete_stack(deck->maneuvre_1);
-    delete_stack(deck->maneuvre_2);
-    delete_stack(deck->maneuvre_3);
-    delete_stack(deck->maneuvre_4);
-    delete_stack(deck->maneuvre_5);
-    delete_stack(deck->maneuvre_6);
+    free_stack(deck->maneuvre_0);
+    free_stack(deck->maneuvre_1);
+    free_stack(deck->maneuvre_2);
+    free_stack(deck->maneuvre_3);
+    free_stack(deck->maneuvre_4);
+    free_stack(deck->maneuvre_5);
+    free_stack(deck->maneuvre_6);
   }
   free(deck);
 
