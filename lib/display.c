@@ -119,17 +119,17 @@ void draw_empty_stacks() {
                           MANEUVRE_STARTING_Y,
                           MANEUVRE_3_STARTING_X);
   empty_stack[10] = newwin(FRAME_HEIGHT,
-                          FRAME_WIDTH,
-                          MANEUVRE_STARTING_Y,
-                          MANEUVRE_4_STARTING_X);
+                           FRAME_WIDTH,
+                           MANEUVRE_STARTING_Y,
+                           MANEUVRE_4_STARTING_X);
   empty_stack[11] = newwin(FRAME_HEIGHT,
-                          FRAME_WIDTH,
-                          MANEUVRE_STARTING_Y,
-                          MANEUVRE_5_STARTING_X);
+                           FRAME_WIDTH,
+                           MANEUVRE_STARTING_Y,
+                           MANEUVRE_5_STARTING_X);
   empty_stack[12] = newwin(FRAME_HEIGHT,
-                          FRAME_WIDTH,
-                          MANEUVRE_STARTING_Y,
-                          MANEUVRE_6_STARTING_X);
+                           FRAME_WIDTH,
+                           MANEUVRE_STARTING_Y,
+                           MANEUVRE_6_STARTING_X);
 
   for (int i = 0; i < EMPTY_STACKS_NUMBER; i++) {
     box(empty_stack[i], 0, 0);
@@ -144,8 +144,10 @@ void draw_empty_stacks() {
 
 void draw_value(struct card *card) {
   mvwprintw(card->frame->shape, 0, 0, card_value(card->value));
-  mvwprintw(card->frame->shape, 4,
-    6 - (strlen(card_value(card->value)) - 1), card_value(card->value));
+  mvwprintw(card->frame->shape,
+            4,
+            6 - (strlen(card_value(card->value)) - 1),
+            card_value(card->value));
 
   return;
 }
