@@ -175,14 +175,16 @@ void test_duplicate_card() {
 
 void test_duplicate_stack() {
   struct stack *stack_0, *stack_1;
-  struct card *card;
+  struct card *card[5];
   const int start_y = 5, start_x = 10;
 
-  allocate_card(&card);
-  set_card(card, ACE, SPADES, EXPOSED, start_y, start_x);
   allocate_stack(&stack_0);
   initialize_stack(stack_0);
-  push(&stack_0, card);
+  for (int i = 0; i < 5; i++) {
+    allocate_card(&card[i]);
+    set_card(card[i], i, SPADES, EXPOSED, start_y, start_x);
+    push(&stack_0, card[i]);
+  }
   stack_1 = duplicate_stack(stack_0);
 
   assert(stack_0 != stack_1);
