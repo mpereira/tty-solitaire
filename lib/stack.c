@@ -45,15 +45,13 @@ bool empty(struct stack *stack) {
 }
 
 int length(struct stack *stack) {
-  struct stack *iterator = stack;
-  int length = 0;
+  int length;
 
   if (!empty(stack)) {
-    length = 1;
-    while (iterator->next != NULL) {
-      length++;
-      iterator = iterator->next;
-    }
+    for (length = 1; stack->next; stack = stack->next, length++)
+      ;
+  } else {
+    length = 0;
   }
 
   return(length);

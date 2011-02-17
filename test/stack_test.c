@@ -47,6 +47,28 @@ void test_empty_on_non_empty_stack() {
   return;
 }
 
+void test_length() {
+  struct stack *stack;
+  struct card *card[4];
+
+  allocate_stack(&stack);
+  initialize_stack(stack);
+
+  assert(length(stack) == 0);
+
+  for (int i = 0; i < 4; i++) {
+    allocate_card(&card[i]);
+    initialize_card(card[i]);
+    set_card(card[i], i, SPADES, EXPOSED, 0, 0);
+    push(&stack, card[i]);
+    assert(length(stack) == i + 1);
+  }
+
+  free_stack(stack);
+
+  return;
+}
+
 void test_push_on_empty_stack() {
   struct stack *stack;
   struct card *card;
@@ -198,6 +220,8 @@ void test_stack() {
 
   test_empty_on_empty_stack();
   test_empty_on_non_empty_stack();
+
+  test_length();
 
   test_push_on_empty_stack();
   test_push_on_non_empty_stack();
