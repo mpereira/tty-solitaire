@@ -36,8 +36,6 @@ extern const char *program_name;
 
 void allocate_cursor(struct cursor **);
 void initialize_cursor(struct cursor *);
-void draw_cursor(struct cursor *);
 void move_cursor(struct cursor *, enum movement);
-bool cursor_on_stock(struct cursor *);
 
 #endif

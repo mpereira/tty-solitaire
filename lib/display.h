@@ -4,6 +4,7 @@
 #include "card.h"
 #include "stack.h"
 #include "deck.h"
+#include "cursor.h"
 
 #define EMPTY_STACKS_NUMBER 13
 
@@ -28,5 +29,7 @@ void draw_back(struct card *);
 void draw_card(struct card *);
 void draw_stack(struct stack *);
 void draw_deck(struct deck *);
+void draw_cursor(struct cursor *);
+void erase_cursor(struct cursor *);
 
 #endif

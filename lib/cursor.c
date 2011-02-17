@@ -24,18 +24,6 @@ void initialize_cursor(struct cursor *cursor) {
   return;
 }
 
-void draw_cursor(struct cursor *cursor) {
-  mvaddch(cursor->y, cursor->x, '*');
-
-  return;
-}
-
-void erase_cursor(struct cursor *cursor) {
-  mvdelch(cursor->y, cursor->x);
-
-  return;
-}
-
 void move_cursor(struct cursor *cursor, enum movement movement) {
   switch (movement) {
   case LEFT:
@@ -104,8 +92,4 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
   draw_deck(deck);
 
   return;
-}
-
-bool cursor_on_stock(struct cursor *cursor) {
-  return((cursor->x == CURSOR_STARTING_X) && (cursor->y == CURSOR_STARTING_Y));
 }

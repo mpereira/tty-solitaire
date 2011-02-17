@@ -5,7 +5,6 @@
 #include <errno.h>
 #include <ncurses.h>
 #include "display.h"
-#include "game.h"
 
 static char *card_suit(enum suit suit) {
   char *card_suit;
@@ -226,6 +225,18 @@ void draw_deck(struct deck *deck) {
   draw_stack(deck->maneuvre_4);
   draw_stack(deck->maneuvre_5);
   draw_stack(deck->maneuvre_6);
+
+  return;
+}
+
+void draw_cursor(struct cursor *cursor) {
+  mvaddch(cursor->y, cursor->x, '*');
+
+  return;
+}
+
+void erase_cursor(struct cursor *cursor) {
+  mvdelch(cursor->y, cursor->x);
 
   return;
 }

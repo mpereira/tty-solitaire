@@ -3,6 +3,10 @@
 #include "display.h"
 #include "keyboard.h"
 
+static bool cursor_on_stock(struct cursor *cursor) {
+  return((cursor->x == CURSOR_STARTING_X) && (cursor->y == CURSOR_STARTING_Y));
+}
+
 static struct stack *cursor_stack(struct cursor *cursor) {
   struct stack *cursor_stack = NULL;
 
