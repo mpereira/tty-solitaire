@@ -6,10 +6,6 @@
 #include <errno.h>
 #include "stack.h"
 
-static bool maneuvre_stack(struct stack *stack) {
-  return(stack->card->frame->start_y >= MANEUVRE_STACKS_STARTING_Y);
-}
-
 void allocate_stack(struct stack **stack) {
   if (!(*stack = malloc(sizeof(**stack)))) {
     fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
@@ -99,19 +95,4 @@ struct stack *pop(struct stack **stack) {
   }
 
   return(popped_entry);
-}
-
-void move_card(struct stack **origin, struct stack **destination) {
-  struct stack *stack = NULL;
-
-  (*origin)->card->frame->start_x = (*destination)->card->frame->start_x;
-  (*origin)->card->frame->start_y = (*destination)->card->frame->start_y;
-  if (!empty(*destination) && maneuvre_stack(*destination)) {
-    (*origin)->card->frame->start_y++;
-  }
-  if ((stack = pop(origin))) {
-    push(destination, stack->card);
-  }
-
-  return;
 }

@@ -10,6 +10,7 @@ extern const char *program_name;
 struct deck *deck;
 struct cursor *cursor;
 
+void move_card(struct stack **, struct stack **);
 void greet_player();
 void initialize_game();
 void end_game();
