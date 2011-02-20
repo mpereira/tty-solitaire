@@ -4,6 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <ncurses.h>
+#include "game.h"
 #include "display.h"
 
 static char *card_suit(enum suit suit) {

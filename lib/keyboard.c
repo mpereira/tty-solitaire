@@ -1,5 +1,5 @@
 #include "card.h"
-#include "stack.h"
+#include "game.h"
 #include "display.h"
 #include "keyboard.h"
 

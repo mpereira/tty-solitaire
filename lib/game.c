@@ -4,7 +4,6 @@
 #include <string.h>
 #include <errno.h>
 #include <time.h>
-#include "stack.h"
 #include "display.h"
 #include "util.h"
 #include "game.h"
