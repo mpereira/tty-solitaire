@@ -3,22 +3,6 @@
 
 #include "stack.h"
 
-enum stack_name {
-  STOCK,
-  WASTE_PILE,
-  FOUNDATION_0,
-  FOUNDATION_1,
-  FOUNDATION_2,
-  FOUNDATION_3,
-  MANEUVRE_0,
-  MANEUVRE_1,
-  MANEUVRE_2,
-  MANEUVRE_3,
-  MANEUVRE_4,
-  MANEUVRE_5,
-  MANEUVRE_6
-};
-
 struct deck {
   struct stack *stock;
   struct stack *waste_pile;
