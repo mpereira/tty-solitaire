@@ -18,7 +18,7 @@ $ make test
 #+END_SRC
 
 ** Author
-   [[http://www.comp.ufscar.br/~murilo][Murilo Pereira]]
+   [[http://murilopereira.com][Murilo Pereira]]
 
 ** License
    Released under the
