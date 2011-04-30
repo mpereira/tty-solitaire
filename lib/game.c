@@ -214,7 +214,8 @@ static void deal_cards(struct deck *deck) {
 }
 
 void greet_player() {
-  mvprintw(11, 27, "Welcome to tty-solitaire.");
+  mvprintw(10, 27, "Welcome to tty-solitaire.");
+  mvprintw(11, 8, "Move with \u2190\u2191\u2192\u2193 or hjkl. Use the space bar to mark and move cards.");
   mvprintw(12, 19, "Press the space bar to play or q to quit.");
 
   return;
