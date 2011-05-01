@@ -94,3 +94,18 @@ struct stack *pop(struct stack **stack) {
 
   return(popped_entry);
 }
+
+struct stack *reverse(struct stack **stack) {
+  if (length(*stack) > 1) {
+    struct stack *tmp_stack;
+
+    allocate_stack(&tmp_stack);
+    initialize_stack(tmp_stack);
+    while (!empty(*stack)) {
+      push(&tmp_stack, pop((stack))->card);
+    }
+    return(tmp_stack);
+  } else {
+    return(*stack);
+  }
+}

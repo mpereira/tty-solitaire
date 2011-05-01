@@ -17,5 +17,6 @@ bool empty(struct stack *);
 int length(struct stack *);
 void push(struct stack **, struct card *);
 struct stack *pop(struct stack **);
+struct stack *reverse(struct stack **);
 
 #endif

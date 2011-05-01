@@ -1,4 +1,5 @@
 #include <assert.h>
+#include "test_helper.h"
 #include "../lib/stack.h"
 
 void test_initialize_stack() {
@@ -215,6 +216,65 @@ void test_pop_on_stack_with_more_than_one_element() {
   return;
 }
 
+void test_reverse_on_empty_stack() {
+  struct stack *stack, *old_stack, *reversed_stack;
+
+  allocate_stack(&stack);
+  initialize_stack(stack);
+  old_stack = stack;
+  reversed_stack = reverse(&stack);
+
+  assert(reversed_stack == old_stack);
+
+  free_stack(stack);
+}
+
+void test_reverse_on_stack_with_one_element() {
+  struct stack *stack, *old_stack, *reversed_stack;
+  struct card *card;
+
+  allocate_card(&card);
+  initialize_card(card);
+  set_card(card, ACE, SPADES, EXPOSED, 0, 0);
+
+  allocate_stack(&stack);
+  initialize_stack(stack);
+  push(&stack, card);
+  old_stack = stack;
+  reversed_stack = reverse(&stack);
+
+  assert(reversed_stack == old_stack);
+
+  free_stack(stack);
+}
+
+void test_reverse_on_stack_with_more_than_one_element() {
+  struct stack *stack, *old_stack, *reversed_stack, *unreversed_stack;
+  struct card *card[3];
+
+  allocate_stack(&stack);
+  initialize_stack(stack);
+  for (int i = 0; i < 3; i++) {
+    allocate_card(&card[i]);
+    initialize_card(card[i]);
+    set_card(card[i], TWO + i, DIAMONDS + i, EXPOSED, 0, 0);
+    push(&stack, card[i]);
+  }
+  old_stack = duplicate_stack(stack);
+  reversed_stack = reverse(&stack);
+
+  allocate_stack(&unreversed_stack);
+  initialize_stack(unreversed_stack);
+  for (int i = 0; i < 3; i++) {
+    push(&unreversed_stack, pop(&reversed_stack)->card);
+  }
+
+  assert(stacks_equal(unreversed_stack, old_stack));
+
+  free_stack(reversed_stack);
+  free_stack(stack);
+}
+
 void test_stack() {
   test_initialize_stack();
 
@@ -230,6 +290,10 @@ void test_stack() {
   test_pop_on_empty_stack();
   test_pop_on_stack_with_one_element();
   test_pop_on_stack_with_more_than_one_element();
+
+  test_reverse_on_empty_stack();
+  test_reverse_on_stack_with_one_element();
+  test_reverse_on_stack_with_more_than_one_element();
 
   return;
 }
