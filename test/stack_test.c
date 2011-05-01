@@ -102,7 +102,7 @@ void test_push_on_empty_stack() {
   initialize_stack(stack);
   push(&stack, card);
 
-  assert(stack->card == card);
+  assert(cards_equal(stack->card, card));
   assert(!stack->next);
 
   free_stack(stack);
@@ -126,8 +126,8 @@ void test_push_on_non_empty_stack() {
   push(&stack, card_0);
   push(&stack, card_1);
 
-  assert(stack->card == card_1);
-  assert(stack->next->card == card_0);
+  assert(cards_equal(stack->card, card_1));
+  assert(cards_equal(stack->next->card, card_0));
   assert(!stack->next->next);
 
   free_stack(stack);
@@ -143,8 +143,8 @@ void test_push_null_on_empty_stack() {
   old_stack = stack;
   push(&stack, NULL);
 
-  assert(stack->card == old_stack->card);
-  assert(stack->next == NULL);
+  assert(cards_equal(stack->card, old_stack->card));
+  assert(!stack->next);
 
   free_stack(stack);
 
@@ -161,11 +161,11 @@ void test_push_null_on_non_empty_stack() {
 
   allocate_stack(&stack);
   initialize_stack(stack);
-  old_stack = stack;
+  old_stack = duplicate_stack(stack);
   push(&stack, NULL);
 
-  assert(stack->card == old_stack->card);
-  assert(stack->next == old_stack->next);
+  assert(cards_equal(stack->card, old_stack->card));
+  assert(stacks_equal(stack->next, old_stack->next));
 
   free_stack(stack);
 
@@ -203,7 +203,7 @@ void test_pop_on_stack_with_one_element() {
   popped_entry = pop(&stack);
 
   assert(empty(stack));
-  assert(popped_entry->card == card);
+  assert(cards_equal(popped_entry->card, card));
   assert(!popped_entry->next);
 
   free_stack(stack);
@@ -228,7 +228,7 @@ void test_pop_on_stack_with_more_than_one_element() {
 
   assert(length(stack) == 2);
   assert(stack == old_stack_next);
-  assert(popped_entry->card == card[2]);
+  assert(cards_equal(popped_entry->card, card[2]));
   assert(!popped_entry->next);
 
   free_stack(stack);

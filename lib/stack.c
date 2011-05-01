@@ -81,10 +81,10 @@ void push(struct stack **stack, struct card *card) {
 
   if (card) {
     if (empty(*stack)) {
-      (*stack)->card = card;
+      (*stack)->card = duplicate_card(card);
     } else {
       allocate_stack(&new_stack);
-      new_stack->card = card;
+      new_stack->card = duplicate_card(card);
       new_stack->next = (*stack);
       *stack = new_stack;
     }
@@ -95,20 +95,23 @@ struct stack *pop(struct stack **stack) {
   struct stack *popped_entry = NULL;
 
   if(!empty(*stack)) {
-    popped_entry = *stack;
-    /* As what's considered an empty stack is an allocated and initialized
-     * stack structure, we make sure pop doesn't make '*stack' point to NULL
-     * when popping a stack with only 1 element. */
+    allocate_stack(&popped_entry);
+    initialize_stack(popped_entry);
+    popped_entry->card = duplicate_card((*stack)->card);
+    popped_entry->next = NULL;
     if (length(*stack) == 1) {
-      allocate_stack(stack);
-      initialize_stack(*stack);
-      set_frame((*stack)->card->frame,
-                (*stack)->card->frame->start_y,
-                (*stack)->card->frame->start_x);
+      /* An empty stack is a stack with a blank top card
+       * and with stack->next == NULL. */
+      set_card((*stack)->card,
+               NO_VALUE,
+               NO_SUIT,
+               NO_FACE,
+               (*stack)->card->frame->start_y,
+               (*stack)->card->frame->start_x);
+      (*stack)->next = NULL;
     } else {
       *stack = (*stack)->next;
     }
-    popped_entry->next = NULL;
   }
 
   return(popped_entry);
