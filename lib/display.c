@@ -199,15 +199,16 @@ void draw_card(struct card *card) {
 
 void draw_stack(struct stack *stack) {
   if (!empty(stack)) {
-    struct stack *iterator = stack->next;
-    while (iterator != NULL) {
-      draw_card(iterator->card);
-      iterator = iterator->next;
-    }
-    draw_card(stack->card);
-  }
+    if (maneuvre_stack(stack)) {
+      struct stack *reversed_stack = reverse(stack);
 
-  return;
+      for (struct stack *i = reversed_stack; i; i = i->next) {
+        draw_card(i->card);
+      }
+    } else {
+      draw_card(stack->card);
+    }
+  }
 }
 
 void draw_deck(struct deck *deck) {

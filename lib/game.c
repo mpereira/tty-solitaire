@@ -8,7 +8,7 @@
 #include "util.h"
 #include "game.h"
 
-static bool maneuvre_stack(struct stack *stack) {
+bool maneuvre_stack(struct stack *stack) {
   return(stack->card->frame->start_y >= MANEUVRE_STACKS_STARTING_Y);
 }
 
