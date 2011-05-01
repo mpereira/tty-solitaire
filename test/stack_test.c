@@ -276,7 +276,7 @@ void test_reverse_on_stack_with_more_than_one_element() {
 }
 
 void test_reverse_should_not_change_stack() {
-  struct stack *stack, *old_stack;
+  struct stack *stack, *old_stack, *old_stack_address;
   struct card *card[3];
 
   allocate_stack(&stack);
@@ -287,10 +287,12 @@ void test_reverse_should_not_change_stack() {
     set_card(card[i], TWO + i, DIAMONDS + i, EXPOSED, 0, 0);
     push(&stack, card[i]);
   }
-  old_stack = stack;
+  old_stack_address = stack;
+  old_stack = duplicate_stack(stack);
   reverse(stack);
 
-  assert(stack == old_stack);
+  assert(stack == old_stack_address);
+  assert(stacks_equal(stack, old_stack));
 
   free_stack(stack);
 }
