@@ -25,6 +25,20 @@ void initialize_card(struct card *card) {
   return;
 }
 
+struct card *duplicate_card(struct card *card) {
+  struct card *new_card;
+
+  allocate_card(&new_card);
+  set_card(new_card,
+           card->value,
+           card->suit,
+           card->face,
+           card->frame->start_y,
+           card->frame->start_x);
+
+  return(new_card);
+}
+
 void free_card(struct card *card) {
   if (card) {
     free_frame(card->frame);

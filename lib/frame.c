@@ -22,6 +22,15 @@ void initialize_frame(struct frame *frame) {
   return;
 }
 
+struct frame *duplicate_frame(struct frame *frame) {
+  struct frame *new_frame;
+
+  allocate_frame(&new_frame);
+  set_frame(new_frame, frame->start_y, frame->start_x);
+
+  return(new_frame);
+}
+
 void free_frame(struct frame *frame) {
   if (frame) {
     delwin(frame->shape);

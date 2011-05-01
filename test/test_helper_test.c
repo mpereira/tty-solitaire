@@ -145,55 +145,6 @@ void test_stacks_equal_with_two_stack_pointers_to_the_same_address() {
   return;
 }
 
-void test_duplicate_frame() {
-  struct frame *frame_0, *frame_1;
-  const int start_y = 5, start_x = 10;
-
-  allocate_frame(&frame_0);
-  set_frame(frame_0, start_y, start_x);
-  frame_1 = duplicate_frame(frame_0);
-
-  assert(frame_0 != frame_1);
-  assert(frames_equal(frame_0, frame_1));
-
-  return;
-}
-
-void test_duplicate_card() {
-  struct card *card_0, *card_1;
-  const int start_y = 5, start_x = 10;
-
-  allocate_card(&card_0);
-  set_card(card_0, ACE, SPADES, EXPOSED, start_y, start_x);
-  card_1 = duplicate_card(card_0);
-
-  assert(card_0 != card_1);
-  assert(cards_equal(card_0, card_1));
-
-  return;
-}
-
-void test_duplicate_stack() {
-  struct stack *stack_0, *stack_1;
-  struct card *card[5];
-  const int start_y = 5, start_x = 10;
-
-  allocate_stack(&stack_0);
-  initialize_stack(stack_0);
-  for (int i = 0; i < 5; i++) {
-    allocate_card(&card[i]);
-    set_card(card[i], i, SPADES, EXPOSED, start_y, start_x);
-    push(&stack_0, card[i]);
-  }
-  stack_1 = duplicate_stack(stack_0);
-
-  assert(stack_0 != stack_1);
-  assert(stacks_equal(stack_0, stack_1));
-
-  return;
-}
-
-
 void test_test_helper() {
   test_frames_equal_with_two_nulls();
   test_frames_equal_with_one_null();
@@ -209,10 +160,6 @@ void test_test_helper() {
   test_stacks_equal_with_two_equivalent_stacks();
   test_stacks_equal_with_two_different_stacks();
   test_stacks_equal_with_two_stack_pointers_to_the_same_address();
-
-  test_duplicate_frame();
-  test_duplicate_card();
-  test_duplicate_stack();
 
   return;
 }

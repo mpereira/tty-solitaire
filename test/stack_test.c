@@ -16,6 +16,26 @@ void test_initialize_stack() {
   return;
 }
 
+void test_duplicate_stack() {
+  struct stack *stack_0, *stack_1;
+  struct card *card[5];
+  const int start_y = 5, start_x = 10;
+
+  allocate_stack(&stack_0);
+  initialize_stack(stack_0);
+  for (int i = 0; i < 5; i++) {
+    allocate_card(&card[i]);
+    set_card(card[i], i, SPADES, EXPOSED, start_y, start_x);
+    push(&stack_0, card[i]);
+  }
+  stack_1 = duplicate_stack(stack_0);
+
+  assert(stack_0 != stack_1);
+  assert(stacks_equal(stack_0, stack_1));
+
+  return;
+}
+
 void test_empty_on_empty_stack() {
   struct stack *stack;
 
@@ -299,6 +319,8 @@ void test_reverse_should_not_change_stack() {
 
 void test_stack() {
   test_initialize_stack();
+
+  test_duplicate_stack();
 
   test_empty_on_empty_stack();
   test_empty_on_non_empty_stack();

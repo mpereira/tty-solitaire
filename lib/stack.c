@@ -24,6 +24,25 @@ void initialize_stack(struct stack *stack) {
   return;
 }
 
+struct stack *duplicate_stack(struct stack *stack) {
+  struct stack *iterator = stack;
+  struct stack *tmp_stack, *new_stack;
+
+  allocate_stack(&new_stack);
+  allocate_stack(&tmp_stack);
+  initialize_stack(new_stack);
+  initialize_stack(tmp_stack);
+  for (iterator = stack; iterator; iterator = iterator->next) {
+    push(&tmp_stack, duplicate_card(iterator->card));
+  }
+  while (!empty(tmp_stack)) {
+    push(&new_stack, (pop(&tmp_stack))->card);
+  }
+  free_stack(tmp_stack);
+
+  return(new_stack);
+}
+
 void free_stack(struct stack *stack) {
   struct stack *tmp_stack;
 
