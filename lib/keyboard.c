@@ -46,17 +46,11 @@ static bool cursor_on_invalid_spot(struct cursor *cursor) {
 
 static void handle_stock_event() {
   if (!empty(deck->stock)) {
-    /* erase the stack before emptying it */
-    if (length(deck->stock) == 1) {
-      erase_stack(deck->stock);
-    }
     move_card(&(deck->stock), &(deck->waste_pile));
     expose_card(deck->waste_pile->card);
     draw_stack(deck->stock);
     draw_stack(deck->waste_pile);
   }
-
-  return;
 }
 
 static void handle_card_movement(struct cursor *cursor) {
