@@ -44,16 +44,13 @@ struct stack *duplicate_stack(struct stack *stack) {
 }
 
 void free_stack(struct stack *stack) {
-  struct stack *tmp_stack;
+  struct stack *tmp;
 
-  while (stack) {
-    tmp_stack = stack->next;
+  for (; stack; stack = tmp) {
+    tmp = stack->next;
     free_card(stack->card);
     free(stack);
-    stack = tmp_stack;
   }
-
-  return;
 }
 
 bool empty(struct stack *stack) {
