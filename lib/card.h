@@ -41,8 +41,6 @@ struct card {
   enum face    face;
 };
 
-extern const char *program_name;
-
 void allocate_card(struct card **);
 void initialize_card(struct card *);
 struct card *duplicate_card(struct card *);

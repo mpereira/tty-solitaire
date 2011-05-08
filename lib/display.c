@@ -6,12 +6,13 @@
 #include <ncurses.h>
 #include "game.h"
 #include "display.h"
+#include "common.h"
 
 static char *card_suit(enum suit suit) {
   char *card_suit;
 
   if (!(card_suit = malloc(5 * sizeof(*card_suit)))) {
-    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
 
@@ -30,7 +31,7 @@ static char *card_value(enum value value) {
   char *card_value;
 
   if (!(card_value = malloc(2 * sizeof(*card_value)))) {
-    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
 

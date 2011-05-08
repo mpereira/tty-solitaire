@@ -18,8 +18,6 @@
 #define WHITE_ON_BLUE  3
 #define WHITE_ON_GREEN 4
 
-extern const char *program_name;
-
 void erase_stack(struct stack *);
 void draw_value(struct card *);
 void draw_suit(struct card *);

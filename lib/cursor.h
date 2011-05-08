@@ -32,7 +32,6 @@ struct cursor {
 enum movement { LEFT, DOWN, UP, RIGHT };
 
 extern struct deck *deck;
-extern const char *program_name;
 
 void allocate_cursor(struct cursor **);
 void initialize_cursor(struct cursor *);

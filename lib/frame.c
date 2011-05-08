@@ -4,10 +4,11 @@
 #include <string.h>
 #include <errno.h>
 #include "frame.h"
+#include "common.h"
 
 void allocate_frame(struct frame **frame) {
   if (!(*frame = malloc(sizeof(**frame)))) {
-    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
 }

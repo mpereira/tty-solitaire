@@ -5,7 +5,8 @@ LDFLAGS = -lncursesw
 EXECUTABLE = bin/ttysolitaire
 LIB_DIR    = lib
 SRC        = ${LIB_DIR}/ttysolitaire.c
-LIB_OBJECTS = ${LIB_DIR}/frame.o    \
+LIB_OBJECTS = ${LIB_DIR}/common.o   \
+              ${LIB_DIR}/frame.o    \
               ${LIB_DIR}/card.o     \
               ${LIB_DIR}/stack.o    \
               ${LIB_DIR}/deck.o     \

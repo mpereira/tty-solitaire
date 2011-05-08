@@ -4,10 +4,11 @@
 #include <string.h>
 #include <errno.h>
 #include "card.h"
+#include "common.h"
 
 void allocate_card(struct card **card) {
   if (!(*card = malloc(sizeof(**card)))) {
-    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
 

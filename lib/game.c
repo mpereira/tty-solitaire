@@ -6,6 +6,7 @@
 #include <time.h>
 #include "display.h"
 #include "util.h"
+#include "common.h"
 #include "game.h"
 
 bool stock_stack(struct stack *stack) {
@@ -198,7 +199,7 @@ static void shuffle_deck(struct deck *deck) {
   int random;
 
   if (!(stack = malloc(NUMBER_OF_CARDS * sizeof(*stack)))) {
-    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
 

@@ -7,10 +7,11 @@
 #include "display.h"
 #include "game.h"
 #include "cursor.h"
+#include "common.h"
 
 void allocate_cursor(struct cursor **cursor) {
   if (!(*cursor = malloc(sizeof(**cursor)))) {
-    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
 }

@@ -8,7 +8,7 @@
 
 void allocate_stack(struct stack **stack) {
   if (!(*stack = malloc(sizeof(**stack)))) {
-    fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
+    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
 
