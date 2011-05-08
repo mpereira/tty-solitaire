@@ -63,18 +63,18 @@ bool empty(struct stack *stack) {
 int length(struct stack *stack) {
   int length;
 
-  if (!empty(stack)) {
+  if (empty(stack)) {
+    length = 0;
+  } else {
     for (length = 1; stack->next; stack = stack->next, length++)
       ;
-  } else {
-    length = 0;
   }
 
   return(length);
 }
 
 void push(struct stack **stack, struct card *card) {
-  struct stack *new_stack = NULL;
+  struct stack *new_stack;
 
   if (card) {
     if (empty(*stack)) {
