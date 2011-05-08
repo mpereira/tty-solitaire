@@ -294,11 +294,8 @@ void initialize_game() {
   shuffle_deck(deck);
   deal_cards(deck);
 
-  draw_empty_stacks();
   draw_cursor(cursor);
   draw_deck(deck);
-
-  return;
 }
 
 void end_game() {

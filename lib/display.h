@@ -21,7 +21,6 @@
 extern const char *program_name;
 
 void erase_stack(struct stack *);
-void draw_empty_stacks();
 void draw_value(struct card *);
 void draw_suit(struct card *);
 void draw_front(struct card *);
