@@ -13,15 +13,11 @@ void allocate_stack(struct stack **stack) {
   }
 
   allocate_card(&((*stack)->card));
-
-  return;
 }
 
 void initialize_stack(struct stack *stack) {
   initialize_card(stack->card);
   stack->next = NULL;
-
-  return;
 }
 
 struct stack *duplicate_stack(struct stack *stack) {

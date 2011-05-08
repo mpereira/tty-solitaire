@@ -12,8 +12,6 @@ void allocate_card(struct card **card) {
   }
 
   allocate_frame(&((*card)->frame));
-
-  return;
 }
 
 void initialize_card(struct card *card) {
@@ -21,8 +19,6 @@ void initialize_card(struct card *card) {
   card->value = NO_VALUE;
   card->suit = NO_SUIT;
   card->face = NO_FACE;
-
-  return;
 }
 
 struct card *duplicate_card(struct card *card) {
@@ -44,8 +40,6 @@ void free_card(struct card *card) {
     free_frame(card->frame);
   }
   free(card);
-
-  return;
 }
 
 void set_card(struct card *card,
@@ -58,18 +52,12 @@ void set_card(struct card *card,
   card->value = value;
   card->suit = suit;
   card->face = face;
-
-  return;
 }
 
 void expose_card(struct card *card) {
   card->face = EXPOSED;
-
-  return;
 }
 
 void cover_card(struct card *card) {
   card->face = COVERED;
-
-  return;
 }

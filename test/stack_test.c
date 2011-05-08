@@ -12,8 +12,6 @@ void test_initialize_stack() {
   assert(!stack->next);
 
   free_stack(stack);
-
-  return;
 }
 
 void test_duplicate_stack() {
@@ -32,8 +30,6 @@ void test_duplicate_stack() {
 
   assert(stack_0 != stack_1);
   assert(stacks_equal(stack_0, stack_1));
-
-  return;
 }
 
 void test_empty_on_empty_stack() {
@@ -45,8 +41,6 @@ void test_empty_on_empty_stack() {
   assert(empty(stack));
 
   free_stack(stack);
-
-  return;
 }
 
 void test_empty_on_non_empty_stack() {
@@ -64,8 +58,6 @@ void test_empty_on_non_empty_stack() {
   assert(!empty(stack));
 
   free_stack(stack);
-
-  return;
 }
 
 void test_length() {
@@ -86,8 +78,6 @@ void test_length() {
   }
 
   free_stack(stack);
-
-  return;
 }
 
 void test_push_on_empty_stack() {
@@ -106,8 +96,6 @@ void test_push_on_empty_stack() {
   assert(!stack->next);
 
   free_stack(stack);
-
-  return;
 }
 
 void test_push_on_non_empty_stack() {
@@ -131,8 +119,6 @@ void test_push_on_non_empty_stack() {
   assert(!stack->next->next);
 
   free_stack(stack);
-
-  return;
 }
 
 void test_push_null_on_empty_stack() {
@@ -147,8 +133,6 @@ void test_push_null_on_empty_stack() {
   assert(!stack->next);
 
   free_stack(stack);
-
-  return;
 }
 
 void test_push_null_on_non_empty_stack() {
@@ -168,8 +152,6 @@ void test_push_null_on_non_empty_stack() {
   assert(stacks_equal(stack->next, old_stack->next));
 
   free_stack(stack);
-
-  return;
 }
 
 void test_pop_on_empty_stack() {
@@ -185,8 +167,6 @@ void test_pop_on_empty_stack() {
   assert(!popped_entry);
 
   free_stack(stack);
-
-  return;
 }
 
 void test_pop_on_stack_with_one_element() {
@@ -207,8 +187,6 @@ void test_pop_on_stack_with_one_element() {
   assert(!popped_entry->next);
 
   free_stack(stack);
-
-  return;
 }
 
 void test_pop_on_stack_with_more_than_one_element() {
@@ -232,8 +210,6 @@ void test_pop_on_stack_with_more_than_one_element() {
   assert(!popped_entry->next);
 
   free_stack(stack);
-
-  return;
 }
 
 void test_reverse_on_empty_stack() {
@@ -339,6 +315,4 @@ void test_stack() {
   test_reverse_on_stack_with_one_element();
   test_reverse_on_stack_with_more_than_one_element();
   test_reverse_should_not_change_stack();
-
-  return;
 }

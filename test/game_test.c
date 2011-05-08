@@ -25,8 +25,6 @@ void test_move_card_from_empty_stack_to_empty_stack() {
 
   free_stack(origin);
   free_stack(destination);
-
-  return;
 }
 
 void test_move_card_from_empty_stack_to_non_empty_stack() {
@@ -57,8 +55,6 @@ void test_move_card_from_empty_stack_to_non_empty_stack() {
 
   free_stack(origin);
   free_stack(destination);
-
-  return;
 }
 
 void test_move_card_from_non_empty_stack_to_empty_stack() {
@@ -82,8 +78,6 @@ void test_move_card_from_non_empty_stack_to_empty_stack() {
 
   free_stack(origin);
   free_stack(destination);
-
-  return;
 }
 
 void test_move_card_from_non_empty_stack_to_non_empty_stack() {
@@ -112,8 +106,6 @@ void test_move_card_from_non_empty_stack_to_non_empty_stack() {
 
   free_stack(origin);
   free_stack(destination);
-
-  return;
 }
 
 void test_valid_move_from_stock_to_stock() {
@@ -521,6 +513,4 @@ void test_game() {
   test_move_card_from_empty_stack_to_non_empty_stack();
   test_move_card_from_non_empty_stack_to_empty_stack();
   test_move_card_from_non_empty_stack_to_non_empty_stack();
-
-  return;
 }

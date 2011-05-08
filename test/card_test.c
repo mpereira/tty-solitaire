@@ -13,8 +13,6 @@ void test_initialize_card() {
   assert(card->face == NO_FACE);
 
   free_card(card);
-
-  return;
 }
 
 void test_duplicate_card() {
@@ -27,8 +25,6 @@ void test_duplicate_card() {
 
   assert(card_0 != card_1);
   assert(cards_equal(card_0, card_1));
-
-  return;
 }
 
 void test_set_card() {
@@ -47,8 +43,6 @@ void test_set_card() {
   assert(card->frame->start_x == start_x);
 
   free_card(card);
-
-  return;
 }
 
 void test_expose_card() {
@@ -61,8 +55,6 @@ void test_expose_card() {
   assert(card->face == EXPOSED);
 
   free_card(card);
-
-  return;
 }
 
 void test_cover_card() {
@@ -75,8 +67,6 @@ void test_cover_card() {
   assert(card->face == COVERED);
 
   free_card(card);
-
-  return;
 }
 
 void test_card() {
@@ -85,6 +75,4 @@ void test_card() {
   test_set_card();
   test_expose_card();
   test_cover_card();
-
-  return;
 }

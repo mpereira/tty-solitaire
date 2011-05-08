@@ -17,20 +17,14 @@ void initialize_curses() {
   init_pair(2, COLOR_RED, COLOR_WHITE);
   init_pair(3, COLOR_WHITE, COLOR_BLUE);
   init_pair(4, COLOR_WHITE, COLOR_GREEN);
-
-  return;
 }
 
 void end_curses() {
   endwin();
   puts("Game finished.");
-
-  return;
 }
 
 void clear_screen() {
   clear();
   refresh();
-
-  return;
 }

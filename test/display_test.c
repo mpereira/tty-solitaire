@@ -4,6 +4,4 @@
 
 void test_display() {
   assert(true);
-
-  return;
 }

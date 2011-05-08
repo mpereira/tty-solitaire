@@ -4,6 +4,4 @@
 
 void test_deck() {
   assert(true);
-
-  return;
 }

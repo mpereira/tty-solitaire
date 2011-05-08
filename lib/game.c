@@ -126,8 +126,6 @@ static void set_stacks_initial_coordinates(struct deck *deck) {
   set_frame(deck->maneuvre_6->card->frame,
             MANEUVRE_STARTING_Y,
             MANEUVRE_6_STARTING_X);
-
-  return;
 }
 
 static void fill_deck(struct deck *deck) {
@@ -192,8 +190,6 @@ static void fill_deck(struct deck *deck) {
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     push(&(deck->stock), card[i]);
   }
-
-  return;
 }
 
 static void shuffle_deck(struct deck *deck) {
@@ -222,8 +218,6 @@ static void shuffle_deck(struct deck *deck) {
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     push(&(deck->stock), stack[i]->card);
   }
-
-  return;
 }
 
 static void deal_cards(struct deck *deck) {
@@ -268,16 +262,12 @@ static void deal_cards(struct deck *deck) {
 
   move_card(&(deck->stock), &(deck->maneuvre_6));
   expose_card(deck->maneuvre_6->card);
-
-  return;
 }
 
 void greet_player() {
   mvprintw(10, 27, "Welcome to tty-solitaire.");
   mvprintw(11, 8, "Move with \u2190\u2191\u2192\u2193 or hjkl. Use the space bar to mark and move cards.");
   mvprintw(12, 19, "Press the space bar to play or q to quit.");
-
-  return;
 }
 
 void initialize_game() {
@@ -300,6 +290,4 @@ void initialize_game() {
 
 void end_game() {
   free_deck(deck);
-
-  return;
 }

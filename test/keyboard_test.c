@@ -4,6 +4,4 @@
 
 void test_keyboard() {
   assert(true);
-
-  return;
 }

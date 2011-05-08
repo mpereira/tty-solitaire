@@ -4,6 +4,4 @@
 
 void test_cursor() {
   assert(true);
-
-  return;
 }

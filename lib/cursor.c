@@ -13,15 +13,11 @@ void allocate_cursor(struct cursor **cursor) {
     fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
     exit(errno);
   }
-
-  return;
 }
 
 void initialize_cursor(struct cursor *cursor) {
   cursor->x = CURSOR_STARTING_X;
   cursor->y = CURSOR_STARTING_Y;
-
-  return;
 }
 
 void move_cursor(struct cursor *cursor, enum movement movement) {
@@ -90,6 +86,4 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
    * on the maneuvre's stacks causes */
   refresh();
   draw_deck(deck);
-
-  return;
 }

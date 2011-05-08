@@ -13,8 +13,6 @@ void test_initialize_frame() {
   assert(frame->start_x == 0);
 
   free_frame(frame);
-
-  return;
 }
 
 void test_duplicate_frame() {
@@ -27,8 +25,6 @@ void test_duplicate_frame() {
 
   assert(frame_0 != frame_1);
   assert(frames_equal(frame_0, frame_1));
-
-  return;
 }
 
 void test_set_frame() {
@@ -44,14 +40,10 @@ void test_set_frame() {
   assert(frame->start_x == start_x);
 
   free_frame(frame);
-
-  return;
 }
 
 void test_frame() {
   test_initialize_frame();
   test_duplicate_frame();
   test_set_frame();
-
-  return;
 }

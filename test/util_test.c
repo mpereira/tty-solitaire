@@ -4,6 +4,4 @@
 
 void test_util() {
   assert(true);
-
-  return;
 }

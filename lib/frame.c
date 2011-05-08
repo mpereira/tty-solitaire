@@ -10,16 +10,12 @@ void allocate_frame(struct frame **frame) {
     fprintf(stderr, "%s: %s (%s:%d)\n", program_name, strerror(errno), __FILE__, __LINE__ - 1);
     exit(errno);
   }
-
-  return;
 }
 
 void initialize_frame(struct frame *frame) {
   frame->shape   = NULL;
   frame->start_y = 0;
   frame->start_x = 0;
-
-  return;
 }
 
 struct frame *duplicate_frame(struct frame *frame) {
@@ -36,8 +32,6 @@ void free_frame(struct frame *frame) {
     delwin(frame->shape);
   }
   free(frame);
-
-  return;
 }
 
 void set_frame(struct frame *frame, int start_y, int start_x) {
@@ -47,6 +41,4 @@ void set_frame(struct frame *frame, int start_y, int start_x) {
                         FRAME_WIDTH,
                         frame->start_y,
                         frame->start_x);
-
-  return;
 }

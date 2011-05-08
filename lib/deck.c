@@ -26,8 +26,6 @@ void allocate_deck(struct deck **deck) {
   allocate_stack(&((*deck)->maneuvre_4));
   allocate_stack(&((*deck)->maneuvre_5));
   allocate_stack(&((*deck)->maneuvre_6));
-
-  return;
 }
 
 void initialize_deck(struct deck *deck) {
@@ -46,8 +44,6 @@ void initialize_deck(struct deck *deck) {
   initialize_stack(deck->maneuvre_4);
   initialize_stack(deck->maneuvre_5);
   initialize_stack(deck->maneuvre_6);
-
-  return;
 }
 
 void free_deck(struct deck *deck) {
@@ -68,6 +64,4 @@ void free_deck(struct deck *deck) {
     free_stack(deck->maneuvre_6);
   }
   free(deck);
-
-  return;
 }

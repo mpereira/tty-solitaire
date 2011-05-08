@@ -74,8 +74,6 @@ void draw_value(struct card *card) {
             4,
             6 - (strlen(card_value(card->value)) - 1),
             card_value(card->value));
-
-  return;
 }
 
 void draw_suit(struct card *card) {
@@ -93,22 +91,16 @@ void draw_suit(struct card *card) {
   } else {
     wattroff(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
   }
-
-  return;
 }
 
 void draw_front(struct card *card) {
   wbkgd(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
   draw_value(card);
   draw_suit(card);
-
-  return;
 }
 
 void draw_back(struct card *card) {
   wbkgd(card->frame->shape, COLOR_PAIR(WHITE_ON_BLUE));
-
-  return;
 }
 
 void draw_card(struct card *card) {
@@ -119,8 +111,6 @@ void draw_card(struct card *card) {
     draw_back(card);
   }
   wrefresh(card->frame->shape);
-
-  return;
 }
 
 void draw_stack(struct stack *stack) {
@@ -162,18 +152,12 @@ void draw_deck(struct deck *deck) {
   draw_stack(deck->maneuvre_4);
   draw_stack(deck->maneuvre_5);
   draw_stack(deck->maneuvre_6);
-
-  return;
 }
 
 void draw_cursor(struct cursor *cursor) {
   mvaddch(cursor->y, cursor->x, '*');
-
-  return;
 }
 
 void erase_cursor(struct cursor *cursor) {
   mvdelch(cursor->y, cursor->x);
-
-  return;
 }
