@@ -5,7 +5,7 @@
 #include <errno.h>
 #include <time.h>
 #include "display.h"
-#include "util.h"
+#include "curses.h"
 #include "common.h"
 #include "game.h"
 

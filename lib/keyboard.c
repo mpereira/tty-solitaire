@@ -2,6 +2,7 @@
 #include "card.h"
 #include "game.h"
 #include "display.h"
+#include "curses.h"
 #include "keyboard.h"
 
 static bool cursor_on_stock(struct cursor *cursor) {

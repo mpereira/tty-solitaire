@@ -5,6 +5,7 @@
 #include <string.h>
 #include <errno.h>
 #include "stack.h"
+#include "common.h"
 
 void allocate_stack(struct stack **stack) {
   if (!(*stack = malloc(sizeof(**stack)))) {

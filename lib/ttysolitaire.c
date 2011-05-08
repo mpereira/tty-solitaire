@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <ncurses.h>
-#include "util.h"
+#include "curses.h"
 #include "game.h"
 #include "keyboard.h"
 

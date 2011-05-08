@@ -13,7 +13,7 @@ int main(int argc, const char *argv[]) {
   test_game();
   test_keyboard();
   test_stack();
-  test_util();
+  test_curses();
   test_test_helper();
 
   return(0);

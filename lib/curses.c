@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ncurses.h>
 #include <locale.h>
-#include "util.h"
+#include "curses.h"
 
 void initialize_curses() {
   setlocale(LC_ALL, "en_US.utf-8");  /* supporting unicode characters          */

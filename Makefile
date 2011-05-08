@@ -10,7 +10,7 @@ LIB_OBJECTS = ${LIB_DIR}/common.o   \
               ${LIB_DIR}/card.o     \
               ${LIB_DIR}/stack.o    \
               ${LIB_DIR}/deck.o     \
-              ${LIB_DIR}/util.o     \
+              ${LIB_DIR}/curses.o   \
               ${LIB_DIR}/cursor.o   \
               ${LIB_DIR}/keyboard.o \
               ${LIB_DIR}/display.o  \
@@ -23,7 +23,7 @@ TEST_OBJECTS = ${TEST_DIR}/frame_test.o       \
                ${TEST_DIR}/card_test.o        \
                ${TEST_DIR}/stack_test.o       \
                ${TEST_DIR}/deck_test.o        \
-               ${TEST_DIR}/util_test.o        \
+               ${TEST_DIR}/curses_test.o      \
                ${TEST_DIR}/cursor_test.o      \
                ${TEST_DIR}/keyboard_test.o    \
                ${TEST_DIR}/display_test.o     \
