@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "card.h"
 #include "game.h"
 #include "display.h"
@@ -90,19 +91,19 @@ static void handle_card_movement(struct cursor *cursor) {
       move_cursor(cursor, RIGHT);
       break;
     case KEY_SPACEBAR:
-      if (!cursor_on_invalid_spot(cursor) &&
-          !cursor_on_stock(cursor) &&
-          !cursor_on_stack(cursor, origin)) {
-        destination = cursor_stack(cursor);
+      destination = cursor_stack(cursor);
+      if (valid_move(origin, destination)) {
         move_card(&origin, &destination);
         draw_stack(origin);
         draw_stack(destination);
       }
       return;
+    case 'q':
+    case 'Q':
+      end_curses();
+      exit(0);
     }
   }
-
-  return;
 }
 
 void handle_keyboard_event(int key) {
@@ -131,6 +132,4 @@ void handle_keyboard_event(int key) {
     }
     break;
   }
-
-  return;
 }

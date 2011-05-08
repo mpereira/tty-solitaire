@@ -34,6 +34,8 @@ extern const char *program_name;
 struct deck *deck;
 struct cursor *cursor;
 
+bool valid_move(struct stack *, struct stack *);
+bool maneuvre_stack(struct stack *);
 void move_card(struct stack **, struct stack **);
 void greet_player();
 void initialize_game();

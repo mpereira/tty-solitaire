@@ -66,8 +66,6 @@ void erase_stack(struct stack *stack) {
   box(empty_stack, 0, 0);
   wrefresh(empty_stack);
   delwin(empty_stack);
-
-  return;
 }
 
 void draw_empty_stacks() {
@@ -198,7 +196,16 @@ void draw_card(struct card *card) {
 }
 
 void draw_stack(struct stack *stack) {
-  if (!empty(stack)) {
+  erase_stack(stack);
+  if (empty(stack)) {
+    WINDOW *empty_stack = newwin(FRAME_HEIGHT,
+                                 FRAME_WIDTH,
+                                 stack->card->frame->start_y,
+                                 stack->card->frame->start_x);
+    box(empty_stack, 0, 0);
+    wrefresh(empty_stack);
+    delwin(empty_stack);
+  } else {
     if (maneuvre_stack(stack)) {
       struct stack *reversed_stack = reverse(stack);
 

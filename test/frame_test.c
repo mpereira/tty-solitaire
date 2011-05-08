@@ -1,4 +1,5 @@
 #include <assert.h>
+#include "test_helper.h"
 #include "../lib/frame.h"
 
 void test_initialize_frame() {

@@ -8,23 +8,82 @@
 #include "util.h"
 #include "game.h"
 
+bool stock_stack(struct stack *stack) {
+  return(stack && stack->card && stack->card->frame &&
+         (stack->card->frame->start_y == STOCK_STARTING_Y) &&
+         (stack->card->frame->start_x == STOCK_STARTING_X));
+}
+
+bool waste_pile_stack(struct stack *stack) {
+  return(stack && stack->card && stack->card->frame &&
+         (stack->card->frame->start_y == WASTE_PILE_STARTING_Y) &&
+         (stack->card->frame->start_x == WASTE_PILE_STARTING_X));
+}
+
+bool foundation_stack(struct stack *stack) {
+  return(stack && stack->card && stack->card->frame &&
+         stack->card->frame->start_y == FOUNDATION_STARTING_Y &&
+         (stack->card->frame->start_x == FOUNDATION_0_STARTING_X ||
+          stack->card->frame->start_x == FOUNDATION_1_STARTING_X ||
+          stack->card->frame->start_x == FOUNDATION_2_STARTING_X ||
+          stack->card->frame->start_x == FOUNDATION_3_STARTING_X));
+}
+
 bool maneuvre_stack(struct stack *stack) {
-  return(stack->card->frame->start_y >= MANEUVRE_STACKS_STARTING_Y);
+  return(stack && stack->card && stack->card->frame &&
+         stack->card->frame->start_y >= MANEUVRE_STACKS_STARTING_Y &&
+         (stack->card->frame->start_x == MANEUVRE_0_STARTING_X ||
+          stack->card->frame->start_x == MANEUVRE_1_STARTING_X ||
+          stack->card->frame->start_x == MANEUVRE_2_STARTING_X ||
+          stack->card->frame->start_x == MANEUVRE_3_STARTING_X ||
+          stack->card->frame->start_x == MANEUVRE_4_STARTING_X ||
+          stack->card->frame->start_x == MANEUVRE_5_STARTING_X ||
+          stack->card->frame->start_x == MANEUVRE_6_STARTING_X));
+}
+
+bool valid_move(struct stack *origin, struct stack *destination) {
+  if (stock_stack(origin)) {
+    if (waste_pile_stack(destination)) {
+      return(true);
+    } else {
+      return(false);
+    }
+  } else if (waste_pile_stack(origin)) {
+    if (foundation_stack(destination) || maneuvre_stack(destination)) {
+      return(true);
+    } else {
+      return(false);
+    }
+  } else if (foundation_stack(origin)) {
+    if ((foundation_stack(destination) && origin != destination) || maneuvre_stack(destination)) {
+      return(true);
+    } else {
+      return(false);
+    }
+  } else if (maneuvre_stack(origin)) {
+    if ((maneuvre_stack(destination) && origin != destination) || foundation_stack(destination)) {
+      return(true);
+    } else {
+      return(false);
+    }
+  } else {
+    return(false);
+  }
 }
 
 void move_card(struct stack **origin, struct stack **destination) {
-  struct stack *stack = NULL;
+  struct stack *stack;
 
-  (*origin)->card->frame->start_x = (*destination)->card->frame->start_x;
-  (*origin)->card->frame->start_y = (*destination)->card->frame->start_y;
+  if (!empty(*origin)) {
+    (*origin)->card->frame->start_x = (*destination)->card->frame->start_x;
+    (*origin)->card->frame->start_y = (*destination)->card->frame->start_y;
+  }
   if (!empty(*destination) && maneuvre_stack(*destination)) {
     (*origin)->card->frame->start_y++;
   }
   if ((stack = pop(origin))) {
     push(destination, stack->card);
   }
-
-  return;
 }
 
 static void set_stacks_initial_coordinates(struct deck *deck) {
