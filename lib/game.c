@@ -32,7 +32,7 @@ bool foundation_stack(struct stack *stack) {
 
 bool maneuvre_stack(struct stack *stack) {
   return(stack && stack->card && stack->card->frame &&
-         stack->card->frame->begin_y >= MANEUVRE_STACKS_BEGIN_Y &&
+         stack->card->frame->begin_y >= MANEUVRE_BEGIN_Y &&
          (stack->card->frame->begin_x == MANEUVRE_0_BEGIN_X ||
           stack->card->frame->begin_x == MANEUVRE_1_BEGIN_X ||
           stack->card->frame->begin_x == MANEUVRE_2_BEGIN_X ||

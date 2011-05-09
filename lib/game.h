@@ -7,8 +7,6 @@
 
 #define NUMBER_OF_CARDS 52
 
-#define MANEUVRE_STACKS_BEGIN_Y 7
-
 #define STOCK_BEGIN_X        1
 #define STOCK_BEGIN_Y        1
 
