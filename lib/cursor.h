@@ -4,8 +4,8 @@
 #include <stdbool.h>
 #include "deck.h"
 
-#define CURSOR_STARTING_X 4
-#define CURSOR_STARTING_Y 7
+#define CURSOR_BEGIN_X 4
+#define CURSOR_BEGIN_Y 7
 
 #define CURSOR_INVALID_SPOT_X 20
 #define CURSOR_INVALID_SPOT_Y 7

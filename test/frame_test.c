@@ -9,18 +9,18 @@ void test_initialize_frame() {
   initialize_frame(frame);
 
   assert(frame->shape == NULL);
-  assert(frame->start_y == 0);
-  assert(frame->start_x == 0);
+  assert(frame->begin_y == 0);
+  assert(frame->begin_x == 0);
 
   free_frame(frame);
 }
 
 void test_duplicate_frame() {
   struct frame *frame_0, *frame_1;
-  const int start_y = 5, start_x = 10;
+  const int begin_y = 5, begin_x = 10;
 
   allocate_frame(&frame_0);
-  set_frame(frame_0, start_y, start_x);
+  set_frame(frame_0, begin_y, begin_x);
   frame_1 = duplicate_frame(frame_0);
 
   assert(frame_0 != frame_1);
@@ -29,15 +29,15 @@ void test_duplicate_frame() {
 
 void test_set_frame() {
   struct frame *frame;
-  int start_y = 5;
-  int start_x = 10;
+  int begin_y = 5;
+  int begin_x = 10;
 
   allocate_frame(&frame);
   initialize_frame(frame);
-  set_frame(frame, start_y, start_x);
+  set_frame(frame, begin_y, begin_x);
 
-  assert(frame->start_y == start_y);
-  assert(frame->start_x == start_x);
+  assert(frame->begin_y == begin_y);
+  assert(frame->begin_x == begin_x);
 
   free_frame(frame);
 }

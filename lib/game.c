@@ -11,35 +11,35 @@
 
 bool stock_stack(struct stack *stack) {
   return(stack && stack->card && stack->card->frame &&
-         (stack->card->frame->start_y == STOCK_STARTING_Y) &&
-         (stack->card->frame->start_x == STOCK_STARTING_X));
+         (stack->card->frame->begin_y == STOCK_BEGIN_Y) &&
+         (stack->card->frame->begin_x == STOCK_BEGIN_X));
 }
 
 bool waste_pile_stack(struct stack *stack) {
   return(stack && stack->card && stack->card->frame &&
-         (stack->card->frame->start_y == WASTE_PILE_STARTING_Y) &&
-         (stack->card->frame->start_x == WASTE_PILE_STARTING_X));
+         (stack->card->frame->begin_y == WASTE_PILE_BEGIN_Y) &&
+         (stack->card->frame->begin_x == WASTE_PILE_BEGIN_X));
 }
 
 bool foundation_stack(struct stack *stack) {
   return(stack && stack->card && stack->card->frame &&
-         stack->card->frame->start_y == FOUNDATION_STARTING_Y &&
-         (stack->card->frame->start_x == FOUNDATION_0_STARTING_X ||
-          stack->card->frame->start_x == FOUNDATION_1_STARTING_X ||
-          stack->card->frame->start_x == FOUNDATION_2_STARTING_X ||
-          stack->card->frame->start_x == FOUNDATION_3_STARTING_X));
+         stack->card->frame->begin_y == FOUNDATION_BEGIN_Y &&
+         (stack->card->frame->begin_x == FOUNDATION_0_BEGIN_X ||
+          stack->card->frame->begin_x == FOUNDATION_1_BEGIN_X ||
+          stack->card->frame->begin_x == FOUNDATION_2_BEGIN_X ||
+          stack->card->frame->begin_x == FOUNDATION_3_BEGIN_X));
 }
 
 bool maneuvre_stack(struct stack *stack) {
   return(stack && stack->card && stack->card->frame &&
-         stack->card->frame->start_y >= MANEUVRE_STACKS_STARTING_Y &&
-         (stack->card->frame->start_x == MANEUVRE_0_STARTING_X ||
-          stack->card->frame->start_x == MANEUVRE_1_STARTING_X ||
-          stack->card->frame->start_x == MANEUVRE_2_STARTING_X ||
-          stack->card->frame->start_x == MANEUVRE_3_STARTING_X ||
-          stack->card->frame->start_x == MANEUVRE_4_STARTING_X ||
-          stack->card->frame->start_x == MANEUVRE_5_STARTING_X ||
-          stack->card->frame->start_x == MANEUVRE_6_STARTING_X));
+         stack->card->frame->begin_y >= MANEUVRE_STACKS_BEGIN_Y &&
+         (stack->card->frame->begin_x == MANEUVRE_0_BEGIN_X ||
+          stack->card->frame->begin_x == MANEUVRE_1_BEGIN_X ||
+          stack->card->frame->begin_x == MANEUVRE_2_BEGIN_X ||
+          stack->card->frame->begin_x == MANEUVRE_3_BEGIN_X ||
+          stack->card->frame->begin_x == MANEUVRE_4_BEGIN_X ||
+          stack->card->frame->begin_x == MANEUVRE_5_BEGIN_X ||
+          stack->card->frame->begin_x == MANEUVRE_6_BEGIN_X));
 }
 
 bool valid_move(struct stack *origin, struct stack *destination) {
@@ -76,11 +76,11 @@ void move_card(struct stack **origin, struct stack **destination) {
   struct stack *stack;
 
   if (!empty(*origin)) {
-    (*origin)->card->frame->start_x = (*destination)->card->frame->start_x;
-    (*origin)->card->frame->start_y = (*destination)->card->frame->start_y;
+    (*origin)->card->frame->begin_x = (*destination)->card->frame->begin_x;
+    (*origin)->card->frame->begin_y = (*destination)->card->frame->begin_y;
   }
   if (!empty(*destination) && maneuvre_stack(*destination)) {
-    (*origin)->card->frame->start_y++;
+    (*origin)->card->frame->begin_y++;
   }
   if ((stack = pop(origin))) {
     push(destination, stack->card);
@@ -89,44 +89,44 @@ void move_card(struct stack **origin, struct stack **destination) {
 
 static void set_stacks_initial_coordinates(struct deck *deck) {
   set_frame(deck->stock->card->frame,
-            STOCK_STARTING_Y,
-            STOCK_STARTING_X);
+            STOCK_BEGIN_Y,
+            STOCK_BEGIN_X);
   set_frame(deck->waste_pile->card->frame,
-            WASTE_PILE_STARTING_Y,
-            WASTE_PILE_STARTING_X);
+            WASTE_PILE_BEGIN_Y,
+            WASTE_PILE_BEGIN_X);
   set_frame(deck->foundation_0->card->frame,
-            FOUNDATION_STARTING_Y,
-            FOUNDATION_0_STARTING_X);
+            FOUNDATION_BEGIN_Y,
+            FOUNDATION_0_BEGIN_X);
   set_frame(deck->foundation_1->card->frame,
-            FOUNDATION_STARTING_Y,
-            FOUNDATION_1_STARTING_X);
+            FOUNDATION_BEGIN_Y,
+            FOUNDATION_1_BEGIN_X);
   set_frame(deck->foundation_2->card->frame,
-            FOUNDATION_STARTING_Y,
-            FOUNDATION_2_STARTING_X);
+            FOUNDATION_BEGIN_Y,
+            FOUNDATION_2_BEGIN_X);
   set_frame(deck->foundation_3->card->frame,
-            FOUNDATION_STARTING_Y,
-            FOUNDATION_3_STARTING_X);
+            FOUNDATION_BEGIN_Y,
+            FOUNDATION_3_BEGIN_X);
   set_frame(deck->maneuvre_0->card->frame,
-            MANEUVRE_STARTING_Y,
-            MANEUVRE_0_STARTING_X);
+            MANEUVRE_BEGIN_Y,
+            MANEUVRE_0_BEGIN_X);
   set_frame(deck->maneuvre_1->card->frame,
-            MANEUVRE_STARTING_Y,
-            MANEUVRE_1_STARTING_X);
+            MANEUVRE_BEGIN_Y,
+            MANEUVRE_1_BEGIN_X);
   set_frame(deck->maneuvre_2->card->frame,
-            MANEUVRE_STARTING_Y,
-            MANEUVRE_2_STARTING_X);
+            MANEUVRE_BEGIN_Y,
+            MANEUVRE_2_BEGIN_X);
   set_frame(deck->maneuvre_3->card->frame,
-            MANEUVRE_STARTING_Y,
-            MANEUVRE_3_STARTING_X);
+            MANEUVRE_BEGIN_Y,
+            MANEUVRE_3_BEGIN_X);
   set_frame(deck->maneuvre_4->card->frame,
-            MANEUVRE_STARTING_Y,
-            MANEUVRE_4_STARTING_X);
+            MANEUVRE_BEGIN_Y,
+            MANEUVRE_4_BEGIN_X);
   set_frame(deck->maneuvre_5->card->frame,
-            MANEUVRE_STARTING_Y,
-            MANEUVRE_5_STARTING_X);
+            MANEUVRE_BEGIN_Y,
+            MANEUVRE_5_BEGIN_X);
   set_frame(deck->maneuvre_6->card->frame,
-            MANEUVRE_STARTING_Y,
-            MANEUVRE_6_STARTING_X);
+            MANEUVRE_BEGIN_Y,
+            MANEUVRE_6_BEGIN_X);
 }
 
 static void fill_deck(struct deck *deck) {

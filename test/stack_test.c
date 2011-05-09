@@ -17,13 +17,13 @@ void test_initialize_stack() {
 void test_duplicate_stack() {
   struct stack *stack_0, *stack_1;
   struct card *card[5];
-  const int start_y = 5, start_x = 10;
+  const int begin_y = 5, begin_x = 10;
 
   allocate_stack(&stack_0);
   initialize_stack(stack_0);
   for (int i = 0; i < 5; i++) {
     allocate_card(&card[i]);
-    set_card(card[i], i, SPADES, EXPOSED, start_y, start_x);
+    set_card(card[i], i, SPADES, EXPOSED, begin_y, begin_x);
     push(&stack_0, card[i]);
   }
   stack_1 = duplicate_stack(stack_0);

@@ -6,13 +6,13 @@
 #include "keyboard.h"
 
 static bool cursor_on_stock(struct cursor *cursor) {
-  return((cursor->x == CURSOR_STARTING_X) && (cursor->y == CURSOR_STARTING_Y));
+  return((cursor->x == CURSOR_BEGIN_X) && (cursor->y == CURSOR_BEGIN_Y));
 }
 
 static struct stack *cursor_stack(struct cursor *cursor) {
   struct stack *cursor_stack = NULL;
 
-  if (cursor->y == CURSOR_STARTING_Y) {
+  if (cursor->y == CURSOR_BEGIN_Y) {
     switch (cursor->x) {
     case CURSOR_STOCK_X:        cursor_stack = deck->stock;        break;
     case CURSOR_WASTE_PILE_X:   cursor_stack = deck->waste_pile;   break;

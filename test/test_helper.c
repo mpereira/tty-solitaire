@@ -2,8 +2,8 @@
 
 bool frames_equal(struct frame *frame_0, struct frame *frame_1) {
   if (frame_0 && frame_1) {
-    return(frame_0->start_y == frame_1->start_y &&
-           frame_0->start_x == frame_1->start_x);
+    return(frame_0->begin_y == frame_1->begin_y &&
+           frame_0->begin_x == frame_1->begin_x);
   } else if ((frame_0 && !frame_1) || (!frame_0 && frame_1)) {
     return(false);
   } else {

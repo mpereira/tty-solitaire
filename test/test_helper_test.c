@@ -15,12 +15,12 @@ void test_frames_equal_with_one_null() {
 
 void test_frames_equal_with_two_equivalent_frames() {
   struct frame *frame_0, *frame_1;
-  const int start_y = 5, start_x = 10;
+  const int begin_y = 5, begin_x = 10;
 
   allocate_frame(&frame_0);
   allocate_frame(&frame_1);
-  set_frame(frame_0, start_y, start_x);
-  set_frame(frame_1, start_y, start_x);
+  set_frame(frame_0, begin_y, begin_x);
+  set_frame(frame_1, begin_y, begin_x);
 
   assert(frames_equal(frame_0, frame_1));
 }
@@ -47,12 +47,12 @@ void test_cards_equal_with_one_null() {
 
 void test_cards_equal_with_two_equivalent_cards() {
   struct card *card_0, *card_1;
-  const int start_y = 5, start_x = 10;
+  const int begin_y = 5, begin_x = 10;
 
   allocate_card(&card_0);
   allocate_card(&card_1);
-  set_card(card_0, ACE, SPADES, EXPOSED, start_y, start_x);
-  set_card(card_1, ACE, SPADES, EXPOSED, start_y, start_x);
+  set_card(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  set_card(card_1, ACE, SPADES, EXPOSED, begin_y, begin_x);
 
   assert(cards_equal(card_0, card_1));
 }
@@ -80,12 +80,12 @@ void test_stacks_equal_with_one_null() {
 void test_stacks_equal_with_two_equivalent_stacks() {
   struct stack *stack_0, *stack_1;
   struct card *card_0, *card_1;
-  const int start_y = 5, start_x = 10;
+  const int begin_y = 5, begin_x = 10;
 
   allocate_card(&card_0);
   allocate_card(&card_1);
-  set_card(card_0, ACE, SPADES, EXPOSED, start_y, start_x);
-  set_card(card_1, ACE, SPADES, EXPOSED, start_y, start_x);
+  set_card(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  set_card(card_1, ACE, SPADES, EXPOSED, begin_y, begin_x);
   allocate_stack(&stack_0);
   allocate_stack(&stack_1);
   push(&stack_0, card_0);
@@ -97,12 +97,12 @@ void test_stacks_equal_with_two_equivalent_stacks() {
 void test_stacks_equal_with_two_different_stacks() {
   struct stack *stack_0, *stack_1;
   struct card *card_0, *card_1;
-  const int start_y = 5, start_x = 10;
+  const int begin_y = 5, begin_x = 10;
 
   allocate_card(&card_0);
   allocate_card(&card_1);
-  set_card(card_0, ACE, SPADES, EXPOSED, start_y, start_x);
-  set_card(card_1, KING, HEARTS, EXPOSED, start_y, start_x);
+  set_card(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  set_card(card_1, KING, HEARTS, EXPOSED, begin_y, begin_x);
   allocate_stack(&stack_0);
   allocate_stack(&stack_1);
   push(&stack_0, card_0);

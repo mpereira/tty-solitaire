@@ -98,8 +98,8 @@ struct stack *pop(struct stack **stack) {
                NO_VALUE,
                NO_SUIT,
                NO_FACE,
-               (*stack)->card->frame->start_y,
-               (*stack)->card->frame->start_x);
+               (*stack)->card->frame->begin_y,
+               (*stack)->card->frame->begin_x);
       (*stack)->next = NULL;
     } else {
       *stack = (*stack)->next;

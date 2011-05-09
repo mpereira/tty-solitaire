@@ -62,8 +62,8 @@ void erase_stack(struct stack *stack) {
   wrefresh(stack->card->frame->shape);
   empty_stack = newwin(FRAME_HEIGHT,
                        FRAME_WIDTH,
-                       stack->card->frame->start_y,
-                       stack->card->frame->start_x);
+                       stack->card->frame->begin_y,
+                       stack->card->frame->begin_x);
   box(empty_stack, 0, 0);
   wrefresh(empty_stack);
   delwin(empty_stack);
@@ -105,7 +105,7 @@ void draw_back(struct card *card) {
 }
 
 void draw_card(struct card *card) {
-  mvwin(card->frame->shape, card->frame->start_y, card->frame->start_x);
+  mvwin(card->frame->shape, card->frame->begin_y, card->frame->begin_x);
   if (card->face == EXPOSED) {
     draw_front(card);
   } else {
@@ -119,8 +119,8 @@ void draw_stack(struct stack *stack) {
   if (empty(stack)) {
     WINDOW *empty_stack = newwin(FRAME_HEIGHT,
                                  FRAME_WIDTH,
-                                 stack->card->frame->start_y,
-                                 stack->card->frame->start_x);
+                                 stack->card->frame->begin_y,
+                                 stack->card->frame->begin_x);
     box(empty_stack, 0, 0);
     wrefresh(empty_stack);
     delwin(empty_stack);

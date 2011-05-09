@@ -30,8 +30,8 @@ struct card *duplicate_card(struct card *card) {
            card->value,
            card->suit,
            card->face,
-           card->frame->start_y,
-           card->frame->start_x);
+           card->frame->begin_y,
+           card->frame->begin_x);
 
   return(new_card);
 }
@@ -47,9 +47,9 @@ void set_card(struct card *card,
               enum value value,
               enum suit suit,
               enum face face,
-              int start_y,
-              int start_x) {
-  set_frame(card->frame, start_y, start_x);
+              int begin_y,
+              int begin_x) {
+  set_frame(card->frame, begin_y, begin_x);
   card->value = value;
   card->suit = suit;
   card->face = face;

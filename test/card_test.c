@@ -17,10 +17,10 @@ void test_initialize_card() {
 
 void test_duplicate_card() {
   struct card *card_0, *card_1;
-  const int start_y = 5, start_x = 10;
+  const int begin_y = 5, begin_x = 10;
 
   allocate_card(&card_0);
-  set_card(card_0, ACE, SPADES, EXPOSED, start_y, start_x);
+  set_card(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
   card_1 = duplicate_card(card_0);
 
   assert(card_0 != card_1);
@@ -29,18 +29,18 @@ void test_duplicate_card() {
 
 void test_set_card() {
   struct card *card;
-  int start_y = 5;
-  int start_x = 10;
+  int begin_y = 5;
+  int begin_x = 10;
 
   allocate_card(&card);
   initialize_card(card);
-  set_card(card, ACE, SPADES, EXPOSED, start_y, start_x);
+  set_card(card, ACE, SPADES, EXPOSED, begin_y, begin_x);
 
   assert(card->value == ACE);
   assert(card->suit == SPADES);
   assert(card->face == EXPOSED);
-  assert(card->frame->start_y == start_y);
-  assert(card->frame->start_x == start_x);
+  assert(card->frame->begin_y == begin_y);
+  assert(card->frame->begin_x == begin_x);
 
   free_card(card);
 }

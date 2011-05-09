@@ -8,8 +8,8 @@
 
 struct frame {
   WINDOW *shape;
-  int    start_y;
-  int    start_x;
+  int    begin_y;
+  int    begin_x;
 };
 
 void allocate_frame(struct frame **);
