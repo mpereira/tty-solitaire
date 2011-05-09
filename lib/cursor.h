@@ -25,6 +25,7 @@
 #define CURSOR_MANEUVRE_6_X   52
 
 struct cursor {
+  WINDOW *window;
   int x;
   int y;
 };

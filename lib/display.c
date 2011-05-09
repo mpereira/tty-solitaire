@@ -156,9 +156,10 @@ void draw_deck(struct deck *deck) {
 }
 
 void draw_cursor(struct cursor *cursor) {
-  mvaddch(cursor->y, cursor->x, '*');
+  mvwaddch(cursor->window, cursor->y, cursor->x, '*');
+  wrefresh(cursor->window);
 }
 
 void erase_cursor(struct cursor *cursor) {
-  mvdelch(cursor->y, cursor->x);
+  mvwdelch(cursor->window, cursor->y, cursor->x);
 }

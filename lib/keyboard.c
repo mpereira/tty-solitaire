@@ -72,18 +72,22 @@ static void handle_card_movement(struct cursor *cursor) {
     case 'h':
     case KEY_LEFT:
       move_cursor(cursor, LEFT);
+      draw_cursor(cursor);
       break;
     case 'j':
     case KEY_DOWN:
       move_cursor(cursor, DOWN);
+      draw_cursor(cursor);
       break;
     case 'k':
     case KEY_UP:
       move_cursor(cursor, UP);
+      draw_cursor(cursor);
       break;
     case 'l':
     case KEY_RIGHT:
       move_cursor(cursor, RIGHT);
+      draw_cursor(cursor);
       break;
     case KEY_SPACEBAR:
       destination = cursor_stack(cursor);
@@ -96,6 +100,7 @@ static void handle_card_movement(struct cursor *cursor) {
     case 'q':
     case 'Q':
       end_curses();
+      end_game();
       exit(0);
     }
   }
@@ -106,18 +111,22 @@ void handle_keyboard_event(int key) {
   case 'h':
   case KEY_LEFT:
     move_cursor(cursor, LEFT);
+    draw_cursor(cursor);
     break;
   case 'j':
   case KEY_DOWN:
     move_cursor(cursor, DOWN);
+    draw_cursor(cursor);
     break;
   case 'k':
   case KEY_UP:
     move_cursor(cursor, UP);
+    draw_cursor(cursor);
     break;
   case 'l':
   case KEY_RIGHT:
     move_cursor(cursor, RIGHT);
+    draw_cursor(cursor);
     break;
   case KEY_SPACEBAR:
     if (cursor_on_stock(cursor)) {

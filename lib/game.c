@@ -291,4 +291,5 @@ void initialize_game() {
 
 void end_game() {
   free_deck(deck);
+  free_cursor(cursor);
 }

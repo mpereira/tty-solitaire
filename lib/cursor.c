@@ -13,12 +13,22 @@ void allocate_cursor(struct cursor **cursor) {
   if (!(*cursor = malloc(sizeof(**cursor)))) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
+  } else {
+    (*cursor)->window = NULL;
   }
 }
 
 void initialize_cursor(struct cursor *cursor) {
+  cursor->window = newwin(0, 0, cursor->y, cursor->x);
   cursor->x = CURSOR_BEGIN_X;
   cursor->y = CURSOR_BEGIN_Y;
+}
+
+void free_cursor(struct cursor *cursor) {
+  if (cursor) {
+    delwin(cursor->window);
+  }
+  free(cursor);
 }
 
 void move_cursor(struct cursor *cursor, enum movement movement) {
@@ -31,7 +41,6 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
         move_cursor(cursor, UP);
         move_cursor(cursor, DOWN);
       }
-      draw_cursor(cursor);
     }
     break;
   case DOWN:
@@ -60,7 +69,6 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
         cursor->y = cursor->y + 7 + length(deck->maneuvre_6);
         break;
       }
-      draw_cursor(cursor);
     }
     break;
   case RIGHT:
@@ -71,20 +79,13 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
         move_cursor(cursor, UP);
         move_cursor(cursor, DOWN);
       }
-      draw_cursor(cursor);
     }
     break;
   case UP:
     if (cursor->y > 1) {
       erase_cursor(cursor);
       cursor->y = CURSOR_BEGIN_Y;
-      draw_cursor(cursor);
     }
     break;
   }
-
-  /* this is needed because of the screen glitch that moving the cursor
-   * on the maneuvre's stacks causes */
-  refresh();
-  draw_deck(deck);
 }
