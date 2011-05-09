@@ -8,7 +8,7 @@ void test_initialize_frame() {
   allocate_frame(&frame);
   initialize_frame(frame);
 
-  assert(frame->shape == NULL);
+  assert(frame->window == NULL);
   assert(frame->begin_y == 0);
   assert(frame->begin_x == 0);
 

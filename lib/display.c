@@ -58,8 +58,8 @@ static char *card_value(enum value value) {
 void erase_stack(struct stack *stack) {
   WINDOW *empty_stack = NULL;
 
-  wbkgd(stack->card->frame->shape, WHITE_ON_GREEN);
-  wrefresh(stack->card->frame->shape);
+  wbkgd(stack->card->frame->window, WHITE_ON_GREEN);
+  wrefresh(stack->card->frame->window);
   empty_stack = newwin(FRAME_HEIGHT,
                        FRAME_WIDTH,
                        stack->card->frame->begin_y,
@@ -70,8 +70,8 @@ void erase_stack(struct stack *stack) {
 }
 
 void draw_value(struct card *card) {
-  mvwprintw(card->frame->shape, 0, 0, card_value(card->value));
-  mvwprintw(card->frame->shape,
+  mvwprintw(card->frame->window, 0, 0, card_value(card->value));
+  mvwprintw(card->frame->window,
             4,
             6 - (strlen(card_value(card->value)) - 1),
             card_value(card->value));
@@ -79,39 +79,39 @@ void draw_value(struct card *card) {
 
 void draw_suit(struct card *card) {
   if (card->suit % 2 == 0) {
-    wattron(card->frame->shape, COLOR_PAIR(RED_ON_WHITE));
+    wattron(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
   } else {
-    wattron(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
+    wattron(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
   }
-  mvwprintw(card->frame->shape, 0, 1 + (strlen(card_value(card->value) + 1)),
+  mvwprintw(card->frame->window, 0, 1 + (strlen(card_value(card->value) + 1)),
     card_suit(card->suit));
-  mvwprintw(card->frame->shape, 4, 5 - (strlen(card_value(card->value) + 1)),
+  mvwprintw(card->frame->window, 4, 5 - (strlen(card_value(card->value) + 1)),
     card_suit(card->suit));
   if (card->suit % 2 == 0) {
-    wattroff(card->frame->shape, COLOR_PAIR(RED_ON_WHITE));
+    wattroff(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
   } else {
-    wattroff(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
+    wattroff(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
   }
 }
 
 void draw_front(struct card *card) {
-  wbkgd(card->frame->shape, COLOR_PAIR(BLACK_ON_WHITE));
+  wbkgd(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
   draw_value(card);
   draw_suit(card);
 }
 
 void draw_back(struct card *card) {
-  wbkgd(card->frame->shape, COLOR_PAIR(WHITE_ON_BLUE));
+  wbkgd(card->frame->window, COLOR_PAIR(WHITE_ON_BLUE));
 }
 
 void draw_card(struct card *card) {
-  mvwin(card->frame->shape, card->frame->begin_y, card->frame->begin_x);
+  mvwin(card->frame->window, card->frame->begin_y, card->frame->begin_x);
   if (card->face == EXPOSED) {
     draw_front(card);
   } else {
     draw_back(card);
   }
-  wrefresh(card->frame->shape);
+  wrefresh(card->frame->window);
 }
 
 void draw_stack(struct stack *stack) {

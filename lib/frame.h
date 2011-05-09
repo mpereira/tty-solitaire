@@ -7,7 +7,7 @@
 #define FRAME_HEIGHT 5
 
 struct frame {
-  WINDOW *shape;
+  WINDOW *window;
   int    begin_y;
   int    begin_x;
 };

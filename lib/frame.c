@@ -14,7 +14,7 @@ void allocate_frame(struct frame **frame) {
 }
 
 void initialize_frame(struct frame *frame) {
-  frame->shape   = NULL;
+  frame->window = NULL;
   frame->begin_y = 0;
   frame->begin_x = 0;
 }
@@ -30,7 +30,7 @@ struct frame *duplicate_frame(struct frame *frame) {
 
 void free_frame(struct frame *frame) {
   if (frame) {
-    delwin(frame->shape);
+    delwin(frame->window);
   }
   free(frame);
 }
@@ -38,8 +38,8 @@ void free_frame(struct frame *frame) {
 void set_frame(struct frame *frame, int begin_y, int begin_x) {
   frame->begin_y = begin_y;
   frame->begin_x = begin_x;
-  frame->shape = newwin(FRAME_HEIGHT,
-                        FRAME_WIDTH,
-                        frame->begin_y,
-                        frame->begin_x);
+  frame->window = newwin(FRAME_HEIGHT,
+                         FRAME_WIDTH,
+                         frame->begin_y,
+                         frame->begin_x);
 }
