@@ -58,11 +58,9 @@ bool empty(struct stack *stack) {
 }
 
 int length(struct stack *stack) {
-  int length;
+  int length = 0;
 
-  if (empty(stack)) {
-    length = 0;
-  } else {
+  if (!empty(stack)) {
     for (length = 1; stack->next; stack = stack->next, length++)
       ;
   }
