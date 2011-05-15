@@ -55,11 +55,19 @@ static char *card_value(enum value value) {
   return(card_value);
 }
 
+void erase_card(struct card *card) {
+  werase(card->frame->window);
+  wbkgd(card->frame->window, WHITE_ON_GREEN);
+  wrefresh(card->frame->window);
+}
+
 void erase_stack(struct stack *stack) {
-  for (; stack; stack = stack->next) {
-    werase(stack->card->frame->window);
-    wbkgd(stack->card->frame->window, WHITE_ON_GREEN);
-    wrefresh(stack->card->frame->window);
+  if (maneuvre_stack(stack)) {
+    for (; stack; stack = stack->next) {
+      erase_card(stack->card);
+    }
+  } else {
+    erase_card(stack->card);
   }
 }
 
@@ -111,13 +119,8 @@ void draw_card(struct card *card) {
 void draw_stack(struct stack *stack) {
   erase_stack(stack);
   if (empty(stack)) {
-    WINDOW *empty_stack = newwin(FRAME_HEIGHT,
-                                 FRAME_WIDTH,
-                                 stack->card->frame->begin_y,
-                                 stack->card->frame->begin_x);
-    box(empty_stack, 0, 0);
-    wrefresh(empty_stack);
-    delwin(empty_stack);
+    box(stack->card->frame->window, 0, 0);
+    wrefresh(stack->card->frame->window);
   } else {
     if (maneuvre_stack(stack)) {
       struct stack *reversed_stack = reverse(stack);
