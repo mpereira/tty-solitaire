@@ -36,6 +36,7 @@ extern struct deck *deck;
 
 void allocate_cursor(struct cursor **);
 void initialize_cursor(struct cursor *);
+void free_cursor(struct cursor *);
 void move_cursor(struct cursor *, enum movement);
 
 #endif
