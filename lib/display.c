@@ -56,17 +56,11 @@ static char *card_value(enum value value) {
 }
 
 void erase_stack(struct stack *stack) {
-  WINDOW *empty_stack = NULL;
-
-  wbkgd(stack->card->frame->window, WHITE_ON_GREEN);
-  wrefresh(stack->card->frame->window);
-  empty_stack = newwin(FRAME_HEIGHT,
-                       FRAME_WIDTH,
-                       stack->card->frame->begin_y,
-                       stack->card->frame->begin_x);
-  box(empty_stack, 0, 0);
-  wrefresh(empty_stack);
-  delwin(empty_stack);
+  for (; stack; stack = stack->next) {
+    werase(stack->card->frame->window);
+    wbkgd(stack->card->frame->window, WHITE_ON_GREEN);
+    wrefresh(stack->card->frame->window);
+  }
 }
 
 void draw_value(struct card *card) {
