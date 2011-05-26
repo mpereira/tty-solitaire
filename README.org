@@ -7,7 +7,7 @@
 
 ** Run the game
 #+BEGIN_SRC
-$ git clone git://github.com/murilasso/tty-solitaire.git
+$ git clone git://github.com/mpereira/tty-solitaire.git
 $ cd tty-solitaire
 $ make && bin/ttysolitaire
 #+END_SRC
@@ -22,4 +22,4 @@ $ make test
 
 ** License
    Released under the
-   [[http://github.com/murilasso/embratel/blob/master/MIT-LICENSE][MIT license]].
+   [[http://github.com/mpereira/embratel/blob/master/MIT-LICENSE][MIT license]].
