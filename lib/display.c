@@ -11,7 +11,7 @@
 static char *card_suit(enum suit suit) {
   char *card_suit;
 
-  if (!(card_suit = malloc(5 * sizeof(*card_suit)))) {
+  if (!(card_suit = malloc(4 * sizeof(*card_suit)))) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
