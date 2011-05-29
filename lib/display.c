@@ -135,19 +135,12 @@ void draw_stack(struct stack *stack) {
 void draw_deck(struct deck *deck) {
   draw_stack(deck->stock);
   draw_stack(deck->waste_pile);
-
-  draw_stack(deck->foundation_0);
-  draw_stack(deck->foundation_1);
-  draw_stack(deck->foundation_2);
-  draw_stack(deck->foundation_3);
-
-  draw_stack(deck->maneuvre_0);
-  draw_stack(deck->maneuvre_1);
-  draw_stack(deck->maneuvre_2);
-  draw_stack(deck->maneuvre_3);
-  draw_stack(deck->maneuvre_4);
-  draw_stack(deck->maneuvre_5);
-  draw_stack(deck->maneuvre_6);
+  for (int i = 0; i < 4; i++) {
+    draw_stack(deck->foundation[i]);
+  }
+  for (int i = 0; i < 7; i++) {
+    draw_stack(deck->maneuvre[i]);
+  }
 }
 
 void draw_cursor(struct cursor *cursor) {

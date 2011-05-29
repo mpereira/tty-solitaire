@@ -16,20 +16,20 @@ static struct stack *cursor_stack(struct cursor *cursor) {
     switch (cursor->x) {
     case CURSOR_STOCK_X:        cursor_stack = deck->stock;        break;
     case CURSOR_WASTE_PILE_X:   cursor_stack = deck->waste_pile;   break;
-    case CURSOR_FOUNDATION_0_X: cursor_stack = deck->foundation_0; break;
-    case CURSOR_FOUNDATION_1_X: cursor_stack = deck->foundation_1; break;
-    case CURSOR_FOUNDATION_2_X: cursor_stack = deck->foundation_2; break;
-    case CURSOR_FOUNDATION_3_X: cursor_stack = deck->foundation_3; break;
+    case CURSOR_FOUNDATION_0_X: cursor_stack = deck->foundation[0]; break;
+    case CURSOR_FOUNDATION_1_X: cursor_stack = deck->foundation[1]; break;
+    case CURSOR_FOUNDATION_2_X: cursor_stack = deck->foundation[2]; break;
+    case CURSOR_FOUNDATION_3_X: cursor_stack = deck->foundation[3]; break;
     }
   } else {
     switch (cursor->x) {
-    case CURSOR_MANEUVRE_0_X: cursor_stack = deck->maneuvre_0; break;
-    case CURSOR_MANEUVRE_1_X: cursor_stack = deck->maneuvre_1; break;
-    case CURSOR_MANEUVRE_2_X: cursor_stack = deck->maneuvre_2; break;
-    case CURSOR_MANEUVRE_3_X: cursor_stack = deck->maneuvre_3; break;
-    case CURSOR_MANEUVRE_4_X: cursor_stack = deck->maneuvre_4; break;
-    case CURSOR_MANEUVRE_5_X: cursor_stack = deck->maneuvre_5; break;
-    case CURSOR_MANEUVRE_6_X: cursor_stack = deck->maneuvre_6; break;
+    case CURSOR_MANEUVRE_0_X: cursor_stack = deck->maneuvre[0]; break;
+    case CURSOR_MANEUVRE_1_X: cursor_stack = deck->maneuvre[1]; break;
+    case CURSOR_MANEUVRE_2_X: cursor_stack = deck->maneuvre[2]; break;
+    case CURSOR_MANEUVRE_3_X: cursor_stack = deck->maneuvre[3]; break;
+    case CURSOR_MANEUVRE_4_X: cursor_stack = deck->maneuvre[4]; break;
+    case CURSOR_MANEUVRE_5_X: cursor_stack = deck->maneuvre[5]; break;
+    case CURSOR_MANEUVRE_6_X: cursor_stack = deck->maneuvre[6]; break;
     }
   }
 

@@ -31,6 +31,8 @@
 struct deck *deck;
 struct cursor *cursor;
 
+int foundation_begin_x(int);
+int maneuvre_begin_x(int);
 bool valid_move(struct stack *, struct stack *);
 bool maneuvre_stack(struct stack *);
 void move_card(struct stack **, struct stack **);

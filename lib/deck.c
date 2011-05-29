@@ -14,55 +14,35 @@ void allocate_deck(struct deck **deck) {
 
   allocate_stack(&((*deck)->stock));
   allocate_stack(&((*deck)->waste_pile));
-
-  allocate_stack(&((*deck)->foundation_0));
-  allocate_stack(&((*deck)->foundation_1));
-  allocate_stack(&((*deck)->foundation_2));
-  allocate_stack(&((*deck)->foundation_3));
-
-  allocate_stack(&((*deck)->maneuvre_0));
-  allocate_stack(&((*deck)->maneuvre_1));
-  allocate_stack(&((*deck)->maneuvre_2));
-  allocate_stack(&((*deck)->maneuvre_3));
-  allocate_stack(&((*deck)->maneuvre_4));
-  allocate_stack(&((*deck)->maneuvre_5));
-  allocate_stack(&((*deck)->maneuvre_6));
+  for (int i = 0; i < 4; i++) {
+    allocate_stack(&((*deck)->foundation[i]));
+  }
+  for (int i = 0; i < 7; i++) {
+    allocate_stack(&((*deck)->maneuvre[i]));
+  }
 }
 
 void initialize_deck(struct deck *deck) {
   initialize_stack(deck->stock);
   initialize_stack(deck->waste_pile);
-
-  initialize_stack(deck->foundation_0);
-  initialize_stack(deck->foundation_1);
-  initialize_stack(deck->foundation_2);
-  initialize_stack(deck->foundation_3);
-
-  initialize_stack(deck->maneuvre_0);
-  initialize_stack(deck->maneuvre_1);
-  initialize_stack(deck->maneuvre_2);
-  initialize_stack(deck->maneuvre_3);
-  initialize_stack(deck->maneuvre_4);
-  initialize_stack(deck->maneuvre_5);
-  initialize_stack(deck->maneuvre_6);
+  for (int i = 0; i < 4; i++) {
+    initialize_stack(deck->foundation[i]);
+  }
+  for (int i = 0; i < 7; i++) {
+    initialize_stack(deck->maneuvre[i]);
+  }
 }
 
 void free_deck(struct deck *deck) {
   if (deck) {
+    free_stack(deck->stock);
     free_stack(deck->waste_pile);
-
-    free_stack(deck->foundation_0);
-    free_stack(deck->foundation_1);
-    free_stack(deck->foundation_2);
-    free_stack(deck->foundation_3);
-
-    free_stack(deck->maneuvre_0);
-    free_stack(deck->maneuvre_1);
-    free_stack(deck->maneuvre_2);
-    free_stack(deck->maneuvre_3);
-    free_stack(deck->maneuvre_4);
-    free_stack(deck->maneuvre_5);
-    free_stack(deck->maneuvre_6);
+    for (int i = 0; i < 4; i++) {
+      free_stack(deck->foundation[i]);
+    }
+    for (int i = 0; i < 7; i++) {
+      free_stack(deck->maneuvre[i]);
+    }
   }
   free(deck);
 }
