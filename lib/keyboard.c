@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <assert.h>
+
 #include "card.h"
 #include "game.h"
 #include "display.h"
@@ -10,39 +12,33 @@ static bool cursor_on_stock(struct cursor *cursor) {
 }
 
 static struct stack *cursor_stack(struct cursor *cursor) {
-  struct stack *cursor_stack = NULL;
-
   if (cursor->y == CURSOR_BEGIN_Y) {
     switch (cursor->x) {
-    case CURSOR_STOCK_X:        cursor_stack = deck->stock;        break;
-    case CURSOR_WASTE_PILE_X:   cursor_stack = deck->waste_pile;   break;
-    case CURSOR_FOUNDATION_0_X: cursor_stack = deck->foundation[0]; break;
-    case CURSOR_FOUNDATION_1_X: cursor_stack = deck->foundation[1]; break;
-    case CURSOR_FOUNDATION_2_X: cursor_stack = deck->foundation[2]; break;
-    case CURSOR_FOUNDATION_3_X: cursor_stack = deck->foundation[3]; break;
+    case CURSOR_STOCK_X:        return(deck->stock);
+    case CURSOR_WASTE_PILE_X:   return(deck->waste_pile);
+    case CURSOR_FOUNDATION_0_X: return(deck->foundation[0]);
+    case CURSOR_FOUNDATION_1_X: return(deck->foundation[1]);
+    case CURSOR_FOUNDATION_2_X: return(deck->foundation[2]);
+    case CURSOR_FOUNDATION_3_X: return(deck->foundation[3]);
+    default: assert(false && "invalid stack");
     }
   } else {
     switch (cursor->x) {
-    case CURSOR_MANEUVRE_0_X: cursor_stack = deck->maneuvre[0]; break;
-    case CURSOR_MANEUVRE_1_X: cursor_stack = deck->maneuvre[1]; break;
-    case CURSOR_MANEUVRE_2_X: cursor_stack = deck->maneuvre[2]; break;
-    case CURSOR_MANEUVRE_3_X: cursor_stack = deck->maneuvre[3]; break;
-    case CURSOR_MANEUVRE_4_X: cursor_stack = deck->maneuvre[4]; break;
-    case CURSOR_MANEUVRE_5_X: cursor_stack = deck->maneuvre[5]; break;
-    case CURSOR_MANEUVRE_6_X: cursor_stack = deck->maneuvre[6]; break;
+    case CURSOR_MANEUVRE_0_X: return(deck->maneuvre[0]);
+    case CURSOR_MANEUVRE_1_X: return(deck->maneuvre[1]);
+    case CURSOR_MANEUVRE_2_X: return(deck->maneuvre[2]);
+    case CURSOR_MANEUVRE_3_X: return(deck->maneuvre[3]);
+    case CURSOR_MANEUVRE_4_X: return(deck->maneuvre[4]);
+    case CURSOR_MANEUVRE_5_X: return(deck->maneuvre[5]);
+    case CURSOR_MANEUVRE_6_X: return(deck->maneuvre[6]);
+    default: assert(false && "invalid stack");
     }
   }
-
-  return(cursor_stack);
-}
-
-static bool cursor_on_stack(struct cursor *cursor, struct stack *stack) {
-  return(cursor_stack(cursor) == stack);
 }
 
 static bool cursor_on_invalid_spot(struct cursor *cursor) {
   return(cursor->x == CURSOR_INVALID_SPOT_X &&
-         cursor->y == CURSOR_INVALID_SPOT_Y);
+           cursor->y == CURSOR_INVALID_SPOT_Y);
 }
 
 static void handle_stock_event() {
