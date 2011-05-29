@@ -11,10 +11,10 @@ void allocate_frame(struct frame **frame) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
+  (*frame)->window = newwin(FRAME_HEIGHT, FRAME_WIDTH, 0, 0);
 }
 
 void initialize_frame(struct frame *frame) {
-  frame->window = NULL;
   frame->begin_y = 0;
   frame->begin_x = 0;
 }
@@ -38,8 +38,5 @@ void free_frame(struct frame *frame) {
 void set_frame(struct frame *frame, int begin_y, int begin_x) {
   frame->begin_y = begin_y;
   frame->begin_x = begin_x;
-  frame->window = newwin(FRAME_HEIGHT,
-                         FRAME_WIDTH,
-                         frame->begin_y,
-                         frame->begin_x);
+  mvwin(frame->window, begin_y, begin_x);
 }

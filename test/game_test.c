@@ -3,111 +3,6 @@
 #include "../lib/game.h"
 #include "test_helper.h"
 
-void test_move_card_from_empty_stack_to_empty_stack() {
-  struct stack *origin, *destination,
-               *new_origin, *new_destination,
-               *origin_duplicate, *destination_duplicate;
-
-  allocate_stack(&origin);
-  allocate_stack(&destination);
-  initialize_stack(origin);
-  initialize_stack(destination);
-  new_origin = origin;
-  new_destination = destination;
-  origin_duplicate = duplicate_stack(origin);
-  destination_duplicate = duplicate_stack(destination);
-  move_card(&new_origin, &new_destination);
-
-  assert(origin == new_origin);
-  assert(stacks_equal(origin, origin_duplicate));
-  assert(destination == new_destination);
-  assert(stacks_equal(destination, destination_duplicate));
-
-  free_stack(origin);
-  free_stack(destination);
-}
-
-void test_move_card_from_empty_stack_to_non_empty_stack() {
-  struct stack *origin, *destination,
-               *new_origin, *new_destination,
-               *origin_duplicate, *destination_duplicate;
-  struct card *card;
-
-  allocate_card(&card);
-  initialize_card(card);
-  set_card(card, ACE, SPADES, EXPOSED, 0, 0);
-
-  allocate_stack(&origin);
-  allocate_stack(&destination);
-  initialize_stack(origin);
-  initialize_stack(destination);
-  new_origin = origin;
-  new_destination = destination;
-  push(&new_destination, card);
-  origin_duplicate = duplicate_stack(origin);
-  destination_duplicate = duplicate_stack(destination);
-  move_card(&new_origin, &new_destination);
-
-  assert(origin == new_origin);
-  assert(stacks_equal(origin, origin_duplicate));
-  assert(destination == new_destination);
-  assert(stacks_equal(destination, destination_duplicate));
-
-  free_stack(origin);
-  free_stack(destination);
-}
-
-void test_move_card_from_non_empty_stack_to_empty_stack() {
-  struct stack *origin, *destination;
-  struct card *card;
-
-  allocate_card(&card);
-  initialize_card(card);
-  set_card(card, ACE, SPADES, EXPOSED, 0, 0);
-
-  allocate_stack(&origin);
-  allocate_stack(&destination);
-  initialize_stack(origin);
-  initialize_stack(destination);
-  push(&origin, card);
-  move_card(&origin, &destination);
-
-  assert(empty(origin));
-  assert(length(destination) == 1);
-  assert(cards_equal(destination->card, card));
-
-  free_stack(origin);
-  free_stack(destination);
-}
-
-void test_move_card_from_non_empty_stack_to_non_empty_stack() {
-  struct stack *origin, *destination;
-  struct card *card[2];
-
-  allocate_card(&card[0]);
-  allocate_card(&card[1]);
-  initialize_card(card[0]);
-  initialize_card(card[1]);
-  set_card(card[0], ACE, SPADES, EXPOSED, 99, 99);
-  set_card(card[1], KING, HEARTS, EXPOSED, 99, 99);
-
-  allocate_stack(&origin);
-  allocate_stack(&destination);
-  initialize_stack(origin);
-  initialize_stack(destination);
-  push(&origin, card[0]);
-  push(&destination, card[1]);
-  move_card(&origin, &destination);
-
-  assert(empty(origin));
-  assert(length(destination) == 2);
-  assert(cards_equal(destination->card, card[0]));
-  assert(cards_equal(destination->next->card, card[1]));
-
-  free_stack(origin);
-  free_stack(destination);
-}
-
 void test_valid_move_from_stock_to_stock() {
   struct stack *stock_0, *stock_1;
 
@@ -491,6 +386,140 @@ void test_valid_move_from_maneuvre_stack_to_maneuvre_stacks() {
   }
 }
 
+void test_move_card_from_empty_stack_to_empty_stack() {
+  struct stack *origin, *destination,
+               *new_origin, *new_destination,
+               *origin_duplicate, *destination_duplicate;
+
+  allocate_stack(&origin);
+  allocate_stack(&destination);
+  initialize_stack(origin);
+  initialize_stack(destination);
+  new_origin = origin;
+  new_destination = destination;
+  origin_duplicate = duplicate_stack(origin);
+  destination_duplicate = duplicate_stack(destination);
+  move_card(&new_origin, &new_destination);
+
+  assert(origin == new_origin);
+  assert(stacks_equal(origin, origin_duplicate));
+  assert(destination == new_destination);
+  assert(stacks_equal(destination, destination_duplicate));
+
+  free_stack(origin);
+  free_stack(destination);
+}
+
+void test_move_card_from_empty_stack_to_non_empty_stack() {
+  struct stack *origin, *destination,
+               *new_origin, *new_destination,
+               *origin_duplicate, *destination_duplicate;
+  struct card *card;
+
+  allocate_card(&card);
+  initialize_card(card);
+  set_card(card, ACE, SPADES, EXPOSED, 0, 0);
+
+  allocate_stack(&origin);
+  allocate_stack(&destination);
+  initialize_stack(origin);
+  initialize_stack(destination);
+  new_origin = origin;
+  new_destination = destination;
+  push(&new_destination, card);
+  origin_duplicate = duplicate_stack(origin);
+  destination_duplicate = duplicate_stack(destination);
+  move_card(&new_origin, &new_destination);
+
+  assert(origin == new_origin);
+  assert(stacks_equal(origin, origin_duplicate));
+  assert(destination == new_destination);
+  assert(stacks_equal(destination, destination_duplicate));
+
+  free_stack(origin);
+  free_stack(destination);
+}
+
+void test_move_card_from_non_empty_stack_to_empty_stack() {
+  struct stack *origin, *destination;
+  struct card *card;
+
+  allocate_card(&card);
+  initialize_card(card);
+  set_card(card, TWO, DIAMONDS, EXPOSED, 0, 0);
+
+  allocate_stack(&origin);
+  allocate_stack(&destination);
+  initialize_stack(origin);
+  initialize_stack(destination);
+  push(&origin, card);
+  move_card(&origin, &destination);
+
+  assert(empty(origin));
+  assert(length(destination) == 1);
+  assert(cards_equal(destination->card, card));
+
+  free_stack(origin);
+  free_stack(destination);
+}
+
+void test_move_card_from_non_empty_stack_to_non_empty_stack() {
+  struct stack *origin, *destination;
+  struct card *card[6];
+
+  for (int i = 0; i < 6; i++) {
+    allocate_card(&card[i]);
+    initialize_card(card[i]);
+    set_card(card[i], TWO + i, i % 5, i % 2, 99, 99);
+  }
+
+  allocate_stack(&origin);
+  allocate_stack(&destination);
+  initialize_stack(origin);
+  initialize_stack(destination);
+  for (int i = 0; i < 3; i++) {
+    push(&origin, card[i]);
+  }
+  for (int i = 3; i < 6; i++) {
+    push(&destination, card[i]);
+  }
+  move_card(&origin, &destination);
+
+  assert(length(origin) == 2);
+  assert(length(destination) == 4);
+  assert(cards_equal(destination->card, card[2]));
+  assert(cards_equal(destination->next->card, card[5]));
+
+  free_stack(origin);
+  free_stack(destination);
+}
+
+void test_move_card_should_not_change_empty_stack_coordinates() {
+  struct stack *origin, *destination;
+  struct card *card[2];
+
+  allocate_card(&card[0]);
+  allocate_card(&card[1]);
+  initialize_card(card[0]);
+  initialize_card(card[1]);
+  set_card(card[0], ACE, SPADES, EXPOSED, MANEUVRE_BEGIN_Y, MANEUVRE_0_BEGIN_X);
+  set_card(card[1], KING, HEARTS, EXPOSED, MANEUVRE_BEGIN_Y, MANEUVRE_1_BEGIN_X);
+
+  allocate_stack(&origin);
+  allocate_stack(&destination);
+  initialize_stack(origin);
+  initialize_stack(destination);
+  push(&origin, card[0]);
+  push(&destination, card[1]);
+  move_card(&origin, &destination);
+
+  assert(origin->card->frame->begin_y == MANEUVRE_BEGIN_Y);
+  assert(origin->card->frame->begin_x == MANEUVRE_0_BEGIN_X);
+
+  free_stack(origin);
+  free_stack(destination);
+}
+
 void test_game() {
   test_valid_move_from_stock_to_stock();
   test_valid_move_from_stock_to_waste_pile();
@@ -513,4 +542,5 @@ void test_game() {
   test_move_card_from_empty_stack_to_non_empty_stack();
   test_move_card_from_non_empty_stack_to_empty_stack();
   test_move_card_from_non_empty_stack_to_non_empty_stack();
+  test_move_card_should_not_change_empty_stack_coordinates();
 }

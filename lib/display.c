@@ -107,7 +107,6 @@ void draw_back(struct card *card) {
 }
 
 void draw_card(struct card *card) {
-  mvwin(card->frame->window, card->frame->begin_y, card->frame->begin_x);
   if (card->face == EXPOSED) {
     draw_front(card);
   } else {
@@ -124,7 +123,6 @@ void draw_stack(struct stack *stack) {
   } else {
     if (maneuvre_stack(stack)) {
       struct stack *reversed_stack = reverse(stack);
-
       for (struct stack *i = reversed_stack; i; i = i->next) {
         draw_card(i->card);
       }

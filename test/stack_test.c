@@ -156,22 +156,21 @@ void test_push_null_on_non_empty_stack() {
 
 void test_pop_on_empty_stack() {
   struct stack *stack;
-  struct stack *popped_entry;
+  struct card *popped_card;
 
   allocate_stack(&stack);
-  allocate_stack(&popped_entry);
   initialize_stack(stack);
-  popped_entry = pop(&stack);
+  popped_card = pop(&stack);
 
   assert(empty(stack));
-  assert(!popped_entry);
+  assert(!popped_card);
 
   free_stack(stack);
 }
 
 void test_pop_on_stack_with_one_element() {
-  struct stack *stack, *popped_entry;
-  struct card *card;
+  struct stack *stack;
+  struct card *card, *popped_card;
 
   allocate_card(&card);
   initialize_card(card);
@@ -180,18 +179,17 @@ void test_pop_on_stack_with_one_element() {
   allocate_stack(&stack);
   initialize_stack(stack);
   push(&stack, card);
-  popped_entry = pop(&stack);
+  popped_card = pop(&stack);
 
   assert(empty(stack));
-  assert(cards_equal(popped_entry->card, card));
-  assert(!popped_entry->next);
+  assert(popped_card == card);
 
   free_stack(stack);
 }
 
 void test_pop_on_stack_with_more_than_one_element() {
-  struct stack *stack, *old_stack_next, *popped_entry;
-  struct card *card[3];
+  struct stack *stack, *old_stack_next;
+  struct card *card[3], *popped_card;
 
   allocate_stack(&stack);
   initialize_stack(stack);
@@ -202,12 +200,11 @@ void test_pop_on_stack_with_more_than_one_element() {
     push(&stack, card[i]);
   }
   old_stack_next = stack->next;
-  popped_entry = pop(&stack);
+  popped_card = pop(&stack);
 
   assert(length(stack) == 2);
   assert(stack == old_stack_next);
-  assert(cards_equal(popped_entry->card, card[2]));
-  assert(!popped_entry->next);
+  assert(popped_card == card[2]);
 
   free_stack(stack);
 }
@@ -262,7 +259,7 @@ void test_reverse_on_stack_with_more_than_one_element() {
   allocate_stack(&unreversed_stack);
   initialize_stack(unreversed_stack);
   for (int i = 0; i < 3; i++) {
-    push(&unreversed_stack, pop(&reversed_stack)->card);
+    push(&unreversed_stack, pop(&reversed_stack));
   }
 
   assert(stacks_equal(unreversed_stack, old_stack));

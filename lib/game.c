@@ -73,60 +73,32 @@ bool valid_move(struct stack *origin, struct stack *destination) {
 }
 
 void move_card(struct stack **origin, struct stack **destination) {
-  struct stack *stack;
-
-  if (!empty(*origin)) {
-    (*origin)->card->frame->begin_x = (*destination)->card->frame->begin_x;
-    (*origin)->card->frame->begin_y = (*destination)->card->frame->begin_y;
-  }
-  if (!empty(*destination) && maneuvre_stack(*destination)) {
-    (*origin)->card->frame->begin_y++;
-  }
-  if ((stack = pop(origin))) {
-    push(destination, stack->card);
+  struct card *tmp;
+  if ((tmp = pop(origin))) {
+    int destination_y = (*destination)->card->frame->begin_y;
+    int destination_x = (*destination)->card->frame->begin_x;
+    if (!empty(*destination) && maneuvre_stack(*destination)) {
+      destination_y++;
+    }
+    push(destination, tmp);
+    set_frame((*destination)->card->frame, destination_y, destination_x);
   }
 }
 
 static void set_stacks_initial_coordinates(struct deck *deck) {
-  set_frame(deck->stock->card->frame,
-            STOCK_BEGIN_Y,
-            STOCK_BEGIN_X);
-  set_frame(deck->waste_pile->card->frame,
-            WASTE_PILE_BEGIN_Y,
-            WASTE_PILE_BEGIN_X);
-  set_frame(deck->foundation_0->card->frame,
-            FOUNDATION_BEGIN_Y,
-            FOUNDATION_0_BEGIN_X);
-  set_frame(deck->foundation_1->card->frame,
-            FOUNDATION_BEGIN_Y,
-            FOUNDATION_1_BEGIN_X);
-  set_frame(deck->foundation_2->card->frame,
-            FOUNDATION_BEGIN_Y,
-            FOUNDATION_2_BEGIN_X);
-  set_frame(deck->foundation_3->card->frame,
-            FOUNDATION_BEGIN_Y,
-            FOUNDATION_3_BEGIN_X);
-  set_frame(deck->maneuvre_0->card->frame,
-            MANEUVRE_BEGIN_Y,
-            MANEUVRE_0_BEGIN_X);
-  set_frame(deck->maneuvre_1->card->frame,
-            MANEUVRE_BEGIN_Y,
-            MANEUVRE_1_BEGIN_X);
-  set_frame(deck->maneuvre_2->card->frame,
-            MANEUVRE_BEGIN_Y,
-            MANEUVRE_2_BEGIN_X);
-  set_frame(deck->maneuvre_3->card->frame,
-            MANEUVRE_BEGIN_Y,
-            MANEUVRE_3_BEGIN_X);
-  set_frame(deck->maneuvre_4->card->frame,
-            MANEUVRE_BEGIN_Y,
-            MANEUVRE_4_BEGIN_X);
-  set_frame(deck->maneuvre_5->card->frame,
-            MANEUVRE_BEGIN_Y,
-            MANEUVRE_5_BEGIN_X);
-  set_frame(deck->maneuvre_6->card->frame,
-            MANEUVRE_BEGIN_Y,
-            MANEUVRE_6_BEGIN_X);
+  set_frame(deck->stock->card->frame, STOCK_BEGIN_Y, STOCK_BEGIN_X);
+  set_frame(deck->waste_pile->card->frame, WASTE_PILE_BEGIN_Y, WASTE_PILE_BEGIN_X);
+  set_frame(deck->foundation_0->card->frame, FOUNDATION_BEGIN_Y, FOUNDATION_0_BEGIN_X);
+  set_frame(deck->foundation_1->card->frame, FOUNDATION_BEGIN_Y, FOUNDATION_1_BEGIN_X);
+  set_frame(deck->foundation_2->card->frame, FOUNDATION_BEGIN_Y, FOUNDATION_2_BEGIN_X);
+  set_frame(deck->foundation_3->card->frame, FOUNDATION_BEGIN_Y, FOUNDATION_3_BEGIN_X);
+  set_frame(deck->maneuvre_0->card->frame, MANEUVRE_BEGIN_Y, MANEUVRE_0_BEGIN_X);
+  set_frame(deck->maneuvre_1->card->frame, MANEUVRE_BEGIN_Y, MANEUVRE_1_BEGIN_X);
+  set_frame(deck->maneuvre_2->card->frame, MANEUVRE_BEGIN_Y, MANEUVRE_2_BEGIN_X);
+  set_frame(deck->maneuvre_3->card->frame, MANEUVRE_BEGIN_Y, MANEUVRE_3_BEGIN_X);
+  set_frame(deck->maneuvre_4->card->frame, MANEUVRE_BEGIN_Y, MANEUVRE_4_BEGIN_X);
+  set_frame(deck->maneuvre_5->card->frame, MANEUVRE_BEGIN_Y, MANEUVRE_5_BEGIN_X);
+  set_frame(deck->maneuvre_6->card->frame, MANEUVRE_BEGIN_Y, MANEUVRE_6_BEGIN_X);
 }
 
 static void fill_deck(struct deck *deck) {
@@ -194,30 +166,29 @@ static void fill_deck(struct deck *deck) {
 }
 
 static void shuffle_deck(struct deck *deck) {
-  struct stack **stack = NULL;
-  struct stack tmp;
+  struct card **card, tmp;
   int random;
 
-  if (!(stack = malloc(NUMBER_OF_CARDS * sizeof(*stack)))) {
+  if (!(card = malloc(NUMBER_OF_CARDS * sizeof(*card)))) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
 
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
-    stack[i] = pop(&(deck->stock));
+    card[i] = pop(&(deck->stock));
   }
 
   srand(time(NULL));
 
   for (int i = 0; i < NUMBER_OF_CARDS - 1; i++) {
     random = i + (rand() % (NUMBER_OF_CARDS) - i);
-    tmp = (*stack[i]);
-    (*stack[i]) = (*stack[random]);
-    (*stack[random]) = tmp;
+    tmp = *card[i];
+    *card[i] = (*card[random]);
+    *card[random] = tmp;
   }
 
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
-    push(&(deck->stock), stack[i]->card);
+    push(&(deck->stock), card[i]);
   }
 }
 

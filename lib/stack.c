@@ -33,7 +33,7 @@ struct stack *duplicate_stack(struct stack *stack) {
     push(&tmp_stack, duplicate_card(iterator->card));
   }
   while (!empty(tmp_stack)) {
-    push(&new_stack, (pop(&tmp_stack))->card);
+    push(&new_stack, (pop(&tmp_stack)));
   }
   free_stack(tmp_stack);
 
@@ -69,44 +69,40 @@ int length(struct stack *stack) {
 }
 
 void push(struct stack **stack, struct card *card) {
-  struct stack *new_stack;
-
   if (card) {
     if (empty(*stack)) {
-      (*stack)->card = duplicate_card(card);
+      (*stack)->card = card;
     } else {
+      struct stack *new_stack;
       allocate_stack(&new_stack);
-      new_stack->card = duplicate_card(card);
+      new_stack->card = card;
       new_stack->next = (*stack);
       *stack = new_stack;
     }
   }
 }
 
-struct stack *pop(struct stack **stack) {
-  struct stack *popped_entry = NULL;
-
-  if(!empty(*stack)) {
-    allocate_stack(&popped_entry);
-    initialize_stack(popped_entry);
-    popped_entry->card = duplicate_card((*stack)->card);
-    popped_entry->next = NULL;
+struct card *pop(struct stack **stack) {
+  if(empty(*stack)) {
+    return(NULL);
+  } else {
+    struct card *popped_card = (*stack)->card;
     if (length(*stack) == 1) {
+      /* Remembering the stack position before clearing it. */
+      int begin_y = (*stack)->card->frame->begin_y;
+      int begin_x = (*stack)->card->frame->begin_x;
+      allocate_card(&((*stack)->card));
       /* An empty stack is a stack with a blank top card
        * and with stack->next == NULL. */
-      set_card((*stack)->card,
-               NO_VALUE,
-               NO_SUIT,
-               NO_FACE,
-               (*stack)->card->frame->begin_y,
-               (*stack)->card->frame->begin_x);
+      set_card((*stack)->card, NO_VALUE, NO_SUIT, NO_FACE, begin_y, begin_x);
       (*stack)->next = NULL;
     } else {
+      struct stack *tmp = *stack;
       *stack = (*stack)->next;
+      free(tmp);
     }
+    return(popped_card);
   }
-
-  return(popped_entry);
 }
 
 struct stack *reverse(struct stack *stack) {
