@@ -145,13 +145,16 @@ void draw_deck(struct deck *deck) {
 
 void draw_cursor(struct cursor *cursor) {
   if (cursor->marked) {
-    mvwaddch(cursor->window, cursor->y, cursor->x, '@');
+    mvwin(cursor->window, cursor->y, cursor->x);
+    waddch(cursor->window, '@');
   } else {
-    mvwaddch(cursor->window, cursor->y, cursor->x, '*');
+    mvwin(cursor->window, cursor->y, cursor->x);
+    waddch(cursor->window, '*');
   }
   wrefresh(cursor->window);
 }
 
 void erase_cursor(struct cursor *cursor) {
-  mvwdelch(cursor->window, cursor->y, cursor->x);
+  wdelch(cursor->window);
+  wrefresh(cursor->window);
 }

@@ -19,7 +19,7 @@ void allocate_cursor(struct cursor **cursor) {
 }
 
 void initialize_cursor(struct cursor *cursor) {
-  cursor->window = newwin(0, 0, cursor->y, cursor->x);
+  cursor->window = newwin(1, 1, cursor->y, cursor->x);
   cursor->x = CURSOR_BEGIN_X;
   cursor->y = CURSOR_BEGIN_Y;
   cursor->marked = false;
