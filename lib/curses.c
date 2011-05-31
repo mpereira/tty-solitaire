@@ -4,13 +4,14 @@
 #include "curses.h"
 
 void initialize_curses() {
-  setlocale(LC_ALL, "en_US.utf-8");  /* supporting unicode characters          */
-  initscr();                         /* initialize the terminal in curses mode */
-  raw();                             /* disable line buffers                   */
-  noecho();                          /* character echo is unnecessary          */
-  keypad(stdscr, TRUE);              /* enable F and arrow keys                */
-  start_color();                     /* I want colors                          */
-  curs_set(FALSE);                   /* invisible cursor                       */
+  setlocale(LC_ALL, "en_US.utf-8"); /* Support unicode characters. */
+  initscr();
+  raw();                            /* Disable line buffers.       */
+  noecho();
+  keypad(stdscr, TRUE);             /* Enable arrow keys.          */
+  start_color();                    /* I want colors.              */
+  curs_set(FALSE);                  /* Invisible cursor.           */
+  set_escdelay(0);
   assume_default_colors(COLOR_WHITE, COLOR_GREEN);
 
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
