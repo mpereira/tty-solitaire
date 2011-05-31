@@ -11,26 +11,26 @@ static bool cursor_on_stock(struct cursor *cursor) {
   return((cursor->x == CURSOR_BEGIN_X) && (cursor->y == CURSOR_BEGIN_Y));
 }
 
-static struct stack *cursor_stack(struct cursor *cursor) {
+static struct stack **cursor_stack(struct cursor *cursor) {
   if (cursor->y == CURSOR_BEGIN_Y) {
     switch (cursor->x) {
-    case CURSOR_STOCK_X:        return(deck->stock);
-    case CURSOR_WASTE_PILE_X:   return(deck->waste_pile);
-    case CURSOR_FOUNDATION_0_X: return(deck->foundation[0]);
-    case CURSOR_FOUNDATION_1_X: return(deck->foundation[1]);
-    case CURSOR_FOUNDATION_2_X: return(deck->foundation[2]);
-    case CURSOR_FOUNDATION_3_X: return(deck->foundation[3]);
+    case CURSOR_STOCK_X:        return(&(deck->stock));
+    case CURSOR_WASTE_PILE_X:   return(&(deck->waste_pile));
+    case CURSOR_FOUNDATION_0_X: return(&(deck->foundation[0]));
+    case CURSOR_FOUNDATION_1_X: return(&(deck->foundation[1]));
+    case CURSOR_FOUNDATION_2_X: return(&(deck->foundation[2]));
+    case CURSOR_FOUNDATION_3_X: return(&(deck->foundation[3]));
     default: assert(false && "invalid stack");
     }
   } else {
     switch (cursor->x) {
-    case CURSOR_MANEUVRE_0_X: return(deck->maneuvre[0]);
-    case CURSOR_MANEUVRE_1_X: return(deck->maneuvre[1]);
-    case CURSOR_MANEUVRE_2_X: return(deck->maneuvre[2]);
-    case CURSOR_MANEUVRE_3_X: return(deck->maneuvre[3]);
-    case CURSOR_MANEUVRE_4_X: return(deck->maneuvre[4]);
-    case CURSOR_MANEUVRE_5_X: return(deck->maneuvre[5]);
-    case CURSOR_MANEUVRE_6_X: return(deck->maneuvre[6]);
+    case CURSOR_MANEUVRE_0_X: return(&(deck->maneuvre[0]));
+    case CURSOR_MANEUVRE_1_X: return(&(deck->maneuvre[1]));
+    case CURSOR_MANEUVRE_2_X: return(&(deck->maneuvre[2]));
+    case CURSOR_MANEUVRE_3_X: return(&(deck->maneuvre[3]));
+    case CURSOR_MANEUVRE_4_X: return(&(deck->maneuvre[4]));
+    case CURSOR_MANEUVRE_5_X: return(&(deck->maneuvre[5]));
+    case CURSOR_MANEUVRE_6_X: return(&(deck->maneuvre[6]));
     default: assert(false && "invalid stack");
     }
   }
@@ -51,20 +51,25 @@ static void handle_stock_event() {
 }
 
 static void handle_card_movement(struct cursor *cursor) {
-  struct stack *origin = NULL;
-  struct stack *destination = NULL;
+  struct stack **origin = cursor_stack(cursor);
+  struct stack **destination;
   int option;
 
-  origin = cursor_stack(cursor);
-
-  /* trying to move cards from the space between the waste pile and the
-   * foundations */
-  if (cursor_on_invalid_spot(cursor)) {
+  if (cursor_on_invalid_spot(cursor) || empty(*origin)) {
     return;
   }
 
+  mark_cursor(cursor);
+  draw_cursor(cursor);
+
   while (1) {
     switch (option = getch()) {
+    case KEY_ESCAPE:
+      if (cursor->marked) {
+        unmark_cursor(cursor);
+        draw_cursor(cursor);
+      }
+      break;
     case 'h':
     case KEY_LEFT:
       move_cursor(cursor, LEFT);
@@ -87,11 +92,14 @@ static void handle_card_movement(struct cursor *cursor) {
       break;
     case KEY_SPACEBAR:
       destination = cursor_stack(cursor);
-      if (valid_move(origin, destination)) {
-        move_card(&origin, &destination);
-        draw_stack(origin);
-        draw_stack(destination);
+      if (valid_move(*origin, *destination)) {
+        erase_stack(*origin);
+        move_card(origin, destination);
+        draw_stack(*origin);
+        draw_stack(*destination);
       }
+      unmark_cursor(cursor);
+      draw_cursor(cursor);
       return;
     case 'q':
     case 'Q':
