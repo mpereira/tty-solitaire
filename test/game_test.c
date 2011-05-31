@@ -442,22 +442,38 @@ void test_move_card_from_empty_stack_to_non_empty_stack() {
 
 void test_move_card_from_non_empty_stack_to_empty_stack() {
   struct stack *origin, *destination;
-  struct card *card;
+  struct card *card[6];
 
-  allocate_card(&card);
-  initialize_card(card);
-  set_card(card, TWO, DIAMONDS, EXPOSED, 0, 0);
+  for (int i = 0; i < 6; i++) {
+    allocate_card(&card[i]);
+    initialize_card(card[i]);
+    set_card(card[i], TWO + i, i % 5, i % 2, 99, 99);
+  }
 
   allocate_stack(&origin);
   allocate_stack(&destination);
   initialize_stack(origin);
   initialize_stack(destination);
-  push(&origin, card);
+  for (int i = 0; i < 6; i++) {
+    push(&origin, card[i]);
+  }
   move_card(&origin, &destination);
 
-  assert(empty(origin));
+  assert(length(origin) == 5);
   assert(length(destination) == 1);
-  assert(cards_equal(destination->card, card));
+  assert(cards_equal(destination->card, card[5]));
+
+  move_card(&origin, &destination);
+
+  assert(length(origin) == 4);
+  assert(length(destination) == 2);
+  assert(cards_equal(destination->card, card[4]));
+
+  move_card(&origin, &destination);
+
+  assert(length(origin) == 3);
+  assert(length(destination) == 3);
+  assert(cards_equal(destination->card, card[3]));
 
   free_stack(origin);
   free_stack(destination);
