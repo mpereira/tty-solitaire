@@ -2,41 +2,41 @@ CC      = gcc
 CFLAGS  = -W -Wall -pedantic -ansi -std=c99 -g
 LDFLAGS = -lncursesw
 
-EXECUTABLE = bin/ttysolitaire
-LIB_DIR    = lib
-SRC        = ${LIB_DIR}/ttysolitaire.c
-LIB_OBJECTS = ${LIB_DIR}/common.o   \
-              ${LIB_DIR}/frame.o    \
-              ${LIB_DIR}/card.o     \
-              ${LIB_DIR}/stack.o    \
-              ${LIB_DIR}/deck.o     \
-              ${LIB_DIR}/curses.o   \
-              ${LIB_DIR}/cursor.o   \
-              ${LIB_DIR}/keyboard.o \
-              ${LIB_DIR}/display.o  \
-              ${LIB_DIR}/game.o     \
+EXECUTABLE = ttysolitaire
+SRC_DIR    = src
+SRC        = ${SRC_DIR}/ttysolitaire.c
+SRC_OBJECTS = ${SRC_DIR}/common.o   \
+              ${SRC_DIR}/frame.o    \
+              ${SRC_DIR}/card.o     \
+              ${SRC_DIR}/stack.o    \
+              ${SRC_DIR}/deck.o     \
+              ${SRC_DIR}/curses.o   \
+              ${SRC_DIR}/cursor.o   \
+              ${SRC_DIR}/keyboard.o \
+              ${SRC_DIR}/display.o  \
+              ${SRC_DIR}/game.o     \
 
-TEST_EXECUTABLE = bin/ttysolitaire_test
-TEST_DIR        = test
-TEST_SRC        = ${TEST_DIR}/ttysolitaire_test.c
-TEST_OBJECTS = ${TEST_DIR}/frame_test.o       \
-               ${TEST_DIR}/card_test.o        \
-               ${TEST_DIR}/stack_test.o       \
-               ${TEST_DIR}/deck_test.o        \
-               ${TEST_DIR}/curses_test.o      \
-               ${TEST_DIR}/cursor_test.o      \
-               ${TEST_DIR}/keyboard_test.o    \
-               ${TEST_DIR}/display_test.o     \
-               ${TEST_DIR}/game_test.o        \
-               ${TEST_DIR}/test_helper.o      \
-               ${TEST_DIR}/test_helper_test.o \
+TESTS_EXECUTABLE = ttysolitaire_test
+TESTS_DIR        = tests
+TESTS_SRC        = ${TESTS_DIR}/ttysolitaire_test.c
+TESTS_OBJECTS = ${TESTS_DIR}/frame_test.o       \
+                ${TESTS_DIR}/card_test.o        \
+                ${TESTS_DIR}/stack_test.o       \
+                ${TESTS_DIR}/deck_test.o        \
+                ${TESTS_DIR}/curses_test.o      \
+                ${TESTS_DIR}/cursor_test.o      \
+                ${TESTS_DIR}/keyboard_test.o    \
+                ${TESTS_DIR}/display_test.o     \
+                ${TESTS_DIR}/game_test.o        \
+                ${TESTS_DIR}/test_helper.o      \
+                ${TESTS_DIR}/test_helper_test.o \
 
-ttysolitaire: ${LIB_OBJECTS}
-	${CC} ${CFLAGS} ${LDFLAGS} ${SRC} -o ${EXECUTABLE} ${LIB_OBJECTS}
+ttysolitaire: ${SRC_OBJECTS}
+	${CC} ${CFLAGS} ${LDFLAGS} ${SRC} -o ${EXECUTABLE} ${SRC_OBJECTS}
 
-test: ${LIB_OBJECTS} ${TEST_OBJECTS}
-	@${CC} ${CFLAGS} ${LDFLAGS} ${TEST_SRC} -o ${TEST_EXECUTABLE} ${TEST_OBJECTS} ${LIB_OBJECTS}
-	@${TEST_EXECUTABLE}
+test: ${SRC_OBJECTS} ${TESTS_OBJECTS}
+	@${CC} ${CFLAGS} ${LDFLAGS} ${TESTS_SRC} -o ${TESTS_EXECUTABLE} ${TESTS_OBJECTS} ${SRC_OBJECTS}
+	@./${TESTS_EXECUTABLE}
 
 clean:
-	rm -rf {${LIB_DIR},${TEST_DIR}}/*.o ${EXECUTABLE} ${TEST_EXECUTABLE}
+	rm -rf {${SRC_DIR},${TESTS_DIR}}/*.o ${EXECUTABLE} ${TESTS_EXECUTABLE}

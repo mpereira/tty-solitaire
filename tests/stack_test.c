@@ -1,6 +1,6 @@
 #include <assert.h>
 #include "test_helper.h"
-#include "../lib/stack.h"
+#include "../src/stack.h"
 
 void test_initialize_stack() {
   struct stack *stack;

@@ -9,7 +9,7 @@
 #+BEGIN_SRC
 $ git clone git://github.com/mpereira/tty-solitaire.git
 $ cd tty-solitaire
-$ make && bin/ttysolitaire
+$ make && ttysolitaire
 #+END_SRC
 
 ** Run the unit tests

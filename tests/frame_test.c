@@ -1,6 +1,6 @@
 #include <assert.h>
 #include "test_helper.h"
-#include "../lib/frame.h"
+#include "../src/frame.h"
 
 void test_initialize_frame() {
   struct frame *frame;

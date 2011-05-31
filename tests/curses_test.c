@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdbool.h>
-#include "../lib/keyboard.h"
+#include "../src/curses.h"
 
-void test_keyboard() {
+void test_curses() {
   assert(true);
 }

@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdbool.h>
-#include "../lib/curses.h"
+#include "../src/deck.h"
 
-void test_curses() {
+void test_deck() {
   assert(true);
 }

@@ -1,6 +1,6 @@
 #include <assert.h>
-#include "../lib/stack.h"
-#include "../lib/game.h"
+#include "../src/stack.h"
+#include "../src/game.h"
 #include "test_helper.h"
 
 void test_valid_move_from_stock_to_stock() {
