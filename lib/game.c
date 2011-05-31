@@ -17,7 +17,10 @@ int foundation_begin_x(int x) {
   case 1: return(FOUNDATION_1_BEGIN_X); break;
   case 2: return(FOUNDATION_2_BEGIN_X); break;
   case 3: return(FOUNDATION_3_BEGIN_X); break;
-  default: assert(false && "foundation_begin_x called x < 0 || x > 3");
+  default:
+    end_curses();
+    end_game();
+    assert(false && "invalid stack");
   }
 }
 
@@ -30,7 +33,10 @@ int maneuvre_begin_x(int x) {
   case 4: return(MANEUVRE_4_BEGIN_X); break;
   case 5: return(MANEUVRE_5_BEGIN_X); break;
   case 6: return(MANEUVRE_6_BEGIN_X); break;
-  default: assert(false && "maneuvre_begin_x called x < 0 || x > 6");
+  default:
+    end_curses();
+    end_game();
+    assert(false && "maneuvre_begin_x called x < 0 || x > 6");
   }
 }
 
@@ -110,17 +116,6 @@ void move_card(struct stack **origin, struct stack **destination) {
   }
 }
 
-static void set_stacks_initial_coordinates(struct deck *deck) {
-  set_frame(deck->stock->card->frame, STOCK_BEGIN_Y, STOCK_BEGIN_X);
-  set_frame(deck->waste_pile->card->frame, WASTE_PILE_BEGIN_Y, WASTE_PILE_BEGIN_X);
-  for (int i = 0; i < 4; i++) {
-    set_frame(deck->foundation[i]->card->frame, FOUNDATION_BEGIN_Y, foundation_begin_x(i));
-  }
-  for (int i = 0; i < 7; i++) {
-    set_frame(deck->maneuvre[i]->card->frame, MANEUVRE_BEGIN_Y, maneuvre_begin_x(i));
-  }
-}
-
 static void fill_deck(struct deck *deck) {
   struct card *card[NUMBER_OF_CARDS];
 
@@ -186,7 +181,16 @@ void initialize_game() {
   allocate_deck(&deck);
   initialize_deck(deck);
 
-  set_stacks_initial_coordinates(deck);
+  /* Setting initial stacks' coordinates. */
+  set_frame(deck->stock->card->frame, STOCK_BEGIN_Y, STOCK_BEGIN_X);
+  set_frame(deck->waste_pile->card->frame, WASTE_PILE_BEGIN_Y, WASTE_PILE_BEGIN_X);
+  for (int i = 0; i < 4; i++) {
+    set_frame(deck->foundation[i]->card->frame, FOUNDATION_BEGIN_Y, foundation_begin_x(i));
+  }
+  for (int i = 0; i < 7; i++) {
+    set_frame(deck->maneuvre[i]->card->frame, MANEUVRE_BEGIN_Y, maneuvre_begin_x(i));
+  }
+
   fill_deck(deck);
   shuffle_deck(deck);
   deal_cards(deck);
