@@ -22,6 +22,7 @@ void initialize_cursor(struct cursor *cursor) {
   cursor->window = newwin(0, 0, cursor->y, cursor->x);
   cursor->x = CURSOR_BEGIN_X;
   cursor->y = CURSOR_BEGIN_Y;
+  cursor->marked = false;
 }
 
 void free_cursor(struct cursor *cursor) {
@@ -29,6 +30,14 @@ void free_cursor(struct cursor *cursor) {
     delwin(cursor->window);
   }
   free(cursor);
+}
+
+void mark_cursor(struct cursor *cursor) {
+  cursor->marked = true;
+}
+
+void unmark_cursor(struct cursor *cursor) {
+  cursor->marked = false;
 }
 
 void move_cursor(struct cursor *cursor, enum movement movement) {

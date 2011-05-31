@@ -28,6 +28,7 @@ struct cursor {
   WINDOW *window;
   int x;
   int y;
+  bool marked;
 };
 
 enum movement { LEFT, DOWN, UP, RIGHT };
@@ -37,6 +38,8 @@ extern struct deck *deck;
 void allocate_cursor(struct cursor **);
 void initialize_cursor(struct cursor *);
 void free_cursor(struct cursor *);
+void mark_cursor(struct cursor *);
+void unmark_cursor(struct cursor *);
 void move_cursor(struct cursor *, enum movement);
 
 #endif

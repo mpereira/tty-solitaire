@@ -144,7 +144,11 @@ void draw_deck(struct deck *deck) {
 }
 
 void draw_cursor(struct cursor *cursor) {
-  mvwaddch(cursor->window, cursor->y, cursor->x, '*');
+  if (cursor->marked) {
+    mvwaddch(cursor->window, cursor->y, cursor->x, '@');
+  } else {
+    mvwaddch(cursor->window, cursor->y, cursor->x, '*');
+  }
   wrefresh(cursor->window);
 }
 
