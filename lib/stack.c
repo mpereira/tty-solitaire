@@ -52,9 +52,9 @@ void free_stack(struct stack *stack) {
 
 bool empty(struct stack *stack) {
   return(stack->card->value == NO_VALUE &&
-         stack->card->suit == NO_SUIT &&
-         stack->card->face == NO_FACE &&
-         !stack->next);
+           stack->card->suit == NO_SUIT &&
+           stack->card->face == NO_FACE &&
+           !stack->next);
 }
 
 int length(struct stack *stack) {
@@ -73,8 +73,9 @@ void push(struct stack **stack, struct card *card) {
     if (empty(*stack)) {
       (*stack)->card = card;
     } else {
-      struct stack *new_stack;
-      allocate_stack(&new_stack);
+      /* Allocating by hand because stack#allocate_stack would
+       * have allocated an unwanted card object. */
+      struct stack *new_stack = malloc(sizeof(*new_stack));
       new_stack->card = card;
       new_stack->next = (*stack);
       *stack = new_stack;
