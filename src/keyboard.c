@@ -69,7 +69,7 @@ static void handle_card_movement(struct cursor *cursor) {
         unmark_cursor(cursor);
         draw_cursor(cursor);
       }
-      break;
+      return;
     case 'h':
     case KEY_LEFT:
       move_cursor(cursor, LEFT);
