@@ -1,15 +1,10 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "card.h"
 #include "game.h"
 #include "display.h"
 #include "curses.h"
 #include "keyboard.h"
-
-static bool cursor_on_stock(struct cursor *cursor) {
-  return((cursor->x == CURSOR_BEGIN_X) && (cursor->y == CURSOR_BEGIN_Y));
-}
 
 static struct stack **cursor_stack(struct cursor *cursor) {
   if (cursor->y == CURSOR_BEGIN_Y) {
@@ -20,7 +15,11 @@ static struct stack **cursor_stack(struct cursor *cursor) {
     case CURSOR_FOUNDATION_1_X: return(&(deck->foundation[1]));
     case CURSOR_FOUNDATION_2_X: return(&(deck->foundation[2]));
     case CURSOR_FOUNDATION_3_X: return(&(deck->foundation[3]));
-    default: assert(false && "invalid stack");
+    case CURSOR_INVALID_SPOT_X: return(NULL);
+    default:
+      end_curses();
+      end_game();
+      assert(false && "invalid stack");
     }
   } else {
     switch (cursor->x) {
@@ -31,14 +30,20 @@ static struct stack **cursor_stack(struct cursor *cursor) {
     case CURSOR_MANEUVRE_4_X: return(&(deck->maneuvre[4]));
     case CURSOR_MANEUVRE_5_X: return(&(deck->maneuvre[5]));
     case CURSOR_MANEUVRE_6_X: return(&(deck->maneuvre[6]));
-    default: assert(false && "invalid stack");
+    default:
+      end_curses();
+      end_game();
+      assert(false && "invalid stack");
     }
   }
 }
 
+static bool cursor_on_stock(struct cursor *cursor) {
+  return(cursor_stack(cursor) && *cursor_stack(cursor) == deck->stock);
+}
+
 static bool cursor_on_invalid_spot(struct cursor *cursor) {
-  return(cursor->x == CURSOR_INVALID_SPOT_X &&
-           cursor->y == CURSOR_INVALID_SPOT_Y);
+  return(!cursor_stack(cursor));
 }
 
 static void handle_stock_event() {
@@ -96,7 +101,7 @@ static void handle_card_movement(struct cursor *cursor) {
       break;
     case KEY_SPACEBAR:
       destination = cursor_stack(cursor);
-      if (valid_move(*origin, *destination)) {
+      if (destination && valid_move(*origin, *destination)) {
         erase_stack(*origin);
         move_card(origin, destination);
         draw_stack(*origin);
