@@ -116,7 +116,6 @@ void draw_card(struct card *card) {
 }
 
 void draw_stack(struct stack *stack) {
-  erase_stack(stack);
   if (empty(stack)) {
     box(stack->card->frame->window, 0, 0);
     wrefresh(stack->card->frame->window);
