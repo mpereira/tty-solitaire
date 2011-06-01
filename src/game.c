@@ -62,14 +62,14 @@ bool foundation_stack(struct stack *stack) {
 
 bool maneuvre_stack(struct stack *stack) {
   return(stack && stack->card && stack->card->frame &&
-           stack->card->frame->begin_y >= MANEUVRE_BEGIN_Y &&
-           (stack->card->frame->begin_x == MANEUVRE_0_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_1_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_2_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_3_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_4_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_5_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_6_BEGIN_X));
+          stack->card->frame->begin_y >= MANEUVRE_BEGIN_Y &&
+          (stack->card->frame->begin_x == MANEUVRE_0_BEGIN_X ||
+            stack->card->frame->begin_x == MANEUVRE_1_BEGIN_X ||
+            stack->card->frame->begin_x == MANEUVRE_2_BEGIN_X ||
+            stack->card->frame->begin_x == MANEUVRE_3_BEGIN_X ||
+            stack->card->frame->begin_x == MANEUVRE_4_BEGIN_X ||
+            stack->card->frame->begin_x == MANEUVRE_5_BEGIN_X ||
+            stack->card->frame->begin_x == MANEUVRE_6_BEGIN_X));
 }
 
 bool valid_move(struct stack *origin, struct stack *destination) {
@@ -80,17 +80,18 @@ bool valid_move(struct stack *origin, struct stack *destination) {
       if (empty(destination)) {
         if (origin->card->value == ACE) {
           return(true);
-        } else if (origin->card->suit == destination->card->suit &&
-                    origin->card->value + 1 == destination->card->value) {
-          return(true);
         }
+      } else if (origin->card->suit == destination->card->suit &&
+                    origin->card->value == destination->card->value + 1) {
+          return(true);
       }
     } else if (maneuvre_stack(destination)) {
       if (empty(destination)) {
         if (origin->card->value == KING) {
           return(true);
         }
-      } else if ((origin->card->suit + destination->card->suit) % 2 == 1 &&
+      } else if (destination->card->face == EXPOSED &&
+                  (origin->card->suit + destination->card->suit) % 2 == 1 &&
                   origin->card->value + 1 == destination->card->value) {
         return(true);
       }
@@ -116,9 +117,9 @@ void move_card(struct stack **origin, struct stack **destination) {
 static void fill_deck(struct deck *deck) {
   struct card *card[NUMBER_OF_CARDS];
 
-  for (int i = TWO; i <= ACE; i++) {
+  for (int i = ACE; i <= KING; i++) {
     for (int j = DIAMONDS; j <= CLUBS; j++) {
-      int index = 4 * (i - TWO) + j;
+      int index = 4 * (i - ACE) + j;
       allocate_card(&(card[index]));
       set_card(card[index], i, j, COVERED, 1, 1);
       push(&(deck->stock), card[index]);

@@ -5,6 +5,7 @@
 
 enum value {
   NO_VALUE = -1,
+  ACE      = 1,
   TWO      = 2,
   THREE    = 3,
   FOUR     = 4,
@@ -16,8 +17,7 @@ enum value {
   TEN      = 10,
   JACK     = 11,
   QUEEN    = 12,
-  KING     = 13,
-  ACE      = 14
+  KING     = 13
 };
 
 enum suit {
