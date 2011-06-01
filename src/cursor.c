@@ -44,7 +44,6 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
   switch (movement) {
   case LEFT:
     if (cursor->x > CURSOR_BEGIN_X) {
-      erase_cursor(cursor);
       cursor->x = cursor->x - 8;
       if (cursor->y > CURSOR_BEGIN_Y) {
         move_cursor(cursor, UP);
@@ -54,7 +53,6 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
     break;
   case DOWN:
     if (cursor->y == CURSOR_BEGIN_Y) {
-      erase_cursor(cursor);
       switch (cursor->x - 3) {
       case MANEUVRE_0_BEGIN_X:
         cursor->y = cursor->y + 7 + length(deck->maneuvre[0]);
@@ -82,7 +80,6 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
     break;
   case RIGHT:
     if (cursor->x < 49) {
-      erase_cursor(cursor);
       cursor->x = cursor->x + 8;
       if (cursor->y > CURSOR_BEGIN_Y) {
         move_cursor(cursor, UP);
@@ -92,7 +89,6 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
     break;
   case UP:
     if (cursor->y > 1) {
-      erase_cursor(cursor);
       cursor->y = CURSOR_BEGIN_Y;
     }
     break;

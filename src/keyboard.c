@@ -72,21 +72,25 @@ static void handle_card_movement(struct cursor *cursor) {
       return;
     case 'h':
     case KEY_LEFT:
+      erase_cursor(cursor);
       move_cursor(cursor, LEFT);
       draw_cursor(cursor);
       break;
     case 'j':
     case KEY_DOWN:
+      erase_cursor(cursor);
       move_cursor(cursor, DOWN);
       draw_cursor(cursor);
       break;
     case 'k':
     case KEY_UP:
+      erase_cursor(cursor);
       move_cursor(cursor, UP);
       draw_cursor(cursor);
       break;
     case 'l':
     case KEY_RIGHT:
+      erase_cursor(cursor);
       move_cursor(cursor, RIGHT);
       draw_cursor(cursor);
       break;
@@ -97,6 +101,11 @@ static void handle_card_movement(struct cursor *cursor) {
         move_card(origin, destination);
         draw_stack(*origin);
         draw_stack(*destination);
+        if (maneuvre_stack(*destination) && length(*destination) > 1) {
+          erase_cursor(cursor);
+          cursor->y++;
+          draw_cursor(cursor);
+        }
       }
       unmark_cursor(cursor);
       draw_cursor(cursor);
@@ -114,21 +123,25 @@ void handle_keyboard_event(int key) {
   switch (key) {
   case 'h':
   case KEY_LEFT:
+    erase_cursor(cursor);
     move_cursor(cursor, LEFT);
     draw_cursor(cursor);
     break;
   case 'j':
   case KEY_DOWN:
+    erase_cursor(cursor);
     move_cursor(cursor, DOWN);
     draw_cursor(cursor);
     break;
   case 'k':
   case KEY_UP:
+    erase_cursor(cursor);
     move_cursor(cursor, UP);
     draw_cursor(cursor);
     break;
   case 'l':
   case KEY_RIGHT:
+    erase_cursor(cursor);
     move_cursor(cursor, RIGHT);
     draw_cursor(cursor);
     break;
