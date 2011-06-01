@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include <string.h>
 #include <errno.h>
 #include <time.h>
 #include <assert.h>
@@ -74,33 +73,31 @@ bool maneuvre_stack(struct stack *stack) {
 }
 
 bool valid_move(struct stack *origin, struct stack *destination) {
-  if (stock_stack(origin)) {
-    if (waste_pile_stack(destination)) {
+  if (origin->card->face == EXPOSED) {
+    if (stock_stack(origin) && waste_pile_stack(destination)) {
       return(true);
-    } else {
-      return(false);
+    } else if (foundation_stack(destination)) {
+      if (empty(destination)) {
+        if (origin->card->value == ACE) {
+          return(true);
+        } else if (origin->card->suit == destination->card->suit &&
+                    origin->card->value + 1 == destination->card->value) {
+          return(true);
+        }
+      }
+    } else if (maneuvre_stack(destination)) {
+      if (empty(destination)) {
+        if (origin->card->value == KING) {
+          return(true);
+        }
+      } else if ((origin->card->suit + destination->card->suit) % 2 == 1 &&
+                  origin->card->value + 1 == destination->card->value) {
+        return(true);
+      }
     }
-  } else if (waste_pile_stack(origin)) {
-    if (foundation_stack(destination) || maneuvre_stack(destination)) {
-      return(true);
-    } else {
-      return(false);
-    }
-  } else if (foundation_stack(origin)) {
-    if ((foundation_stack(destination) && origin != destination) || maneuvre_stack(destination)) {
-      return(true);
-    } else {
-      return(false);
-    }
-  } else if (maneuvre_stack(origin)) {
-    if ((maneuvre_stack(destination) && origin != destination) || foundation_stack(destination)) {
-      return(true);
-    } else {
-      return(false);
-    }
-  } else {
-    return(false);
   }
+
+  return(false);
 }
 
 void move_card(struct stack **origin, struct stack **destination) {
