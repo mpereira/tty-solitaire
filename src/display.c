@@ -146,10 +146,10 @@ void draw_deck(struct deck *deck) {
 void draw_cursor(struct cursor *cursor) {
   if (cursor->marked) {
     mvwin(cursor->window, cursor->y, cursor->x);
-    mvwaddch(cursor->window, 0, 0, '@');
+    waddch(cursor->window, '@');
   } else {
     mvwin(cursor->window, cursor->y, cursor->x);
-    mvwaddch(cursor->window, 0, 0, '*');
+    waddch(cursor->window, '*');
   }
   wrefresh(cursor->window);
 }
