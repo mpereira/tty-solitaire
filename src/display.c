@@ -14,23 +14,7 @@ static const char *card_values[13] = {
   "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"
 };
 
-void erase_card(struct card *card) {
-  werase(card->frame->window);
-  wbkgd(card->frame->window, WHITE_ON_GREEN);
-  wrefresh(card->frame->window);
-}
-
-void erase_stack(struct stack *stack) {
-  if (maneuvre_stack(stack)) {
-    for (; stack; stack = stack->next) {
-      erase_card(stack->card);
-    }
-  } else {
-    erase_card(stack->card);
-  }
-}
-
-void draw_value(struct card *card) {
+static void draw_value(struct card *card) {
   mvwprintw(card->frame->window, 0, 0, card_values[card->value]);
   mvwprintw(card->frame->window,
             4,
@@ -38,7 +22,7 @@ void draw_value(struct card *card) {
             card_values[card->value]);
 }
 
-void draw_suit(struct card *card) {
+static void draw_suit(struct card *card) {
   if (card->suit % 2 == 0) {
     wattron(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
   } else {
@@ -59,13 +43,13 @@ void draw_suit(struct card *card) {
   }
 }
 
-void draw_front(struct card *card) {
+static void draw_front(struct card *card) {
   wbkgd(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
   draw_value(card);
   draw_suit(card);
 }
 
-void draw_back(struct card *card) {
+static void draw_back(struct card *card) {
   wbkgd(card->frame->window, COLOR_PAIR(WHITE_ON_BLUE));
 }
 
@@ -114,6 +98,22 @@ void draw_cursor(struct cursor *cursor) {
     waddch(cursor->window, '*');
   }
   wrefresh(cursor->window);
+}
+
+void erase_card(struct card *card) {
+  werase(card->frame->window);
+  wbkgd(card->frame->window, WHITE_ON_GREEN);
+  wrefresh(card->frame->window);
+}
+
+void erase_stack(struct stack *stack) {
+  if (maneuvre_stack(stack)) {
+    for (; stack; stack = stack->next) {
+      erase_card(stack->card);
+    }
+  } else {
+    erase_card(stack->card);
+  }
 }
 
 void erase_cursor(struct cursor *cursor) {

@@ -14,10 +14,6 @@
 #define WHITE_ON_GREEN 4
 
 void erase_stack(struct stack *);
-void draw_value(struct card *);
-void draw_suit(struct card *);
-void draw_front(struct card *);
-void draw_back(struct card *);
 void draw_card(struct card *);
 void draw_stack(struct stack *);
 void draw_deck(struct deck *);
