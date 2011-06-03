@@ -5,34 +5,22 @@
 
 enum value {
   NO_VALUE = -1,
-  ACE      = 1,
-  TWO      = 2,
-  THREE    = 3,
-  FOUR     = 4,
-  FIVE     = 5,
-  SIX      = 6,
-  SEVEN    = 7,
-  EIGHT    = 8,
-  NINE     = 9,
-  TEN      = 10,
-  JACK     = 11,
-  QUEEN    = 12,
-  KING     = 13
+  ACE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+  TEN,
+  JACK,
+  QUEEN,
+  KING
 };
-
-enum suit {
-  NO_SUIT  = -1,
-  DIAMONDS = 0,
-  SPADES   = 1,
-  HEARTS   = 2,
-  CLUBS    = 3
-};
-
-enum face {
-  NO_FACE = -1,
-  COVERED = 0,
-  EXPOSED = 1
-};
+enum suit { NO_SUIT = -1, DIAMONDS, SPADES, HEARTS, CLUBS };
+enum face { NO_FACE = -1, COVERED, EXPOSED };
 
 struct card {
   struct frame *frame;

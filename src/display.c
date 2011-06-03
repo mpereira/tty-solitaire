@@ -4,56 +4,15 @@
 #include <string.h>
 #include <errno.h>
 #include <ncurses.h>
+
 #include "game.h"
 #include "display.h"
 #include "common.h"
 
-static char *card_suit(enum suit suit) {
-  char *card_suit;
-
-  if (!(card_suit = malloc(4 * sizeof(*card_suit)))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
-  }
-
-  switch(suit) {
-  case DIAMONDS: strcpy(card_suit, DIAMONDS_SYMBOL); break;
-  case SPADES:   strcpy(card_suit, SPADES_SYMBOL);   break;
-  case HEARTS:   strcpy(card_suit, HEARTS_SYMBOL);   break;
-  case CLUBS:    strcpy(card_suit, CLUBS_SYMBOL);    break;
-  default:       strcpy(card_suit, "?");
-  }
-
-  return(card_suit);
-}
-
-static char *card_value(enum value value) {
-  char *card_value;
-
-  if (!(card_value = malloc(2 * sizeof(*card_value)))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
-  }
-
-  switch(value) {
-  case TWO:   card_value = "2";  break;
-  case THREE: card_value = "3";  break;
-  case FOUR:  card_value = "4";  break;
-  case FIVE:  card_value = "5";  break;
-  case SIX:   card_value = "6";  break;
-  case SEVEN: card_value = "7";  break;
-  case EIGHT: card_value = "8";  break;
-  case NINE:  card_value = "9";  break;
-  case TEN:   card_value = "10"; break;
-  case JACK:  card_value = "J";  break;
-  case QUEEN: card_value = "Q";  break;
-  case KING:  card_value = "K";  break;
-  case ACE:   card_value = "A";  break;
-  default:    card_value = "?";
-  }
-
-  return(card_value);
-}
+static const char *card_suits[4] = { "\u2666", "\u2660", "\u2665", "\u2663" };
+static const char *card_values[13] = {
+  "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"
+};
 
 void erase_card(struct card *card) {
   werase(card->frame->window);
@@ -72,11 +31,11 @@ void erase_stack(struct stack *stack) {
 }
 
 void draw_value(struct card *card) {
-  mvwprintw(card->frame->window, 0, 0, card_value(card->value));
+  mvwprintw(card->frame->window, 0, 0, card_values[card->value]);
   mvwprintw(card->frame->window,
             4,
-            6 - (strlen(card_value(card->value)) - 1),
-            card_value(card->value));
+            7 - strlen(card_values[card->value]),
+            card_values[card->value]);
 }
 
 void draw_suit(struct card *card) {
@@ -85,10 +44,14 @@ void draw_suit(struct card *card) {
   } else {
     wattron(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
   }
-  mvwprintw(card->frame->window, 0, 1 + (strlen(card_value(card->value) + 1)),
-    card_suit(card->suit));
-  mvwprintw(card->frame->window, 4, 5 - (strlen(card_value(card->value) + 1)),
-    card_suit(card->suit));
+  mvwprintw(card->frame->window,
+            0,
+            strlen(card_values[card->value]),
+            card_suits[card->suit]);
+  mvwprintw(card->frame->window,
+            4,
+            6 - strlen(card_values[card->value]),
+            card_suits[card->suit]);
   if (card->suit % 2 == 0) {
     wattroff(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
   } else {
