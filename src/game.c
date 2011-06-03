@@ -21,7 +21,7 @@ static int foundation_begin_x(int x) {
   case 2: return(FOUNDATION_2_BEGIN_X); break;
   case 3: return(FOUNDATION_3_BEGIN_X); break;
   default:
-    end_curses();
+    endwin();
     end_game();
     assert(false && "invalid stack");
   }
@@ -37,7 +37,7 @@ static int maneuvre_begin_x(int x) {
   case 5: return(MANEUVRE_5_BEGIN_X); break;
   case 6: return(MANEUVRE_6_BEGIN_X); break;
   default:
-    end_curses();
+    endwin();
     end_game();
     assert(false && "maneuvre_begin_x called x < 0 || x > 6");
   }
@@ -167,7 +167,8 @@ void greet_player() {
 }
 
 void initialize_game() {
-  clear_screen();
+  clear();
+  refresh();
 
   allocate_cursor(&cursor);
   initialize_cursor(cursor);

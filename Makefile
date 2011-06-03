@@ -10,7 +10,6 @@ SRC_OBJECTS = ${SRC_DIR}/common.o   \
               ${SRC_DIR}/card.o     \
               ${SRC_DIR}/stack.o    \
               ${SRC_DIR}/deck.o     \
-              ${SRC_DIR}/curses.o   \
               ${SRC_DIR}/cursor.o   \
               ${SRC_DIR}/keyboard.o \
               ${SRC_DIR}/display.o  \
@@ -23,7 +22,6 @@ TESTS_OBJECTS = ${TESTS_DIR}/frame_test.o       \
                 ${TESTS_DIR}/card_test.o        \
                 ${TESTS_DIR}/stack_test.o       \
                 ${TESTS_DIR}/deck_test.o        \
-                ${TESTS_DIR}/curses_test.o      \
                 ${TESTS_DIR}/cursor_test.o      \
                 ${TESTS_DIR}/keyboard_test.o    \
                 ${TESTS_DIR}/display_test.o     \

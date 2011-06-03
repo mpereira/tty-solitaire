@@ -19,7 +19,7 @@ static struct stack **cursor_stack(struct cursor *cursor) {
     case CURSOR_FOUNDATION_3_X: return(&(deck->foundation[3]));
     case CURSOR_INVALID_SPOT_X: return(NULL);
     default:
-      end_curses();
+      endwin();
       end_game();
       assert(false && "invalid stack");
     }
@@ -33,7 +33,7 @@ static struct stack **cursor_stack(struct cursor *cursor) {
     case CURSOR_MANEUVRE_5_X: return(&(deck->maneuvre[5]));
     case CURSOR_MANEUVRE_6_X: return(&(deck->maneuvre[6]));
     default:
-      end_curses();
+      endwin();
       end_game();
       assert(false && "invalid stack");
     }
@@ -121,7 +121,7 @@ static void handle_card_movement(struct cursor *cursor) {
       return;
     case 'q':
     case 'Q':
-      end_curses();
+      endwin();
       end_game();
       exit(0);
     }
