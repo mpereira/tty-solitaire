@@ -16,10 +16,10 @@
 
 static int foundation_begin_x(int x) {
   switch (x) {
-  case 0: return(FOUNDATION_0_BEGIN_X); break;
-  case 1: return(FOUNDATION_1_BEGIN_X); break;
-  case 2: return(FOUNDATION_2_BEGIN_X); break;
-  case 3: return(FOUNDATION_3_BEGIN_X); break;
+  case 0: return(FOUNDATION_0_BEGIN_X);
+  case 1: return(FOUNDATION_1_BEGIN_X);
+  case 2: return(FOUNDATION_2_BEGIN_X);
+  case 3: return(FOUNDATION_3_BEGIN_X);
   default:
     endwin();
     end_game();
@@ -29,13 +29,13 @@ static int foundation_begin_x(int x) {
 
 static int maneuvre_begin_x(int x) {
   switch (x) {
-  case 0: return(MANEUVRE_0_BEGIN_X); break;
-  case 1: return(MANEUVRE_1_BEGIN_X); break;
-  case 2: return(MANEUVRE_2_BEGIN_X); break;
-  case 3: return(MANEUVRE_3_BEGIN_X); break;
-  case 4: return(MANEUVRE_4_BEGIN_X); break;
-  case 5: return(MANEUVRE_5_BEGIN_X); break;
-  case 6: return(MANEUVRE_6_BEGIN_X); break;
+  case 0: return(MANEUVRE_0_BEGIN_X);
+  case 1: return(MANEUVRE_1_BEGIN_X);
+  case 2: return(MANEUVRE_2_BEGIN_X);
+  case 3: return(MANEUVRE_3_BEGIN_X);
+  case 4: return(MANEUVRE_4_BEGIN_X);
+  case 5: return(MANEUVRE_5_BEGIN_X);
+  case 6: return(MANEUVRE_6_BEGIN_X);
   default:
     endwin();
     end_game();
