@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <malloc.h>
-#include <string.h>
 #include <errno.h>
+
 #include "stack.h"
+#include "card.h"
 #include "common.h"
 
 void allocate_stack(struct stack **stack) {
@@ -12,13 +13,22 @@ void allocate_stack(struct stack **stack) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
-
   allocate_card(&((*stack)->card));
 }
 
 void initialize_stack(struct stack *stack) {
   initialize_card(stack->card);
   stack->next = NULL;
+}
+
+void free_stack(struct stack *stack) {
+  struct stack *tmp;
+
+  for (; stack; stack = tmp) {
+    tmp = stack->next;
+    free_card(stack->card);
+    free(stack);
+  }
 }
 
 struct stack *duplicate_stack(struct stack *stack) {
@@ -38,16 +48,6 @@ struct stack *duplicate_stack(struct stack *stack) {
   free_stack(tmp_stack);
 
   return(new_stack);
-}
-
-void free_stack(struct stack *stack) {
-  struct stack *tmp;
-
-  for (; stack; stack = tmp) {
-    tmp = stack->next;
-    free_card(stack->card);
-    free(stack);
-  }
 }
 
 bool empty(struct stack *stack) {
@@ -107,16 +107,21 @@ struct card *pop(struct stack **stack) {
 }
 
 struct stack *reverse(struct stack *stack) {
-  if (length(stack) > 1) {
-    struct stack *tmp_stack, *iterator;
+  struct stack *tmp_stack, *iterator;
 
-    allocate_stack(&tmp_stack);
-    initialize_stack(tmp_stack);
+  allocate_stack(&tmp_stack);
+  initialize_stack(tmp_stack);
+  if (length(stack) > 1) {
     for (iterator = stack; iterator; iterator = iterator->next) {
-      push(&tmp_stack, iterator->card);
+      push(&tmp_stack, duplicate_card(iterator->card));
     }
-    return(tmp_stack);
   } else {
-    return(stack);
+    set_card(tmp_stack->card,
+             stack->card->value,
+             stack->card->suit,
+             stack->card->face,
+             stack->card->frame->begin_y,
+             stack->card->frame->begin_x);
   }
+  return(tmp_stack);
 }

@@ -3,8 +3,9 @@
 #include <string.h>
 #include <ncurses.h>
 
-#include "game.h"
 #include "display.h"
+#include "deck.h"
+#include "game.h"
 
 static const char *card_suits[4] = { "\u2666", "\u2660", "\u2665", "\u2663" };
 static const char *card_values[13] = {
@@ -69,6 +70,7 @@ void draw_stack(struct stack *stack) {
       for (struct stack *i = reversed_stack; i; i = i->next) {
         draw_card(i->card);
       }
+      free_stack(reversed_stack);
     } else {
       draw_card(stack->card);
     }
@@ -78,10 +80,10 @@ void draw_stack(struct stack *stack) {
 void draw_deck(struct deck *deck) {
   draw_stack(deck->stock);
   draw_stack(deck->waste_pile);
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
     draw_stack(deck->foundation[i]);
   }
-  for (int i = 0; i < 7; i++) {
+  for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
     draw_stack(deck->maneuvre[i]);
   }
 }

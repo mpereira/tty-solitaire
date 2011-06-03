@@ -14,8 +14,8 @@ struct frame {
 
 void allocate_frame(struct frame **);
 void initialize_frame(struct frame *);
-struct frame *duplicate_frame(struct frame *);
 void free_frame(struct frame *);
 void set_frame(struct frame *, int, int);
+struct frame *duplicate_frame(struct frame *);
 
 #endif

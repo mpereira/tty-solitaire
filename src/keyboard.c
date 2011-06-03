@@ -1,10 +1,12 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include "keyboard.h"
+#include "stack.h"
 #include "game.h"
+#include "cursor.h"
 #include "display.h"
 #include "curses.h"
-#include "keyboard.h"
 
 static struct stack **cursor_stack(struct cursor *cursor) {
   if (cursor->y == CURSOR_BEGIN_Y) {
@@ -101,6 +103,8 @@ static void handle_card_movement(struct cursor *cursor) {
       break;
     case KEY_SPACEBAR:
       destination = cursor_stack(cursor);
+      /* As 'destination' can be NULL if the cursor is at the invalid spot we
+       * check it before dereferencing */
       if (destination && valid_move(*origin, *destination)) {
         erase_stack(*origin);
         move_card(origin, destination);

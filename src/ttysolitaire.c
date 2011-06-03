@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <ncurses.h>
-#include "curses.h"
+
 #include "game.h"
 #include "keyboard.h"
+#include "curses.h"
 
 const char *program_name;
 

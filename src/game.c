@@ -5,12 +5,16 @@
 #include <time.h>
 #include <assert.h>
 
+#include "game.h"
+#include "card.h"
+#include "stack.h"
+#include "deck.h"
 #include "display.h"
+#include "cursor.h"
 #include "curses.h"
 #include "common.h"
-#include "game.h"
 
-int foundation_begin_x(int x) {
+static int foundation_begin_x(int x) {
   switch (x) {
   case 0: return(FOUNDATION_0_BEGIN_X); break;
   case 1: return(FOUNDATION_1_BEGIN_X); break;
@@ -23,7 +27,7 @@ int foundation_begin_x(int x) {
   }
 }
 
-int maneuvre_begin_x(int x) {
+static int maneuvre_begin_x(int x) {
   switch (x) {
   case 0: return(MANEUVRE_0_BEGIN_X); break;
   case 1: return(MANEUVRE_1_BEGIN_X); break;
@@ -39,21 +43,18 @@ int maneuvre_begin_x(int x) {
   }
 }
 
-bool stock_stack(struct stack *stack) {
-  return(stack && stack->card && stack->card->frame &&
-           (stack->card->frame->begin_y == STOCK_BEGIN_Y) &&
-           (stack->card->frame->begin_x == STOCK_BEGIN_X));
+static bool stock_stack(struct stack *stack) {
+  return((stack->card->frame->begin_y == STOCK_BEGIN_Y) &&
+          (stack->card->frame->begin_x == STOCK_BEGIN_X));
 }
 
-bool waste_pile_stack(struct stack *stack) {
-  return(stack && stack->card && stack->card->frame &&
-           (stack->card->frame->begin_y == WASTE_PILE_BEGIN_Y) &&
+static bool waste_pile_stack(struct stack *stack) {
+  return((stack->card->frame->begin_y == WASTE_PILE_BEGIN_Y) &&
            (stack->card->frame->begin_x == WASTE_PILE_BEGIN_X));
 }
 
-bool foundation_stack(struct stack *stack) {
-  return(stack && stack->card && stack->card->frame &&
-           stack->card->frame->begin_y == FOUNDATION_BEGIN_Y &&
+static bool foundation_stack(struct stack *stack) {
+  return(stack->card->frame->begin_y == FOUNDATION_BEGIN_Y &&
            (stack->card->frame->begin_x == FOUNDATION_0_BEGIN_X ||
               stack->card->frame->begin_x == FOUNDATION_1_BEGIN_X ||
               stack->card->frame->begin_x == FOUNDATION_2_BEGIN_X ||
@@ -61,15 +62,14 @@ bool foundation_stack(struct stack *stack) {
 }
 
 bool maneuvre_stack(struct stack *stack) {
-  return(stack && stack->card && stack->card->frame &&
-          stack->card->frame->begin_y >= MANEUVRE_BEGIN_Y &&
-          (stack->card->frame->begin_x == MANEUVRE_0_BEGIN_X ||
-            stack->card->frame->begin_x == MANEUVRE_1_BEGIN_X ||
-            stack->card->frame->begin_x == MANEUVRE_2_BEGIN_X ||
-            stack->card->frame->begin_x == MANEUVRE_3_BEGIN_X ||
-            stack->card->frame->begin_x == MANEUVRE_4_BEGIN_X ||
-            stack->card->frame->begin_x == MANEUVRE_5_BEGIN_X ||
-            stack->card->frame->begin_x == MANEUVRE_6_BEGIN_X));
+  return(stack->card->frame->begin_y >= MANEUVRE_BEGIN_Y &&
+           (stack->card->frame->begin_x == MANEUVRE_0_BEGIN_X ||
+              stack->card->frame->begin_x == MANEUVRE_1_BEGIN_X ||
+              stack->card->frame->begin_x == MANEUVRE_2_BEGIN_X ||
+              stack->card->frame->begin_x == MANEUVRE_3_BEGIN_X ||
+              stack->card->frame->begin_x == MANEUVRE_4_BEGIN_X ||
+              stack->card->frame->begin_x == MANEUVRE_5_BEGIN_X ||
+              stack->card->frame->begin_x == MANEUVRE_6_BEGIN_X));
 }
 
 bool valid_move(struct stack *origin, struct stack *destination) {
@@ -135,20 +135,16 @@ static void shuffle_deck(struct deck *deck) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
-
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     card[i] = pop(&(deck->stock));
   }
-
   srand(time(NULL));
-
   for (int i = 0; i < NUMBER_OF_CARDS - 1; i++) {
     random = i + (rand() % (NUMBER_OF_CARDS) - i);
     tmp = *card[i];
     *card[i] = (*card[random]);
     *card[random] = tmp;
   }
-
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     push(&(deck->stock), card[i]);
   }
@@ -182,10 +178,10 @@ void initialize_game() {
   /* Setting initial stacks' coordinates. */
   set_frame(deck->stock->card->frame, STOCK_BEGIN_Y, STOCK_BEGIN_X);
   set_frame(deck->waste_pile->card->frame, WASTE_PILE_BEGIN_Y, WASTE_PILE_BEGIN_X);
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
     set_frame(deck->foundation[i]->card->frame, FOUNDATION_BEGIN_Y, foundation_begin_x(i));
   }
-  for (int i = 0; i < 7; i++) {
+  for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
     set_frame(deck->maneuvre[i]->card->frame, MANEUVRE_BEGIN_Y, maneuvre_begin_x(i));
   }
 

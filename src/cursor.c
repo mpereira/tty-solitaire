@@ -1,34 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
-#include <string.h>
 #include <errno.h>
 #include <ncurses.h>
-#include "display.h"
-#include "game.h"
+
 #include "cursor.h"
+#include "game.h"
 #include "common.h"
 
 void allocate_cursor(struct cursor **cursor) {
   if (!(*cursor = malloc(sizeof(**cursor)))) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
-  } else {
-    (*cursor)->window = NULL;
   }
+  (*cursor)->window = newwin(1, 1, CURSOR_BEGIN_Y, CURSOR_BEGIN_X);
 }
 
 void initialize_cursor(struct cursor *cursor) {
-  cursor->window = newwin(1, 1, cursor->y, cursor->x);
-  cursor->x = CURSOR_BEGIN_X;
+  mvwin(cursor->window, CURSOR_BEGIN_Y, CURSOR_BEGIN_X);
   cursor->y = CURSOR_BEGIN_Y;
+  cursor->x = CURSOR_BEGIN_X;
   cursor->marked = false;
 }
 
 void free_cursor(struct cursor *cursor) {
-  if (cursor) {
-    delwin(cursor->window);
-  }
+  delwin(cursor->window);
   free(cursor);
 }
 
@@ -88,7 +84,7 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
     }
     break;
   case UP:
-    if (cursor->y > 1) {
+    if (cursor->y > CURSOR_BEGIN_Y) {
       cursor->y = CURSOR_BEGIN_Y;
     }
     break;
