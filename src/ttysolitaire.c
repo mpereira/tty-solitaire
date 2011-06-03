@@ -1,6 +1,7 @@
 #include <ncurses.h>
 #include <locale.h>
 
+#include "draw.h"
 #include "game.h"
 #include "keyboard.h"
 
@@ -24,7 +25,7 @@ int main(int argc, const char *argv[]) {
   init_pair(3, COLOR_WHITE, COLOR_BLUE);
   init_pair(4, COLOR_WHITE, COLOR_GREEN);
 
-  greet_player();
+  draw_greeting();
 
   while (key != KEY_SPACEBAR) {
     switch (key = getch()) {

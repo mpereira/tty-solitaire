@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdbool.h>
-#include "../src/display.h"
+#include "../src/draw.h"
 
-void test_display() {
+void test_draw() {
   assert(true);
 }

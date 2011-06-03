@@ -8,7 +8,7 @@ int main(int argc, const char *argv[]) {
   test_card();
   test_cursor();
   test_deck();
-  test_display();
+  test_draw();
   test_frame();
   test_game();
   test_keyboard();

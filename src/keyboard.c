@@ -5,7 +5,7 @@
 #include "stack.h"
 #include "game.h"
 #include "cursor.h"
-#include "display.h"
+#include "draw.h"
 #include "curses.h"
 
 static struct stack **cursor_stack(struct cursor *cursor) {

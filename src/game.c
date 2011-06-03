@@ -9,7 +9,7 @@
 #include "card.h"
 #include "stack.h"
 #include "deck.h"
-#include "display.h"
+#include "draw.h"
 #include "cursor.h"
 #include "curses.h"
 #include "common.h"
@@ -158,12 +158,6 @@ static void deal_cards(struct deck *deck) {
       move_card(&(deck->stock), &(deck->maneuvre[j]));
     }
   }
-}
-
-void greet_player() {
-  mvprintw(10, 27, "Welcome to tty-solitaire.");
-  mvprintw(11, 8, "Move with \u2190\u2191\u2192\u2193 or hjkl. Use the space bar to mark and move cards.");
-  mvprintw(12, 19, "Press the space bar to play or q to quit.");
 }
 
 void initialize_game() {

@@ -12,7 +12,7 @@ SRC_OBJECTS = ${SRC_DIR}/common.o   \
               ${SRC_DIR}/deck.o     \
               ${SRC_DIR}/cursor.o   \
               ${SRC_DIR}/keyboard.o \
-              ${SRC_DIR}/display.o  \
+              ${SRC_DIR}/draw.o     \
               ${SRC_DIR}/game.o     \
 
 TESTS_EXECUTABLE = ttysolitaire_test
@@ -24,7 +24,7 @@ TESTS_OBJECTS = ${TESTS_DIR}/frame_test.o       \
                 ${TESTS_DIR}/deck_test.o        \
                 ${TESTS_DIR}/cursor_test.o      \
                 ${TESTS_DIR}/keyboard_test.o    \
-                ${TESTS_DIR}/display_test.o     \
+                ${TESTS_DIR}/draw_test.o        \
                 ${TESTS_DIR}/game_test.o        \
                 ${TESTS_DIR}/test_helper.o      \
                 ${TESTS_DIR}/test_helper_test.o \
