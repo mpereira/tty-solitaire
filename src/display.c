@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <malloc.h>
 #include <string.h>
-#include <errno.h>
 #include <ncurses.h>
 
 #include "game.h"
 #include "display.h"
-#include "common.h"
 
 static const char *card_suits[4] = { "\u2666", "\u2660", "\u2665", "\u2663" };
 static const char *card_values[13] = {
