@@ -155,7 +155,8 @@ void handle_keyboard_event(int key) {
       handle_stock_event();
     } else {
       struct card *card;
-      if ((card = (*cursor_stack(cursor))->card)->face == COVERED) {
+      if (cursor_stack(cursor) &&
+            (card = (*cursor_stack(cursor))->card)->face == COVERED) {
         expose_card(card);
         draw_card(card);
       } else {
