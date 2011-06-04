@@ -9,15 +9,14 @@ const char *program_name;
 
 int main(int argc, const char *argv[]) {
   program_name = *argv;
-  int key;
 
-  setlocale(LC_ALL, "en_US.utf-8"); /* Support unicode characters. */
+  setlocale(LC_ALL, "");            /* Support unicode characters.   */
   initscr();
-  raw();                            /* Disable line buffers.       */
+  raw();                            /* Disable line buffers.         */
   noecho();
-  keypad(stdscr, TRUE);             /* Enable arrow keys.          */
-  start_color();                    /* I want colors.              */
-  curs_set(FALSE);                  /* Invisible cursor.           */
+  keypad(stdscr, TRUE);             /* Give us keyboard key symbols. */
+  start_color();
+  curs_set(FALSE);                  /* We have our own cursor.       */
   set_escdelay(0);
   assume_default_colors(COLOR_WHITE, COLOR_GREEN);
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
@@ -27,27 +26,29 @@ int main(int argc, const char *argv[]) {
 
   draw_greeting();
 
-  while (key != KEY_SPACEBAR) {
+  int key;
+  do {
     switch (key = getch()) {
     case KEY_SPACEBAR:
-      initialize_game();
+      clear();
+      refresh();
+      game_init();
       break;
     case 'q':
     case 'Q':
       endwin();
       return(0);
     }
-  }
+  } while (key != KEY_SPACEBAR);
 
-  while (1) {
+  do {
     if ((key = getch()) == 'q' || key == 'Q') {
       endwin();
-      end_game();
-      return(0);
+      game_end();
     } else {
       handle_keyboard_event(key);
     }
-  }
+  } while (key != 'q' && key != 'Q');
 
   return(0);
 }

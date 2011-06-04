@@ -6,7 +6,6 @@
 #include "game.h"
 #include "cursor.h"
 #include "draw.h"
-#include "curses.h"
 
 static struct stack **cursor_stack(struct cursor *cursor) {
   if (cursor->y == CURSOR_BEGIN_Y) {
@@ -20,7 +19,7 @@ static struct stack **cursor_stack(struct cursor *cursor) {
     case CURSOR_INVALID_SPOT_X: return(NULL);
     default:
       endwin();
-      end_game();
+      game_end();
       assert(false && "invalid stack");
     }
   } else {
@@ -34,7 +33,7 @@ static struct stack **cursor_stack(struct cursor *cursor) {
     case CURSOR_MANEUVRE_6_X: return(&(deck->maneuvre[6]));
     default:
       endwin();
-      end_game();
+      game_end();
       assert(false && "invalid stack");
     }
   }
@@ -122,7 +121,7 @@ static void handle_card_movement(struct cursor *cursor) {
     case 'q':
     case 'Q':
       endwin();
-      end_game();
+      game_end();
       exit(0);
     }
   }

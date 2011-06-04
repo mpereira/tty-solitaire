@@ -35,7 +35,7 @@ bool maneuvre_stack(struct stack *);
 bool valid_move(struct stack *, struct stack *);
 void move_card(struct stack **, struct stack **);
 void greet_player();
-void initialize_game();
-void end_game();
+void game_init();
+void game_end();
 
 #endif

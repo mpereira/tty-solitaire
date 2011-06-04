@@ -11,7 +11,6 @@
 #include "deck.h"
 #include "draw.h"
 #include "cursor.h"
-#include "curses.h"
 #include "common.h"
 
 static int foundation_begin_x(int x) {
@@ -22,7 +21,7 @@ static int foundation_begin_x(int x) {
   case 3: return(FOUNDATION_3_BEGIN_X);
   default:
     endwin();
-    end_game();
+    game_end();
     assert(false && "invalid stack");
   }
 }
@@ -38,7 +37,7 @@ static int maneuvre_begin_x(int x) {
   case 6: return(MANEUVRE_6_BEGIN_X);
   default:
     endwin();
-    end_game();
+    game_end();
     assert(false && "maneuvre_begin_x called x < 0 || x > 6");
   }
 }
@@ -160,13 +159,9 @@ static void deal_cards(struct deck *deck) {
   }
 }
 
-void initialize_game() {
-  clear();
-  refresh();
-
+void game_init() {
   allocate_cursor(&cursor);
   initialize_cursor(cursor);
-
   allocate_deck(&deck);
   initialize_deck(deck);
 
@@ -188,7 +183,7 @@ void initialize_game() {
   draw_deck(deck);
 }
 
-void end_game() {
-  free_deck(deck);
+void game_end() {
   free_cursor(cursor);
+  free_deck(deck);
 }
