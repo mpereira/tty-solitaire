@@ -55,6 +55,7 @@ static void draw_front(struct card *card) {
 
 static void draw_back(struct card *card) {
   wbkgd(card->frame->window, COLOR_PAIR(WHITE_ON_BLUE));
+  box(card->frame->window, 0, 0);
 }
 
 void draw_card(struct card *card) {
