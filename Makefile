@@ -1,6 +1,6 @@
 CC      = gcc
 CFLAGS  = -W -Wall -pedantic -ansi -std=c99 -g
-LDFLAGS = -lncursesw
+LDFLAGS = -lncurses
 
 EXECUTABLE = ttysolitaire
 SRC_DIR    = src
@@ -30,10 +30,10 @@ TESTS_OBJECTS = ${TESTS_DIR}/frame_test.o       \
                 ${TESTS_DIR}/test_helper_test.o \
 
 ttysolitaire: ${SRC_OBJECTS}
-	${CC} ${CFLAGS} ${LDFLAGS} ${SRC} -o ${EXECUTABLE} ${SRC_OBJECTS}
+	${CC} ${CFLAGS} ${SRC} -o ${EXECUTABLE} ${SRC_OBJECTS} ${LDFLAGS}
 
 test: ${SRC_OBJECTS} ${TESTS_OBJECTS}
-	@${CC} ${CFLAGS} ${LDFLAGS} ${TESTS_SRC} -o ${TESTS_EXECUTABLE} ${TESTS_OBJECTS} ${SRC_OBJECTS}
+	@${CC} ${CFLAGS} ${TESTS_SRC} -o ${TESTS_EXECUTABLE} ${TESTS_OBJECTS} ${SRC_OBJECTS} ${LDFLAGS}
 	@./${TESTS_EXECUTABLE}
 
 clean:
