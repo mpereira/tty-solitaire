@@ -44,7 +44,7 @@ static int maneuvre_begin_x(int x) {
 
 static bool stock_stack(struct stack *stack) {
   return((stack->card->frame->begin_y == STOCK_BEGIN_Y) &&
-          (stack->card->frame->begin_x == STOCK_BEGIN_X));
+           (stack->card->frame->begin_x == STOCK_BEGIN_X));
 }
 
 static bool waste_pile_stack(struct stack *stack) {

@@ -13,9 +13,12 @@ static const char *card_values[13] = {
 };
 
 void draw_greeting() {
-  mvprintw(10, 27, "Welcome to tty-solitaire.");
-  mvprintw(11, 8, "Move with \u2190\u2191\u2192\u2193 or hjkl. Use the space bar to mark and move cards.");
-  mvprintw(12, 19, "Press the space bar to play or q to quit.");
+  mvprintw(8, 26, "Welcome to tty-solitaire.");
+  mvprintw(10, 27, "Move with \u2190\u2191\u2192\u2193 or hjkl.");
+  mvprintw(11, 19, "Use the space bar to mark and move cards.");
+  mvprintw(12, 16, "After marking a card you can use m to increase ");
+  mvprintw(13, 17, "and n to decrease the number of marked cards.");
+  mvprintw(15, 19, "Press the space bar to play or q to quit.");
 }
 
 static void draw_value(struct card *card) {
