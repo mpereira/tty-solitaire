@@ -200,7 +200,7 @@ static void handle_card_movement(struct cursor *cursor) {
           }
         }
       }
-      if (destination && *origin == *destination) {
+      if (maneuvre_stack(*origin) && destination && *origin == *destination) {
         erase_cursor(cursor);
         cursor->y--;
       }
