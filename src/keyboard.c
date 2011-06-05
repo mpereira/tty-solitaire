@@ -180,7 +180,7 @@ static void handle_card_movement(struct cursor *cursor) {
           draw_cursor(cursor);
         }
       }
-      if (*origin == *destination) {
+      if (destination && *origin == *destination) {
         erase_cursor(cursor);
         cursor->y--;
       }
