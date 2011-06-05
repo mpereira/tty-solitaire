@@ -2,6 +2,7 @@
 #include <assert.h>
 
 #include "keyboard.h"
+#include "card.h"
 #include "stack.h"
 #include "game.h"
 #include "cursor.h"
@@ -56,6 +57,30 @@ static void handle_stock_event() {
   }
 }
 
+static int marked_cards_count(struct stack *stack) {
+  if (length(stack) == 1) {
+    if (stack->card->frame->begin_y > MANEUVRE_BEGIN_Y) {
+      return(1);
+    }
+  } else if (length(stack) > 1) {
+    for (int marked_cards_count = 0; stack; stack = stack->next) {
+      marked_cards_count++;
+      if (!stack->next || (stack->card->frame->begin_y -
+                             stack->next->card->frame->begin_y) > 1) {
+        return(marked_cards_count);
+      }
+    }
+  }
+  return(0);
+}
+
+static void unmark_cards(struct stack *stack) {
+  int marked_cards = marked_cards_count(stack);
+  for (int i = 0; i < marked_cards; stack = stack->next, i++) {
+    unmark_card(stack->card);
+  }
+}
+
 static void handle_card_movement(struct cursor *cursor) {
   struct stack **origin = cursor_stack(cursor);
   struct stack **destination;
@@ -65,17 +90,18 @@ static void handle_card_movement(struct cursor *cursor) {
     return;
   }
 
+  if (maneuvre_stack(*origin)) {
+    erase_stack(*origin);
+    mark_card((*origin)->card);
+    draw_stack(*origin);
+    cursor->y++;
+  }
+  erase_cursor(cursor);
   mark_cursor(cursor);
   draw_cursor(cursor);
 
   while (1) {
     switch (option = getch()) {
-    case KEY_ESCAPE:
-      if (cursor->marked) {
-        unmark_cursor(cursor);
-        draw_cursor(cursor);
-      }
-      return;
     case 'h':
     case KEY_LEFT:
       erase_cursor(cursor);
@@ -100,8 +126,46 @@ static void handle_card_movement(struct cursor *cursor) {
       move_cursor(cursor, RIGHT);
       draw_cursor(cursor);
       break;
+    case 'm':
+      if (origin == cursor_stack(cursor) && maneuvre_stack(*origin)) {
+        for (struct stack *i = *origin; i && i->next; i = i->next) {
+          if ((i->card->frame->begin_y - i->next->card->frame->begin_y) > 1) {
+            erase_stack(*origin);
+            mark_card(i->next->card);
+            draw_stack(*origin);
+            break;
+          }
+        }
+      }
+      break;
+    case 'n':
+      if (origin == cursor_stack(cursor) && maneuvre_stack(*origin)) {
+        for (struct stack *i = (*origin)->next; i; i = i->next) {
+          if (i->next) {
+            if ((i->card->frame->begin_y - i->next->card->frame->begin_y) > 1) {
+              erase_stack(*origin);
+              unmark_card(i->card);
+              draw_stack(*origin);
+              break;
+            }
+          } else {
+            if (i->card->frame->begin_y == (MANEUVRE_BEGIN_Y + 1)) {
+              erase_stack(*origin);
+              unmark_card(i->card);
+              draw_stack(*origin);
+              break;
+            }
+          }
+        }
+      }
+      break;
     case KEY_SPACEBAR:
       destination = cursor_stack(cursor);
+      if (maneuvre_stack(*origin) && marked_cards_count(*origin) > 0) {
+        erase_stack(*origin);
+        unmark_cards(*origin);
+        draw_stack(*origin);
+      }
       /* As 'destination' can be NULL if the cursor is at the invalid spot we
        * check it before dereferencing */
       if (destination && valid_move(*origin, *destination)) {
@@ -115,8 +179,27 @@ static void handle_card_movement(struct cursor *cursor) {
           draw_cursor(cursor);
         }
       }
+      if (*origin == *destination) {
+        erase_cursor(cursor);
+        cursor->y--;
+      }
       unmark_cursor(cursor);
       draw_cursor(cursor);
+      return;
+    case KEY_ESCAPE:
+      if (cursor_stack(cursor) == origin && maneuvre_stack(*origin)) {
+        erase_cursor(cursor);
+        cursor->y--;
+      }
+      if (marked_cards_count(*origin) > 0) {
+        erase_stack(*origin);
+        unmark_cards(*origin);
+        draw_stack(*origin);
+      }
+      if (cursor->marked) {
+        unmark_cursor(cursor);
+        draw_cursor(cursor);
+      }
       return;
     case 'q':
     case 'Q':

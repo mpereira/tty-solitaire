@@ -46,6 +46,14 @@ void cover_card(struct card *card) {
   card->face = COVERED;
 }
 
+void mark_card(struct card *card) {
+  set_frame(card->frame, card->frame->begin_y + 1, card->frame->begin_x);
+}
+
+void unmark_card(struct card *card) {
+  set_frame(card->frame, card->frame->begin_y - 1, card->frame->begin_x);
+}
+
 struct card *duplicate_card(struct card *card) {
   struct card *new_card;
 
