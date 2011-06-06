@@ -77,8 +77,8 @@ static int marked_cards_count(struct stack *stack) {
 }
 
 static void unmark_cards(struct stack *stack) {
-  int marked_cards = marked_cards_count(stack);
-  for (int i = 0; i < marked_cards; stack = stack->next, i++) {
+  int _marked_cards_count = marked_cards_count(stack);
+  for (int i = 0; i < _marked_cards_count; stack = stack->next, i++) {
     unmark_card(stack->card);
   }
 }
@@ -164,50 +164,34 @@ static void handle_card_movement(struct cursor *cursor) {
       break;
     case KEY_SPACEBAR:
       destination = cursor_stack(cursor);
-      int marked_cards = marked_cards_count(*origin);
-      if (maneuvre_stack(*origin) && marked_cards > 0) {
+      int _marked_cards_count = marked_cards_count(*origin);
+      if (maneuvre_stack(*origin) && _marked_cards_count > 0) {
         erase_stack(*origin);
         unmark_cards(*origin);
         draw_stack(*origin);
       }
       if (destination) {
-        if (marked_cards > 1 &&
+        erase_stack(*origin);
+        erase_cursor(cursor);
+        if (_marked_cards_count > 1 &&
               maneuvre_stack(*origin) &&
               maneuvre_stack(*destination)) {
           struct stack *block = *origin;
-          for (int i = 1; i < marked_cards; block = block->next, i++)
+          for (int i = 1; i < _marked_cards_count; block = block->next, i++)
             ;
           if (valid_move(block, *destination)) {
-            erase_stack(*origin);
-            struct stack *tmp;
-            allocate_stack(&tmp);
-            initialize_stack(tmp);
-            for (int i = 0; i < marked_cards; i++) {
-              push(&tmp, pop(origin));
-            }
-            for (int i = 0; i < marked_cards; i++) {
-              move_card(&tmp, destination);
-            }
-            if (length(*destination) > 1) {
-              erase_cursor(cursor);
-              cursor->y += marked_cards;
-            }
-            free_stack(tmp);
-            draw_stack(*origin);
-            draw_stack(*destination);
+            move_block(origin, destination, _marked_cards_count);
           }
         } else {
           if (valid_move(*origin, *destination)) {
-            erase_stack(*origin);
-            move_card(origin, destination);
             if (maneuvre_stack(*destination) && length(*destination) > 1) {
-              erase_cursor(cursor);
               cursor->y++;
             }
-            draw_stack(*origin);
-            draw_stack(*destination);
+            move_card(origin, destination);
           }
         }
+        draw_stack(*origin);
+        draw_stack(*destination);
         if (maneuvre_stack(*origin) && *origin == *destination) {
           erase_cursor(cursor);
           cursor->y--;

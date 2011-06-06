@@ -113,6 +113,23 @@ void move_card(struct stack **origin, struct stack **destination) {
   }
 }
 
+void move_block(struct stack **origin, struct stack **destination, int block_size) {
+  struct stack *tmp;
+  allocate_stack(&tmp);
+  initialize_stack(tmp);
+  for (int i = 0; i < block_size; i++) {
+    push(&tmp, pop(origin));
+  }
+  for (int i = 0; i < block_size; i++) {
+    move_card(&tmp, destination);
+  }
+  if (length(*destination) > 1) {
+    cursor->y += block_size;
+  }
+  free_stack(tmp);
+}
+
+
 static void fill_deck(struct deck *deck) {
   struct card *card[NUMBER_OF_CARDS];
 

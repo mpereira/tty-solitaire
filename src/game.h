@@ -34,7 +34,7 @@ struct cursor *cursor;
 bool maneuvre_stack(struct stack *);
 bool valid_move(struct stack *, struct stack *);
 void move_card(struct stack **, struct stack **);
-void greet_player();
+void move_block(struct stack **, struct stack **, int);
 void game_init();
 void game_end();
 

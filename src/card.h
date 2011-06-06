@@ -36,5 +36,7 @@ void set_card(struct card *, enum value, enum suit, enum face, int, int);
 void expose_card(struct card *);
 void cover_card(struct card *);
 struct card *duplicate_card(struct card *);
+void mark_card(struct card *);
+void unmark_card(struct card *);
 
 #endif
