@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef TTY_SOLITAIRE_GAME_H
+#define TTY_SOLITAIRE_GAME_H
 
 #include <stdbool.h>
 

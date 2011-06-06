@@ -1,5 +1,5 @@
-#ifndef CURSOR_H
-#define CURSOR_H
+#ifndef TTY_SOLITAIRE_CURSOR_H
+#define TTY_SOLITAIRE_CURSOR_H
 
 #include <stdbool.h>
 #include "deck.h"

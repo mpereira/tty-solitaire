@@ -1,5 +1,5 @@
-#ifndef CARD_H
-#define CARD_H
+#ifndef TTY_SOLITAIRE_CARD_H
+#define TTY_SOLITAIRE_CARD_H
 
 #include "frame.h"
 

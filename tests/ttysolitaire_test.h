@@ -1,5 +1,5 @@
-#ifndef TTYSOLITAIRE_TEST_H
-#define TTYSOLITAIRE_TEST_H
+#ifndef TTY_SOLITAIRE_TEST_H
+#define TTY_SOLITAIRE_TEST_H
 
 void test_card();
 void test_cursor();

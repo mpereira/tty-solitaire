@@ -1,5 +1,5 @@
-#ifndef DECK_H
-#define DECK_H
+#ifndef TTY_SOLITAIRE_DECK_H
+#define TTY_SOLITAIRE_DECK_H
 
 #include "stack.h"
 

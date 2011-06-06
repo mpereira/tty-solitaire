@@ -1,5 +1,5 @@
-#ifndef TEST_HELPER_H
-#define TEST_HELPER_H
+#ifndef TTY_SOLITAIRE_TEST_HELPER_H
+#define TTY_SOLITAIRE_TEST_HELPER_H
 
 #include <stdbool.h>
 #include "../src/frame.h"

@@ -1,5 +1,5 @@
-#ifndef STACK_H
-#define STACK_H
+#ifndef TTY_SOLITAIRE_STACK_H
+#define TTY_SOLITAIRE_STACK_H
 
 #include "card.h"
 

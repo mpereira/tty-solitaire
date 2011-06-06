@@ -1,5 +1,5 @@
-#ifndef FRAME_H
-#define FRAME_H
+#ifndef TTY_SOLITAIRE_FRAME_H
+#define TTY_SOLITAIRE_FRAME_H
 
 #include <ncurses.h>
 

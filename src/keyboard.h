@@ -1,5 +1,5 @@
-#ifndef KEYBOARD_H
-#define KEYBOARD_H
+#ifndef TTY_SOLITAIRE_KEYBOARD_H
+#define TTY_SOLITAIRE_KEYBOARD_H
 
 #include "deck.h"
 #include "cursor.h"
