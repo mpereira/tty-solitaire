@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <malloc.h>
 #include <errno.h>
 #include <time.h>
@@ -203,4 +204,11 @@ void game_init() {
 void game_end() {
   free_cursor(cursor);
   free_deck(deck);
+}
+
+bool game_won() {
+  return(length(deck->foundation[0]) == 13 &&
+           length(deck->foundation[1]) == 13 &&
+           length(deck->foundation[2]) == 13 &&
+           length(deck->foundation[3]) == 13);
 }

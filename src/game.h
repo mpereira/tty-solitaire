@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <stdbool.h>
+
 #include "stack.h"
 #include "deck.h"
 #include "cursor.h"
@@ -36,6 +38,7 @@ bool valid_move(struct stack *, struct stack *);
 void move_card(struct stack **, struct stack **);
 void move_block(struct stack **, struct stack **, int);
 void game_init();
+bool game_won();
 void game_end();
 
 #endif

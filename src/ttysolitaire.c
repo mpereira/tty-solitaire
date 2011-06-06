@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <ncurses.h>
 #include <locale.h>
 
@@ -6,6 +7,15 @@
 #include "keyboard.h"
 
 const char *program_name;
+
+void draw_greeting() {
+  mvprintw(8, 26, "Welcome to tty-solitaire.");
+  mvprintw(10, 27, "Move with \u2190\u2191\u2192\u2193 or hjkl.");
+  mvprintw(11, 19, "Use the space bar to mark and move cards.");
+  mvprintw(12, 16, "After marking a card you can use m to increase ");
+  mvprintw(13, 17, "and n to decrease the number of marked cards.");
+  mvprintw(15, 19, "Press the space bar to play or q to quit.");
+}
 
 int main(int argc, const char *argv[]) {
   program_name = *argv;
@@ -45,10 +55,15 @@ int main(int argc, const char *argv[]) {
     if ((key = getch()) == 'q' || key == 'Q') {
       endwin();
       game_end();
+      exit(0);
     } else {
       handle_keyboard_event(key);
     }
-  } while (key != 'q' && key != 'Q');
+  } while (!game_won());
+
+  endwin();
+  game_end();
+  printf("You won.\n");
 
   return(0);
 }
