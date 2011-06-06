@@ -2,39 +2,39 @@
 #include "test_helper.h"
 #include "../src/card.h"
 
-void test_initialize_card() {
+void test_card_init() {
   struct card *card;
 
-  allocate_card(&card);
-  initialize_card(card);
+  card_malloc(&card);
+  card_init(card);
 
   assert(card->value == NO_VALUE);
   assert(card->suit == NO_SUIT);
   assert(card->face == NO_FACE);
 
-  free_card(card);
+  card_free(card);
 }
 
-void test_duplicate_card() {
+void test_card_dup() {
   struct card *card_0, *card_1;
   const int begin_y = 5, begin_x = 10;
 
-  allocate_card(&card_0);
-  set_card(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
-  card_1 = duplicate_card(card_0);
+  card_malloc(&card_0);
+  card_set(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  card_1 = card_dup(card_0);
 
   assert(card_0 != card_1);
   assert(cards_equal(card_0, card_1));
 }
 
-void test_set_card() {
+void test_card_set() {
   struct card *card;
   int begin_y = 5;
   int begin_x = 10;
 
-  allocate_card(&card);
-  initialize_card(card);
-  set_card(card, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  card_malloc(&card);
+  card_init(card);
+  card_set(card, ACE, SPADES, EXPOSED, begin_y, begin_x);
 
   assert(card->value == ACE);
   assert(card->suit == SPADES);
@@ -42,37 +42,37 @@ void test_set_card() {
   assert(card->frame->begin_y == begin_y);
   assert(card->frame->begin_x == begin_x);
 
-  free_card(card);
+  card_free(card);
 }
 
-void test_expose_card() {
+void test_card_expose() {
   struct card *card;
 
-  allocate_card(&card);
-  initialize_card(card);
-  expose_card(card);
+  card_malloc(&card);
+  card_init(card);
+  card_expose(card);
 
   assert(card->face == EXPOSED);
 
-  free_card(card);
+  card_free(card);
 }
 
-void test_cover_card() {
+void test_card_cover() {
   struct card *card;
 
-  allocate_card(&card);
-  initialize_card(card);
-  cover_card(card);
+  card_malloc(&card);
+  card_init(card);
+  card_cover(card);
 
   assert(card->face == COVERED);
 
-  free_card(card);
+  card_free(card);
 }
 
 void test_card() {
-  test_initialize_card();
-  test_duplicate_card();
-  test_set_card();
-  test_expose_card();
-  test_cover_card();
+  test_card_init();
+  test_card_dup();
+  test_card_set();
+  test_card_expose();
+  test_card_cover();
 }

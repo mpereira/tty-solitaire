@@ -51,25 +51,25 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
     if (cursor->y == CURSOR_BEGIN_Y) {
       switch (cursor->x - 3) {
       case MANEUVRE_0_BEGIN_X:
-        cursor->y = cursor->y + 7 + length(deck->maneuvre[0]);
+        cursor->y = cursor->y + 7 + stack_length(deck->maneuvre[0]);
         break;
       case MANEUVRE_1_BEGIN_X:
-        cursor->y = cursor->y + 7 + length(deck->maneuvre[1]);
+        cursor->y = cursor->y + 7 + stack_length(deck->maneuvre[1]);
         break;
       case MANEUVRE_2_BEGIN_X:
-        cursor->y = cursor->y + 7 + length(deck->maneuvre[2]);
+        cursor->y = cursor->y + 7 + stack_length(deck->maneuvre[2]);
         break;
       case MANEUVRE_3_BEGIN_X:
-        cursor->y = cursor->y + 7 + length(deck->maneuvre[3]);
+        cursor->y = cursor->y + 7 + stack_length(deck->maneuvre[3]);
         break;
       case MANEUVRE_4_BEGIN_X:
-        cursor->y = cursor->y + 7 + length(deck->maneuvre[4]);
+        cursor->y = cursor->y + 7 + stack_length(deck->maneuvre[4]);
         break;
       case MANEUVRE_5_BEGIN_X:
-        cursor->y = cursor->y + 7 + length(deck->maneuvre[5]);
+        cursor->y = cursor->y + 7 + stack_length(deck->maneuvre[5]);
         break;
       case MANEUVRE_6_BEGIN_X:
-        cursor->y = cursor->y + 7 + length(deck->maneuvre[6]);
+        cursor->y = cursor->y + 7 + stack_length(deck->maneuvre[6]);
         break;
       }
     }

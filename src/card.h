@@ -29,14 +29,14 @@ struct card {
   enum face    face;
 };
 
-void allocate_card(struct card **);
-void initialize_card(struct card *);
-void free_card(struct card *);
-void set_card(struct card *, enum value, enum suit, enum face, int, int);
-void expose_card(struct card *);
-void cover_card(struct card *);
-struct card *duplicate_card(struct card *);
-void mark_card(struct card *);
-void unmark_card(struct card *);
+void card_malloc(struct card **);
+void card_init(struct card *);
+void card_free(struct card *);
+void card_set(struct card *, enum value, enum suit, enum face, int, int);
+void card_expose(struct card *);
+void card_cover(struct card *);
+void card_mark(struct card *);
+void card_unmark(struct card *);
+struct card *card_dup(struct card *);
 
 #endif

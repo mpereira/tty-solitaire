@@ -11,35 +11,35 @@ void allocate_deck(struct deck **deck) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
-  allocate_stack(&((*deck)->stock));
-  allocate_stack(&((*deck)->waste_pile));
+  stack_malloc(&((*deck)->stock));
+  stack_malloc(&((*deck)->waste_pile));
   for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
-    allocate_stack(&((*deck)->foundation[i]));
+    stack_malloc(&((*deck)->foundation[i]));
   }
   for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
-    allocate_stack(&((*deck)->maneuvre[i]));
+    stack_malloc(&((*deck)->maneuvre[i]));
   }
 }
 
 void initialize_deck(struct deck *deck) {
-  initialize_stack(deck->stock);
-  initialize_stack(deck->waste_pile);
+  stack_init(deck->stock);
+  stack_init(deck->waste_pile);
   for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
-    initialize_stack(deck->foundation[i]);
+    stack_init(deck->foundation[i]);
   }
   for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
-    initialize_stack(deck->maneuvre[i]);
+    stack_init(deck->maneuvre[i]);
   }
 }
 
 void free_deck(struct deck *deck) {
-  free_stack(deck->stock);
-  free_stack(deck->waste_pile);
+  stack_free(deck->stock);
+  stack_free(deck->waste_pile);
   for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
-    free_stack(deck->foundation[i]);
+    stack_free(deck->foundation[i]);
   }
   for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
-    free_stack(deck->maneuvre[i]);
+    stack_free(deck->maneuvre[i]);
   }
   free(deck);
 }

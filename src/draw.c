@@ -62,16 +62,16 @@ void draw_card(struct card *card) {
 }
 
 void draw_stack(struct stack *stack) {
-  if (empty(stack)) {
+  if (stack_empty(stack)) {
     box(stack->card->frame->window, 0, 0);
     wrefresh(stack->card->frame->window);
   } else {
     if (maneuvre_stack(stack)) {
-      struct stack *reversed_stack = reverse(stack);
-      for (struct stack *i = reversed_stack; i; i = i->next) {
+      struct stack *stack_reversed_stack = stack_reverse(stack);
+      for (struct stack *i = stack_reversed_stack; i; i = i->next) {
         draw_card(i->card);
       }
-      free_stack(reversed_stack);
+      stack_free(stack_reversed_stack);
     } else {
       draw_card(stack->card);
     }

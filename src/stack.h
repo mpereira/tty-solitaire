@@ -8,14 +8,14 @@ struct stack {
   struct stack *next;
 };
 
-void allocate_stack(struct stack **);
-void initialize_stack(struct stack *);
-void free_stack(struct stack *);
-struct stack *duplicate_stack(struct stack *);
-bool empty(struct stack *);
-int length(struct stack *);
-void push(struct stack **, struct card *);
-struct card *pop(struct stack **);
-struct stack *reverse(struct stack *);
+void stack_malloc(struct stack **);
+void stack_init(struct stack *);
+void stack_free(struct stack *);
+bool stack_empty(struct stack *);
+int stack_length(struct stack *);
+void stack_push(struct stack **, struct card *);
+struct card *stack_pop(struct stack **);
+struct stack *stack_reverse(struct stack *);
+struct stack *stack_dup(struct stack *);
 
 #endif

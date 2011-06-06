@@ -40,7 +40,7 @@ void test_cards_equal_with_two_nulls() {
 void test_cards_equal_with_one_null() {
   struct card *card;
 
-  allocate_card(&card);
+  card_malloc(&card);
   assert(!cards_equal(card, NULL));
   assert(!cards_equal(NULL, card));
 }
@@ -49,10 +49,10 @@ void test_cards_equal_with_two_equivalent_cards() {
   struct card *card_0, *card_1;
   const int begin_y = 5, begin_x = 10;
 
-  allocate_card(&card_0);
-  allocate_card(&card_1);
-  set_card(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
-  set_card(card_1, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  card_malloc(&card_0);
+  card_malloc(&card_1);
+  card_set(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  card_set(card_1, ACE, SPADES, EXPOSED, begin_y, begin_x);
 
   assert(cards_equal(card_0, card_1));
 }
@@ -60,7 +60,7 @@ void test_cards_equal_with_two_equivalent_cards() {
 void test_cards_equal_with_two_card_pointers_to_the_same_address() {
   struct card *card;
 
-  allocate_card(&card);
+  card_malloc(&card);
 
   assert(cards_equal(card, card));
 }
@@ -72,7 +72,7 @@ void test_stacks_equal_with_two_nulls() {
 void test_stacks_equal_with_one_null() {
   struct stack *stack;
 
-  allocate_stack(&stack);
+  stack_malloc(&stack);
   assert(!stacks_equal(stack, NULL));
   assert(!stacks_equal(NULL, stack));
 }
@@ -82,14 +82,14 @@ void test_stacks_equal_with_two_equivalent_stacks() {
   struct card *card_0, *card_1;
   const int begin_y = 5, begin_x = 10;
 
-  allocate_card(&card_0);
-  allocate_card(&card_1);
-  set_card(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
-  set_card(card_1, ACE, SPADES, EXPOSED, begin_y, begin_x);
-  allocate_stack(&stack_0);
-  allocate_stack(&stack_1);
-  push(&stack_0, card_0);
-  push(&stack_1, card_1);
+  card_malloc(&card_0);
+  card_malloc(&card_1);
+  card_set(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  card_set(card_1, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  stack_malloc(&stack_0);
+  stack_malloc(&stack_1);
+  stack_push(&stack_0, card_0);
+  stack_push(&stack_1, card_1);
 
   assert(stacks_equal(stack_0, stack_1));
 }
@@ -99,14 +99,14 @@ void test_stacks_equal_with_two_different_stacks() {
   struct card *card_0, *card_1;
   const int begin_y = 5, begin_x = 10;
 
-  allocate_card(&card_0);
-  allocate_card(&card_1);
-  set_card(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
-  set_card(card_1, KING, HEARTS, EXPOSED, begin_y, begin_x);
-  allocate_stack(&stack_0);
-  allocate_stack(&stack_1);
-  push(&stack_0, card_0);
-  push(&stack_1, card_1);
+  card_malloc(&card_0);
+  card_malloc(&card_1);
+  card_set(card_0, ACE, SPADES, EXPOSED, begin_y, begin_x);
+  card_set(card_1, KING, HEARTS, EXPOSED, begin_y, begin_x);
+  stack_malloc(&stack_0);
+  stack_malloc(&stack_1);
+  stack_push(&stack_0, card_0);
+  stack_push(&stack_1, card_1);
 
   assert(!stacks_equal(stack_0, stack_1));
 }
@@ -114,7 +114,7 @@ void test_stacks_equal_with_two_different_stacks() {
 void test_stacks_equal_with_two_stack_pointers_to_the_same_address() {
   struct stack *stack;
 
-  allocate_stack(&stack);
+  stack_malloc(&stack);
 
   assert(stacks_equal(stack, stack));
 }

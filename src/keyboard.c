@@ -49,9 +49,9 @@ static bool cursor_on_invalid_spot(struct cursor *cursor) {
 }
 
 static void handle_stock_event() {
-  if (!empty(deck->stock)) {
+  if (!stack_empty(deck->stock)) {
     move_card(&(deck->stock), &(deck->waste_pile));
-    expose_card(deck->waste_pile->card);
+    card_expose(deck->waste_pile->card);
     erase_stack(deck->waste_pile);
     draw_stack(deck->stock);
     draw_stack(deck->waste_pile);
@@ -61,11 +61,11 @@ static void handle_stock_event() {
 /* FIXME: this function does not work on stacks with no marked cards.
  * In that case it returns the stack's length. */
 static int marked_cards_count(struct stack *stack) {
-  if (length(stack) == 1) {
+  if (stack_length(stack) == 1) {
     if (stack->card->frame->begin_y > MANEUVRE_BEGIN_Y) {
       return(1);
     }
-  } else if (length(stack) > 1) {
+  } else if (stack_length(stack) > 1) {
     for (int marked_cards_count = 0; stack; stack = stack->next) {
       marked_cards_count++;
       if (!stack->next || (stack->card->frame->begin_y - stack->next->card->frame->begin_y) > 1) {
@@ -79,7 +79,7 @@ static int marked_cards_count(struct stack *stack) {
 static void unmark_cards(struct stack *stack) {
   int _marked_cards_count = marked_cards_count(stack);
   for (int i = 0; i < _marked_cards_count; stack = stack->next, i++) {
-    unmark_card(stack->card);
+    card_unmark(stack->card);
   }
 }
 
@@ -88,13 +88,13 @@ static void handle_card_movement(struct cursor *cursor) {
   struct stack **destination;
   int option;
 
-  if (cursor_on_invalid_spot(cursor) || empty(*origin)) {
+  if (cursor_on_invalid_spot(cursor) || stack_empty(*origin)) {
     return;
   }
 
   if (maneuvre_stack(*origin)) {
     erase_stack(*origin);
-    mark_card((*origin)->card);
+    card_mark((*origin)->card);
     draw_stack(*origin);
     cursor->y++;
   }
@@ -134,7 +134,7 @@ static void handle_card_movement(struct cursor *cursor) {
           if (i->next->card->face == EXPOSED &&
                 (i->card->frame->begin_y - i->next->card->frame->begin_y) > 1) {
             erase_stack(*origin);
-            mark_card(i->next->card);
+            card_mark(i->next->card);
             draw_stack(*origin);
             break;
           }
@@ -147,14 +147,14 @@ static void handle_card_movement(struct cursor *cursor) {
           if (i->next) {
             if ((i->card->frame->begin_y - i->next->card->frame->begin_y) > 1) {
               erase_stack(*origin);
-              unmark_card(i->card);
+              card_unmark(i->card);
               draw_stack(*origin);
               break;
             }
           } else {
             if (i->card->frame->begin_y == (MANEUVRE_BEGIN_Y + 1)) {
               erase_stack(*origin);
-              unmark_card(i->card);
+              card_unmark(i->card);
               draw_stack(*origin);
               break;
             }
@@ -184,7 +184,7 @@ static void handle_card_movement(struct cursor *cursor) {
           }
         } else {
           if (valid_move(*origin, *destination)) {
-            if (maneuvre_stack(*destination) && length(*destination) > 1) {
+            if (maneuvre_stack(*destination) && stack_length(*destination) > 1) {
               cursor->y++;
             }
             move_card(origin, destination);
@@ -257,7 +257,7 @@ void handle_keyboard_event(int key) {
       struct card *card;
       if (cursor_stack(cursor) &&
             (card = (*cursor_stack(cursor))->card)->face == COVERED) {
-        expose_card(card);
+        card_expose(card);
         draw_card(card);
       } else {
         handle_card_movement(cursor);

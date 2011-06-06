@@ -77,7 +77,7 @@ bool valid_move(struct stack *origin, struct stack *destination) {
     if (stock_stack(origin) && waste_pile_stack(destination)) {
       return(true);
     } else if (foundation_stack(destination)) {
-      if (empty(destination)) {
+      if (stack_empty(destination)) {
         if (origin->card->value == ACE) {
           return(true);
         }
@@ -86,7 +86,7 @@ bool valid_move(struct stack *origin, struct stack *destination) {
           return(true);
       }
     } else if (maneuvre_stack(destination)) {
-      if (empty(destination)) {
+      if (stack_empty(destination)) {
         if (origin->card->value == KING) {
           return(true);
         }
@@ -103,31 +103,31 @@ bool valid_move(struct stack *origin, struct stack *destination) {
 
 void move_card(struct stack **origin, struct stack **destination) {
   struct card *tmp;
-  if ((tmp = pop(origin))) {
+  if ((tmp = stack_pop(origin))) {
     int destination_y = (*destination)->card->frame->begin_y;
     int destination_x = (*destination)->card->frame->begin_x;
-    if (!empty(*destination) && maneuvre_stack(*destination)) {
+    if (!stack_empty(*destination) && maneuvre_stack(*destination)) {
       destination_y++;
     }
-    push(destination, tmp);
+    stack_push(destination, tmp);
     set_frame((*destination)->card->frame, destination_y, destination_x);
   }
 }
 
 void move_block(struct stack **origin, struct stack **destination, int block_size) {
   struct stack *tmp;
-  allocate_stack(&tmp);
-  initialize_stack(tmp);
+  stack_malloc(&tmp);
+  stack_init(tmp);
   for (int i = 0; i < block_size; i++) {
-    push(&tmp, pop(origin));
+    stack_push(&tmp, stack_pop(origin));
   }
   for (int i = 0; i < block_size; i++) {
     move_card(&tmp, destination);
   }
-  if (length(*destination) > 1) {
+  if (stack_length(*destination) > 1) {
     cursor->y += block_size;
   }
-  free_stack(tmp);
+  stack_free(tmp);
 }
 
 
@@ -137,9 +137,9 @@ static void fill_deck(struct deck *deck) {
   for (int i = ACE; i <= KING; i++) {
     for (int j = DIAMONDS; j <= CLUBS; j++) {
       int index = 4 * (i - ACE) + j;
-      allocate_card(&(card[index]));
-      set_card(card[index], i, j, COVERED, 1, 1);
-      push(&(deck->stock), card[index]);
+      card_malloc(&(card[index]));
+      card_set(card[index], i, j, COVERED, 1, 1);
+      stack_push(&(deck->stock), card[index]);
     }
   }
 }
@@ -153,7 +153,7 @@ static void shuffle_deck(struct deck *deck) {
     exit(errno);
   }
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
-    card[i] = pop(&(deck->stock));
+    card[i] = stack_pop(&(deck->stock));
   }
   srand(time(NULL));
   for (int i = 0; i < NUMBER_OF_CARDS - 1; i++) {
@@ -163,14 +163,14 @@ static void shuffle_deck(struct deck *deck) {
     *card[random] = tmp;
   }
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
-    push(&(deck->stock), card[i]);
+    stack_push(&(deck->stock), card[i]);
   }
 }
 
 static void deal_cards(struct deck *deck) {
   for (int i = 0; i < 7; i++) {
     move_card(&(deck->stock), &(deck->maneuvre[i]));
-    expose_card(deck->maneuvre[i]->card);
+    card_expose(deck->maneuvre[i]->card);
     for (int j = i + 1; j < 7; j++) {
       move_card(&(deck->stock), &(deck->maneuvre[j]));
     }
@@ -207,8 +207,8 @@ void game_end() {
 }
 
 bool game_won() {
-  return(length(deck->foundation[0]) == 13 &&
-           length(deck->foundation[1]) == 13 &&
-           length(deck->foundation[2]) == 13 &&
-           length(deck->foundation[3]) == 13);
+  return(stack_length(deck->foundation[0]) == 13 &&
+           stack_length(deck->foundation[1]) == 13 &&
+           stack_length(deck->foundation[2]) == 13 &&
+           stack_length(deck->foundation[3]) == 13);
 }

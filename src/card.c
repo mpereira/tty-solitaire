@@ -6,7 +6,7 @@
 #include "card.h"
 #include "common.h"
 
-void allocate_card(struct card **card) {
+void card_malloc(struct card **card) {
   if (!(*card = malloc(sizeof(**card)))) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
@@ -14,19 +14,19 @@ void allocate_card(struct card **card) {
   allocate_frame(&((*card)->frame));
 }
 
-void initialize_card(struct card *card) {
+void card_init(struct card *card) {
   initialize_frame(card->frame);
   card->value = NO_VALUE;
   card->suit = NO_SUIT;
   card->face = NO_FACE;
 }
 
-void free_card(struct card *card) {
+void card_free(struct card *card) {
   free_frame(card->frame);
   free(card);
 }
 
-void set_card(struct card *card,
+void card_set(struct card *card,
               enum value value,
               enum suit suit,
               enum face face,
@@ -38,27 +38,27 @@ void set_card(struct card *card,
   card->face = face;
 }
 
-void expose_card(struct card *card) {
+void card_expose(struct card *card) {
   card->face = EXPOSED;
 }
 
-void cover_card(struct card *card) {
+void card_cover(struct card *card) {
   card->face = COVERED;
 }
 
-void mark_card(struct card *card) {
+void card_mark(struct card *card) {
   set_frame(card->frame, card->frame->begin_y + 1, card->frame->begin_x);
 }
 
-void unmark_card(struct card *card) {
+void card_unmark(struct card *card) {
   set_frame(card->frame, card->frame->begin_y - 1, card->frame->begin_x);
 }
 
-struct card *duplicate_card(struct card *card) {
+struct card *card_dup(struct card *card) {
   struct card *new_card;
 
-  allocate_card(&new_card);
-  set_card(new_card,
+  card_malloc(&new_card);
+  card_set(new_card,
            card->value,
            card->suit,
            card->face,
