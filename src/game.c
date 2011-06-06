@@ -110,7 +110,7 @@ void move_card(struct stack **origin, struct stack **destination) {
       destination_y++;
     }
     stack_push(destination, tmp);
-    set_frame((*destination)->card->frame, destination_y, destination_x);
+    frame_set((*destination)->card->frame, destination_y, destination_x);
   }
 }
 
@@ -184,13 +184,13 @@ void game_init() {
   deck_init(deck);
 
   /* Setting initial stacks' coordinates. */
-  set_frame(deck->stock->card->frame, STOCK_BEGIN_Y, STOCK_BEGIN_X);
-  set_frame(deck->waste_pile->card->frame, WASTE_PILE_BEGIN_Y, WASTE_PILE_BEGIN_X);
+  frame_set(deck->stock->card->frame, STOCK_BEGIN_Y, STOCK_BEGIN_X);
+  frame_set(deck->waste_pile->card->frame, WASTE_PILE_BEGIN_Y, WASTE_PILE_BEGIN_X);
   for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
-    set_frame(deck->foundation[i]->card->frame, FOUNDATION_BEGIN_Y, foundation_begin_x(i));
+    frame_set(deck->foundation[i]->card->frame, FOUNDATION_BEGIN_Y, foundation_begin_x(i));
   }
   for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
-    set_frame(deck->maneuvre[i]->card->frame, MANEUVRE_BEGIN_Y, maneuvre_begin_x(i));
+    frame_set(deck->maneuvre[i]->card->frame, MANEUVRE_BEGIN_Y, maneuvre_begin_x(i));
   }
 
   fill_deck(deck);

@@ -6,7 +6,7 @@
 #include "frame.h"
 #include "common.h"
 
-void allocate_frame(struct frame **frame) {
+void frame_malloc(struct frame **frame) {
   if (!(*frame = malloc(sizeof(**frame)))) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
@@ -14,27 +14,27 @@ void allocate_frame(struct frame **frame) {
   (*frame)->window = newwin(FRAME_HEIGHT, FRAME_WIDTH, 0, 0);
 }
 
-void initialize_frame(struct frame *frame) {
+void frame_init(struct frame *frame) {
   frame->begin_y = 0;
   frame->begin_x = 0;
 }
 
-void free_frame(struct frame *frame) {
+void frame_free(struct frame *frame) {
   delwin(frame->window);
   free(frame);
 }
 
-void set_frame(struct frame *frame, int begin_y, int begin_x) {
+void frame_set(struct frame *frame, int begin_y, int begin_x) {
   frame->begin_y = begin_y;
   frame->begin_x = begin_x;
   mvwin(frame->window, begin_y, begin_x);
 }
 
-struct frame *duplicate_frame(struct frame *frame) {
+struct frame *frame_dup(struct frame *frame) {
   struct frame *new_frame;
 
-  allocate_frame(&new_frame);
-  set_frame(new_frame, frame->begin_y, frame->begin_x);
+  frame_malloc(&new_frame);
+  frame_set(new_frame, frame->begin_y, frame->begin_x);
 
   return(new_frame);
 }

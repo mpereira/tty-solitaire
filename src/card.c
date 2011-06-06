@@ -11,18 +11,18 @@ void card_malloc(struct card **card) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
   }
-  allocate_frame(&((*card)->frame));
+  frame_malloc(&((*card)->frame));
 }
 
 void card_init(struct card *card) {
-  initialize_frame(card->frame);
+  frame_init(card->frame);
   card->value = NO_VALUE;
   card->suit = NO_SUIT;
   card->face = NO_FACE;
 }
 
 void card_free(struct card *card) {
-  free_frame(card->frame);
+  frame_free(card->frame);
   free(card);
 }
 
@@ -32,7 +32,7 @@ void card_set(struct card *card,
               enum face face,
               int begin_y,
               int begin_x) {
-  set_frame(card->frame, begin_y, begin_x);
+  frame_set(card->frame, begin_y, begin_x);
   card->value = value;
   card->suit = suit;
   card->face = face;
@@ -47,11 +47,11 @@ void card_cover(struct card *card) {
 }
 
 void card_mark(struct card *card) {
-  set_frame(card->frame, card->frame->begin_y + 1, card->frame->begin_x);
+  frame_set(card->frame, card->frame->begin_y + 1, card->frame->begin_x);
 }
 
 void card_unmark(struct card *card) {
-  set_frame(card->frame, card->frame->begin_y - 1, card->frame->begin_x);
+  frame_set(card->frame, card->frame->begin_y - 1, card->frame->begin_x);
 }
 
 struct card *card_dup(struct card *card) {

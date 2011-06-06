@@ -8,7 +8,7 @@ void test_frames_equal_with_two_nulls() {
 void test_frames_equal_with_one_null() {
   struct frame *frame;
 
-  allocate_frame(&frame);
+  frame_malloc(&frame);
   assert(!frames_equal(frame, NULL));
   assert(!frames_equal(NULL, frame));
 }
@@ -17,10 +17,10 @@ void test_frames_equal_with_two_equivalent_frames() {
   struct frame *frame_0, *frame_1;
   const int begin_y = 5, begin_x = 10;
 
-  allocate_frame(&frame_0);
-  allocate_frame(&frame_1);
-  set_frame(frame_0, begin_y, begin_x);
-  set_frame(frame_1, begin_y, begin_x);
+  frame_malloc(&frame_0);
+  frame_malloc(&frame_1);
+  frame_set(frame_0, begin_y, begin_x);
+  frame_set(frame_1, begin_y, begin_x);
 
   assert(frames_equal(frame_0, frame_1));
 }
@@ -28,7 +28,7 @@ void test_frames_equal_with_two_equivalent_frames() {
 void test_frames_equal_with_two_frame_pointers_to_the_same_address() {
   struct frame *frame;
 
-  allocate_frame(&frame);
+  frame_malloc(&frame);
 
   assert(frames_equal(frame, frame));
 }

@@ -12,10 +12,10 @@ struct frame {
   int    begin_x;
 };
 
-void allocate_frame(struct frame **);
-void initialize_frame(struct frame *);
-void free_frame(struct frame *);
-void set_frame(struct frame *, int, int);
-struct frame *duplicate_frame(struct frame *);
+void frame_malloc(struct frame **);
+void frame_init(struct frame *);
+void frame_free(struct frame *);
+void frame_set(struct frame *, int, int);
+struct frame *frame_dup(struct frame *);
 
 #endif
