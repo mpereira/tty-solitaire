@@ -178,8 +178,8 @@ static void deal_cards(struct deck *deck) {
 }
 
 void game_init() {
-  allocate_cursor(&cursor);
-  initialize_cursor(cursor);
+  cursor_malloc(&cursor);
+  cursor_init(cursor);
   deck_malloc(&deck);
   deck_init(deck);
 
@@ -202,7 +202,7 @@ void game_init() {
 }
 
 void game_end() {
-  free_cursor(cursor);
+  cursor_free(cursor);
   deck_free(deck);
 }
 

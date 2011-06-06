@@ -35,11 +35,11 @@ enum movement { LEFT, DOWN, UP, RIGHT };
 
 extern struct deck *deck;
 
-void allocate_cursor(struct cursor **);
-void initialize_cursor(struct cursor *);
-void free_cursor(struct cursor *);
-void mark_cursor(struct cursor *);
-void unmark_cursor(struct cursor *);
-void move_cursor(struct cursor *, enum movement);
+void cursor_malloc(struct cursor **);
+void cursor_init(struct cursor *);
+void cursor_free(struct cursor *);
+void cursor_mark(struct cursor *);
+void cursor_unmark(struct cursor *);
+void cursor_move(struct cursor *, enum movement);
 
 #endif

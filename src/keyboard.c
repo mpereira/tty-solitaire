@@ -99,7 +99,7 @@ static void handle_card_movement(struct cursor *cursor) {
     cursor->y++;
   }
   erase_cursor(cursor);
-  mark_cursor(cursor);
+  cursor_mark(cursor);
   draw_cursor(cursor);
 
   while (1) {
@@ -107,25 +107,25 @@ static void handle_card_movement(struct cursor *cursor) {
     case 'h':
     case KEY_LEFT:
       erase_cursor(cursor);
-      move_cursor(cursor, LEFT);
+      cursor_move(cursor, LEFT);
       draw_cursor(cursor);
       break;
     case 'j':
     case KEY_DOWN:
       erase_cursor(cursor);
-      move_cursor(cursor, DOWN);
+      cursor_move(cursor, DOWN);
       draw_cursor(cursor);
       break;
     case 'k':
     case KEY_UP:
       erase_cursor(cursor);
-      move_cursor(cursor, UP);
+      cursor_move(cursor, UP);
       draw_cursor(cursor);
       break;
     case 'l':
     case KEY_RIGHT:
       erase_cursor(cursor);
-      move_cursor(cursor, RIGHT);
+      cursor_move(cursor, RIGHT);
       draw_cursor(cursor);
       break;
     case 'm':
@@ -197,7 +197,7 @@ static void handle_card_movement(struct cursor *cursor) {
           cursor->y--;
         }
       }
-      unmark_cursor(cursor);
+      cursor_unmark(cursor);
       draw_cursor(cursor);
       return;
     case KEY_ESCAPE:
@@ -211,7 +211,7 @@ static void handle_card_movement(struct cursor *cursor) {
         draw_stack(*origin);
       }
       if (cursor->marked) {
-        unmark_cursor(cursor);
+        cursor_unmark(cursor);
         draw_cursor(cursor);
       }
       return;
@@ -229,25 +229,25 @@ void handle_keyboard_event(int key) {
   case 'h':
   case KEY_LEFT:
     erase_cursor(cursor);
-    move_cursor(cursor, LEFT);
+    cursor_move(cursor, LEFT);
     draw_cursor(cursor);
     break;
   case 'j':
   case KEY_DOWN:
     erase_cursor(cursor);
-    move_cursor(cursor, DOWN);
+    cursor_move(cursor, DOWN);
     draw_cursor(cursor);
     break;
   case 'k':
   case KEY_UP:
     erase_cursor(cursor);
-    move_cursor(cursor, UP);
+    cursor_move(cursor, UP);
     draw_cursor(cursor);
     break;
   case 'l':
   case KEY_RIGHT:
     erase_cursor(cursor);
-    move_cursor(cursor, RIGHT);
+    cursor_move(cursor, RIGHT);
     draw_cursor(cursor);
     break;
   case KEY_SPACEBAR:

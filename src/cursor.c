@@ -8,7 +8,7 @@
 #include "game.h"
 #include "common.h"
 
-void allocate_cursor(struct cursor **cursor) {
+void cursor_malloc(struct cursor **cursor) {
   if (!(*cursor = malloc(sizeof(**cursor)))) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
@@ -16,34 +16,34 @@ void allocate_cursor(struct cursor **cursor) {
   (*cursor)->window = newwin(1, 1, CURSOR_BEGIN_Y, CURSOR_BEGIN_X);
 }
 
-void initialize_cursor(struct cursor *cursor) {
+void cursor_init(struct cursor *cursor) {
   mvwin(cursor->window, CURSOR_BEGIN_Y, CURSOR_BEGIN_X);
   cursor->y = CURSOR_BEGIN_Y;
   cursor->x = CURSOR_BEGIN_X;
   cursor->marked = false;
 }
 
-void free_cursor(struct cursor *cursor) {
+void cursor_free(struct cursor *cursor) {
   delwin(cursor->window);
   free(cursor);
 }
 
-void mark_cursor(struct cursor *cursor) {
+void cursor_mark(struct cursor *cursor) {
   cursor->marked = true;
 }
 
-void unmark_cursor(struct cursor *cursor) {
+void cursor_unmark(struct cursor *cursor) {
   cursor->marked = false;
 }
 
-void move_cursor(struct cursor *cursor, enum movement movement) {
+void cursor_move(struct cursor *cursor, enum movement movement) {
   switch (movement) {
   case LEFT:
     if (cursor->x > CURSOR_BEGIN_X) {
       cursor->x = cursor->x - 8;
       if (cursor->y > CURSOR_BEGIN_Y) {
-        move_cursor(cursor, UP);
-        move_cursor(cursor, DOWN);
+        cursor_move(cursor, UP);
+        cursor_move(cursor, DOWN);
       }
     }
     break;
@@ -78,8 +78,8 @@ void move_cursor(struct cursor *cursor, enum movement movement) {
     if (cursor->x < 49) {
       cursor->x = cursor->x + 8;
       if (cursor->y > CURSOR_BEGIN_Y) {
-        move_cursor(cursor, UP);
-        move_cursor(cursor, DOWN);
+        cursor_move(cursor, UP);
+        cursor_move(cursor, DOWN);
       }
     }
     break;
