@@ -13,8 +13,8 @@ struct deck {
   struct stack *maneuvre[MANEUVRE_STACKS_NUMBER];
 };
 
-void allocate_deck(struct deck **);
-void initialize_deck(struct deck *);
-void free_deck(struct deck *);
+void deck_malloc(struct deck **);
+void deck_init(struct deck *);
+void deck_free(struct deck *);
 
 #endif

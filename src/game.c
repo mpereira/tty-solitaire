@@ -180,8 +180,8 @@ static void deal_cards(struct deck *deck) {
 void game_init() {
   allocate_cursor(&cursor);
   initialize_cursor(cursor);
-  allocate_deck(&deck);
-  initialize_deck(deck);
+  deck_malloc(&deck);
+  deck_init(deck);
 
   /* Setting initial stacks' coordinates. */
   set_frame(deck->stock->card->frame, STOCK_BEGIN_Y, STOCK_BEGIN_X);
@@ -203,7 +203,7 @@ void game_init() {
 
 void game_end() {
   free_cursor(cursor);
-  free_deck(deck);
+  deck_free(deck);
 }
 
 bool game_won() {

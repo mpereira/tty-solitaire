@@ -6,7 +6,7 @@
 #include "deck.h"
 #include "common.h"
 
-void allocate_deck(struct deck **deck) {
+void deck_malloc(struct deck **deck) {
   if (!(*deck = malloc(sizeof(**deck)))) {
     fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
     exit(errno);
@@ -21,7 +21,7 @@ void allocate_deck(struct deck **deck) {
   }
 }
 
-void initialize_deck(struct deck *deck) {
+void deck_init(struct deck *deck) {
   stack_init(deck->stock);
   stack_init(deck->waste_pile);
   for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
@@ -32,7 +32,7 @@ void initialize_deck(struct deck *deck) {
   }
 }
 
-void free_deck(struct deck *deck) {
+void deck_free(struct deck *deck) {
   stack_free(deck->stock);
   stack_free(deck->waste_pile);
   for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
