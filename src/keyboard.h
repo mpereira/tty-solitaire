@@ -10,6 +10,6 @@
 extern struct deck *deck;
 extern struct cursor *cursor;
 
-void handle_keyboard_event();
+void keyboard_event();
 
 #endif

@@ -57,7 +57,7 @@ int main(int argc, const char *argv[]) {
       game_end();
       exit(0);
     } else {
-      handle_keyboard_event(key);
+      keyboard_event(key);
     }
   } while (!game_won());
 

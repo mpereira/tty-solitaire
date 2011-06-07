@@ -33,19 +33,8 @@ static void unmark_cards(struct stack *stack) {
   }
 }
 
-static void handle_stock_event() {
-  if (!stack_empty(deck->stock)) {
-    move_card(&(deck->stock), &(deck->waste_pile));
-    card_expose(deck->waste_pile->card);
-    erase_stack(deck->waste_pile);
-    draw_stack(deck->stock);
-    draw_stack(deck->waste_pile);
-  }
-}
-
 static void handle_card_movement(struct cursor *cursor) {
   struct stack **origin = cursor_stack(cursor);
-  struct stack **destination;
   int option;
 
   if (cursor_on_invalid_spot(cursor) || stack_empty(*origin)) {
@@ -110,8 +99,9 @@ static void handle_card_movement(struct cursor *cursor) {
         }
       }
       break;
-    case KEY_SPACEBAR:
-      destination = cursor_stack(cursor);
+    case KEY_SPACEBAR:;
+      /* http://www.mail-archive.com/gcc-bugs@gcc.gnu.org/msg259382.html */
+      struct stack **destination = cursor_stack(cursor);
       int _marked_cards_count = marked_cards_count(*origin);
       if (maneuvre_stack(*origin) && _marked_cards_count > 0) {
         erase_stack(*origin);
@@ -172,7 +162,7 @@ static void handle_card_movement(struct cursor *cursor) {
   }
 }
 
-void handle_keyboard_event(int key) {
+void keyboard_event(int key) {
   switch (key) {
   case 'h':
   case 'j':
@@ -188,7 +178,13 @@ void handle_keyboard_event(int key) {
     break;
   case KEY_SPACEBAR:
     if (cursor_on_stock(cursor)) {
-      handle_stock_event();
+      if (!stack_empty(deck->stock)) {
+        move_card(&(deck->stock), &(deck->waste_pile));
+        card_expose(deck->waste_pile->card);
+        erase_stack(deck->waste_pile);
+        draw_stack(deck->stock);
+        draw_stack(deck->waste_pile);
+      }
     } else {
       struct card *card;
       if (cursor_stack(cursor) &&
