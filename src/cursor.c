@@ -3,6 +3,7 @@
 #include <malloc.h>
 #include <errno.h>
 #include <ncurses.h>
+#include <assert.h>
 
 #include "cursor.h"
 #include "game.h"
@@ -88,5 +89,26 @@ void cursor_move(struct cursor *cursor, enum movement movement) {
       cursor->y = CURSOR_BEGIN_Y;
     }
     break;
+  }
+}
+
+enum movement cursor_direction(int key) {
+  switch (key) {
+  case 'h':
+  case KEY_LEFT:
+    return(LEFT);
+  case 'j':
+  case KEY_DOWN:
+    return(DOWN);
+  case 'k':
+  case KEY_UP:
+    return(UP);
+  case 'l':
+  case KEY_RIGHT:
+    return(RIGHT);
+  default:
+    endwin();
+    game_end();
+    assert(false && "invalid cursor direction");
   }
 }

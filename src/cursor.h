@@ -41,5 +41,6 @@ void cursor_free(struct cursor *);
 void cursor_mark(struct cursor *);
 void cursor_unmark(struct cursor *);
 void cursor_move(struct cursor *, enum movement);
+enum movement cursor_direction(int);
 
 #endif

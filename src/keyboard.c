@@ -105,27 +105,15 @@ static void handle_card_movement(struct cursor *cursor) {
   while (1) {
     switch (option = getch()) {
     case 'h':
-    case KEY_LEFT:
-      erase_cursor(cursor);
-      cursor_move(cursor, LEFT);
-      draw_cursor(cursor);
-      break;
     case 'j':
-    case KEY_DOWN:
-      erase_cursor(cursor);
-      cursor_move(cursor, DOWN);
-      draw_cursor(cursor);
-      break;
     case 'k':
-    case KEY_UP:
-      erase_cursor(cursor);
-      cursor_move(cursor, UP);
-      draw_cursor(cursor);
-      break;
     case 'l':
+    case KEY_LEFT:
+    case KEY_DOWN:
+    case KEY_UP:
     case KEY_RIGHT:
       erase_cursor(cursor);
-      cursor_move(cursor, RIGHT);
+      cursor_move(cursor, cursor_direction(option));
       draw_cursor(cursor);
       break;
     case 'm':
@@ -227,27 +215,15 @@ static void handle_card_movement(struct cursor *cursor) {
 void handle_keyboard_event(int key) {
   switch (key) {
   case 'h':
-  case KEY_LEFT:
-    erase_cursor(cursor);
-    cursor_move(cursor, LEFT);
-    draw_cursor(cursor);
-    break;
   case 'j':
-  case KEY_DOWN:
-    erase_cursor(cursor);
-    cursor_move(cursor, DOWN);
-    draw_cursor(cursor);
-    break;
   case 'k':
-  case KEY_UP:
-    erase_cursor(cursor);
-    cursor_move(cursor, UP);
-    draw_cursor(cursor);
-    break;
   case 'l':
+  case KEY_LEFT:
+  case KEY_DOWN:
+  case KEY_UP:
   case KEY_RIGHT:
     erase_cursor(cursor);
-    cursor_move(cursor, RIGHT);
+    cursor_move(cursor, cursor_direction(key));
     draw_cursor(cursor);
     break;
   case KEY_SPACEBAR:
