@@ -42,5 +42,8 @@ void cursor_mark(struct cursor *);
 void cursor_unmark(struct cursor *);
 void cursor_move(struct cursor *, enum movement);
 enum movement cursor_direction(int);
+struct stack **cursor_stack(struct cursor *);
+bool cursor_on_stock(struct cursor *);
+bool cursor_on_invalid_spot(struct cursor *);
 
 #endif

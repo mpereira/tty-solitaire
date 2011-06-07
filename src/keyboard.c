@@ -8,56 +8,6 @@
 #include "cursor.h"
 #include "draw.h"
 
-static struct stack **cursor_stack(struct cursor *cursor) {
-  if (cursor->y == CURSOR_BEGIN_Y) {
-    switch (cursor->x) {
-    case CURSOR_STOCK_X:        return(&(deck->stock));
-    case CURSOR_WASTE_PILE_X:   return(&(deck->waste_pile));
-    case CURSOR_FOUNDATION_0_X: return(&(deck->foundation[0]));
-    case CURSOR_FOUNDATION_1_X: return(&(deck->foundation[1]));
-    case CURSOR_FOUNDATION_2_X: return(&(deck->foundation[2]));
-    case CURSOR_FOUNDATION_3_X: return(&(deck->foundation[3]));
-    case CURSOR_INVALID_SPOT_X: return(NULL);
-    default:
-      endwin();
-      game_end();
-      assert(false && "invalid stack");
-    }
-  } else {
-    switch (cursor->x) {
-    case CURSOR_MANEUVRE_0_X: return(&(deck->maneuvre[0]));
-    case CURSOR_MANEUVRE_1_X: return(&(deck->maneuvre[1]));
-    case CURSOR_MANEUVRE_2_X: return(&(deck->maneuvre[2]));
-    case CURSOR_MANEUVRE_3_X: return(&(deck->maneuvre[3]));
-    case CURSOR_MANEUVRE_4_X: return(&(deck->maneuvre[4]));
-    case CURSOR_MANEUVRE_5_X: return(&(deck->maneuvre[5]));
-    case CURSOR_MANEUVRE_6_X: return(&(deck->maneuvre[6]));
-    default:
-      endwin();
-      game_end();
-      assert(false && "invalid stack");
-    }
-  }
-}
-
-static bool cursor_on_stock(struct cursor *cursor) {
-  return(cursor_stack(cursor) && *cursor_stack(cursor) == deck->stock);
-}
-
-static bool cursor_on_invalid_spot(struct cursor *cursor) {
-  return(!cursor_stack(cursor));
-}
-
-static void handle_stock_event() {
-  if (!stack_empty(deck->stock)) {
-    move_card(&(deck->stock), &(deck->waste_pile));
-    card_expose(deck->waste_pile->card);
-    erase_stack(deck->waste_pile);
-    draw_stack(deck->stock);
-    draw_stack(deck->waste_pile);
-  }
-}
-
 /* FIXME: this function does not work on stacks with no marked cards.
  * In that case it returns the stack's length. */
 static int marked_cards_count(struct stack *stack) {
@@ -80,6 +30,16 @@ static void unmark_cards(struct stack *stack) {
   int _marked_cards_count = marked_cards_count(stack);
   for (int i = 0; i < _marked_cards_count; stack = stack->next, i++) {
     card_unmark(stack->card);
+  }
+}
+
+static void handle_stock_event() {
+  if (!stack_empty(deck->stock)) {
+    move_card(&(deck->stock), &(deck->waste_pile));
+    card_expose(deck->waste_pile->card);
+    erase_stack(deck->waste_pile);
+    draw_stack(deck->stock);
+    draw_stack(deck->waste_pile);
   }
 }
 

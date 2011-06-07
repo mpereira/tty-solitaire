@@ -112,3 +112,43 @@ enum movement cursor_direction(int key) {
     assert(false && "invalid cursor direction");
   }
 }
+
+struct stack **cursor_stack(struct cursor *cursor) {
+  if (cursor->y == CURSOR_BEGIN_Y) {
+    switch (cursor->x) {
+    case CURSOR_STOCK_X:        return(&(deck->stock));
+    case CURSOR_WASTE_PILE_X:   return(&(deck->waste_pile));
+    case CURSOR_FOUNDATION_0_X: return(&(deck->foundation[0]));
+    case CURSOR_FOUNDATION_1_X: return(&(deck->foundation[1]));
+    case CURSOR_FOUNDATION_2_X: return(&(deck->foundation[2]));
+    case CURSOR_FOUNDATION_3_X: return(&(deck->foundation[3]));
+    case CURSOR_INVALID_SPOT_X: return(NULL);
+    default:
+      endwin();
+      game_end();
+      assert(false && "invalid stack");
+    }
+  } else {
+    switch (cursor->x) {
+    case CURSOR_MANEUVRE_0_X: return(&(deck->maneuvre[0]));
+    case CURSOR_MANEUVRE_1_X: return(&(deck->maneuvre[1]));
+    case CURSOR_MANEUVRE_2_X: return(&(deck->maneuvre[2]));
+    case CURSOR_MANEUVRE_3_X: return(&(deck->maneuvre[3]));
+    case CURSOR_MANEUVRE_4_X: return(&(deck->maneuvre[4]));
+    case CURSOR_MANEUVRE_5_X: return(&(deck->maneuvre[5]));
+    case CURSOR_MANEUVRE_6_X: return(&(deck->maneuvre[6]));
+    default:
+      endwin();
+      game_end();
+      assert(false && "invalid stack");
+    }
+  }
+}
+
+bool cursor_on_stock(struct cursor *cursor) {
+  return(cursor_stack(cursor) && *cursor_stack(cursor) == deck->stock);
+}
+
+bool cursor_on_invalid_spot(struct cursor *cursor) {
+  return(!cursor_stack(cursor));
+}
