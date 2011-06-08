@@ -34,6 +34,7 @@ struct cursor {
 enum movement { LEFT, DOWN, UP, RIGHT };
 
 extern struct deck *deck;
+extern struct game game;
 
 void cursor_malloc(struct cursor **);
 void cursor_init(struct cursor *);

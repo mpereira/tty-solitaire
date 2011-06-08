@@ -43,11 +43,6 @@ static int maneuvre_begin_x(int x) {
   }
 }
 
-static bool stock_stack(struct stack *stack) {
-  return((stack->card->frame->begin_y == STOCK_BEGIN_Y) &&
-           (stack->card->frame->begin_x == STOCK_BEGIN_X));
-}
-
 static bool waste_pile_stack(struct stack *stack) {
   return((stack->card->frame->begin_y == WASTE_PILE_BEGIN_Y) &&
            (stack->card->frame->begin_x == WASTE_PILE_BEGIN_X));
@@ -59,6 +54,11 @@ static bool foundation_stack(struct stack *stack) {
               stack->card->frame->begin_x == FOUNDATION_1_BEGIN_X ||
               stack->card->frame->begin_x == FOUNDATION_2_BEGIN_X ||
               stack->card->frame->begin_x == FOUNDATION_3_BEGIN_X));
+}
+
+bool stock_stack(struct stack *stack) {
+  return((stack->card->frame->begin_y == STOCK_BEGIN_Y) &&
+           (stack->card->frame->begin_x == STOCK_BEGIN_X));
 }
 
 bool maneuvre_stack(struct stack *stack) {
@@ -177,7 +177,7 @@ static void deal_cards(struct deck *deck) {
   }
 }
 
-void game_init() {
+void game_init(struct game *game, int passes_through_deck) {
   cursor_malloc(&cursor);
   cursor_init(cursor);
   deck_malloc(&deck);
@@ -199,6 +199,8 @@ void game_init() {
 
   draw_cursor(cursor);
   draw_deck(deck);
+
+  game->passes_through_deck_left = passes_through_deck;
 }
 
 void game_end() {

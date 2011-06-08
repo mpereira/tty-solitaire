@@ -64,6 +64,13 @@ void draw_card(struct card *card) {
 void draw_stack(struct stack *stack) {
   if (stack_empty(stack)) {
     box(stack->card->frame->window, 0, 0);
+    if (stock_stack(stack)) {
+      if (game.passes_through_deck_left >= 1) {
+        mvwprintw(stack->card->frame->window, 2, 3, "O");
+      } else {
+        mvwprintw(stack->card->frame->window, 2, 3, "X");
+      }
+    }
     wrefresh(stack->card->frame->window);
   } else {
     if (maneuvre_stack(stack)) {

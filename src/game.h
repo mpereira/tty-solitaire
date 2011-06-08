@@ -30,14 +30,19 @@
 #define MANEUVRE_5_BEGIN_X   41
 #define MANEUVRE_6_BEGIN_X   49
 
+struct game {
+  int passes_through_deck_left;
+};
+
 struct deck *deck;
 struct cursor *cursor;
 
 bool maneuvre_stack(struct stack *);
+bool stock_stack(struct stack *);
 bool valid_move(struct stack *, struct stack *);
 void move_card(struct stack **, struct stack **);
 void move_block(struct stack **, struct stack **, int);
-void game_init();
+void game_init(struct game *, int);
 bool game_won();
 void game_end();
 

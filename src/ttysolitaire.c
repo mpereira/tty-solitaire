@@ -8,6 +8,7 @@
 #include "keyboard.h"
 
 const char *program_name;
+struct game game;
 
 void draw_greeting() {
   mvprintw(8, 26, "Welcome to tty-solitaire.");
@@ -36,18 +37,23 @@ void version() {
 int main(int argc, char *argv[]) {
   int option;
   int option_index;
+  int passes_through_deck = 3;
   static const struct option options[] = {
-    {"help",    no_argument, NULL, 'h'},
-    {"version", no_argument, NULL, 'v'}
+    {"help",    no_argument,       NULL, 'h'},
+    {"version", no_argument,       NULL, 'v'},
+    {"passes",  required_argument, NULL, 'p'}
   };
 
   program_name = argv[0];
 
-  while ((option = getopt_long(argc, argv, "hv", options, &option_index)) != -1) {
+  while ((option = getopt_long(argc, argv, "hvp:", options, &option_index)) != -1) {
     switch (option) {
     case 'v':
       version();
       exit(0);
+    case 'p':
+      passes_through_deck = atoi(optarg);
+      break;
     case 'h':
     default:
       usage();
@@ -77,7 +83,7 @@ int main(int argc, char *argv[]) {
     case KEY_SPACEBAR:
       clear();
       refresh();
-      game_init();
+      game_init(&game, passes_through_deck);
       break;
     case 'q':
     case 'Q':

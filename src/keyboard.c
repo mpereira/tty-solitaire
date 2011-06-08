@@ -178,10 +178,20 @@ void keyboard_event(int key) {
     break;
   case KEY_SPACEBAR:
     if (cursor_on_stock(cursor)) {
-      if (!stack_empty(deck->stock)) {
+      if (stack_empty(deck->stock)) {
+        if (game.passes_through_deck_left >= 1) {
+          while (!stack_empty(deck->waste_pile)) {
+            move_card(&(deck->waste_pile), &(deck->stock));
+          }
+          draw_stack(deck->stock);
+          draw_stack(deck->waste_pile);
+        }
+      } else {
         move_card(&(deck->stock), &(deck->waste_pile));
+        if (stack_empty(deck->stock)) {
+          game.passes_through_deck_left--;
+        }
         card_expose(deck->waste_pile->card);
-        erase_stack(deck->waste_pile);
         draw_stack(deck->stock);
         draw_stack(deck->waste_pile);
       }

@@ -11,6 +11,8 @@
 #define WHITE_ON_BLUE  3
 #define WHITE_ON_GREEN 4
 
+extern struct game game;
+
 void draw_card(struct card *);
 void draw_stack(struct stack *);
 void draw_deck(struct deck *);
