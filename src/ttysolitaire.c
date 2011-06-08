@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <ncurses.h>
 #include <locale.h>
+#include <getopt.h>
 
 #include "draw.h"
 #include "game.h"
@@ -17,8 +18,42 @@ void draw_greeting() {
   mvprintw(15, 19, "Press the space bar to play or q to quit.");
 }
 
-int main(int argc, const char *argv[]) {
-  program_name = *argv;
+void usage() {
+  printf("usage: %s [-v|--version] [-h|--help]\n", program_name);
+  printf("  -v, --version  Show the version\n");
+  printf("  -h, --help     Show this message\n");
+}
+
+void version() {
+  FILE *version_file = fopen("VERSION", "rb");
+  char version_string[6];
+  fread(version_string, 1, 5, version_file);
+  version_string[5] = '\0';
+  printf("%s\n", version_string);
+  fclose(version_file);
+}
+
+int main(int argc, char *argv[]) {
+  int option;
+  int option_index;
+  static const struct option options[] = {
+    {"help",    no_argument, NULL, 'h'},
+    {"version", no_argument, NULL, 'v'}
+  };
+
+  program_name = argv[0];
+
+  while ((option = getopt_long(argc, argv, "hv", options, &option_index)) != -1) {
+    switch (option) {
+    case 'v':
+      version();
+      exit(0);
+    case 'h':
+    default:
+      usage();
+      exit(0);
+    }
+  }
 
   setlocale(LC_ALL, "");            /* Support unicode characters.   */
   initscr();
