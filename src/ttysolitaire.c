@@ -2,10 +2,12 @@
 #include <ncurses.h>
 #include <locale.h>
 #include <getopt.h>
+#include <errno.h>
 
 #include "draw.h"
 #include "game.h"
 #include "keyboard.h"
+#include "common.h"
 
 const char *program_name;
 struct game game;
@@ -26,8 +28,13 @@ void usage() {
 }
 
 void version() {
-  FILE *version_file = fopen("VERSION", "rb");
+  FILE *version_file;
   char version_string[6];
+
+  if (!(version_file = fopen("VERSION", "rb"))) {
+    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
+    exit(errno);
+  }
   fread(version_string, 1, 5, version_file);
   version_string[5] = '\0';
   printf("%s\n", version_string);
@@ -61,13 +68,13 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  setlocale(LC_ALL, "");            /* Support unicode characters.   */
+  setlocale(LC_ALL, "");
   initscr();
-  raw();                            /* Disable line buffers.         */
+  raw();
   noecho();
-  keypad(stdscr, TRUE);             /* Give us keyboard key symbols. */
+  keypad(stdscr, TRUE);
   start_color();
-  curs_set(FALSE);                  /* We have our own cursor.       */
+  curs_set(FALSE);
   set_escdelay(0);
   assume_default_colors(COLOR_WHITE, COLOR_GREEN);
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
