@@ -10,7 +10,7 @@
 #include "card.h"
 #include "stack.h"
 #include "deck.h"
-#include "draw.h"
+#include "gui.h"
 #include "cursor.h"
 #include "common.h"
 

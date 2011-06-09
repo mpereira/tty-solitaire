@@ -6,7 +6,7 @@
 #include "stack.h"
 #include "game.h"
 #include "cursor.h"
-#include "draw.h"
+#include "gui.h"
 
 /* FIXME: this function does not work on stacks with no marked cards.
  * In that case it returns the stack's length. */

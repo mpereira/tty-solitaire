@@ -4,7 +4,7 @@
 #include <getopt.h>
 #include <errno.h>
 
-#include "draw.h"
+#include "gui.h"
 #include "game.h"
 #include "keyboard.h"
 #include "common.h"

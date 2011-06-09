@@ -4,7 +4,7 @@
 void test_card();
 void test_cursor();
 void test_deck();
-void test_draw();
+void test_gui();
 void test_frame();
 void test_game();
 void test_keyboard();

@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ncurses.h>
 
-#include "draw.h"
+#include "gui.h"
 #include "deck.h"
 #include "game.h"
 
