@@ -182,6 +182,7 @@ void keyboard_event(int key) {
         if (game.passes_through_deck_left >= 1) {
           while (!stack_empty(deck->waste_pile)) {
             move_card(&(deck->waste_pile), &(deck->stock));
+            card_cover(deck->stock->card);
           }
           draw_stack(deck->stock);
           draw_stack(deck->waste_pile);
