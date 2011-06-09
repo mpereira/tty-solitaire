@@ -192,6 +192,7 @@ void keyboard_event(int key) {
           game.passes_through_deck_left--;
         }
         card_expose(deck->waste_pile->card);
+        erase_stack(deck->waste_pile);
         draw_stack(deck->stock);
         draw_stack(deck->waste_pile);
       }
