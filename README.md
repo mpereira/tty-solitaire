@@ -1,8 +1,13 @@
 # tty-solitaire
   ncurses-based klondlike solitaire game.
 
+## Dependencies
+  - Terminal emulator with UTF-8 support
+  - C library with multibyte locales support
+  - Ncurses
+
 ## Running the game
-    $ git clone git://github.com/mpereira/tty-solitaire.git
+    $ git clone https://github.com/mpereira/tty-solitaire.git
     $ cd tty-solitaire
     $ make && ./ttysolitaire
 
