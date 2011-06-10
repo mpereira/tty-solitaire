@@ -122,7 +122,7 @@ static void handle_card_movement(struct cursor *cursor) {
           }
         } else {
           if (valid_move(*origin, *destination)) {
-            if (maneuvre_stack(*destination) && stack_length(*destination) > 1) {
+            if (maneuvre_stack(*destination)) {
               cursor->y++;
             }
             move_card(origin, destination);
