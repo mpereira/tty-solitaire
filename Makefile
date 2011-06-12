@@ -1,6 +1,6 @@
 CC      = gcc
 CFLAGS  = -W -Wall -pedantic -ansi -std=c99 -g
-LDFLAGS = -lncurses
+LDFLAGS = -lncursesw
 
 EXECUTABLE = ttysolitaire
 SRC_DIR    = src
