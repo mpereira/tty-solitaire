@@ -4,7 +4,7 @@
 ## Dependencies
   - Terminal emulator with UTF-8 support
   - C library with multibyte locales support
-  - Ncurses
+  - libncurses compiled with wide-char/UTF-8 code
 
 ## Running the game
     $ git clone https://github.com/mpereira/tty-solitaire.git
