@@ -21,7 +21,7 @@ void draw_greeting() {
   mvprintw(15, 19, "Press the space bar to play or q to quit.");
 }
 
-void usage() {
+void usage(const char *program_name) {
   printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER]\n", program_name);
   printf("  -v, --version  Show version\n");
   printf("  -h, --help     Show this message\n");
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]) {
       break;
     case 'h':
     default:
-      usage();
+      usage(program_name);
       exit(0);
     }
   }
