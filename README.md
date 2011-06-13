@@ -6,6 +6,12 @@
   - C library with multibyte locales support
   - libncurses compiled with wide-char/UTF-8 code
 
+## Usage
+    usage: ttysolitaire [-v|--version] [-h|--help] [-p|--passes=NUMBER]
+      -v, --version  Show version
+      -h, --help     Show this message
+      -p, --passes   Number of passes through the deck
+
 ## Running the game
     $ git clone https://github.com/mpereira/tty-solitaire.git
     $ cd tty-solitaire

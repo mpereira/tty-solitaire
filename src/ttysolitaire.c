@@ -23,7 +23,7 @@ void draw_greeting() {
 
 void usage() {
   printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER]\n", program_name);
-  printf("  -v, --version  Show the version\n");
+  printf("  -v, --version  Show version\n");
   printf("  -h, --help     Show this message\n");
   printf("  -p, --passes   Number of passes through the deck\n");
 }
