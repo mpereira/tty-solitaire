@@ -1,16 +1,25 @@
 #include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
+#include <ncurses.h>
+
 #include "common.h"
 
-char *tty_solitaire_error_message(int errno, char *file, int line) {
-  char *message = malloc(sizeof(ERROR_MESSAGE_BUFFER_SIZE));
+bool term_size_ok() {
+  int lines, columns;
+  getmaxyx(stdscr, lines, columns);
+  return(lines >= MIN_TERM_LINES && columns >= MIN_TERM_COLS);
+}
+
+void tty_solitaire_generic_error(int errno, char *file, int line) {
+  char message[TTY_SOLITAIRE_BUFSIZ];
   snprintf(message,
-           ERROR_MESSAGE_BUFFER_SIZE,
-           "%s: %s (%s:%d)\n",
+           TTY_SOLITAIRE_BUFSIZ,
+           "%s: %s (%s:%d)",
            program_name,
            strerror(errno),
            file,
            line - 1);
-  return(message);
+  fprintf(stderr, "%s\n", message);
+  exit(errno);
 }

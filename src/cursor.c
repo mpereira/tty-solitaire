@@ -11,8 +11,7 @@
 
 void cursor_malloc(struct cursor **cursor) {
   if (!(*cursor = malloc(sizeof(**cursor)))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
+    tty_solitaire_generic_error(errno, __FILE__, __LINE__);
   }
   (*cursor)->window = newwin(1, 1, CURSOR_BEGIN_Y, CURSOR_BEGIN_X);
 }

@@ -8,8 +8,7 @@
 
 void frame_malloc(struct frame **frame) {
   if (!(*frame = malloc(sizeof(**frame)))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
+    tty_solitaire_generic_error(errno, __FILE__, __LINE__);
   }
   (*frame)->window = newwin(FRAME_HEIGHT, FRAME_WIDTH, 0, 0);
 }

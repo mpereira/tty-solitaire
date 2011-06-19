@@ -149,8 +149,7 @@ static void shuffle_deck(struct deck *deck) {
   int random;
 
   if (!(card = malloc(NUMBER_OF_CARDS * sizeof(*card)))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
+    tty_solitaire_generic_error(errno, __FILE__, __LINE__);
   }
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     card[i] = stack_pop(&(deck->stock));

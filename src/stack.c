@@ -10,8 +10,7 @@
 
 void stack_malloc(struct stack **stack) {
   if (!(*stack = malloc(sizeof(**stack)))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
+    tty_solitaire_generic_error(errno, __FILE__, __LINE__);
   }
   card_malloc(&((*stack)->card));
 }

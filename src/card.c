@@ -8,8 +8,7 @@
 
 void card_malloc(struct card **card) {
   if (!(*card = malloc(sizeof(**card)))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
+    tty_solitaire_generic_error(errno, __FILE__, __LINE__);
   }
   frame_malloc(&((*card)->frame));
 }

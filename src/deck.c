@@ -8,8 +8,7 @@
 
 void deck_malloc(struct deck **deck) {
   if (!(*deck = malloc(sizeof(**deck)))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
+    tty_solitaire_generic_error(errno, __FILE__, __LINE__);
   }
   stack_malloc(&((*deck)->stock));
   stack_malloc(&((*deck)->waste_pile));

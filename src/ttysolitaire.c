@@ -4,7 +4,6 @@
 #include <getopt.h>
 #include <errno.h>
 
-#include "gui.h"
 #include "game.h"
 #include "keyboard.h"
 #include "common.h"
@@ -12,35 +11,9 @@
 const char *program_name;
 struct game game;
 
-void draw_greeting() {
-  mvprintw(8, 26, "Welcome to tty-solitaire.");
-  mvprintw(10, 23, "Move with the arrow keys or hjkl.");
-  mvprintw(11, 19, "Use the space bar to mark and move cards.");
-  mvprintw(12, 16, "After marking a card you can use m to increase ");
-  mvprintw(13, 17, "and n to decrease the number of marked cards.");
-  mvprintw(15, 19, "Press the space bar to play or q to quit.");
-}
-
-void usage(const char *program_name) {
-  printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER]\n", program_name);
-  printf("  -v, --version  Show version\n");
-  printf("  -h, --help     Show this message\n");
-  printf("  -p, --passes   Number of passes through the deck\n");
-}
-
-void version() {
-  FILE *version_file;
-  char version_string[6];
-
-  if (!(version_file = fopen("VERSION", "rb"))) {
-    fprintf(stderr, tty_solitaire_error_message(errno, __FILE__, __LINE__));
-    exit(errno);
-  }
-  fread(version_string, 1, 5, version_file);
-  version_string[5] = '\0';
-  printf("%s\n", version_string);
-  fclose(version_file);
-}
+void version();
+void usage(const char *);
+void draw_greeting();
 
 int main(int argc, char *argv[]) {
   int option;
@@ -83,31 +56,44 @@ int main(int argc, char *argv[]) {
   init_pair(3, COLOR_WHITE, COLOR_BLUE);
   init_pair(4, COLOR_WHITE, COLOR_GREEN);
 
-  draw_greeting();
-
   int key;
-  do {
-    switch (key = getch()) {
-    case KEY_SPACEBAR:
-      clear();
-      refresh();
-      game_init(&game, passes_through_deck);
-      break;
-    case 'q':
-    case 'Q':
+
+  while (!term_size_ok()) {
+    clear();
+    mvprintw(1, 1, SMALL_TERM_MSG);
+    refresh();
+    if ((key = getch()) == 'q' || key == 'Q') {
       endwin();
       return(0);
     }
-  } while (key != KEY_SPACEBAR);
+  }
 
-  do {
+  clear();
+  draw_greeting();
+  refresh();
+
+  for (;;) {
     if ((key = getch()) == 'q' || key == 'Q') {
       endwin();
-      game_end();
-      exit(0);
-    } else {
-      keyboard_event(key);
+      return(0);
     }
+    if (term_size_ok()) {
+      clear();
+      draw_greeting();
+      refresh();
+      if (key == KEY_SPACEBAR) {
+        game_init(&game, passes_through_deck);
+        break;
+      }
+    } else if (key == KEY_RESIZE) {
+      clear();
+      mvprintw(1, 1, SMALL_TERM_MSG);
+      refresh();
+    }
+  }
+
+  do {
+    keyboard_event(getch());
   } while (!game_won());
 
   endwin();
@@ -115,4 +101,33 @@ int main(int argc, char *argv[]) {
   printf("You won.\n");
 
   return(0);
+}
+
+void draw_greeting() {
+  mvprintw(8, 26, "Welcome to tty-solitaire.");
+  mvprintw(10, 23, "Move with the arrow keys or hjkl.");
+  mvprintw(11, 19, "Use the space bar to mark and move cards.");
+  mvprintw(12, 16, "After marking a card you can use m to increase ");
+  mvprintw(13, 17, "and n to decrease the number of marked cards.");
+  mvprintw(15, 19, "Press the space bar to play or q to quit.");
+}
+
+void usage(const char *program_name) {
+  printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER]\n", program_name);
+  printf("  -v, --version  Show version\n");
+  printf("  -h, --help     Show this message\n");
+  printf("  -p, --passes   Number of passes through the deck\n");
+}
+
+void version() {
+  FILE *version_file;
+  char version_string[6];
+
+  if (!(version_file = fopen("VERSION", "rb"))) {
+    tty_solitaire_generic_error(errno, __FILE__, __LINE__);
+  }
+  fread(version_string, 1, 5, version_file);
+  version_string[5] = '\0';
+  printf("%s\n", version_string);
+  fclose(version_file);
 }
