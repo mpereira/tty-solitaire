@@ -82,6 +82,8 @@ int main(int argc, char *argv[]) {
       draw_greeting();
       refresh();
       if (key == KEY_SPACEBAR) {
+        clear();
+        refresh();
         game_init(&game, passes_through_deck);
         break;
       }
