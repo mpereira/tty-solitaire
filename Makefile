@@ -1,6 +1,7 @@
 CC      = gcc
 CFLAGS  = -W -Wall -pedantic -ansi -std=c99 -g
 LDFLAGS = -lncursesw
+PREFIX  = /usr/local
 
 EXECUTABLE = ttysolitaire
 SRC_DIR    = src
@@ -29,6 +30,8 @@ TESTS_OBJECTS = ${TESTS_DIR}/frame_test.o       \
                 ${TESTS_DIR}/test_helper.o      \
                 ${TESTS_DIR}/test_helper_test.o \
 
+.PHONY: test clean
+
 ttysolitaire: ${SRC_OBJECTS}
 	${CC} ${CFLAGS} ${SRC} -o ${EXECUTABLE} ${SRC_OBJECTS} ${LDFLAGS}
 
@@ -38,3 +41,6 @@ test: ${SRC_OBJECTS} ${TESTS_OBJECTS}
 
 clean:
 	rm -rf {${SRC_DIR},${TESTS_DIR}}/*.o ${EXECUTABLE} ${TESTS_EXECUTABLE}
+
+install:
+	cp -pf ${EXECUTABLE} ${PREFIX}/bin
