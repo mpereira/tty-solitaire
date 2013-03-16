@@ -44,3 +44,6 @@ clean:
 
 install:
 	cp -pf ${EXECUTABLE} ${PREFIX}/bin
+
+uninstall:
+	rm -f ${PREFIX}/bin/${EXECUTABLE}
