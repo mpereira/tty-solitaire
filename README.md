@@ -1,6 +1,8 @@
 # tty-solitaire
   ncurses-based klondlike solitaire game.
 
+![ttysolitaire gameplay](https://raw.github.com/mpereira/tty-solitaire/master/resources/ttysolitaire.gif)
+
 ## Dependencies
   - Terminal emulator with UTF-8 support
   - C library with multibyte locales support
@@ -32,11 +34,6 @@
       -v, --version  Show version
       -h, --help     Show this message
       -p, --passes   Number of passes through the deck
-
-## Screenshots
-![Greeting screen picture](http://dl.dropbox.com/u/14256545/tty_solitaire_screenshot_shadowed_0.png)
-![Game start picture](http://dl.dropbox.com/u/14256545/tty_solitaire_screenshot_shadowed_1.png)
-![Game middle picture](http://dl.dropbox.com/u/14256545/tty_solitaire_screenshot_shadowed_2.png)
 
 ## Running the unit tests
     $ make test
