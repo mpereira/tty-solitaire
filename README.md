@@ -6,13 +6,13 @@
 ## Dependencies
   - Terminal emulator with UTF-8 support
   - C library with multibyte locales support
-  - libncursesw
+  - Ncurses with wide-char/UTF-8 support
 
-### Installing libncursesw
+### Installing Ncurses
 
 #### Ubuntu
 
-    $ sudo apt-get install libncursesw5-dev
+    $ sudo apt-get install libncurses5-dev libncursesw5-dev
 
 #### OS X
 
