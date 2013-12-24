@@ -1,6 +1,12 @@
-CC      = gcc
-CFLAGS  = -W -Wall -pedantic -ansi -std=c99 -g
+CC     = gcc
+CFLAGS = -W -Wall -pedantic -ansi -std=c99 -g
+
 LDFLAGS = -lncursesw
+
+ifeq ($(shell uname -s),Darwin)
+	LDFLAGS += -L /opt/local/lib
+endif
+
 PREFIX  = /usr/local
 
 EXECUTABLE = ttysolitaire
