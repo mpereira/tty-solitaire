@@ -1,5 +1,5 @@
 # tty-solitaire
-  ncurses-based klondlike solitaire game.
+  ncurses-based klondike solitaire game.
 
 ![ttysolitaire gameplay](https://raw.github.com/mpereira/tty-solitaire/master/resources/ttysolitaire.gif)
 
