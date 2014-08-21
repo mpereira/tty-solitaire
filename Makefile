@@ -46,10 +46,10 @@ test: $(SRC_OBJECTS) $(TESTS_OBJECTS)
 	@./$(TESTS_EXECUTABLE)
 
 clean:
-	rm -rf ($(SRC_DIR),$(TESTS_DIR))/*.o $(EXECUTABLE) $(TESTS_EXECUTABLE)
+	@rm -rf {$(SRC_DIR),$(TESTS_DIR)}/*.o $(EXECUTABLE) $(TESTS_EXECUTABLE)
 
 install:
-	cp -pf $(EXECUTABLE) $(PREFIX)/bin
+	@install -Dm755 $(EXECUTABLE) $(DESTDIR)$(PREFIX)/bin/$(EXECUTABLE)
 
 uninstall:
-	rm -f $(PREFIX)/bin/$(EXECUTABLE)
+	@rm -f $(PREFIX)/bin/$(EXECUTABLE)
