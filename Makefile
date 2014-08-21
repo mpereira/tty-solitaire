@@ -36,7 +36,7 @@ TESTS_OBJECTS = $(TESTS_DIR)/frame_test.o       \
                 $(TESTS_DIR)/test_helper.o      \
                 $(TESTS_DIR)/test_helper_test.o \
 
-.PHONY: test clean
+.PHONY: test clean install uninstall
 
 ttysolitaire: $(SRC_OBJECTS)
 	$(CC) $(CFLAGS) $(SRC) -o $(EXECUTABLE) $(SRC_OBJECTS) $(LDFLAGS)
