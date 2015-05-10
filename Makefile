@@ -50,7 +50,8 @@ clean:
 	@rm -rf {$(SRC_DIR),$(TESTS_DIR)}/*.o $(EXECUTABLE) $(TESTS_EXECUTABLE)
 
 install:
-	@install -Dm755 $(EXECUTABLE) $(DESTDIR)$(PREFIX)/bin/$(EXECUTABLE)
+	@install -d $(DESTDIR)$(PREFIX)/bin
+	@install -m755 $(EXECUTABLE) $(DESTDIR)$(PREFIX)/bin/$(EXECUTABLE)
 
 uninstall:
 	@rm -f $(PREFIX)/bin/$(EXECUTABLE)
