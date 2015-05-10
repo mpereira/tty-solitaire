@@ -3,8 +3,9 @@ CFLAGS = -W -Wall -pedantic -ansi -std=c99 -g
 
 LDFLAGS = -lncursesw
 
+# OS X installs ncurses with wide character support, but not as "libncurses"
 ifeq ($(shell uname -s),Darwin)
-	LDFLAGS += -L /opt/local/lib
+	LDFLAGS = -lncurses
 endif
 
 PREFIX  = /usr/local
