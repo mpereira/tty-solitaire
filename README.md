@@ -16,7 +16,11 @@
 
 #### OS X
 
-    $ sudo port install ncurses
+OS X has ncurses with wide character support out of the box. If you want to use
+other ncurses libraries (from Macports, Homebrew, etc.) you will still be able
+to do so if you specify LDLAGS in the make invocation. See
+[this pull request](https://github.com/mpereira/tty-solitaire/pull/8) for more
+information.
 
 ## Compile
     $ git clone https://github.com/mpereira/tty-solitaire.git
