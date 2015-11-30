@@ -22,7 +22,8 @@ int main(int argc, char *argv[]) {
   static const struct option options[] = {
     {"help",    no_argument,       NULL, 'h'},
     {"version", no_argument,       NULL, 'v'},
-    {"passes",  required_argument, NULL, 'p'}
+    {"passes",  required_argument, NULL, 'p'},
+    {0, 0, 0, 0}
   };
 
   program_name = argv[0];
