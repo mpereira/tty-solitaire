@@ -160,7 +160,7 @@ static void handle_card_movement(struct cursor *cursor) {
           erase_cursor(cursor);
           cursor->y--;
         }
-        if (marked_cards_count(*origin) > 0) {
+        if (maneuvre_stack(*origin)) {
           erase_stack(*origin);
           unmark_cards(*origin);
           draw_stack(*origin);
