@@ -129,7 +129,7 @@ void version() {
   if (!(version_file = fopen("VERSION", "rb"))) {
     tty_solitaire_generic_error(errno, __FILE__, __LINE__);
   }
-  fread(version_string, 1, 5, version_file);
+  if (!fread(version_string, 1, 5, version_file));
   version_string[5] = '\0';
   printf("%s\n", version_string);
   fclose(version_file);
