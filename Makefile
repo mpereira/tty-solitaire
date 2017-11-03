@@ -39,6 +39,8 @@ TESTS_OBJECTS = $(TESTS_DIR)/frame_test.o       \
 
 .PHONY: test clean install uninstall
 
+all: ${EXECUTABLE}
+
 ttysolitaire: $(SRC_OBJECTS)
 	$(CC) $(CFLAGS) $(SRC) -o $(EXECUTABLE) $(SRC_OBJECTS) $(LDFLAGS)
 
