@@ -1,14 +1,15 @@
-CC     = gcc
-CFLAGS = -W -Wall -pedantic -ansi -std=c99 -g
-
-LDFLAGS = -lncursesw
+CC     ?= gcc
+CFLAGS ?= -g
+CFLAGS += -W -Wall -pedantic -ansi -std=c99 -g
 
 # OS X installs ncurses with wide character support, but not as "libncurses"
 ifeq ($(shell uname -s),Darwin)
-	LDFLAGS = -lncurses
+	LDFLAGS += -lncurses
+else
+	LDFLAGS += -lncursesw
 endif
 
-PREFIX  = /usr/local
+PREFIX  ?= /usr/local
 
 EXECUTABLE = ttysolitaire
 SRC_DIR    = src
