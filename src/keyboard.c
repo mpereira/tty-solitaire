@@ -128,6 +128,15 @@ static void handle_card_movement(struct cursor *cursor) {
           }
         }
         break;
+      case 'N':
+        if (origin == cursor_stack(cursor) && maneuvre_stack(*origin)) {
+          erase_stack(*origin);
+          unmark_cards(*origin);
+          card_mark((*origin)->card);
+          draw_stack(*origin);
+        }
+        break;
+
       case KEY_SPACEBAR:;
         /* http://www.mail-archive.com/gcc-bugs@gcc.gnu.org/msg259382.html */
         struct stack **destination = cursor_stack(cursor);
