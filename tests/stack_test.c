@@ -217,7 +217,7 @@ void test_stack_reverse_on_stack_empty_stack() {
   old_stack = stack;
   stack_reversed_stack = stack_reverse(stack);
 
-  assert(stack_reversed_stack == old_stack);
+  assert(stacks_equal(stack_reversed_stack, old_stack));
 
   stack_free(stack);
 }
@@ -236,7 +236,7 @@ void test_stack_reverse_on_stack_with_one_element() {
   old_stack = stack;
   stack_reversed_stack = stack_reverse(stack);
 
-  assert(stack_reversed_stack == old_stack);
+  assert(stacks_equal(stack_reversed_stack, old_stack));
 
   stack_free(stack);
 }
