@@ -129,6 +129,7 @@ void test_valid_move_from_waste_pile_to_foundation_stacks() {
   card_set(foundation_stacks[2]->card, ACE, SPADES, EXPOSED, FOUNDATION_BEGIN_Y, FOUNDATION_2_BEGIN_X);
   card_set(foundation_stacks[3]->card, ACE, SPADES, EXPOSED, FOUNDATION_BEGIN_Y, FOUNDATION_3_BEGIN_X);
   for (int i = 0; i < 4; i++) {
+    // TODO: fix error here
     assert(valid_move(waste_pile, foundation_stacks[i]));
   }
   stack_free(waste_pile);
@@ -155,6 +156,7 @@ void test_valid_move_from_waste_pile_to_maneuvre_stacks() {
   card_set(maneuvre_stacks[5]->card, ACE, SPADES, EXPOSED, MANEUVRE_BEGIN_Y, MANEUVRE_5_BEGIN_X);
   card_set(maneuvre_stacks[6]->card, ACE, SPADES, EXPOSED, MANEUVRE_BEGIN_Y, MANEUVRE_6_BEGIN_X);
   for (int i = 0; i < 7; i++) {
+    // TODO: fix error here
     assert(valid_move(waste_pile, maneuvre_stacks[i]));
   }
   stack_free(waste_pile);
@@ -225,6 +227,7 @@ void test_valid_move_from_foundation_stack_to_foundation_stacks() {
       if (i == j) {
         assert(!valid_move(foundation_stacks[i], foundation_stacks[j]));
       } else {
+        // TODO: fix error here
         assert(valid_move(foundation_stacks[i], foundation_stacks[j]));
       }
     }
@@ -259,6 +262,7 @@ void test_valid_move_from_foundation_stack_to_maneuvre_stacks() {
   card_set(maneuvre_stacks[6]->card, ACE, SPADES, EXPOSED, MANEUVRE_BEGIN_Y, MANEUVRE_6_BEGIN_X);
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 7; j++) {
+      // TODO: fix error here
       assert(valid_move(foundation_stacks[i], maneuvre_stacks[j]));
     }
   }
@@ -347,6 +351,7 @@ void test_valid_move_from_maneuvre_stack_to_foundation_stacks() {
   card_set(maneuvre_stacks[6]->card, ACE, SPADES, EXPOSED, MANEUVRE_BEGIN_Y, MANEUVRE_6_BEGIN_X);
   for (int i = 0; i < 7; i++) {
     for (int j = 0; j < 4; j++) {
+      // TODO: fix error here
       assert(valid_move(maneuvre_stacks[i], foundation_stacks[j]));
     }
   }
@@ -377,6 +382,7 @@ void test_valid_move_from_maneuvre_stack_to_maneuvre_stacks() {
       if (i == j) {
         assert(!valid_move(maneuvre_stacks[i], maneuvre_stacks[j]));
       } else {
+        // TODO: fix error here
         assert(valid_move(maneuvre_stacks[i], maneuvre_stacks[j]));
       }
     }
