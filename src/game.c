@@ -129,7 +129,6 @@ void move_block(struct stack **origin, struct stack **destination, int block_siz
   stack_free(tmp);
 }
 
-
 static void fill_deck(struct deck *deck) {
   struct card *card[NUMBER_OF_CARDS];
 
@@ -166,10 +165,10 @@ static void shuffle_deck(struct deck *deck) {
 }
 
 static void deal_cards(struct deck *deck) {
-  for (int i = 0; i < 7; i++) {
+  for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
     move_card(&(deck->stock), &(deck->maneuvre[i]));
     card_expose(deck->maneuvre[i]->card);
-    for (int j = i + 1; j < 7; j++) {
+    for (int j = i + 1; j < MANEUVRE_STACKS_NUMBER; j++) {
       move_card(&(deck->stock), &(deck->maneuvre[j]));
     }
   }
