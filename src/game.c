@@ -207,8 +207,14 @@ void game_end() {
 }
 
 bool game_won() {
-  return(stack_length(deck->foundation[0]) == 13 &&
-           stack_length(deck->foundation[1]) == 13 &&
-           stack_length(deck->foundation[2]) == 13 &&
-           stack_length(deck->foundation[3]) == 13);
+  // if any card is covered, game is not won
+  for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++)
+    for (struct stack *j = deck->maneuvre[i]; j!= NULL; j = j->next)
+      if (j->card->face == COVERED)
+        return false;
+  // else look in stock and waste pile
+  if (stack_empty(deck->stock) &&
+      stack_empty(deck->waste_pile))
+     return true;
+  else return false;
 }
