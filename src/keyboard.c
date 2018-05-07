@@ -98,7 +98,7 @@ static void handle_card_movement(struct cursor *cursor) {
       case 'M':
         if (origin == cursor_stack(cursor) && maneuvre_stack(*origin)) {
           for (struct stack *i = *origin; i && i->next; i = i->next) {
-            while (i->next->card->face == EXPOSED &&
+            if (i->next->card->face == EXPOSED &&
                   (i->card->frame->begin_y - i->next->card->frame->begin_y) > 1) {
               erase_stack(*origin);
               card_mark(i->next->card);
