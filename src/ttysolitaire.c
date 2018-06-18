@@ -8,6 +8,10 @@
 #include "keyboard.h"
 #include "common.h"
 
+#ifndef TS_VERSION
+#define TS_VERSION "n/a"
+#endif
+
 const char *program_name;
 struct game game;
 
@@ -123,16 +127,5 @@ void usage(const char *program_name) {
 }
 
 void version() {
-  FILE *version_file;
-  char version_string[6];
-
-  if (!(version_file = fopen("VERSION", "rb"))) {
-    tty_solitaire_generic_error(errno, __FILE__, __LINE__);
-  }
-  if (!fread(version_string, 1, 5, version_file)) {
-    // TODO: handle this.
-  }
-  version_string[5] = '\0';
-  printf("%s\n", version_string);
-  fclose(version_file);
+  printf("%s\n", TS_VERSION);
 }
