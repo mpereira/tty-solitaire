@@ -1,5 +1,7 @@
+VERSION = 1.0.0
+
 CC     = gcc
-CFLAGS = -W -Wall -pedantic -ansi -std=c99 -g
+CFLAGS = -W -Wall -pedantic -ansi -std=c99 -g -DTS_VERSION=\"$(VERSION)\"
 
 LDFLAGS = -lncursesw
 
