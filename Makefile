@@ -1,6 +1,8 @@
+VERSION = 1.0.0
+
 CC     ?= gcc
 CFLAGS ?= -g
-CFLAGS += -W -Wall -pedantic -ansi -std=c99 -g
+CFLAGS += -W -Wall -pedantic -ansi -std=c99 -DTS_VERSION=\"$(VERSION)\"
 
 # OS X installs ncurses with wide character support, but not as "libncurses"
 ifeq ($(shell uname -s),Darwin)
@@ -9,7 +11,7 @@ else
 	LDFLAGS += -lncursesw
 endif
 
-PREFIX  ?= /usr/local
+PREFIX ?= /usr/local
 
 EXECUTABLE = ttysolitaire
 SRC_DIR    = src
@@ -39,6 +41,8 @@ TESTS_OBJECTS = $(TESTS_DIR)/frame_test.o       \
                 $(TESTS_DIR)/test_helper_test.o \
 
 .PHONY: test clean install uninstall
+
+all: ${EXECUTABLE}
 
 ttysolitaire: $(SRC_OBJECTS)
 	$(CC) $(CFLAGS) $(SRC) -o $(EXECUTABLE) $(SRC_OBJECTS) $(LDFLAGS)
