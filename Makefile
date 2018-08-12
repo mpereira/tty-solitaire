@@ -1,16 +1,17 @@
 VERSION = 1.0.0
 
-CC     = gcc
-CFLAGS = -W -Wall -pedantic -ansi -std=c99 -g -DTS_VERSION=\"$(VERSION)\"
-
-LDFLAGS = -lncursesw
+CC     ?= gcc
+CFLAGS ?= -g
+CFLAGS += -W -Wall -pedantic -ansi -std=c99 -DTS_VERSION=\"$(VERSION)\"
 
 # OS X installs ncurses with wide character support, but not as "libncurses"
 ifeq ($(shell uname -s),Darwin)
-	LDFLAGS = -lncurses
+	LDFLAGS += -lncurses
+else
+	LDFLAGS += -lncursesw
 endif
 
-PREFIX  = /usr/local
+PREFIX ?= /usr/local
 
 EXECUTABLE = ttysolitaire
 SRC_DIR    = src
