@@ -1,0 +1,12 @@
+* CHANGELOG
+
+** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.1.0][v1.1.0]] (2018-08-12)
+*** Features
+    - ~M~ and ~N~ select and deselect (respectively) all cards in a stack. [[https://github.com/mpereira/tty-solitaire/pull/20][(#20]])
+    - Game now automatically detects a "win" situation. [[https://github.com/mpereira/tty-solitaire/pull/23][(#23]])
+*** Improvements
+    - Version is now stored in the binary instead of a text file. [[https://github.com/mpereira/tty-solitaire/pull/26][(#26]])
+    - Some compiler and linker flags are now overridable. [[https://github.com/mpereira/tty-solitaire/pull/15][(#15]])
+
+** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.0.0][v1.0.0]] (2017-01-07)
+   - Initial release.
