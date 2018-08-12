@@ -2,9 +2,9 @@ VERSION = 1.0.0
 
 CC     ?= gcc
 CFLAGS ?= -g
-CFLAGS += -W -Wall -pedantic -ansi -std=c99 -DTS_VERSION=\"$(VERSION)\"
+CFLAGS += -W -Wall -pedantic -ansi -std=c99 -DVERSION=\"$(VERSION)\"
 
-# OS X installs ncurses with wide character support, but not as "libncurses"
+# OS X installs ncurses with wide character support, but not as "libncurses".
 ifeq ($(shell uname -s),Darwin)
 	LDFLAGS += -lncurses
 else

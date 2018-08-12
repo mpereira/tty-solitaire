@@ -8,8 +8,8 @@
 #include "keyboard.h"
 #include "common.h"
 
-#ifndef TS_VERSION
-#define TS_VERSION "n/a"
+#ifndef VERSION
+#define VERSION "n/a"
 #endif
 
 const char *program_name;
@@ -127,5 +127,5 @@ void usage(const char *program_name) {
 }
 
 void version() {
-  printf("%s\n", TS_VERSION);
+  printf("%s\n", VERSION);
 }
