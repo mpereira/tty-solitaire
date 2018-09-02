@@ -1,0 +1,64 @@
+* tty-solitaire
+  Ncurses-based klondike solitaire game.
+
+  #+CAPTION: ttysolitaire gameplay
+  [[https://raw.github.com/mpereira/tty-solitaire/master/resources/ttysolitaire.gif]]
+
+** Dependencies
+   - Terminal emulator with UTF-8 support
+   - C library with multibyte locales support
+   - Ncurses with wide-char/UTF-8 support
+
+** Install
+*** From source
+**** Install Ncurses
+     tty-solitaire depends on Ncurses. Some platforms provide it out of the box
+     and some don't, so you might need to install it yourself.
+***** Ubuntu
+      #+BEGIN_SRC bash
+      sudo apt-get install libncurses5-dev libncursesw5-dev
+      #+END_SRC
+***** macOS
+      macOS has Ncurses with wide character support out of the box, so *there's
+      nothing you need to do*. If you want to use other Ncurses libraries (from
+      Macports, Homebrew, etc.) you are able to do it by specifying =LDLAGS= in
+      the make invocation. See [[https://github.com/mpereira/tty-solitaire/pull/8][this pull request]] for more information.
+**** Install tty-solitaire
+    #+BEGIN_SRC text
+    $ wget -O tty-solitaire-v1.1.0.tar.gz https://github.com/mpereira/tty-solitaire/archive/v1.1.0.tar.gz
+    $ cd tty-solitaire-1.1.0
+    $ make
+    $ sudo make install
+    #+END_SRC
+*** Via package managers
+    Check out https://github.com/mpereira/tty-solitaire/issues/29.
+
+** Play
+   Run in your favorite shell:
+   #+BEGIN_SRC bash
+   ttysolitaire
+   #+END_SRC
+
+** Usage
+   #+BEGIN_SRC text
+   usage: ttysolitaire [-v|--version] [-h|--help] [-p|--passes=NUMBER]
+   -v, --version  Show version
+   -h, --help     Show this message
+   -p, --passes   Number of passes through the deck
+   #+END_SRC
+
+** Development
+*** Get the code
+    #+BEGIN_SRC bash
+    git clone https://github.com/mpereira/tty-solitaire.git
+    #+END_SRC
+*** Run the unit tests
+    #+BEGIN_SRC bash
+    make test
+    #+END_SRC
+
+** Author
+   [[http://murilopereira.com][Murilo Pereira]]
+
+** License
+   [[https://github.com/mpereira/tty-solitaire/blob/master/LICENSE][MIT]]
