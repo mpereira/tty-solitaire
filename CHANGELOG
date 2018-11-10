@@ -2,6 +2,10 @@
 
 * CHANGELOG
 
+** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.1.1][v1.1.1]] (2018-11-10)
+*** Improvements
+    - Added LICENSE.
+
 ** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.1.0][v1.1.0]] (2018-08-12)
 *** Features
     - ~M~ and ~N~ select and deselect (respectively) all cards in a stack. [[https://github.com/mpereira/tty-solitaire/pull/20][(#20]])
