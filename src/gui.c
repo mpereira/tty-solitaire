@@ -6,6 +6,7 @@
 #include "gui.h"
 #include "deck.h"
 #include "game.h"
+#include "card.h"
 
 static const char *card_suits[4] = { "\u2666", "\u2660", "\u2665", "\u2663" };
 static const char *card_values[13] = {
@@ -21,10 +22,28 @@ static void draw_value(struct card *card) {
 }
 
 static void draw_suit(struct card *card) {
-  if (card->suit % 2 == 0) {
-    wattron(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
+  if (game.color_mode == 0) {
+    if (card->suit % 2 == 0) {
+      wattron(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
+    } else {
+      wattron(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
+    }
   } else {
-    wattron(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
+    switch (card->suit) {
+      case SPADES:
+        wattron(card->frame->window, COLOR_PAIR(GREEN_ON_WHITE));
+        break;
+      case DIAMONDS:
+        wattron(card->frame->window, COLOR_PAIR(YELLOW_ON_WHITE));
+        break;
+      case CLUBS:
+        wattron(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
+        break;
+      case HEARTS:
+      default:
+        wattron(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
+        break;
+    }
   }
   mvwprintw(card->frame->window,
             0,

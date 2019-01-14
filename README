@@ -44,10 +44,11 @@
 
 ** Usage
    #+BEGIN_SRC text
-   usage: ttysolitaire [-v|--version] [-h|--help] [-p|--passes=NUMBER]
+   usage: ttysolitaire [-v|--version] [-h|--help] [-p|--passes=NUMBER] [-c|--colors]
    -v, --version  Show version
    -h, --help     Show this message
    -p, --passes   Number of passes through the deck
+   -c, --colors   Four unique colors, one for each suit
    #+END_SRC
 
 ** Development

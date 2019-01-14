@@ -174,7 +174,7 @@ static void deal_cards(struct deck *deck) {
   }
 }
 
-void game_init(struct game *game, int passes_through_deck) {
+void game_init(struct game *game, int passes_through_deck, int color_mode) {
   cursor_malloc(&cursor);
   cursor_init(cursor);
   deck_malloc(&deck);
@@ -189,6 +189,8 @@ void game_init(struct game *game, int passes_through_deck) {
   for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
     frame_set(deck->maneuvre[i]->card->frame, MANEUVRE_BEGIN_Y, maneuvre_begin_x(i));
   }
+
+  game->color_mode = color_mode;
 
   fill_deck(deck);
   shuffle_deck(deck);

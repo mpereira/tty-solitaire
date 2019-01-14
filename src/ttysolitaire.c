@@ -23,9 +23,11 @@ int main(int argc, char *argv[]) {
   int option;
   int option_index;
   int passes_through_deck = 3;
+  int color_mode = 0;
   static const struct option options[] = {
     {"help",    no_argument,       NULL, 'h'},
     {"version", no_argument,       NULL, 'v'},
+    {"colors", no_argument,        NULL, 'c'},
     {"passes",  required_argument, NULL, 'p'},
     {0, 0, 0, 0}
   };
@@ -39,6 +41,9 @@ int main(int argc, char *argv[]) {
       exit(0);
     case 'p':
       passes_through_deck = atoi(optarg);
+      break;
+    case 'c':
+      color_mode = 1;
       break;
     case 'h':
     default:
@@ -58,8 +63,10 @@ int main(int argc, char *argv[]) {
   assume_default_colors(COLOR_WHITE, COLOR_GREEN);
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
-  init_pair(3, COLOR_WHITE, COLOR_BLUE);
-  init_pair(4, COLOR_WHITE, COLOR_GREEN);
+  init_pair(3, COLOR_GREEN, COLOR_WHITE);
+  init_pair(4, COLOR_YELLOW, COLOR_WHITE);
+  init_pair(5, COLOR_WHITE, COLOR_BLUE);
+  init_pair(6, COLOR_WHITE, COLOR_GREEN);
 
   int key;
 
@@ -89,7 +96,7 @@ int main(int argc, char *argv[]) {
       if (key == KEY_SPACEBAR) {
         clear();
         refresh();
-        game_init(&game, passes_through_deck);
+        game_init(&game, passes_through_deck, color_mode);
         break;
       }
     } else if (key == KEY_RESIZE) {
@@ -120,10 +127,11 @@ void draw_greeting() {
 }
 
 void usage(const char *program_name) {
-  printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER]\n", program_name);
+  printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER] [-c|--colors]\n", program_name);
   printf("  -v, --version  Show version\n");
   printf("  -h, --help     Show this message\n");
   printf("  -p, --passes   Number of passes through the deck\n");
+  printf("  -c, --colors   Four unique colors, one for each suit\n");
 }
 
 void version() {
