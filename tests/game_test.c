@@ -406,6 +406,8 @@ void test_move_card_from_stack_empty_stack_to_stack_empty_stack() {
   assert(destination == new_destination);
   assert(stacks_equal(destination, destination_duplicate));
 
+  stack_free(origin_duplicate);
+  stack_free(destination_duplicate);
   stack_free(origin);
   stack_free(destination);
 }
@@ -436,6 +438,8 @@ void test_move_card_from_stack_empty_stack_to_non_stack_empty_stack() {
   assert(destination == new_destination);
   assert(stacks_equal(destination, destination_duplicate));
 
+  stack_free(origin_duplicate);
+  stack_free(destination_duplicate);
   stack_free(origin);
   stack_free(destination);
 }

@@ -11,6 +11,8 @@ void test_frames_equal_with_one_null() {
   frame_malloc(&frame);
   assert(!frames_equal(frame, NULL));
   assert(!frames_equal(NULL, frame));
+
+  frame_free(frame);
 }
 
 void test_frames_equal_with_two_equivalent_frames() {
@@ -23,14 +25,20 @@ void test_frames_equal_with_two_equivalent_frames() {
   frame_set(frame_1, begin_y, begin_x);
 
   assert(frames_equal(frame_0, frame_1));
+
+  frame_free(frame_0);
+  frame_free(frame_1);
 }
 
 void test_frames_equal_with_two_frame_pointers_to_the_same_address() {
   struct frame *frame;
 
   frame_malloc(&frame);
+  frame_init(frame);
 
   assert(frames_equal(frame, frame));
+
+  frame_free(frame);
 }
 
 void test_cards_equal_with_two_nulls() {
@@ -55,14 +63,20 @@ void test_cards_equal_with_two_equivalent_cards() {
   card_set(card_1, ACE, SPADES, EXPOSED, begin_y, begin_x);
 
   assert(cards_equal(card_0, card_1));
+
+  card_free(card_0);
+  card_free(card_1);
 }
 
 void test_cards_equal_with_two_card_pointers_to_the_same_address() {
   struct card *card;
 
   card_malloc(&card);
+  card_init(card);
 
   assert(cards_equal(card, card));
+
+  card_free(card);
 }
 
 void test_stacks_equal_with_two_nulls() {
@@ -73,8 +87,12 @@ void test_stacks_equal_with_one_null() {
   struct stack *stack;
 
   stack_malloc(&stack);
+  stack_init(stack);
+
   assert(!stacks_equal(stack, NULL));
   assert(!stacks_equal(NULL, stack));
+
+  stack_free(stack);
 }
 
 void test_stacks_equal_with_two_equivalent_stacks() {
@@ -88,10 +106,15 @@ void test_stacks_equal_with_two_equivalent_stacks() {
   card_set(card_1, ACE, SPADES, EXPOSED, begin_y, begin_x);
   stack_malloc(&stack_0);
   stack_malloc(&stack_1);
+  stack_init(stack_0);
+  stack_init(stack_1);
   stack_push(&stack_0, card_0);
   stack_push(&stack_1, card_1);
 
   assert(stacks_equal(stack_0, stack_1));
+
+  stack_free(stack_0);
+  stack_free(stack_1);
 }
 
 void test_stacks_equal_with_two_different_stacks() {
@@ -105,18 +128,26 @@ void test_stacks_equal_with_two_different_stacks() {
   card_set(card_1, KING, HEARTS, EXPOSED, begin_y, begin_x);
   stack_malloc(&stack_0);
   stack_malloc(&stack_1);
+  stack_init(stack_0);
+  stack_init(stack_1);
   stack_push(&stack_0, card_0);
   stack_push(&stack_1, card_1);
 
   assert(!stacks_equal(stack_0, stack_1));
+
+  stack_free(stack_0);
+  stack_free(stack_1);
 }
 
 void test_stacks_equal_with_two_stack_pointers_to_the_same_address() {
   struct stack *stack;
 
   stack_malloc(&stack);
+  stack_init(stack);
 
   assert(stacks_equal(stack, stack));
+
+  stack_free(stack);
 }
 
 void test_test_helper() {

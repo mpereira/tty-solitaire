@@ -162,6 +162,7 @@ static void shuffle_deck(struct deck *deck) {
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     stack_push(&(deck->stock), card[i]);
   }
+  free(card);
 }
 
 static void deal_cards(struct deck *deck) {

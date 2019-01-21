@@ -69,6 +69,7 @@ int stack_length(struct stack *stack) {
 void stack_push(struct stack **stack, struct card *card) {
   if (card) {
     if (stack_empty(*stack)) {
+      card_free((*stack)->card);
       (*stack)->card = card;
     } else {
       /* Allocating by hand because stack_malloc() would
