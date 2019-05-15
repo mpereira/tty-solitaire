@@ -52,7 +52,7 @@ test: $(SRC_OBJECTS) $(TESTS_OBJECTS)
 	@./$(TESTS_EXECUTABLE)
 
 clean:
-	@rm -rf {$(SRC_DIR),$(TESTS_DIR)}/*.o $(EXECUTABLE) $(TESTS_EXECUTABLE)
+	@rm -rf $(SRC_DIR)/*.o $(TESTS_DIR)/*.o $(EXECUTABLE) $(TESTS_EXECUTABLE)
 
 install:
 	@install -d $(DESTDIR)$(PREFIX)/bin
