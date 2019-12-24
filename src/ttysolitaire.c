@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
     {"help",    no_argument,       NULL, 'h'},
     {"version", no_argument,       NULL, 'v'},
     {"passes",  required_argument, NULL, 'p'},
-	{"default-backg", no_argument, NULL, 'd'},
+    {"default-backg", no_argument, NULL, 'd'},
     {0, 0, 0, 0}
   };
 
