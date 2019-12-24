@@ -23,16 +23,18 @@ int main(int argc, char *argv[]) {
   int option;
   int option_index;
   int passes_through_deck = 3;
+  bool default_background = false;
   static const struct option options[] = {
     {"help",    no_argument,       NULL, 'h'},
     {"version", no_argument,       NULL, 'v'},
     {"passes",  required_argument, NULL, 'p'},
+	{"default-backg", no_argument, NULL, 'd'},
     {0, 0, 0, 0}
   };
 
   program_name = argv[0];
 
-  while ((option = getopt_long(argc, argv, "hvp:", options, &option_index)) != -1) {
+  while ((option = getopt_long(argc, argv, "hvp:d", options, &option_index)) != -1) {
     switch (option) {
     case 'v':
       version();
@@ -40,6 +42,9 @@ int main(int argc, char *argv[]) {
     case 'p':
       passes_through_deck = atoi(optarg);
       break;
+	case 'd':
+	  default_background = true;
+	  break;
     case 'h':
     default:
       usage(program_name);
@@ -55,7 +60,16 @@ int main(int argc, char *argv[]) {
   start_color();
   curs_set(FALSE);
   set_escdelay(0);
-  assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+
+  if(default_background) {
+	if( use_default_colors() == ERR ) {
+      assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+	}
+  }
+  else {
+    assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+  }
+
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
   init_pair(3, COLOR_WHITE, COLOR_BLUE);
