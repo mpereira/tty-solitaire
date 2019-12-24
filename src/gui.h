@@ -9,7 +9,7 @@
 #define BLACK_ON_WHITE 1
 #define RED_ON_WHITE   2
 #define WHITE_ON_BLUE  3
-#define WHITE_ON_GREEN 4
+#define DEFAULT 4 // either terminal's default or white on green
 
 extern struct game game;
 

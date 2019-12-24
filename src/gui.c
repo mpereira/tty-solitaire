@@ -109,7 +109,7 @@ void draw_cursor(struct cursor *cursor) {
 
 void erase_card(struct card *card) {
   werase(card->frame->window);
-  wbkgd(card->frame->window, WHITE_ON_GREEN);
+  wbkgd(card->frame->window, DEFAULT);
   wrefresh(card->frame->window);
 }
 
