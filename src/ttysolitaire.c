@@ -134,10 +134,11 @@ void draw_greeting() {
 }
 
 void usage(const char *program_name) {
-  printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER]\n", program_name);
-  printf("  -v, --version  Show version\n");
-  printf("  -h, --help     Show this message\n");
-  printf("  -p, --passes   Number of passes through the deck\n");
+  printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER] [-d|--default-backg]\n", program_name);
+  printf("  -v, --version       Show version\n");
+  printf("  -h, --help          Show this message\n");
+  printf("  -p, --passes        Number of passes through the deck\n");
+  printf("  -d, --default-backg Use default terminal background color\n");
 }
 
 void version() {
