@@ -61,19 +61,17 @@ int main(int argc, char *argv[]) {
   curs_set(FALSE);
   set_escdelay(0);
 
-  if(default_background) {
-	if( use_default_colors() == ERR ) {
-      assume_default_colors(COLOR_WHITE, COLOR_GREEN);
-	}
+  if(default_background && use_default_colors() == OK) {
+    init_pair(4, -1, -1);
   }
   else {
     assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+    init_pair(4, COLOR_WHITE, COLOR_GREEN);
   }
 
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
   init_pair(3, COLOR_WHITE, COLOR_BLUE);
-  init_pair(4, COLOR_WHITE, COLOR_GREEN);
 
   int key;
 
