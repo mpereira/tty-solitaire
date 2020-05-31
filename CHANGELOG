@@ -2,6 +2,14 @@
 
 * CHANGELOG
 
+** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.2.0][v1.2.0]] (2020-05-31)
+*** Bug fixes
+    - Fixed off-by-one issue in ~game:shuffle_deck()~. [[https://github.com/mpereira/tty-solitaire/pull/35][(#35)]]
+    - Fixed memory leaks in game and test code. [[https://github.com/mpereira/tty-solitaire/pull/35][(#35)]]
+    - Fixed broken tests. [[https://github.com/mpereira/tty-solitaire/pull/35][(#35)]]
+    - Fixed card drawing issue that came up due to changes in newer versions of
+      Ncurses. ([[https://github.com/mpereira/tty-solitaire/pull/41][#41]])
+
 ** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.1.1][v1.1.1]] (2018-11-10)
 *** Improvements
     - Added LICENSE.

@@ -64,9 +64,9 @@
 
 **** Install tty-solitaire
      #+begin_src bash
-     wget -O tty-solitaire-v1.1.1.tar.gz https://github.com/mpereira/tty-solitaire/archive/v1.1.1.tar.gz
-     tar xvf tty-solitaire-v1.1.1.tar.gz
-     cd tty-solitaire-1.1.1
+     wget -O tty-solitaire-v1.2.0.tar.gz https://github.com/mpereira/tty-solitaire/archive/v1.2.0.tar.gz
+     tar xvf tty-solitaire-v1.2.0.tar.gz
+     cd tty-solitaire-1.2.0
      make
      sudo make install
      #+end_src
