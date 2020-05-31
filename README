@@ -12,53 +12,90 @@
    - Ncurses with wide-char/UTF-8 support
 
 ** Install
+*** Using package managers
+**** Arch Linux
+     #+begin_src bash
+     pacman -S tty-solitaire
+     #+end_src
+
+**** macOS
+     #+begin_src bash
+     brew install tty-solitaire
+     #+end_src
+
+**** Void Linux
+     #+begin_src bash
+     xbps-install -S tty-solitaire
+     #+end_src
+
+**** FreeBSD
+     #+begin_src bash
+     pkg install tty-solitaire
+     #+end_src
+
+**** Slackware
+     [[https://www.slackbuilds.org/repository/14.2/games/tty-solitaire/][Via Slackbuilds]].
+
+**** ALT Linux
+     #+begin_src bash
+     apt-get install tty-solitaire
+     #+end_src
+
+   We still need help making tty-solitaire available on Ubuntu, Fedora, Gentoo,
+   and more. Please give us a hand at [[https://github.com/mpereira/tty-solitaire/issues/29][issue #29]] if you think you can help.
+
 *** From source
 **** Install Ncurses
      tty-solitaire depends on Ncurses. Some platforms provide it out of the box
      and some don't, so you might need to install it yourself.
+
 ***** Ubuntu
-      #+BEGIN_SRC bash
+      #+begin_src bash
       sudo apt-get install libncurses5-dev libncursesw5-dev
-      #+END_SRC
+      #+end_src
+
 ***** macOS
       macOS has Ncurses with wide character support out of the box, so *there's
-      nothing you need to do*. If you want to use other Ncurses libraries (from
+      nothing you need to do*.
+
+      *If* for some reason you want to use other Ncurses libraries (from
       Macports, Homebrew, etc.) you are able to do it by specifying =LDLAGS= in
       the make invocation. See [[https://github.com/mpereira/tty-solitaire/pull/8][this pull request]] for more information.
+
 **** Install tty-solitaire
-    #+BEGIN_SRC text
-    $ wget -O tty-solitaire-v1.1.0.tar.gz https://github.com/mpereira/tty-solitaire/archive/v1.1.0.tar.gz
-    $ tar xvf tty-solitaire-v1.1.0.tar.gz
-    $ cd tty-solitaire-1.1.0
-    $ make
-    $ sudo make install
-    #+END_SRC
-*** Via package managers
-    Check out https://github.com/mpereira/tty-solitaire/issues/29.
+     #+begin_src bash
+     wget -O tty-solitaire-v1.1.1.tar.gz https://github.com/mpereira/tty-solitaire/archive/v1.1.1.tar.gz
+     tar xvf tty-solitaire-v1.1.1.tar.gz
+     cd tty-solitaire-1.1.1
+     make
+     sudo make install
+     #+end_src
 
 ** Play
    Run in your favorite shell:
-   #+BEGIN_SRC bash
+
+   #+begin_src bash
    ttysolitaire
-   #+END_SRC
+   #+end_src
 
 ** Usage
-   #+BEGIN_SRC text
+   #+begin_src text
    usage: ttysolitaire [-v|--version] [-h|--help] [-p|--passes=NUMBER]
    -v, --version  Show version
    -h, --help     Show this message
    -p, --passes   Number of passes through the deck
-   #+END_SRC
+   #+end_src
 
 ** Development
 *** Get the code
-    #+BEGIN_SRC bash
+    #+begin_src bash
     git clone https://github.com/mpereira/tty-solitaire.git
-    #+END_SRC
+    #+end_src
+
 *** Run the unit tests
-    #+BEGIN_SRC bash
+    #+begin_src bash
     make test
-    #+END_SRC
+    #+end_src
 
 ** Author
    [[http://murilopereira.com][Murilo Pereira]]
