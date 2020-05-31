@@ -43,6 +43,7 @@ static void draw_suit(struct card *card) {
 
 static void draw_front(struct card *card) {
   wbkgd(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
+  wborder(card->frame->window, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
   draw_value(card);
   draw_suit(card);
 }
