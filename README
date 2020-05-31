@@ -97,6 +97,10 @@
     make test
     #+end_src
 
+*** [[https://invisible-island.net/ncurses/man/ncurses.3x.html][Ncurses documentation]]
+
+*** [[https://tldp.org/HOWTO/NCURSES-Programming-HOWTO/][Ncurses programming HOWTO]]
+
 ** Author
    [[http://murilopereira.com][Murilo Pereira]]
 
