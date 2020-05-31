@@ -30,6 +30,9 @@ void test_stack_dup() {
 
   assert(stack_0 != stack_1);
   assert(stacks_equal(stack_0, stack_1));
+
+  stack_free(stack_0);
+  stack_free(stack_1);
 }
 
 void test_stack_empty_on_stack_empty_stack() {
@@ -185,6 +188,7 @@ void test_stack_pop_on_stack_with_one_element() {
   assert(stack_popped_card == card);
 
   stack_free(stack);
+  card_free(stack_popped_card);
 }
 
 void test_stack_pop_on_stack_with_more_than_one_element() {
@@ -207,6 +211,7 @@ void test_stack_pop_on_stack_with_more_than_one_element() {
   assert(stack_popped_card == card[2]);
 
   stack_free(stack);
+  card_free(stack_popped_card);
 }
 
 void test_stack_reverse_on_stack_empty_stack() {
@@ -220,6 +225,7 @@ void test_stack_reverse_on_stack_empty_stack() {
   assert(stacks_equal(stack_reversed_stack, old_stack));
 
   stack_free(stack);
+  stack_free(stack_reversed_stack);
 }
 
 void test_stack_reverse_on_stack_with_one_element() {
@@ -238,6 +244,7 @@ void test_stack_reverse_on_stack_with_one_element() {
 
   assert(stacks_equal(stack_reversed_stack, old_stack));
 
+  stack_free(stack_reversed_stack);
   stack_free(stack);
 }
 
@@ -264,12 +271,14 @@ void test_stack_reverse_on_stack_with_more_than_one_element() {
 
   assert(stacks_equal(unstack_reversed_stack, old_stack));
 
+  stack_free(unstack_reversed_stack);
   stack_free(stack_reversed_stack);
+  stack_free(old_stack);
   stack_free(stack);
 }
 
 void test_stack_reverse_should_not_change_stack() {
-  struct stack *stack, *old_stack, *old_stack_address;
+  struct stack *stack, *stack_reversed_stack_0, *stack_reversed_stack_1;
   struct card *card[3];
 
   stack_malloc(&stack);
@@ -280,13 +289,14 @@ void test_stack_reverse_should_not_change_stack() {
     card_set(card[i], TWO + i, DIAMONDS + i, EXPOSED, 0, 0);
     stack_push(&stack, card[i]);
   }
-  old_stack_address = stack;
-  old_stack = stack_dup(stack);
-  stack_reverse(stack);
+  stack_reversed_stack_0 = stack_reverse(stack);
+  stack_reversed_stack_1 = stack_reverse(stack_reversed_stack_0);
 
-  assert(stack == old_stack_address);
-  assert(stacks_equal(stack, old_stack));
+  assert(!stacks_equal(stack, stack_reversed_stack_0));
+  assert(stacks_equal(stack, stack_reversed_stack_1));
 
+  stack_free(stack_reversed_stack_0);
+  stack_free(stack_reversed_stack_1);
   stack_free(stack);
 }
 
