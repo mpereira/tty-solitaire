@@ -23,17 +23,17 @@ int main(int argc, char *argv[]) {
   int option;
   int option_index;
   int passes_through_deck = 3;
-  int color = 1;
+  static int no_background_color;
   static const struct option options[] = {
       {"help", no_argument, NULL, 'h'},
       {"version", no_argument, NULL, 'v'},
       {"passes", required_argument, NULL, 'p'},
-      {"color", required_argument, NULL, 'c'},
+      {"no-background-color", no_argument, &no_background_color, 1},
       {0, 0, 0, 0}};
 
   program_name = argv[0];
 
-  while ((option = getopt_long(argc, argv, "hvpc:", options, &option_index)) !=
+  while ((option = getopt_long(argc, argv, "hvp:", options, &option_index)) !=
          -1) {
     switch (option) {
     case 'v':
@@ -42,10 +42,11 @@ int main(int argc, char *argv[]) {
     case 'p':
       passes_through_deck = atoi(optarg);
       break;
-    case 'c':
-      color = atoi(optarg) > 0 ? 1 : 0;
-      break;
     case 'h':
+    case 0:
+      /* If this option set a "no_argument" flag, do nothing else now. */
+      if (options[option_index].flag != 0)
+        break;
     default:
       usage(program_name);
       exit(0);
@@ -60,10 +61,10 @@ int main(int argc, char *argv[]) {
   start_color();
   curs_set(FALSE);
   set_escdelay(0);
-  if (color) {
-    assume_default_colors(COLOR_WHITE, COLOR_GREEN);
-  } else {
+  if (no_background_color) {
     use_default_colors();
+  } else {
+    assume_default_colors(COLOR_WHITE, COLOR_GREEN);
   }
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
@@ -129,13 +130,13 @@ void draw_greeting() {
 }
 
 void usage(const char *program_name) {
-  printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER]\n",
-         program_name);
-  printf("  -v, --version  Show version\n");
-  printf("  -h, --help     Show this message\n");
-  printf("  -p, --passes   Number of passes through the deck\n");
-  printf("  -c, --color    1 (default) - use suggested colors\n");
-  printf("                 0 - use terminal colors\n");
+  printf("usage: %s [OPTIONS]\n", program_name);
+  printf("  -v, --version              Show version\n");
+  printf("  -h, --help                 Show this message\n");
+  printf("  -p, --passes               Number of passes through the deck  "
+         "(default: 3)\n");
+  printf("      --no-background-color  Don't draw background color        "
+         "(default: false)\n");
 }
 
 void version() { printf("%s\n", VERSION); }

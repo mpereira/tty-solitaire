@@ -80,10 +80,11 @@
 
 ** Usage
    #+begin_src text
-   usage: ttysolitaire [-v|--version] [-h|--help] [-p|--passes=NUMBER]
-   -v, --version  Show version
-   -h, --help     Show this message
-   -p, --passes   Number of passes through the deck
+   usage: ./ttysolitaire [OPTIONS]
+     -v, --version              Show version
+     -h, --help                 Show this message
+     -p, --passes               Number of passes through the deck  (default: 3)
+         --no-background-color  Don't draw background color        (default: false)
    #+end_src
 
 ** Development
