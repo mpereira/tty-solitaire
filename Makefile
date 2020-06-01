@@ -2,7 +2,7 @@ VERSION = 1.2.0
 
 CC     ?= gcc
 CFLAGS ?= -g
-CFLAGS += -W -Wall -pedantic -ansi -std=c99 -DVERSION=\"$(VERSION)\"
+CFLAGS += -W -Wall -pedantic -ansi -std=c99 -DVERSION=\"$(VERSION)\" -fcommon
 
 # The Ncurses library with wide character support is available as "lncurses"
 # under macOS.
