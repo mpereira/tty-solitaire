@@ -23,22 +23,27 @@ int main(int argc, char *argv[]) {
   int option;
   int option_index;
   int passes_through_deck = 3;
+  int color = 1;
   static const struct option options[] = {
     {"help",    no_argument,       NULL, 'h'},
     {"version", no_argument,       NULL, 'v'},
     {"passes",  required_argument, NULL, 'p'},
+    {"color", required_argument, NULL, 'c'},
     {0, 0, 0, 0}
   };
 
   program_name = argv[0];
 
-  while ((option = getopt_long(argc, argv, "hvp:", options, &option_index)) != -1) {
+  while ((option = getopt_long(argc, argv, "hvpc:", options, &option_index)) != -1) {
     switch (option) {
     case 'v':
       version();
       exit(0);
     case 'p':
       passes_through_deck = atoi(optarg);
+      break;
+    case 'c':
+      color = atoi(optarg) > 0 ? 1 : 0;
       break;
     case 'h':
     default:
@@ -55,7 +60,12 @@ int main(int argc, char *argv[]) {
   start_color();
   curs_set(FALSE);
   set_escdelay(0);
-  assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+  if(color) {
+    assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+  }
+  else {
+    use_default_colors();
+  }
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
   init_pair(3, COLOR_WHITE, COLOR_BLUE);
@@ -124,6 +134,8 @@ void usage(const char *program_name) {
   printf("  -v, --version  Show version\n");
   printf("  -h, --help     Show this message\n");
   printf("  -p, --passes   Number of passes through the deck\n");
+  printf("  -c, --color    1 (default) - use suggested colors\n");
+  printf("                 0 - use terminal colors\n");   
 }
 
 void version() {
