@@ -25,6 +25,9 @@ void test_card_dup() {
 
   assert(card_0 != card_1);
   assert(cards_equal(card_0, card_1));
+
+  card_free(card_0);
+  card_free(card_1);
 }
 
 void test_card_set() {

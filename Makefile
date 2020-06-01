@@ -1,10 +1,11 @@
-VERSION = 1.1.1
+VERSION = 1.2.0
 
 CC     ?= gcc
 CFLAGS ?= -g
 CFLAGS += -W -Wall -pedantic -ansi -std=c99 -DVERSION=\"$(VERSION)\" -fcommon
 
-# OS X installs ncurses with wide character support, but not as "libncurses".
+# The Ncurses library with wide character support is available as "lncurses"
+# under macOS.
 ifeq ($(shell uname -s),Darwin)
 	LDFLAGS += -lncurses
 else
@@ -48,15 +49,15 @@ ttysolitaire: $(SRC_OBJECTS)
 	$(CC) $(CFLAGS) $(SRC) -o $(EXECUTABLE) $(SRC_OBJECTS) $(LDFLAGS)
 
 test: $(SRC_OBJECTS) $(TESTS_OBJECTS)
-	@$(CC) $(CFLAGS) $(TESTS_SRC) -o $(TESTS_EXECUTABLE) $(TESTS_OBJECTS) $(SRC_OBJECTS) $(LDFLAGS)
-	@./$(TESTS_EXECUTABLE)
+	$(CC) $(CFLAGS) $(TESTS_SRC) -o $(TESTS_EXECUTABLE) $(TESTS_OBJECTS) $(SRC_OBJECTS) $(LDFLAGS)
+	./$(TESTS_EXECUTABLE)
 
 clean:
-	@rm -rf $(SRC_DIR)/*.o $(TESTS_DIR)/*.o $(EXECUTABLE) $(TESTS_EXECUTABLE)
+	rm -rf $(SRC_DIR)/*.o $(TESTS_DIR)/*.o $(EXECUTABLE) $(TESTS_EXECUTABLE)
 
 install:
-	@install -d $(DESTDIR)$(PREFIX)/bin
-	@install -m755 $(EXECUTABLE) $(DESTDIR)$(PREFIX)/bin/$(EXECUTABLE)
+	install -d $(DESTDIR)$(PREFIX)/bin
+	install -m755 $(EXECUTABLE) $(DESTDIR)$(PREFIX)/bin/$(EXECUTABLE)
 
 uninstall:
-	@rm -f $(PREFIX)/bin/$(EXECUTABLE)
+	rm -f $(PREFIX)/bin/$(EXECUTABLE)
