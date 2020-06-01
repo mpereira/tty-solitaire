@@ -1,38 +1,50 @@
+#include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ncurses.h>
 
-#include "gui.h"
+#include "card.h"
 #include "deck.h"
 #include "game.h"
+#include "gui.h"
 
-static const char *card_suits[4] = { "\u2666", "\u2660", "\u2665", "\u2663" };
-static const char *card_values[13] = {
-  "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"
-};
+static const char *card_suits[4] = {"\u2666", "\u2660", "\u2665", "\u2663"};
+static const char *card_values[13] = {"A", "2", "3",  "4", "5", "6", "7",
+                                      "8", "9", "10", "J", "Q", "K"};
 
 static void draw_value(struct card *card) {
   mvwprintw(card->frame->window, 0, 0, card_values[card->value]);
-  mvwprintw(card->frame->window,
-            4,
-            7 - strlen(card_values[card->value]),
+  mvwprintw(card->frame->window, 4, 7 - strlen(card_values[card->value]),
             card_values[card->value]);
 }
 
 static void draw_suit(struct card *card) {
-  if (card->suit % 2 == 0) {
-    wattron(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
+  if (game.four_color_deck == 0) {
+    if (card->suit % 2 == 0) {
+      wattron(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
+    } else {
+      wattron(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
+    }
   } else {
-    wattron(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
+    switch (card->suit) {
+    case SPADES:
+      wattron(card->frame->window, COLOR_PAIR(GREEN_ON_WHITE));
+      break;
+    case DIAMONDS:
+      wattron(card->frame->window, COLOR_PAIR(YELLOW_ON_WHITE));
+      break;
+    case CLUBS:
+      wattron(card->frame->window, COLOR_PAIR(BLACK_ON_WHITE));
+      break;
+    case HEARTS:
+    default:
+      wattron(card->frame->window, COLOR_PAIR(RED_ON_WHITE));
+      break;
+    }
   }
-  mvwprintw(card->frame->window,
-            0,
-            strlen(card_values[card->value]),
+  mvwprintw(card->frame->window, 0, strlen(card_values[card->value]),
             card_suits[card->suit]);
-  mvwprintw(card->frame->window,
-            4,
-            6 - strlen(card_values[card->value]),
+  mvwprintw(card->frame->window, 4, 6 - strlen(card_values[card->value]),
             card_suits[card->suit]);
   if (card->suit % 2 == 0) {
     wattroff(card->frame->window, COLOR_PAIR(RED_ON_WHITE));

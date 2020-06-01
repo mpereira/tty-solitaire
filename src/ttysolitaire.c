@@ -23,11 +23,13 @@ int main(int argc, char *argv[]) {
   int option;
   int option_index;
   int passes_through_deck = 3;
+  static int four_color_deck;
   static int no_background_color;
   static const struct option options[] = {
       {"help", no_argument, NULL, 'h'},
       {"version", no_argument, NULL, 'v'},
       {"passes", required_argument, NULL, 'p'},
+      {"four-color-deck", no_argument, &four_color_deck, 1},
       {"no-background-color", no_argument, &no_background_color, 1},
       {0, 0, 0, 0}};
 
@@ -43,8 +45,12 @@ int main(int argc, char *argv[]) {
       passes_through_deck = atoi(optarg);
       break;
     case 'h':
+    case '?':
+      usage(program_name);
+      exit(0);
     case 0:
       /* If this option set a "no_argument" flag, do nothing else now. */
+      printf("options[option_index].name: %s\n", options[option_index].name);
       if (options[option_index].flag != 0)
         break;
     default:
@@ -68,8 +74,10 @@ int main(int argc, char *argv[]) {
   }
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
-  init_pair(3, COLOR_WHITE, COLOR_BLUE);
-  init_pair(4, COLOR_WHITE, COLOR_GREEN);
+  init_pair(3, COLOR_GREEN, COLOR_WHITE);
+  init_pair(4, COLOR_YELLOW, COLOR_WHITE);
+  init_pair(5, COLOR_WHITE, COLOR_BLUE);
+  init_pair(6, COLOR_WHITE, COLOR_GREEN);
 
   int key;
 
@@ -99,7 +107,7 @@ int main(int argc, char *argv[]) {
       if (key == KEY_SPACEBAR) {
         clear();
         refresh();
-        game_init(&game, passes_through_deck);
+        game_init(&game, passes_through_deck, four_color_deck);
         break;
       }
     } else if (key == KEY_RESIZE) {
@@ -135,6 +143,8 @@ void usage(const char *program_name) {
   printf("  -h, --help                 Show this message\n");
   printf("  -p, --passes               Number of passes through the deck  "
          "(default: 3)\n");
+  printf("      --four-color-deck      Draw unique card suit colors       "
+         "(default: false)\n");
   printf("      --no-background-color  Don't draw background color        "
          "(default: false)\n");
 }
