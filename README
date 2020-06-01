@@ -84,7 +84,7 @@
      -v, --version              Show version
      -h, --help                 Show this message
      -p, --passes               Number of passes through the deck  (default: 3)
-     -c, --colors               Unique colors for each suit        (default: false)
+         --four-color-deck      Draw unique card suit colors       (default: false)
          --no-background-color  Don't draw background color        (default: false)
    #+end_src
 

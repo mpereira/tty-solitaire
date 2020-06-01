@@ -32,7 +32,7 @@
 
 struct game {
   int passes_through_deck_left;
-  int color_mode;
+  int four_color_deck;
 };
 
 struct deck *deck;

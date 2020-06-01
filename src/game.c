@@ -1,24 +1,28 @@
+#include <assert.h>
+#include <errno.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <errno.h>
 #include <time.h>
-#include <assert.h>
 
-#include "game.h"
 #include "card.h"
-#include "stack.h"
-#include "deck.h"
-#include "gui.h"
-#include "cursor.h"
 #include "common.h"
+#include "cursor.h"
+#include "deck.h"
+#include "game.h"
+#include "gui.h"
+#include "stack.h"
 
 static int foundation_begin_x(int x) {
   switch (x) {
-  case 0: return(FOUNDATION_0_BEGIN_X);
-  case 1: return(FOUNDATION_1_BEGIN_X);
-  case 2: return(FOUNDATION_2_BEGIN_X);
-  case 3: return(FOUNDATION_3_BEGIN_X);
+  case 0:
+    return (FOUNDATION_0_BEGIN_X);
+  case 1:
+    return (FOUNDATION_1_BEGIN_X);
+  case 2:
+    return (FOUNDATION_2_BEGIN_X);
+  case 3:
+    return (FOUNDATION_3_BEGIN_X);
   default:
     endwin();
     game_end();
@@ -28,13 +32,20 @@ static int foundation_begin_x(int x) {
 
 static int maneuvre_begin_x(int x) {
   switch (x) {
-  case 0: return(MANEUVRE_0_BEGIN_X);
-  case 1: return(MANEUVRE_1_BEGIN_X);
-  case 2: return(MANEUVRE_2_BEGIN_X);
-  case 3: return(MANEUVRE_3_BEGIN_X);
-  case 4: return(MANEUVRE_4_BEGIN_X);
-  case 5: return(MANEUVRE_5_BEGIN_X);
-  case 6: return(MANEUVRE_6_BEGIN_X);
+  case 0:
+    return (MANEUVRE_0_BEGIN_X);
+  case 1:
+    return (MANEUVRE_1_BEGIN_X);
+  case 2:
+    return (MANEUVRE_2_BEGIN_X);
+  case 3:
+    return (MANEUVRE_3_BEGIN_X);
+  case 4:
+    return (MANEUVRE_4_BEGIN_X);
+  case 5:
+    return (MANEUVRE_5_BEGIN_X);
+  case 6:
+    return (MANEUVRE_6_BEGIN_X);
   default:
     endwin();
     game_end();
@@ -43,61 +54,61 @@ static int maneuvre_begin_x(int x) {
 }
 
 static bool waste_pile_stack(struct stack *stack) {
-  return((stack->card->frame->begin_y == WASTE_PILE_BEGIN_Y) &&
-           (stack->card->frame->begin_x == WASTE_PILE_BEGIN_X));
+  return ((stack->card->frame->begin_y == WASTE_PILE_BEGIN_Y) &&
+          (stack->card->frame->begin_x == WASTE_PILE_BEGIN_X));
 }
 
 static bool foundation_stack(struct stack *stack) {
-  return(stack->card->frame->begin_y == FOUNDATION_BEGIN_Y &&
-           (stack->card->frame->begin_x == FOUNDATION_0_BEGIN_X ||
-              stack->card->frame->begin_x == FOUNDATION_1_BEGIN_X ||
-              stack->card->frame->begin_x == FOUNDATION_2_BEGIN_X ||
-              stack->card->frame->begin_x == FOUNDATION_3_BEGIN_X));
+  return (stack->card->frame->begin_y == FOUNDATION_BEGIN_Y &&
+          (stack->card->frame->begin_x == FOUNDATION_0_BEGIN_X ||
+           stack->card->frame->begin_x == FOUNDATION_1_BEGIN_X ||
+           stack->card->frame->begin_x == FOUNDATION_2_BEGIN_X ||
+           stack->card->frame->begin_x == FOUNDATION_3_BEGIN_X));
 }
 
 bool stock_stack(struct stack *stack) {
-  return((stack->card->frame->begin_y == STOCK_BEGIN_Y) &&
-           (stack->card->frame->begin_x == STOCK_BEGIN_X));
+  return ((stack->card->frame->begin_y == STOCK_BEGIN_Y) &&
+          (stack->card->frame->begin_x == STOCK_BEGIN_X));
 }
 
 bool maneuvre_stack(struct stack *stack) {
-  return(stack->card->frame->begin_y >= MANEUVRE_BEGIN_Y &&
-           (stack->card->frame->begin_x == MANEUVRE_0_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_1_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_2_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_3_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_4_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_5_BEGIN_X ||
-              stack->card->frame->begin_x == MANEUVRE_6_BEGIN_X));
+  return (stack->card->frame->begin_y >= MANEUVRE_BEGIN_Y &&
+          (stack->card->frame->begin_x == MANEUVRE_0_BEGIN_X ||
+           stack->card->frame->begin_x == MANEUVRE_1_BEGIN_X ||
+           stack->card->frame->begin_x == MANEUVRE_2_BEGIN_X ||
+           stack->card->frame->begin_x == MANEUVRE_3_BEGIN_X ||
+           stack->card->frame->begin_x == MANEUVRE_4_BEGIN_X ||
+           stack->card->frame->begin_x == MANEUVRE_5_BEGIN_X ||
+           stack->card->frame->begin_x == MANEUVRE_6_BEGIN_X));
 }
 
 bool valid_move(struct stack *origin, struct stack *destination) {
   if (origin->card->face == EXPOSED) {
     if (stock_stack(origin) && waste_pile_stack(destination)) {
-      return(true);
+      return (true);
     } else if (foundation_stack(destination)) {
       if (stack_empty(destination)) {
         if (origin->card->value == ACE) {
-          return(true);
+          return (true);
         }
       } else if (origin->card->suit == destination->card->suit &&
-                    origin->card->value == destination->card->value + 1) {
-          return(true);
+                 origin->card->value == destination->card->value + 1) {
+        return (true);
       }
     } else if (maneuvre_stack(destination)) {
       if (stack_empty(destination)) {
         if (origin->card->value == KING) {
-          return(true);
+          return (true);
         }
       } else if (destination->card->face == EXPOSED &&
-                  (origin->card->suit + destination->card->suit) % 2 == 1 &&
-                  origin->card->value + 1 == destination->card->value) {
-        return(true);
+                 (origin->card->suit + destination->card->suit) % 2 == 1 &&
+                 origin->card->value + 1 == destination->card->value) {
+        return (true);
       }
     }
   }
 
-  return(false);
+  return (false);
 }
 
 void move_card(struct stack **origin, struct stack **destination) {
@@ -113,7 +124,8 @@ void move_card(struct stack **origin, struct stack **destination) {
   }
 }
 
-void move_block(struct stack **origin, struct stack **destination, int block_size) {
+void move_block(struct stack **origin, struct stack **destination,
+                int block_size) {
   struct stack *tmp;
   stack_malloc(&tmp);
   stack_init(tmp);
@@ -175,7 +187,8 @@ static void deal_cards(struct deck *deck) {
   }
 }
 
-void game_init(struct game *game, int passes_through_deck, int color_mode) {
+void game_init(struct game *game, int passes_through_deck,
+               int four_color_deck) {
   cursor_malloc(&cursor);
   cursor_init(cursor);
   deck_malloc(&deck);
@@ -183,15 +196,18 @@ void game_init(struct game *game, int passes_through_deck, int color_mode) {
 
   /* Setting initial stacks' coordinates. */
   frame_set(deck->stock->card->frame, STOCK_BEGIN_Y, STOCK_BEGIN_X);
-  frame_set(deck->waste_pile->card->frame, WASTE_PILE_BEGIN_Y, WASTE_PILE_BEGIN_X);
+  frame_set(deck->waste_pile->card->frame, WASTE_PILE_BEGIN_Y,
+            WASTE_PILE_BEGIN_X);
   for (int i = 0; i < FOUNDATION_STACKS_NUMBER; i++) {
-    frame_set(deck->foundation[i]->card->frame, FOUNDATION_BEGIN_Y, foundation_begin_x(i));
+    frame_set(deck->foundation[i]->card->frame, FOUNDATION_BEGIN_Y,
+              foundation_begin_x(i));
   }
   for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
-    frame_set(deck->maneuvre[i]->card->frame, MANEUVRE_BEGIN_Y, maneuvre_begin_x(i));
+    frame_set(deck->maneuvre[i]->card->frame, MANEUVRE_BEGIN_Y,
+              maneuvre_begin_x(i));
   }
 
-  game->color_mode = color_mode;
+  game->four_color_deck = four_color_deck;
 
   fill_deck(deck);
   shuffle_deck(deck);
@@ -211,17 +227,17 @@ void game_end() {
 bool game_won() {
   // If any card in the maneuvre stacks is covered, game is not won.
   for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
-    for (struct stack *j = deck->maneuvre[i]; j!= NULL; j = j->next) {
+    for (struct stack *j = deck->maneuvre[i]; j != NULL; j = j->next) {
       if (j->card->face == COVERED) {
-        return(false);
+        return (false);
       }
     }
   }
 
   // If the stock pile or the waste pile aren't empty, game is not won.
   if (!stack_empty(deck->stock) || !stack_empty(deck->waste_pile)) {
-    return(false);
+    return (false);
   }
 
-  return(true);
+  return (true);
 }

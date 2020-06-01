@@ -23,13 +23,13 @@ int main(int argc, char *argv[]) {
   int option;
   int option_index;
   int passes_through_deck = 3;
-  int color_mode = 0;
+  static int four_color_deck;
   static int no_background_color;
   static const struct option options[] = {
       {"help", no_argument, NULL, 'h'},
       {"version", no_argument, NULL, 'v'},
       {"passes", required_argument, NULL, 'p'},
-      {"colors", no_argument, NULL, 'c'},
+      {"four-color-deck", no_argument, &four_color_deck, 1},
       {"no-background-color", no_argument, &no_background_color, 1},
       {0, 0, 0, 0}};
 
@@ -44,12 +44,13 @@ int main(int argc, char *argv[]) {
     case 'p':
       passes_through_deck = atoi(optarg);
       break;
-    case 'c':
-      color_mode = 1;
-      break;
     case 'h':
+    case '?':
+      usage(program_name);
+      exit(0);
     case 0:
       /* If this option set a "no_argument" flag, do nothing else now. */
+      printf("options[option_index].name: %s\n", options[option_index].name);
       if (options[option_index].flag != 0)
         break;
     default:
@@ -106,7 +107,7 @@ int main(int argc, char *argv[]) {
       if (key == KEY_SPACEBAR) {
         clear();
         refresh();
-        game_init(&game, passes_through_deck, color_mode);
+        game_init(&game, passes_through_deck, four_color_deck);
         break;
       }
     } else if (key == KEY_RESIZE) {
@@ -142,7 +143,8 @@ void usage(const char *program_name) {
   printf("  -h, --help                 Show this message\n");
   printf("  -p, --passes               Number of passes through the deck  "
          "(default: 3)\n");
-  printf("  -c, --colors               Unique colors for each suit\n");
+  printf("      --four-color-deck      Draw unique card suit colors       "
+         "(default: false)\n");
   printf("      --no-background-color  Don't draw background color        "
          "(default: false)\n");
 }
