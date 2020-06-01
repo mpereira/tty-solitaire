@@ -1,12 +1,12 @@
-#include <stdlib.h>
-#include <ncurses.h>
-#include <locale.h>
-#include <getopt.h>
 #include <errno.h>
+#include <getopt.h>
+#include <locale.h>
+#include <ncurses.h>
+#include <stdlib.h>
 
+#include "common.h"
 #include "game.h"
 #include "keyboard.h"
-#include "common.h"
 
 #ifndef VERSION
 #define VERSION "n/a"
@@ -24,17 +24,19 @@ int main(int argc, char *argv[]) {
   int option_index;
   int passes_through_deck = 3;
   int color_mode = 0;
+  static int no_background_color;
   static const struct option options[] = {
-    {"help",    no_argument,       NULL, 'h'},
-    {"version", no_argument,       NULL, 'v'},
-    {"colors", no_argument,        NULL, 'c'},
-    {"passes",  required_argument, NULL, 'p'},
-    {0, 0, 0, 0}
-  };
+      {"help", no_argument, NULL, 'h'},
+      {"version", no_argument, NULL, 'v'},
+      {"passes", required_argument, NULL, 'p'},
+      {"colors", no_argument, NULL, 'c'},
+      {"no-background-color", no_argument, &no_background_color, 1},
+      {0, 0, 0, 0}};
 
   program_name = argv[0];
 
-  while ((option = getopt_long(argc, argv, "hvp:", options, &option_index)) != -1) {
+  while ((option = getopt_long(argc, argv, "hvp:", options, &option_index)) !=
+         -1) {
     switch (option) {
     case 'v':
       version();
@@ -46,6 +48,10 @@ int main(int argc, char *argv[]) {
       color_mode = 1;
       break;
     case 'h':
+    case 0:
+      /* If this option set a "no_argument" flag, do nothing else now. */
+      if (options[option_index].flag != 0)
+        break;
     default:
       usage(program_name);
       exit(0);
@@ -60,7 +66,11 @@ int main(int argc, char *argv[]) {
   start_color();
   curs_set(FALSE);
   set_escdelay(0);
-  assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+  if (no_background_color) {
+    use_default_colors();
+  } else {
+    assume_default_colors(COLOR_WHITE, COLOR_GREEN);
+  }
   init_pair(1, COLOR_BLACK, COLOR_WHITE);
   init_pair(2, COLOR_RED, COLOR_WHITE);
   init_pair(3, COLOR_GREEN, COLOR_WHITE);
@@ -76,7 +86,7 @@ int main(int argc, char *argv[]) {
     refresh();
     if ((key = getch()) == 'q' || key == 'Q') {
       endwin();
-      return(0);
+      return (0);
     }
   }
 
@@ -87,7 +97,7 @@ int main(int argc, char *argv[]) {
   for (;;) {
     if ((key = getch()) == 'q' || key == 'Q') {
       endwin();
-      return(0);
+      return (0);
     }
     if (term_size_ok()) {
       clear();
@@ -114,7 +124,7 @@ int main(int argc, char *argv[]) {
   game_end();
   printf("You won.\n");
 
-  return(0);
+  return (0);
 }
 
 void draw_greeting() {
@@ -127,13 +137,14 @@ void draw_greeting() {
 }
 
 void usage(const char *program_name) {
-  printf("usage: %s [-v|--version] [-h|--help] [-p|--passes=NUMBER] [-c|--colors]\n", program_name);
-  printf("  -v, --version  Show version\n");
-  printf("  -h, --help     Show this message\n");
-  printf("  -p, --passes   Number of passes through the deck\n");
-  printf("  -c, --colors   Four unique colors, one for each suit\n");
+  printf("usage: %s [OPTIONS]\n", program_name);
+  printf("  -v, --version              Show version\n");
+  printf("  -h, --help                 Show this message\n");
+  printf("  -p, --passes               Number of passes through the deck  "
+         "(default: 3)\n");
+  printf("  -c, --colors               Unique colors for each suit\n");
+  printf("      --no-background-color  Don't draw background color        "
+         "(default: false)\n");
 }
 
-void version() {
-  printf("%s\n", VERSION);
-}
+void version() { printf("%s\n", VERSION); }

@@ -25,6 +25,9 @@ void test_frame_dup() {
 
   assert(frame_0 != frame_1);
   assert(frames_equal(frame_0, frame_1));
+
+  frame_free(frame_0);
+  frame_free(frame_1);
 }
 
 void test_frame_set() {

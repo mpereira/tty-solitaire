@@ -153,8 +153,8 @@ static void shuffle_deck(struct deck *deck) {
     card[i] = stack_pop(&(deck->stock));
   }
   srand(time(NULL));
-  for (int i = 0; i < NUMBER_OF_CARDS - 1; i++) {
-    random = i + (rand() % (NUMBER_OF_CARDS) - i);
+  for (int i = 0; i < NUMBER_OF_CARDS; i++) {
+    random = rand() % (NUMBER_OF_CARDS);
     tmp = *card[i];
     *card[i] = (*card[random]);
     *card[random] = tmp;
@@ -162,6 +162,7 @@ static void shuffle_deck(struct deck *deck) {
   for (int i = 0; i < NUMBER_OF_CARDS; i++) {
     stack_push(&(deck->stock), card[i]);
   }
+  free(card);
 }
 
 static void deal_cards(struct deck *deck) {
