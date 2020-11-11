@@ -12,6 +12,8 @@
    - Ncurses with wide-char/UTF-8 support
 
 ** Install
+   [[https://repology.org/project/tty-solitaire/versions][https://repology.org/badge/vertical-allrepos/tty-solitaire.svg]]
+
 *** Using package managers
 **** Arch Linux
      #+begin_src bash
