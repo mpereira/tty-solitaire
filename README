@@ -25,6 +25,11 @@
      brew install tty-solitaire
      #+end_src
 
+**** Nix
+     #+begin_src bash
+     nix-env --install tty-solitaire
+     #+end_src
+
 **** Void Linux
      #+begin_src bash
      xbps-install -S tty-solitaire
