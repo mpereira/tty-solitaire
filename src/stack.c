@@ -92,7 +92,7 @@ struct card *stack_pop(struct stack **stack) {
       int begin_y = (*stack)->card->frame->begin_y;
       int begin_x = (*stack)->card->frame->begin_x;
       card_malloc(&((*stack)->card));
-      /* An stack_empty stack is a stack with a blank top card
+      /* A stack_empty stack is a stack with a blank top card
        * and with stack->next == NULL. */
       card_set((*stack)->card, NO_VALUE, NO_SUIT, NO_FACE, begin_y, begin_x);
       (*stack)->next = NULL;
