@@ -44,6 +44,12 @@ void cursor_move(struct cursor *cursor, enum movement movement) {
         cursor_move(cursor, UP);
         cursor_move(cursor, DOWN);
       }
+    } else {
+      cursor->x = CURSOR_MANEUVRE_6_X;
+      if (cursor->y > CURSOR_BEGIN_Y) {
+        cursor_move(cursor, UP);
+        cursor_move(cursor, DOWN);
+      }
     }
     break;
   case DOWN:
@@ -76,6 +82,12 @@ void cursor_move(struct cursor *cursor, enum movement movement) {
   case RIGHT:
     if (cursor->x < 49) {
       cursor->x = cursor->x + 8;
+      if (cursor->y > CURSOR_BEGIN_Y) {
+        cursor_move(cursor, UP);
+        cursor_move(cursor, DOWN);
+      }
+    } else {
+      cursor->x = CURSOR_BEGIN_X;
       if (cursor->y > CURSOR_BEGIN_Y) {
         cursor_move(cursor, UP);
         cursor_move(cursor, DOWN);
