@@ -10,6 +10,8 @@
 #include "gui.h"
 #include "common.h"
 
+char outer_getch = '\0';
+
 static void handle_term_resize() {
   clear();
   refresh();
@@ -48,7 +50,7 @@ static void unmark_cards(struct stack *stack) {
 
 static void handle_card_movement(struct cursor *cursor) {
   struct stack **origin = cursor_stack(cursor);
-  int key;
+  int key = outer_getch;
 
   if (cursor_on_invalid_spot(cursor) || stack_empty(*origin)) {
     return;
@@ -64,9 +66,11 @@ static void handle_card_movement(struct cursor *cursor) {
   draw_cursor(cursor);
 
   for (;;) {
-    if ((key = getch()) == 'q' || key == 'Q') {
-      endwin();
-      exit(0);
+    if (outer_getch != 'M') {
+      if ((key = getch()) == 'q' || key == 'Q') {
+        endwin();
+        exit(0);
+      }
     }
     if (term_size_ok()) {
       switch (key) {
@@ -105,6 +109,11 @@ static void handle_card_movement(struct cursor *cursor) {
               draw_stack(*origin);
             }
           }
+        }
+        if (outer_getch == 'M') {
+          /* Prevent conditional at beginning of outer for-loop from
+           * skipping getch() more than once */
+          outer_getch = '\0';
         }
         break;
       case 'n':
@@ -207,6 +216,7 @@ static void handle_card_movement(struct cursor *cursor) {
 }
 
 void keyboard_event(int key) {
+  outer_getch = key;
   if (key == 'q' || key == 'Q') {
     endwin();
     game_end();
@@ -257,6 +267,9 @@ void keyboard_event(int key) {
           handle_card_movement(cursor);
         }
       }
+      break;
+    case 'M':
+      handle_card_movement(cursor);
       break;
     case KEY_RESIZE:
       handle_term_resize();
