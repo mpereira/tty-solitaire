@@ -130,10 +130,10 @@ int main(int argc, char *argv[]) {
 
 void draw_greeting() {
   mvprintw(8, 26, "Welcome to tty-solitaire.");
-  mvprintw(10, 23, "Move with the arrow keys or hjkl.");
-  mvprintw(11, 19, "Use the space bar to mark and move cards.");
-  mvprintw(12, 16, "After marking a card you can use m to increase ");
-  mvprintw(13, 17, "and n to decrease the number of marked cards.");
+  mvprintw(10, 21, "Move with the arrow keys or <hjkl>.");
+  mvprintw(11, 18, "Use the space bar to select and place cards.");
+  mvprintw(12, 13, "After selecting a card you can use <m> to select more");
+  mvprintw(13, 13, "and <n> to select less. Press <Shift+M> to select all.");
   mvprintw(15, 19, "Press the space bar to play or q to quit.");
 }
 
