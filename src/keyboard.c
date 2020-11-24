@@ -21,21 +21,22 @@ static void handle_term_resize() {
   }
 }
 
-/* FIXME: this function does not work on stacks with no marked cards.
- * In that case it returns the stack's length. */
 static int marked_cards_count(struct stack *stack) {
-  if (stack_length(stack) == 1) {
-    if (stack->card->frame->begin_y > MANEUVRE_BEGIN_Y) {
-      return(1);
-    }
-  } else if (stack_length(stack) > 1) {
-    for (int marked_cards_count = 0; stack; stack = stack->next) {
-      marked_cards_count++;
-      if (!stack->next || (stack->card->frame->begin_y - stack->next->card->frame->begin_y) > 1) {
+  for (int marked_cards_count = 0; stack; stack = stack->next) {
+    marked_cards_count++;
+    if (!stack->next || (stack->card->frame->begin_y - stack->next->card->frame->begin_y) > 1) {
+      /* Case 1: Entire stack is marked */
+      if (!stack->next && (stack->card->frame->begin_y - 1 == MANEUVRE_BEGIN_Y))
         return(marked_cards_count);
-      }
+      /* Case 2: Partial stack is marked */
+      else if (stack->next && stack->card->frame->begin_y - stack->next->card->frame->begin_y > 1)
+        return(marked_cards_count);
+      /* Case 3: No card is marked */
+      else
+        return(0);
     }
   }
+  /* Code shouldn't get here unless stack is empty. */
   return(0);
 }
 
