@@ -23,7 +23,7 @@ static void handle_term_resize() {
 
 /* FIXME: this function does not work on stacks with no marked cards.
  * In that case it returns the stack's length. */
-static int marked_cards_count(struct stack *stack) {
+int marked_cards_count(struct stack *stack) {
   if (stack_length(stack) == 1) {
     if (stack->card->frame->begin_y > MANEUVRE_BEGIN_Y) {
       return(1);
