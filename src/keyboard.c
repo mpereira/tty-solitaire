@@ -21,7 +21,7 @@ static void handle_term_resize() {
   }
 }
 
-static int marked_cards_count(struct stack *stack) {
+int marked_cards_count(struct stack *stack) {
   for (int marked_cards_count = 0; stack; stack = stack->next) {
     marked_cards_count++;
     if (!stack->next || (stack->card->frame->begin_y - stack->next->card->frame->begin_y) > 1) {
