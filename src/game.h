@@ -35,8 +35,8 @@ struct game {
   int four_color_deck;
 };
 
-struct deck *deck;
-struct cursor *cursor;
+extern struct deck *deck;
+extern struct cursor *cursor;
 
 bool maneuvre_stack(struct stack *);
 bool stock_stack(struct stack *);
