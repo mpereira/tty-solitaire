@@ -25,6 +25,11 @@
      brew install tty-solitaire
      #+end_src
 
+**** Debian [[https://wiki.debian.org/DebianTesting][testing]]
+     #+begin_src bash
+     apt install tty-solitaire
+     #+end_src
+
 **** Nix
      #+begin_src bash
      nix-env --install tty-solitaire
