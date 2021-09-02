@@ -1,5 +1,6 @@
 #include <errno.h>
 #include <getopt.h>
+#include <libgen.h>
 #include <locale.h>
 #include <ncurses.h>
 #include <stdlib.h>
@@ -33,7 +34,7 @@ int main(int argc, char *argv[]) {
       {"no-background-color", no_argument, &no_background_color, 1},
       {0, 0, 0, 0}};
 
-  program_name = argv[0];
+  program_name = basename(argv[0]);
 
   while ((option = getopt_long(argc, argv, "hvp:", options, &option_index)) !=
          -1) {
