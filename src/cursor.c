@@ -8,8 +8,6 @@
 #include "game.h"
 #include "common.h"
 
-struct cursor *cursor;
-
 void cursor_malloc(struct cursor **cursor) {
   if (!(*cursor = malloc(sizeof(**cursor)))) {
     tty_solitaire_generic_error(errno, __FILE__, __LINE__);

@@ -13,6 +13,9 @@
 #include "gui.h"
 #include "stack.h"
 
+struct deck *deck;
+struct cursor *cursor;
+
 static int foundation_begin_x(int x) {
   switch (x) {
   case 0:

@@ -5,8 +5,6 @@
 #include "deck.h"
 #include "common.h"
 
-struct deck *deck;
-
 void deck_malloc(struct deck **deck) {
   if (!(*deck = malloc(sizeof(**deck)))) {
     tty_solitaire_generic_error(errno, __FILE__, __LINE__);
