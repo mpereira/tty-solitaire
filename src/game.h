@@ -33,6 +33,7 @@
 struct game {
   int passes_through_deck_left;
   int four_color_deck;
+  int auto_win_disable;
 };
 
 extern struct deck *deck;
@@ -43,7 +44,7 @@ bool stock_stack(struct stack *);
 bool valid_move(struct stack *, struct stack *);
 void move_card(struct stack **, struct stack **);
 void move_block(struct stack **, struct stack **, int);
-void game_init(struct game *, int, int);
+void game_init(struct game *, int, int, int);
 bool game_won();
 void game_end();
 
