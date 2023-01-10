@@ -132,9 +132,9 @@ int main(int argc, char *argv[]) {
 void draw_greeting() {
   mvprintw(8, 26, "Welcome to tty-solitaire.");
   mvprintw(10, 21, "Move with the arrow keys or <hjkl>.");
-  mvprintw(11, 18, "Use <w> to move to the waste, <s> to move to the");
-  mvprintw(12, 13, "stock, <1234567> to move to the maneuvers and <F1,F2,F3,F4>");
-  mvprintw(13, 13, "to move to the fountains.");
+  mvprintw(11, 18, "Use <w> to move to the waste pile, <s> to move to");
+  mvprintw(12, 13, "the stock pile, <1...7> to move between the maneuvers,");
+  mvprintw(13, 13, "and <F1...F4> to move between the foundations.");
   mvprintw(14, 18, "Use the space bar to select and place cards.");
   mvprintw(15, 13, "After selecting a card you can use <m> to select more");
   mvprintw(16, 13, "and <n> to select less. Press <Shift+M> to select all.");
