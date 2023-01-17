@@ -136,7 +136,43 @@ static void handle_card_movement(struct cursor *cursor) {
           draw_stack(*origin);
         }
         break;
-
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+        erase_cursor(cursor);
+        int key_as_index = key - '1';
+        cursor->x = CURSOR_MANEUVRE_0_X + 8 * (key_as_index);
+        cursor->y = CURSOR_BEGIN_Y + 7 + stack_length(deck->maneuvre[key_as_index]);
+        draw_cursor(cursor);
+        break;
+      case 's':
+      case 'S':
+        erase_cursor(cursor);
+        cursor->x = CURSOR_STOCK_X;
+        cursor->y = CURSOR_BEGIN_Y;
+        draw_cursor(cursor);
+        break;
+      case 'w':
+      case 'W':
+        erase_cursor(cursor);
+        cursor->x = CURSOR_WASTE_PILE_X;
+        cursor->y = CURSOR_BEGIN_Y;
+        draw_cursor(cursor);
+        break;
+      case KEY_F1: // F1 key
+      case KEY_F2: // F2 key
+      case KEY_F3: // F3 key
+      case KEY_F4: // F4 key
+        erase_cursor(cursor);
+        int fkey_as_index = key - KEY_F1;
+        cursor->x = CURSOR_FOUNDATION_0_X + 8 * fkey_as_index;
+        cursor->y = CURSOR_BEGIN_Y;
+        draw_cursor(cursor);
+        break;
       case KEY_SPACEBAR:;
         /* http://www.mail-archive.com/gcc-bugs@gcc.gnu.org/msg259382.html */
         struct stack **destination = cursor_stack(cursor);
