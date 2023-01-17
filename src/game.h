@@ -43,6 +43,7 @@ bool stock_stack(struct stack *);
 bool valid_move(struct stack *, struct stack *);
 void move_card(struct stack **, struct stack **);
 void move_block(struct stack **, struct stack **, int);
+void expose_top(struct stack **);
 void game_init(struct game *, int, int);
 bool game_won();
 void game_end();
