@@ -66,6 +66,7 @@ static void handle_card_movement(struct cursor *cursor) {
   for (;;) {
     if ((key = getch()) == 'q' || key == 'Q') {
       endwin();
+      game_end();
       exit(0);
     }
     if (term_size_ok()) {
