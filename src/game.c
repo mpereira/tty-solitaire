@@ -191,7 +191,7 @@ static void deal_cards(struct deck *deck) {
 }
 
 void game_init(struct game *game, int passes_through_deck,
-               int four_color_deck) {
+               int four_color_deck, int auto_win_disable) {
   cursor_malloc(&cursor);
   cursor_init(cursor);
   deck_malloc(&deck);
@@ -211,6 +211,7 @@ void game_init(struct game *game, int passes_through_deck,
   }
 
   game->four_color_deck = four_color_deck;
+  game->auto_win_disable = auto_win_disable;
 
   fill_deck(deck);
   shuffle_deck(deck);
@@ -227,20 +228,27 @@ void game_end() {
   deck_free(deck);
 }
 
-bool game_won() {
-  // If any card in the maneuvre stacks is covered, game is not won.
-  for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
-    for (struct stack *j = deck->maneuvre[i]; j != NULL; j = j->next) {
-      if (j->card->face == COVERED) {
-        return (false);
+bool game_won(int auto_win_disable) {
+  if (auto_win_disable) {
+    return(stack_length(deck->foundation[0]) == 13 &&
+             stack_length(deck->foundation[1]) == 13 &&
+             stack_length(deck->foundation[2]) == 13 &&
+             stack_length(deck->foundation[3]) == 13);
+  } else {
+    // If any card in the maneuvre stacks is covered, game is not won.
+    for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
+      for (struct stack *j = deck->maneuvre[i]; j != NULL; j = j->next) {
+        if (j->card->face == COVERED) {
+          return (false);
+        }
       }
     }
-  }
 
-  // If the stock pile or the waste pile aren't empty, game is not won.
-  if (!stack_empty(deck->stock) || !stack_empty(deck->waste_pile)) {
-    return (false);
-  }
+    // If the stock pile or the waste pile aren't empty, game is not won.
+    if (!stack_empty(deck->stock) || !stack_empty(deck->waste_pile)) {
+      return (false);
+    }
 
-  return (true);
+    return (true);
+  }
 }
