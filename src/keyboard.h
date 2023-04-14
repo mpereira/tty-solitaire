@@ -11,6 +11,7 @@ extern struct deck *deck;
 extern struct cursor *cursor;
 extern struct game game;
 
+int marked_cards_count(struct stack *);
 void keyboard_event();
 
 #endif
