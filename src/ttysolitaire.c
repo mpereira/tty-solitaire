@@ -19,6 +19,7 @@ struct game game;
 void version();
 void usage(const char *);
 void draw_greeting();
+void draw_you_won();
 
 int main(int argc, char *argv[]) {
   int option;
@@ -122,9 +123,14 @@ int main(int argc, char *argv[]) {
     keyboard_event(getch());
   } while (!game_won());
 
+  clear();
+  draw_you_won();
+  refresh();
+  getch();
+  clear();
+
   endwin();
   game_end();
-  printf("You won.\n");
 
   return (0);
 }
@@ -136,6 +142,15 @@ void draw_greeting() {
   mvprintw(14, 13, "After selecting a card you can use <m> to select more");
   mvprintw(15, 12, "and <n> to select fewer. Press <Shift+M> to select all.");
   mvprintw(17, 19, "Press the space bar to play or q to quit.");
+}
+
+void draw_you_won() {
+  mvprintw(10, 8, "██╗   ██╗ ██████╗ ██╗   ██╗    ██╗    ██╗ ██████╗ ███╗   ██╗██╗");
+  mvprintw(11, 8, "╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║    ██║██╔═══██╗████╗  ██║██║");
+  mvprintw(12, 8, " ╚████╔╝ ██║   ██║██║   ██║    ██║ █╗ ██║██║   ██║██╔██╗ ██║██║");
+  mvprintw(13, 8, "  ╚██╔╝  ██║   ██║██║   ██║    ██║███╗██║██║   ██║██║╚██╗██║╚═╝");
+  mvprintw(14, 8, "   ██║   ╚██████╔╝╚██████╔╝    ╚███╔███╔╝╚██████╔╝██║ ╚████║██╗");
+  mvprintw(15, 8, "   ╚═╝    ╚═════╝  ╚═════╝      ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═══╝╚═╝");
 }
 
 void usage(const char *program_name) {
