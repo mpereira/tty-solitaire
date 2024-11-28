@@ -26,12 +26,14 @@ int main(int argc, char *argv[]) {
   int passes_through_deck = 3;
   static int four_color_deck;
   static int no_background_color;
+  static int auto_win_disable;
   static const struct option options[] = {
       {"help", no_argument, NULL, 'h'},
       {"version", no_argument, NULL, 'v'},
       {"passes", required_argument, NULL, 'p'},
       {"four-color-deck", no_argument, &four_color_deck, 1},
       {"no-background-color", no_argument, &no_background_color, 1},
+      {"auto-win-disable", no_argument, &auto_win_disable, 1},
       {0, 0, 0, 0}};
 
   program_name = basename(argv[0]);
@@ -108,7 +110,7 @@ int main(int argc, char *argv[]) {
       if (key == KEY_SPACEBAR) {
         clear();
         refresh();
-        game_init(&game, passes_through_deck, four_color_deck);
+        game_init(&game, passes_through_deck, four_color_deck, auto_win_disable);
         break;
       }
     } else if (key == KEY_RESIZE) {
@@ -120,7 +122,7 @@ int main(int argc, char *argv[]) {
 
   do {
     keyboard_event(getch());
-  } while (!game_won());
+  } while (!game_won(game.auto_win_disable));
 
   endwin();
   game_end();
@@ -147,6 +149,8 @@ void usage(const char *program_name) {
   printf("      --four-color-deck      Draw unique card suit colors       "
          "(default: false)\n");
   printf("      --no-background-color  Don't draw background color        "
+         "(default: false)\n");
+  printf("      --auto-win-disable     Disable auto-winning the game      "
          "(default: false)\n");
 }
 
