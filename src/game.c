@@ -141,7 +141,16 @@ void move_block(struct stack **origin, struct stack **destination,
   if (stack_length(*destination) > 1) {
     cursor->y += block_size;
   }
-  stack_free(tmp);
+}
+
+void expose_top(struct stack **origin)
+{
+  struct card *top;
+  if((top = stack_pop(origin)))
+  {
+    card_expose(top);
+    stack_push(origin, top);
+  }
 }
 
 static void fill_deck(struct deck *deck) {
