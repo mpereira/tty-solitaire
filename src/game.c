@@ -56,7 +56,7 @@ static int maneuvre_begin_x(int x) {
   }
 }
 
-static bool waste_pile_stack(struct stack *stack) {
+bool waste_pile_stack(struct stack *stack) {
   return ((stack->card->frame->begin_y == WASTE_PILE_BEGIN_Y) &&
           (stack->card->frame->begin_x == WASTE_PILE_BEGIN_X));
 }
