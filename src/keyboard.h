@@ -11,6 +11,6 @@ extern struct deck *deck;
 extern struct cursor *cursor;
 extern struct game game;
 
-void keyboard_event();
+void keyboard_event(int key);
 
 #endif
