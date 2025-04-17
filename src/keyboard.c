@@ -167,6 +167,19 @@ static void handle_card_movement(struct cursor *cursor) {
               move_card(origin, destination);
             }
           }
+
+          /* If they only had one card selected... */
+          if (*origin == *destination && ((maneuvre_stack(*origin)  && _marked_cards_count == 1) || waste_pile_stack(*origin))) {
+            /* see if we can automatically move card to foundation */
+            for (int i = 0; i <= 3; ++i) {
+              destination = (&(deck->foundation[i]));
+              if (valid_move(*origin, *destination)) {
+                move_card(origin, destination);
+                break;
+              }
+            }
+          }
+
           draw_stack(*origin);
           draw_stack(*destination);
           if (maneuvre_stack(*origin) && *origin == *destination) {

@@ -38,6 +38,7 @@ struct game {
 extern struct deck *deck;
 extern struct cursor *cursor;
 
+bool waste_pile_stack(struct stack *);
 bool maneuvre_stack(struct stack *);
 bool stock_stack(struct stack *);
 bool valid_move(struct stack *, struct stack *);
