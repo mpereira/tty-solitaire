@@ -2,6 +2,11 @@
 
 * CHANGELOG
 
+** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.3.0][v1.4.0]] (2025-04-17)
+*** Features
+    - Double tap on a card to automatically move it to a foundation
+      pile if there's a valid move. [[https://github.com/mpereira/tty-solitaire/pull/69][(#69)]]
+
 ** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.3.0][v1.3.1]] (2021-09-03)
 *** Improvements
     - Made only executable basename be shown in shell output. [[https://github.com/mpereira/tty-solitaire/pull/60][(#60)]]
