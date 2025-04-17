@@ -16,9 +16,9 @@
 const char *program_name;
 struct game game;
 
-void version();
+void version(void);
 void usage(const char *);
-void draw_greeting();
+void draw_greeting(void);
 
 int main(int argc, char *argv[]) {
   int option;
@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
   return (0);
 }
 
-void draw_greeting() {
+void draw_greeting(void) {
   mvprintw(8, 26, "Welcome to tty-solitaire.");
   mvprintw(10, 21, "Move with the arrow keys or <hjkl>.");
   mvprintw(12, 18, "Use the space bar to select and place cards.");
@@ -150,4 +150,4 @@ void usage(const char *program_name) {
          "(default: false)\n");
 }
 
-void version() { printf("%s\n", VERSION); }
+void version(void) { printf("%s\n", VERSION); }

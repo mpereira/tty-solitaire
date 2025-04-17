@@ -222,12 +222,12 @@ void game_init(struct game *game, int passes_through_deck,
   game->passes_through_deck_left = passes_through_deck;
 }
 
-void game_end() {
+void game_end(void) {
   cursor_free(cursor);
   deck_free(deck);
 }
 
-bool game_won() {
+bool game_won(void) {
   // If any card in the maneuvre stacks is covered, game is not won.
   for (int i = 0; i < MANEUVRE_STACKS_NUMBER; i++) {
     for (struct stack *j = deck->maneuvre[i]; j != NULL; j = j->next) {

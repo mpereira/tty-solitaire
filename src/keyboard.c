@@ -10,7 +10,7 @@
 #include "gui.h"
 #include "common.h"
 
-static void handle_term_resize() {
+static void handle_term_resize(void) {
   clear();
   refresh();
   if (term_size_ok()) {
