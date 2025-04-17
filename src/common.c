@@ -5,7 +5,7 @@
 
 #include "common.h"
 
-bool term_size_ok() {
+bool term_size_ok(void) {
   int lines, columns;
   getmaxyx(stdscr, lines, columns);
   return(lines >= MIN_TERM_LINES && columns >= MIN_TERM_COLS);

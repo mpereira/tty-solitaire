@@ -12,6 +12,6 @@
 extern const char *program_name;
 
 void tty_solitaire_generic_error(int, char *, int);
-bool term_size_ok();
+bool term_size_ok(void);
 
 #endif
