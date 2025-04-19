@@ -2,6 +2,12 @@
 
 * CHANGELOG
 
+** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.4.1][v1.4.1]] (2025-04-19)
+*** Chores
+    - Fix function prototypes. [[https://github.com/mpereira/tty-solitaire/pull/71][(#71)]]
+    - Make Makefile ncurses flags handling in Makefile more flexible.
+      [[https://github.com/mpereira/tty-solitaire/pull/70][(#70)]]
+
 ** [[https://github.com/mpereira/tty-solitaire/releases/tag/v1.3.0][v1.4.0]] (2025-04-17)
 *** Features
     - Double tap on a card to automatically move it to a foundation
