@@ -158,6 +158,7 @@ static void handle_card_movement(struct cursor *cursor) {
               ;
             if (valid_move(block, *destination)) {
               move_block(origin, destination, _marked_cards_count);
+              expose_top(origin);
             }
           } else {
             if (valid_move(*origin, *destination)) {
@@ -165,6 +166,7 @@ static void handle_card_movement(struct cursor *cursor) {
                 cursor->y++;
               }
               move_card(origin, destination);
+              expose_top(origin);
             }
           }
 
