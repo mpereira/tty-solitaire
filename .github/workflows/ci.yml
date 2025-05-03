@@ -1,0 +1,30 @@
+name: CI
+on: [ push, pull_request ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.may_fail }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { cc: gcc, may_fail: false }
+          - { cc: clang, may_fail: false }
+          - { cc: gcc, cflags: -Werror, may_fail: true }
+          - { cc: clang, cflags: -Werror, may_fail: true }
+    name: ${{ matrix.cc }} ${{ matrix.cflags }}
+    env:
+      CC: ${{ matrix.cc }}
+      CFLAGS: ${{ matrix.cflags }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: make
+      - name: Test
+        run: make test
+      - name: Install
+        env:
+          DESTDIR: /
+        run: sudo make install
+      - name: Uninstall
+        run: sudo make uninstall
